@@ -34,3 +34,15 @@ Route::get('/', function () {
 Route::get("/update", function(){
     OrderStatusUpdate::dispatch(new Order(1));
 });
+
+Route::get("/task", [
+    'uses' => 'TaskController@index'
+]);
+
+Route::get("/task/list", [
+    'uses' => 'TaskController@list'
+]);
+
+Route::post("/task", [
+    'uses' => 'TaskController@store'
+]);
