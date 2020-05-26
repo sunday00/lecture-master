@@ -19,4 +19,8 @@
 - sign up pusher
 - edit config
 - require pusher/pusher-php-server via composer
-- 
+- npm install pusher-js, laravel-echo
+- import npm installed
+- register Object with env
+- listen event
+
