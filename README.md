@@ -14,3 +14,9 @@
 - make event property.
 - trigger event.
 
+### 2
+- hello pusher
+- sign up pusher
+- edit config
+- require pusher/pusher-php-server via composer
+- 

@@ -14,10 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+class Order
+{
+    public $id;
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+}
+
 Route::get('/', function () {
-    OrderStatusUpdate::dispatch(1, 2);
+    
     // === 
     // event(new OrderStatusUpdate());
 
     return view('welcome');
+});
+
+Route::get("/update", function(){
+    OrderStatusUpdate::dispatch(new Order(1));
 });
