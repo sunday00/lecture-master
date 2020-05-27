@@ -35,14 +35,26 @@ Route::get("/update", function(){
     OrderStatusUpdate::dispatch(new Order(1));
 });
 
-Route::get("/task", [
-    'uses' => 'TaskController@index'
-]);
-
 Route::get("/task/list", [
     'uses' => 'TaskController@list'
 ]);
 
+Route::get("/task/{task}", [
+    'uses' => 'TaskController@index'
+]);
+
 Route::post("/task", [
     'uses' => 'TaskController@store'
+]);
+
+Route::get("/project/{project}", [
+    'uses'  => 'ProjectController@index'
+]);
+
+Route::get("/api/project/{project}", [
+    'uses'  => 'ProjectController@list'
+]);
+
+Route::post("/api/project/{project}/task", [
+    'uses'  => 'TaskController@add'
 ]);
