@@ -19,9 +19,10 @@ export default {
         }
     },
     created(){
-        window.Echo.channel('tasks.' + this.project.id).listen('TaskCreated', ({task}) => {
-            this.addTask(task);
-        });
+        window.Echo.private('tasks.' + this.project.id)
+            .listen('TaskCreated', ({task}) => {
+                this.addTask(task);
+            });
     },
     methods: {
         save(){

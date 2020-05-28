@@ -1930,7 +1930,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    window.Echo.channel('tasks.' + this.project.id).listen('TaskCreated', function (_ref) {
+    window.Echo["private"]('tasks.' + this.project.id).listen('TaskCreated', function (_ref) {
       var task = _ref.task;
 
       _this.addTask(task);
@@ -37955,9 +37955,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   key: "9d8c25deda1e06679aae",
   cluster: "ap3",
   forceTLS: true
-});
-window.Echo.channel('orders').listen('OrderStatusUpdate', function (e) {
-  console.log(e);
 });
 
 /***/ }),
