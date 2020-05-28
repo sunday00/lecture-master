@@ -9,7 +9,7 @@
 </head>
 <body>
     <section id="app">
-        <chats :data-project="{{ $chats }}"></chats>
+        <chats :data-chatroom="{{ $chats }}"></chats>
     </section>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>

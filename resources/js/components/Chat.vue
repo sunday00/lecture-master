@@ -1,38 +1,38 @@
 <template>
   <div>
       <ul>
-          <li v-for="task in project.task" :key="task.id" v-text="task.body"></li>
+          <li v-for="chat in chats" :key="chat.id" v-text="chat.message"></li>
       </ul>
-      <input type="text" v-model="newTask" @blur="save" />
+      <input type="text" v-model="newMessage" @keydown="send" />
   </div>
 </template>
 
 <script>
 export default {
     props:{
-        dataProject: {}
+        dataChatroom: {}
     },
     data(){
         return {
-            project: this.dataProject,
-            newTask: ''
+            chats: this.dataChatroom,
+            newMessage: ''
         }
     },
     created(){
-        window.Echo.private('tasks.' + this.project.id)
-            .listen('TaskCreated', ({task}) => {
-                this.addTask(task);
-            });
+        // window.Echo.private('tasks.' + this.project.id)
+        //     .listen('TaskCreated', ({task}) => {
+        //         this.addTask(task);
+        //     });
     },
     methods: {
-        save(){
-            axios.post(`/api/project/${this.project.id}/task`, {body: this.newTask})
-                .then(response => response.data)
-                .then(this.addTask);
+        send(){
+            // axios.post(`/api/project/${this.project.id}/task`, {body: this.newTask})
+            //     .then(response => response.data)
+            //     .then(this.addTask);
         },
         addTask(task){
-            this.project.task.push(task);
-            this.newTask = '';
+            // this.project.task.push(task);
+            // this.newTask = '';
         }
     }
 }

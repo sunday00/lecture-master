@@ -1919,34 +1919,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    dataProject: {}
+    dataChatroom: {}
   },
   data: function data() {
     return {
-      project: this.dataProject,
-      newTask: ''
+      chats: this.dataChatroom,
+      newMessage: ''
     };
   },
-  created: function created() {
-    var _this = this;
-
-    window.Echo["private"]('tasks.' + this.project.id).listen('TaskCreated', function (_ref) {
-      var task = _ref.task;
-
-      _this.addTask(task);
-    });
+  created: function created() {// window.Echo.private('tasks.' + this.project.id)
+    //     .listen('TaskCreated', ({task}) => {
+    //         this.addTask(task);
+    //     });
   },
   methods: {
-    save: function save() {
-      axios.post("/api/project/".concat(this.project.id, "/task"), {
-        body: this.newTask
-      }).then(function (response) {
-        return response.data;
-      }).then(this.addTask);
+    send: function send() {// axios.post(`/api/project/${this.project.id}/task`, {body: this.newTask})
+      //     .then(response => response.data)
+      //     .then(this.addTask);
     },
-    addTask: function addTask(task) {
-      this.project.task.push(task);
-      this.newTask = '';
+    addTask: function addTask(task) {// this.project.task.push(task);
+      // this.newTask = '';
     }
   }
 });
@@ -25683,10 +25675,10 @@ var render = function() {
   return _c("div", [
     _c(
       "ul",
-      _vm._l(_vm.project.task, function(task) {
+      _vm._l(_vm.chats, function(chat) {
         return _c("li", {
-          key: task.id,
-          domProps: { textContent: _vm._s(task.body) }
+          key: chat.id,
+          domProps: { textContent: _vm._s(chat.message) }
         })
       }),
       0
@@ -25697,19 +25689,19 @@ var render = function() {
         {
           name: "model",
           rawName: "v-model",
-          value: _vm.newTask,
-          expression: "newTask"
+          value: _vm.newMessage,
+          expression: "newMessage"
         }
       ],
       attrs: { type: "text" },
-      domProps: { value: _vm.newTask },
+      domProps: { value: _vm.newMessage },
       on: {
-        blur: _vm.save,
+        keydown: _vm.send,
         input: function($event) {
           if ($event.target.composing) {
             return
           }
-          _vm.newTask = $event.target.value
+          _vm.newMessage = $event.target.value
         }
       }
     })
