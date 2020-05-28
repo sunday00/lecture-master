@@ -12,4 +12,9 @@ class Chat extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function chatroom()
+    {
+        return $this->belongsTo('App\Chatroom');
+    }
 }

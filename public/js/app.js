@@ -1924,13 +1924,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       chats: this.dataChatroom,
+      chatRoomId: location.toString().split("/").pop(),
       newMessage: ''
     };
   },
-  created: function created() {// window.Echo.private('tasks.' + this.project.id)
-    //     .listen('TaskCreated', ({task}) => {
-    //         this.addTask(task);
-    //     });
+  created: function created() {
+    window.Echo["private"]('chat.' + this.chatRoomId).listen('Chat', function (responce) {
+      console.log(responce); // this.addTask(task);
+    });
   },
   methods: {
     send: function send() {// axios.post(`/api/project/${this.project.id}/task`, {body: this.newTask})

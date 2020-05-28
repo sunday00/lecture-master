@@ -67,10 +67,10 @@ Route::post("/api/project/{project}/task", [
     'uses'  => 'TaskController@add'
 ]);
 
-Route::get("/chat/{chat}", [
+Route::get("/chat/{chatroom}", [
     'uses'  => 'ChatController@index'
 ]);
 
-Route::post("/api/chat/{chat}", [
+Route::post("/api/chat/{chatroom}", [
     'uses'  => 'ChatController@send'
 ]);

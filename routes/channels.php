@@ -1,5 +1,6 @@
 <?php
 
+use App\Chatroom;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -22,3 +23,6 @@ Broadcast::channel('tasks.{projectId}', function ($user, $projectId) {
 });
 
 
+Broadcast::channel('chat.{chatroomId}', function ($user, $chatroomId) {
+    return \Arr::has( Chatroom::find($chatroomId)->user->pluck('id'), $user->id );
+});

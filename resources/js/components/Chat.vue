@@ -15,14 +15,16 @@ export default {
     data(){
         return {
             chats: this.dataChatroom,
+            chatRoomId: location.toString().split("/").pop(),
             newMessage: ''
         }
     },
     created(){
-        // window.Echo.private('tasks.' + this.project.id)
-        //     .listen('TaskCreated', ({task}) => {
-        //         this.addTask(task);
-        //     });
+        window.Echo.private('chat.' + this.chatRoomId)
+            .listen('Chat', ( responce ) => {
+                console.log(responce);
+                // this.addTask(task);
+            });
     },
     methods: {
         send(){
