@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('task-list', require('./components/TaskList.vue').default);
 Vue.component('project-task', require('./components/Projects.vue').default);
+Vue.component('chats', require('./components/Chat.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
