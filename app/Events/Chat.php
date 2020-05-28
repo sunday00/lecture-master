@@ -15,6 +15,7 @@ class Chat implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $chat;
+    public $username;
 
     /**
      * Create a new event instance.
@@ -23,7 +24,9 @@ class Chat implements ShouldBroadcast
      */
     public function __construct( $chat )
     {
+        $this->dontBroadcastToCurrentUser();
         $this->chat = $chat;
+        $this->username = $chat->user()->first()->name;
     }
 
     /**
@@ -33,6 +36,6 @@ class Chat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat.'.$this->chatroom->id);
+        return new PrivateChannel('chat.'.$this->chat->chatroom->id);
     }
 }

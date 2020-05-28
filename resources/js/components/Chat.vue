@@ -1,40 +1,52 @@
 <template>
   <div>
       <ul>
-          <li v-for="chat in chats" :key="chat.id" v-text="chat.message"></li>
+          <li v-for="chat in chats" :key="chat.id" class="my-4 rounded" :class="chat.user.id != user ? 'bg-warning float-left' : 'bg-success float-right'">
+            <img :src="chat.user.id > user ? 'https://source.unsplash.com/72QxUqXuXz8/50x50' : 'https://source.unsplash.com/AWbhfbkRC74/50x50'" class="rounded-circle float-left"
+                v-show="chat.user.id != user"
+            >
+            <p class="msg p-1 mx-2" :class="chat.user.id != user ? 'text-left' : 'text-right'">{{chat.message}}</p>
+          </li>
       </ul>
-      <input type="text" v-model="newMessage" @keydown="send" />
+      <form action="#">
+          <div class="form-group">
+            <input type="text" v-model="newMessage" @keydown.enter.prevent="send" class="position-fixed form-control fixed-bottom mb-2 mx-auto" />
+          </div>
+      </form>
   </div>
 </template>
 
 <script>
 export default {
     props:{
-        dataChatroom: {}
+        dataChatroom: {},
+        dataUser: {},
     },
     data(){
         return {
             chats: this.dataChatroom,
+            user: this.dataUser,
             chatRoomId: location.toString().split("/").pop(),
             newMessage: ''
         }
     },
     created(){
         window.Echo.private('chat.' + this.chatRoomId)
-            .listen('Chat', ( responce ) => {
-                console.log(responce);
-                // this.addTask(task);
+            .listen('Chat', ( {chat} ) => {
+                this.addMsg(chat);
             });
+        window.scrollTo(0,document.body.scrollHeight);
     },
     methods: {
         send(){
-            // axios.post(`/api/project/${this.project.id}/task`, {body: this.newTask})
-            //     .then(response => response.data)
-            //     .then(this.addTask);
+            axios.post(`/api/chat/${this.chatRoomId}`, {message: this.newMessage})
+                .then(response => response.data)
+                .then(this.addMsg);
         },
-        addTask(task){
-            // this.project.task.push(task);
-            // this.newTask = '';
+        addMsg(chat){
+            this.chats.push(chat);
+            this.newMessage = '';
+            window.scrollTo(0,document.body.scrollHeight);
         }
     }
 }

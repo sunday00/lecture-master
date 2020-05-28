@@ -11,7 +11,7 @@ class ChatController extends Controller
 {
     public function index(int $room)
     {
-        $chats = Chatroom::find($room)->chat()->get();
+        $chats = Chatroom::find($room)->chat()->with('user:id,name')->get();
         return view('chat', compact('chats'));
     }
 
@@ -21,8 +21,9 @@ class ChatController extends Controller
             'chatroom_id' => $room,
             'user_id'     => Auth::id(),
             'message'     => request('message')
-        ]);
-        event(new App\Events\Chat($chat));
+        ])->load('user:id,name');
+        $chat->userName = auth()->user()->name;
+        event(new \App\Events\Chat($chat));
         return $chat;
     }
 }

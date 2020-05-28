@@ -1917,29 +1917,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    dataChatroom: {}
+    dataChatroom: {},
+    dataUser: {}
   },
   data: function data() {
     return {
       chats: this.dataChatroom,
+      user: this.dataUser,
       chatRoomId: location.toString().split("/").pop(),
       newMessage: ''
     };
   },
   created: function created() {
-    window.Echo["private"]('chat.' + this.chatRoomId).listen('Chat', function (responce) {
-      console.log(responce); // this.addTask(task);
+    var _this = this;
+
+    window.Echo["private"]('chat.' + this.chatRoomId).listen('Chat', function (_ref) {
+      var chat = _ref.chat;
+
+      _this.addMsg(chat);
     });
+    window.scrollTo(0, document.body.scrollHeight);
   },
   methods: {
-    send: function send() {// axios.post(`/api/project/${this.project.id}/task`, {body: this.newTask})
-      //     .then(response => response.data)
-      //     .then(this.addTask);
+    send: function send() {
+      axios.post("/api/chat/".concat(this.chatRoomId), {
+        message: this.newMessage
+      }).then(function (response) {
+        return response.data;
+      }).then(this.addMsg);
     },
-    addTask: function addTask(task) {// this.project.task.push(task);
-      // this.newTask = '';
+    addMsg: function addMsg(chat) {
+      this.chats.push(chat);
+      this.newMessage = '';
+      window.scrollTo(0, document.body.scrollHeight);
     }
   }
 });
@@ -25677,35 +25698,84 @@ var render = function() {
     _c(
       "ul",
       _vm._l(_vm.chats, function(chat) {
-        return _c("li", {
-          key: chat.id,
-          domProps: { textContent: _vm._s(chat.message) }
-        })
+        return _c(
+          "li",
+          {
+            key: chat.id,
+            staticClass: "my-4 rounded",
+            class:
+              chat.user.id != _vm.user
+                ? "bg-warning float-left"
+                : "bg-success float-right"
+          },
+          [
+            _c("img", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: chat.user.id != _vm.user,
+                  expression: "chat.user.id != user"
+                }
+              ],
+              staticClass: "rounded-circle float-left",
+              attrs: {
+                src:
+                  chat.user.id > _vm.user
+                    ? "https://source.unsplash.com/72QxUqXuXz8/50x50"
+                    : "https://source.unsplash.com/AWbhfbkRC74/50x50"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "msg p-1 mx-2",
+                class: chat.user.id != _vm.user ? "text-left" : "text-right"
+              },
+              [_vm._v(_vm._s(chat.message))]
+            )
+          ]
+        )
       }),
       0
     ),
     _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.newMessage,
-          expression: "newMessage"
-        }
-      ],
-      attrs: { type: "text" },
-      domProps: { value: _vm.newMessage },
-      on: {
-        keydown: _vm.send,
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+    _c("form", { attrs: { action: "#" } }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newMessage,
+              expression: "newMessage"
+            }
+          ],
+          staticClass: "position-fixed form-control fixed-bottom mb-2 mx-auto",
+          attrs: { type: "text" },
+          domProps: { value: _vm.newMessage },
+          on: {
+            keydown: function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              $event.preventDefault()
+              return _vm.send($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.newMessage = $event.target.value
+            }
           }
-          _vm.newMessage = $event.target.value
-        }
-      }
-    })
+        })
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

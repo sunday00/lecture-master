@@ -24,5 +24,5 @@ Broadcast::channel('tasks.{projectId}', function ($user, $projectId) {
 
 
 Broadcast::channel('chat.{chatroomId}', function ($user, $chatroomId) {
-    return \Arr::has( Chatroom::find($chatroomId)->user->pluck('id'), $user->id );
+    return in_array( $user->id, Chatroom::find($chatroomId)->user->pluck('id')->toArray() );
 });
