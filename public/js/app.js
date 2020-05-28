@@ -1926,6 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     dataChatroom: {},
@@ -1936,7 +1937,9 @@ __webpack_require__.r(__webpack_exports__);
       chats: this.dataChatroom,
       user: this.dataUser,
       chatRoomId: location.toString().split("/").pop(),
-      newMessage: ''
+      newMessage: '',
+      activePeer: false,
+      typinging: false
     };
   },
   created: function created() {
@@ -1946,10 +1949,22 @@ __webpack_require__.r(__webpack_exports__);
       var chat = _ref.chat;
 
       _this.addMsg(chat);
+    }).listenForWhisper('typing', function (e) {
+      console.log(e.name);
+      _this.activePeer = e;
+      if (_this.typinging) clearTimeout(_this.typinging);
+      _this.typinging = setTimeout(function () {
+        _this.activePeer = false;
+      }, 2000);
     });
     window.scrollTo(0, document.body.scrollHeight);
   },
   methods: {
+    tapParticipants: function tapParticipants() {
+      window.Echo["private"]('chat.' + this.chatRoomId).whisper('typing', {
+        name: "FOO BAR"
+      });
+    },
     send: function send() {
       axios.post("/api/chat/".concat(this.chatRoomId), {
         message: this.newMessage
@@ -25697,48 +25712,65 @@ var render = function() {
   return _c("div", [
     _c(
       "ul",
-      _vm._l(_vm.chats, function(chat) {
-        return _c(
+      [
+        _vm._l(_vm.chats, function(chat) {
+          return _c(
+            "li",
+            {
+              key: chat.id,
+              staticClass: "my-4 rounded",
+              class:
+                chat.user.id != _vm.user
+                  ? "bg-warning float-left"
+                  : "bg-success float-right"
+            },
+            [
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: chat.user.id != _vm.user,
+                    expression: "chat.user.id != user"
+                  }
+                ],
+                staticClass: "rounded-circle float-left",
+                attrs: {
+                  src:
+                    chat.user.id > _vm.user
+                      ? "https://source.unsplash.com/72QxUqXuXz8/50x50"
+                      : "https://source.unsplash.com/AWbhfbkRC74/50x50"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass: "msg p-1 mx-2",
+                  class: chat.user.id != _vm.user ? "text-left" : "text-right"
+                },
+                [_vm._v(_vm._s(chat.message))]
+              )
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c(
           "li",
           {
-            key: chat.id,
-            staticClass: "my-4 rounded",
-            class:
-              chat.user.id != _vm.user
-                ? "bg-warning float-left"
-                : "bg-success float-right"
-          },
-          [
-            _c("img", {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: chat.user.id != _vm.user,
-                  expression: "chat.user.id != user"
-                }
-              ],
-              staticClass: "rounded-circle float-left",
-              attrs: {
-                src:
-                  chat.user.id > _vm.user
-                    ? "https://source.unsplash.com/72QxUqXuXz8/50x50"
-                    : "https://source.unsplash.com/AWbhfbkRC74/50x50"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "p",
+            directives: [
               {
-                staticClass: "msg p-1 mx-2",
-                class: chat.user.id != _vm.user ? "text-left" : "text-right"
-              },
-              [_vm._v(_vm._s(chat.message))]
-            )
-          ]
+                name: "show",
+                rawName: "v-show",
+                value: _vm.activePeer,
+                expression: "activePeer"
+              }
+            ]
+          },
+          [_c("p", [_vm._v("someone is now start talk to you")])]
         )
-      }),
-      0
+      ],
+      2
     ),
     _vm._v(" "),
     _c("form", { attrs: { action: "#" } }, [
@@ -25756,16 +25788,19 @@ var render = function() {
           attrs: { type: "text" },
           domProps: { value: _vm.newMessage },
           on: {
-            keydown: function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              $event.preventDefault()
-              return _vm.send($event)
-            },
+            keydown: [
+              function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                $event.preventDefault()
+                return _vm.send($event)
+              },
+              _vm.tapParticipants
+            ],
             input: function($event) {
               if ($event.target.composing) {
                 return

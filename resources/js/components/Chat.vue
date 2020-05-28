@@ -7,10 +7,11 @@
             >
             <p class="msg p-1 mx-2" :class="chat.user.id != user ? 'text-left' : 'text-right'">{{chat.message}}</p>
           </li>
+          <li v-show="activePeer"><p>someone is now start talk to you</p></li>
       </ul>
       <form action="#">
           <div class="form-group">
-            <input type="text" v-model="newMessage" @keydown.enter.prevent="send" class="position-fixed form-control fixed-bottom mb-2 mx-auto" />
+            <input type="text" v-model="newMessage" @keydown.enter.prevent="send" class="position-fixed form-control fixed-bottom mb-2 mx-auto" @keydown="tapParticipants" />
           </div>
       </form>
   </div>
@@ -27,17 +28,31 @@ export default {
             chats: this.dataChatroom,
             user: this.dataUser,
             chatRoomId: location.toString().split("/").pop(),
-            newMessage: ''
+            newMessage: '',
+            activePeer: false,
+            typinging: false,
         }
     },
     created(){
         window.Echo.private('chat.' + this.chatRoomId)
             .listen('Chat', ( {chat} ) => {
                 this.addMsg(chat);
+            }).listenForWhisper('typing', e => {
+                console.log(e.name);
+                this.activePeer = e;
+                if( this.typinging ) clearTimeout( this.typinging );
+                this.typinging = setTimeout(()=>{
+                    this.activePeer = false;
+                }, 2000);
             });
         window.scrollTo(0,document.body.scrollHeight);
     },
     methods: {
+
+        tapParticipants(){
+            window.Echo.private('chat.' + this.chatRoomId)
+                .whisper('typing', { name: "FOO BAR" });
+        },
         send(){
             axios.post(`/api/chat/${this.chatRoomId}`, {message: this.newMessage})
                 .then(response => response.data)
@@ -47,7 +62,8 @@ export default {
             this.chats.push(chat);
             this.newMessage = '';
             window.scrollTo(0,document.body.scrollHeight);
-        }
+        },
+        
     }
 }
 </script>
