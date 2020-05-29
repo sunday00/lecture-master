@@ -36,6 +36,6 @@ class Chat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat.'.$this->chat->chatroom->id);
+        return new PresenceChannel('chat.'.$this->chat->chatroom->id);
     }
 }
