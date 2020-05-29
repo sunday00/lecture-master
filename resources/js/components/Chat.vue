@@ -33,8 +33,22 @@ export default {
             typinging: false,
         }
     },
+    computed: {
+        channel(){
+            return window.Echo.join('chat.' + this.chatRoomId);
+        }
+    },
     created(){
-        window.Echo.private('chat.' + this.chatRoomId)
+        this.channel
+            .joining(user => {
+                console.log(`${user.name} is joining`);
+            })
+            .here(users => {
+                users.forEach(user => { console.log(`${user.name} is here`); });
+            })
+            .leaving(user => {
+                console.log(`${user.name} is leaving`);
+            })
             .listen('Chat', ( {chat} ) => {
                 this.addMsg(chat);
             }).listenForWhisper('typing', e => {

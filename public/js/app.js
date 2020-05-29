@@ -1942,10 +1942,23 @@ __webpack_require__.r(__webpack_exports__);
       typinging: false
     };
   },
+  computed: {
+    channel: function channel() {
+      return window.Echo.join('chat.' + this.chatRoomId);
+    }
+  },
   created: function created() {
     var _this = this;
 
-    window.Echo["private"]('chat.' + this.chatRoomId).listen('Chat', function (_ref) {
+    this.channel.joining(function (user) {
+      console.log("".concat(user.name, " is joining"));
+    }).here(function (users) {
+      users.forEach(function (user) {
+        console.log("".concat(user.name, " is here"));
+      });
+    }).leaving(function (user) {
+      console.log("".concat(user.name, " is leaving"));
+    }).listen('Chat', function (_ref) {
       var chat = _ref.chat;
 
       _this.addMsg(chat);
