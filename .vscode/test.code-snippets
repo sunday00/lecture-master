@@ -1,0 +1,32 @@
+{
+    "testcase class": {
+		"scope": "php",
+		"prefix": "testcase",
+		"body": [
+			"class ${1:ExampleClassName} extends \\PHPUnit\\Framework\\TestCase",
+            "{",
+            "",
+                "\t/** @test */",
+                "\tpublic function ${2:test_name}($3)",
+                "\t{",
+                "\t\t$4",
+                "\t\t$this->assertTrue( $5 );",
+                "\t}",
+            "}"
+		],
+		"description": "basic test case"
+    },
+    "test method": {
+		"scope": "php",
+		"prefix": "test-m",
+		"body": [
+                "/** @test */",
+                "public function ${2:test_name}($3)",
+                "{",
+                "\t$4",
+                "\t$this->assertTrue( $5 );",
+                "}",
+		],
+		"description": "basic test case"
+	}
+}
