@@ -8,7 +8,7 @@ class CustomerIsGoldTest extends \PHPUnit\Framework\TestCase
     {
         $spec = new CustomerIsGold;
 
-        $customer = new Customer('gold');
+        $customer = new Customer(['type' => 'gold']);
 
         $this->assertTrue( $spec->isSatisfiedBy($customer) );
     }
