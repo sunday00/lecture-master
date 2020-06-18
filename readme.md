@@ -12,6 +12,10 @@ git push -u origin 'svelte-tuto'
 
 * * *
 
+git clone -b js-svelte-tuto --single-branch https://github.com/sunday00/lecture-master.git
+
+* * *
+
 https://dev.to/alexparra/basic-svelte-app-with-parcel-30i5
 
 npm init -y
