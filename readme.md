@@ -2,13 +2,13 @@ git init
 
 git remote add origin https://github.com/sunday00/lecture-master.git
 
-git checkout -b 'svelte-tuto'
+git checkout -b 'svelte-tuto-actual'
 
 git aa
 
 git c "re upload"
 
-git push -u origin 'svelte-tuto'
+git push -u origin 'svelte-tuto-actual'
 
 * * *
 
