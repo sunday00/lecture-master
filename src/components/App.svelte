@@ -18,6 +18,16 @@
   <button on:click={increaseRef2}>ref++</button>
   {ref2} : {double2}
 
+  <br><br>
+
+<button on:click={pushNumToArr}>+</button>
+<ul>
+  {#each arr as ar}
+    <li>{ar}</li>
+  {/each}
+</ul>
+
+
 </div>
 
 <script>
@@ -50,6 +60,15 @@
 
   $: if ( ref2 % 2 ) {
     console.log(ref2);
+  }
+
+  let arr = [1,2,3];
+  function pushNumToArr () {
+    arr.push(arr.length+1);
+    console.log(arr);
+    // still not work. need blow
+
+    arr = arr;
   }
 
 </script>
