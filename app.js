@@ -1,2 +1,0 @@
-import svelte from 'svelte';
-
