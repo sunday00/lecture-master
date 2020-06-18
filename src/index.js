@@ -1,8 +1,8 @@
 import App from './components/App.svelte';
 
 export default new App({
-  target: document.body,
+  target: document.body.querySelector('.container'),
   props: {
-    name: 'Svelte',
+    
   },
 });

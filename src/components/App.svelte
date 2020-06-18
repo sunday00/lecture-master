@@ -1,11 +1,9 @@
+<h1>Hello {name}!</h1>
+
 <script>
-  export let name;
+  let name = 'banana';
 </script>
 
 <style>
-  h1 {
-    text-align: center;
-  }
-</style>
 
-<h1>Hello {name}!</h1>
+</style>
