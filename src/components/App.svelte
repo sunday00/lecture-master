@@ -1,7 +1,7 @@
 <div>
   <h1>Hello {name}!</h1>
   <img {src} alt="adorable avatar" style="border-radius:50%;">
-  <Child></Child>
+  <Child childNumber=3></Child>
   {someTag}
   {@html someTag}
 </div>
