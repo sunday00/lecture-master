@@ -9,7 +9,7 @@
 <hr>
 
 <div>
-    <article class="on"></article>
+    <article class="on" on:mousemove={onMouseMove}></article>
 </div>
 
 
@@ -27,6 +27,18 @@
 
     let articles = getArticles();
 
+    // 
+
+    function onMouseMove (e) {
+        let r = e.offsetX;
+        let g = e.offsetY;
+        let b = (e.offsetX + e.offsetY) / 2;
+
+        // console.log(r, g, b);
+
+        e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
 </script>
 
 <style lang="scss">
@@ -34,7 +46,7 @@
 
     .on {
         background-color: $primary;
-        width: 300px;
-        height: 300px;
+        width: 255px;
+        height: 255px;
     }
 </style>
