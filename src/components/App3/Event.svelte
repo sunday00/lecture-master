@@ -51,6 +51,21 @@
         </div>
     </div>
 
+
+</div>
+
+<hr />
+
+<div>
+    <button on:click={dipatchToPrentComponent}>DISPATCH</button>
+</div>
+
+<Descendant on:eventFromDescendant></Descendant>
+
+<hr>
+
+<div>
+    <button on:click>Just this can pass the event to parent easly</button>
 </div>
 
 <script>
@@ -81,5 +96,18 @@
 
         To solve this issue, just add your event to common parent element. And use capturing!
         */
+    // /
+
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
+    function dipatchToPrentComponent()
+    {
+        dispatch('parentEventTrigger', {
+            somethingKey: 'HELLO'
+        });
+    }
+
+    import Descendant from './Descendant';
 
 </script>
