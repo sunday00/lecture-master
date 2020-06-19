@@ -1,0 +1,40 @@
+{
+    "articles": [
+        { 
+            "id" : 1,
+            "title" : "Hauzogag",
+            "content": "teach scientific tomorrow supply planned upward atmosphere population flight lady just distance meat scale touch frighten part instrument average frog wash greatest mighty fall",
+            "date" : "3/24/2020"
+        },
+        {
+            "id" : 2,
+            "title" : "explore",
+            "content": "sand especially never gather whale needle pitch plane scientist factory bank table easy off serious said point hung upward continued thrown moon gray fly",
+            "date" : "8/6/2076"
+        },
+        {
+            "id" : 3,
+            "title" : "frame",
+            "content": "am mad spend effort escape tears except themselves was beat shadow circus go express should blue no studying somebody thing unhappy radio hollow pride",
+            "date" : "8/4/2088"
+        },
+        {
+            "id" : 4,
+            "title" : "grandfather",
+            "content": "exciting captured aloud fill fully tiny contain gravity largest finger doing blew orbit bottom hung easier write eye heart am buffalo leather strange ago",
+            "date" : "7/30/2086"
+        },
+        {
+            "id" : 5,
+            "title" : "disease",
+            "content": "positive compass eleven control gradually couple pen canal finest whether spite curve beneath owner system pattern have importance trick pupil measure alive only board",
+            "date" : "7/5/2024"
+        },
+        {
+            "id" : 6,
+            "title" : "cannot",
+            "content": "entire hope whom wheat tip when plus however friend here element becoming split softly major swung farm cookies thing hardly forward complete late thick",
+            "date" : "9/16/2074"
+        }
+    ]
+}
