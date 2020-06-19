@@ -3,7 +3,7 @@
 </div>
 
 <script>
-    import Async from './Async'
+    import Async from './Async.svelte';
 
     
 </script>
