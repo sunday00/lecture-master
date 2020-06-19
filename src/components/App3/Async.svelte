@@ -6,6 +6,12 @@
 {/await}
 </div>
 
+<hr>
+
+<div>
+    <article class="on"></article>
+</div>
+
 
 <script>
     async function getArticles(){
@@ -22,3 +28,13 @@
     let articles = getArticles();
 
 </script>
+
+<style lang="scss">
+    $primary : skyblue;
+
+    .on {
+        background-color: $primary;
+        width: 300px;
+        height: 300px;
+    }
+</style>

@@ -8,7 +8,8 @@
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.6",
     "sass": "^1.26.8",
-    "svelte": "^3.23.2"
+    "svelte": "^3.23.2",
+    "svelte-preprocess": "^3.9.8"
   },
   "browserslist": [
     "last 3 and_chr versions",
