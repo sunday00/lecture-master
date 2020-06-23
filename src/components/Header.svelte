@@ -15,6 +15,12 @@
   <li class="mr-1">
     <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" href="/store" use:link use:active>Store Basic</a>
   </li>
+  <li class="mr-1">
+    <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+     href="/animation" use:link use:active>
+     Animation
+    </a>
+  </li>
 </ul>
 </header>
 
