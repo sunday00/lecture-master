@@ -21,6 +21,18 @@
      Animation
     </a>
   </li>
+  <li class="mr-1">
+    <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+     href="/animation2" use:link use:active>
+     Animation2
+    </a>
+  </li>
+  <li class="mr-1">
+    <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+     href="/component" use:link use:active>
+     Component
+    </a>
+  </li>
 </ul>
 </header>
 
