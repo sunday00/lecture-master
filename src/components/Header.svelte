@@ -33,6 +33,12 @@
      Component
     </a>
   </li>
+  <li class="mr-1">
+    <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+     href="/component2" use:link use:active>
+     Component2
+    </a>
+  </li>
 </ul>
 </header>
 

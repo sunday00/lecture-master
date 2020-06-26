@@ -6,6 +6,7 @@ import App6 from './components/Contents/App6/App.svelte';
 import App7 from './components/Contents/App7/App.svelte';
 import App72 from './components/Contents/App7/App2.svelte';
 import App8 from './components/Contents/App8/App.svelte';
+import App9 from './components/Contents/App9/App.svelte';
 
 const routes = {
     '/binding': App4,
@@ -16,6 +17,7 @@ const routes = {
     '/animation': App7,
     '/animation2': App72,
     '/component': App8,
+    '/component2': App9,
 };
 
 export default routes;
