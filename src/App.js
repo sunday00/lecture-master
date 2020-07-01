@@ -6,6 +6,7 @@ import Clock from './pages/Clock/Clock';
 import Click from './pages/Click/Click';
 import Cond from './pages/Cond/Cond';
 import Loop from './pages/Loop/Loop';
+import Form from './pages/Form/Form';
 // load component file
 
 const items = [
@@ -14,6 +15,7 @@ const items = [
   { name : 'Click', component:Click, path: '/click' },
   { name : 'Cond',  component:Cond, path: '/condition', option: { params: { key:'isShow', val:'true' } } },
   { name : 'Loop',  component:Loop, path: '/loop' },
+  { name : 'Form',  component:Form, path: '/form' },
   // register component
 ];
 
