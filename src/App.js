@@ -8,6 +8,7 @@ import Cond from './pages/Cond/Cond';
 import Loop from './pages/Loop/Loop';
 import Form from './pages/Form/Form';
 import Share from './pages/Share/Share';
+import Inherit from './pages/Inherit/Inherit';
 // load component file
 
 const items = [
@@ -18,6 +19,7 @@ const items = [
   { name : 'Loop',  component:Loop, path: '/loop' },
   { name : 'Form',  component:Form, path: '/form' },
   { name : 'Share',  component:Share, path: '/share' },
+  { name : 'Inherit',  component:Inherit, path: '/inherit' },
   // register component
 ];
 
