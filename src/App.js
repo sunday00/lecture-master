@@ -7,6 +7,7 @@ import Click from './pages/Click/Click';
 import Cond from './pages/Cond/Cond';
 import Loop from './pages/Loop/Loop';
 import Form from './pages/Form/Form';
+import Share from './pages/Share/Share';
 // load component file
 
 const items = [
@@ -16,6 +17,7 @@ const items = [
   { name : 'Cond',  component:Cond, path: '/condition', option: { params: { key:'isShow', val:'true' } } },
   { name : 'Loop',  component:Loop, path: '/loop' },
   { name : 'Form',  component:Form, path: '/form' },
+  { name : 'Share',  component:Share, path: '/share' },
   // register component
 ];
 
