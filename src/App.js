@@ -10,6 +10,7 @@ import Form from './pages/Form/Form';
 import Share from './pages/Share/Share';
 import Inherit from './pages/Inherit/Inherit';
 import Cart from './pages/Cart/Index';
+import Etc1 from './pages/ETC1/Index';
 // load component file
 
 const items = [
@@ -22,6 +23,7 @@ const items = [
   { name : 'Share',  component:Share, path: '/share' },
   { name : 'Inherit',  component:Inherit, path: '/inherit' },
   { name : 'Cart',  component:Cart, path: '/cart' },
+  { name : 'Etc1',  component:Etc1, path: '/etc1' },
   // register component
 ];
 
