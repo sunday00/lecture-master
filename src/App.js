@@ -9,6 +9,7 @@ import Loop from './pages/Loop/Loop';
 import Form from './pages/Form/Form';
 import Share from './pages/Share/Share';
 import Inherit from './pages/Inherit/Inherit';
+import Cart from './pages/Cart/Index';
 // load component file
 
 const items = [
@@ -20,6 +21,7 @@ const items = [
   { name : 'Form',  component:Form, path: '/form' },
   { name : 'Share',  component:Share, path: '/share' },
   { name : 'Inherit',  component:Inherit, path: '/inherit' },
+  { name : 'Cart',  component:Cart, path: '/cart' },
   // register component
 ];
 
