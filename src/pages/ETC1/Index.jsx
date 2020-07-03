@@ -5,6 +5,8 @@ import Frag from './Frag';
 import Ref from './Ref';
 import LazyImport from './LazyImport';
 import Cont from './Cont';
+import ErrorBound from './ErrorBound';
+import HOC from './HOC';
 
 const Menu = () => {
   
@@ -42,6 +44,16 @@ const Menu = () => {
               context
             </NavLink>
           </li>
+          <li style={navStyle}>
+            <NavLink to="/etc1/error" activeStyle={activeStyle}>
+              error
+            </NavLink>
+          </li>
+          <li style={navStyle}>
+            <NavLink to="/etc1/hoc" activeStyle={activeStyle}>
+              HOC
+            </NavLink>
+          </li>
         </ul>
         <hr/>
       </div>
@@ -59,6 +71,8 @@ const Menu = () => {
               <Route path="/etc1/ref" component={Ref} />
               <Route path="/etc1/lazyImport" component={LazyImport} />
               <Route path="/etc1/context" component={Cont} />
+              <Route path="/etc1/error" component={ErrorBound} />
+              <Route path="/etc1/hoc" component={HOC} />
 
             </Switch>
         </section>
