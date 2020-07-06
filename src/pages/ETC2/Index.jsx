@@ -3,6 +3,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 
 import Frag from './Fragment';
 import Portals from './Portals';
+import RenderProp from './RenderProp';
 
 
 const Menu = () => {
@@ -31,6 +32,11 @@ const Menu = () => {
               portals
             </NavLink>
           </li>
+          <li style={navStyle}>
+            <NavLink to="/etc2/renderProp" activeStyle={activeStyle}>
+              renderProp
+            </NavLink>
+          </li>
 
         </ul>
         <hr/>
@@ -47,6 +53,7 @@ const Menu = () => {
             <Switch>
               <Route path="/etc2/frag" component={Frag} />
               <Route path="/etc2/portals" component={Portals} />
+              <Route path="/etc2/renderProp" component={RenderProp} />
               
 
             </Switch>
