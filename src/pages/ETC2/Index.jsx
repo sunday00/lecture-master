@@ -5,6 +5,7 @@ import Frag from './Fragment';
 import Portals from './Portals';
 import RenderProp from './RenderProp';
 import Typecheck from './Typecheck';
+import File from './File';
 
 
 const Menu = () => {
@@ -43,6 +44,11 @@ const Menu = () => {
               typecheck
             </NavLink>
           </li>
+          <li style={navStyle}>
+            <NavLink to="/etc2/file" activeStyle={activeStyle}>
+              file
+            </NavLink>
+          </li>
         </ul>
         <hr/>
       </div>
@@ -60,6 +66,7 @@ const Menu = () => {
               <Route path="/etc2/portals" component={Portals} />
               <Route path="/etc2/renderProp" component={RenderProp} />
               <Route path="/etc2/typecheck" component={Typecheck} />
+              <Route path="/etc2/file" component={File} />
               
 
             </Switch>
