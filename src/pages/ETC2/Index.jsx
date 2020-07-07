@@ -4,6 +4,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import Frag from './Fragment';
 import Portals from './Portals';
 import RenderProp from './RenderProp';
+import Typecheck from './Typecheck';
 
 
 const Menu = () => {
@@ -37,7 +38,11 @@ const Menu = () => {
               renderProp
             </NavLink>
           </li>
-
+          <li style={navStyle}>
+            <NavLink to="/etc2/typecheck" activeStyle={activeStyle}>
+              typecheck
+            </NavLink>
+          </li>
         </ul>
         <hr/>
       </div>
@@ -54,6 +59,7 @@ const Menu = () => {
               <Route path="/etc2/frag" component={Frag} />
               <Route path="/etc2/portals" component={Portals} />
               <Route path="/etc2/renderProp" component={RenderProp} />
+              <Route path="/etc2/typecheck" component={Typecheck} />
               
 
             </Switch>
