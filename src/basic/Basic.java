@@ -1,5 +1,7 @@
 package basic;
 
+import java.lang.reflect.Array;
+
 public class Basic {
     public static void main(String[] args) {
 
@@ -19,6 +21,46 @@ public class Basic {
         new Basic().oper();
 
         new Basic().arr();
+
+        new Basic().str();
+
+        new Basic().staticTest();
+
+        new Basic().strict();
+
+        ClassPractice classPractice = new ClassPractice();
+        System.out.println("+=====++=====++==++=======+");
+        classPractice.doFunc();
+
+
+        int[][] board = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 3},
+                {0, 2, 5, 0, 1},
+                {4, 2, 4, 4, 2},
+                {3, 5, 1, 3, 1}
+        };
+        int[] moves = {1, 5, 3, 5, 1, 2, 1, 4};
+        KakaoToyCrain kakaoToyCrain = new KakaoToyCrain();
+        System.out.println(kakaoToyCrain.solution(board, moves));
+
+        System.out.println("+=====++=====++==++=======+");
+
+        Bed bed = new Bed();
+        bed.setPrice(100);
+        System.out.println(bed.getPrice());
+//        Furniture furniture = new Furniture();
+        // abstract 는 상속/타입 전용.
+        Furniture bed2 = new Bed();
+
+        bed.lying();
+//        bed2.lying(); // 부모 클래스 타입으로 호출하면 사실상 부모클래스 인스턴스임.
+        ((Bed) bed2).lying(); // 형변환 해주면 됨.
+
+        System.out.println("+=====++=====++==++=======+");
+
+        DefaultMethodIncludedInterface defaultMethodIncludedInterface = new DefaultMethodPractice();
+        defaultMethodIncludedInterface.echo("echo");
     }
 
     private void cast () {
@@ -76,4 +118,48 @@ public class Basic {
             System.out.println("for each : " + a);
         }
     }
+
+    private void str() {
+        System.out.println("==================");
+        String str1 = "hello";
+        String str2 = "hello";
+        String str3 = new String("hello");
+        String str4 = new String("hello");
+
+        System.out.println(str1 == str2);
+        System.out.println(str3 == str4);
+    }
+
+    static int num;
+    private void staticTest () {
+        Basic a = new Basic();
+        Basic b = new Basic();
+
+        a.num = 10;
+        b.num = 20;
+
+        System.out.println(a.num + ":" + b.num); // not 10:20 // 20:20
+        // static is allow store value one. this is not instance value scope;
+        System.out.println(Basic.num); // so, this is called "variable of class" and using from not instance, directly from Class.
+    }
+
+    public static final String Male = "MALE";
+    public static final String Female = "FEMALE";
+
+    private enum Gender {MALE, FEMALE};
+
+    private void strict (){
+        String gender = this.Male;
+        System.out.println(gender);
+
+        gender = "boy";
+        System.out.println(gender);
+
+        Gender gender2;
+        gender2 = Gender.FEMALE;
+//        gender2 = "girl"; //not work
+        System.out.println(gender2);
+    }
+
+
 }
