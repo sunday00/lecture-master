@@ -61,6 +61,8 @@ public class Basic {
 
         DefaultMethodIncludedInterface defaultMethodIncludedInterface = new DefaultMethodPractice();
         defaultMethodIncludedInterface.echo("echo");
+//        defaultMethodIncludedInterface.echo2("echo2");
+        DefaultMethodIncludedInterface.echo2("echo2");
     }
 
     private void cast () {

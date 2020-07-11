@@ -8,4 +8,8 @@ public interface DefaultMethodIncludedInterface {
     default void echo(String val){
         System.out.println(val);
     }
+
+    public static void echo2 (String val) {
+        System.out.println(val);
+    }
 }
