@@ -1,7 +1,7 @@
 package ThreadPrac;
 
 public class MusicBox {
-    public void playMusicA() {
+    public synchronized void playMusicA() {
         for (int i = 0; i < 10; i++) {
             System.out.println("Funnnnn!");
             try {
@@ -12,8 +12,11 @@ public class MusicBox {
         }
     }
     public void playMusicB() {
+        System.out.println("Gloomy is running");
         for (int i = 0; i < 10; i++) {
-            System.out.println("Gloomy");
+            synchronized (this) {
+                System.out.println("Gloomy");
+            }
             try {
                 Thread.sleep((int) (Math.random() * 1000));
             } catch (InterruptedException e) {
