@@ -1,0 +1,6 @@
+hello file input stream.
+It can be multi line.
+how about think?
+한글도 불러와지는 지 확인
+한자漢字입력入力
+
