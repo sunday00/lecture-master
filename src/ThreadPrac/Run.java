@@ -2,11 +2,13 @@ package ThreadPrac;
 
 public class Run {
     public static void main(String[] args) {
-        FirstTryHandler firstTryHandler = new FirstTryHandler();
-        firstTryHandler.handle();
+        // FirstTryHandler firstTryHandler = new FirstTryHandler();
+        // firstTryHandler.handle();
 
-        SecondTryHandler secondTryHandler = new SecondTryHandler();
-        secondTryHandler.handle();
+        // SecondTryHandler secondTryHandler = new SecondTryHandler();
+        // secondTryHandler.handle();
 
+        ThirdTry thirdTry = new ThirdTry();
+        thirdTry.handle();
     }
 }
