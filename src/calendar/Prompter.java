@@ -32,12 +32,26 @@ public class Prompter {
             if(command.equals("h")){
                 System.out.print("\nq : exit\n");
                 System.out.print("f : is leap\n");
+                System.out.print("s : register plan\n");
+                System.out.print("c : check plan\n");
                 System.out.print("e | r : exec\n");
                 System.out.print("v : version\n");
                 continue;
             } else if( command.equals("f") ){
                 if (Calendar.is_lib(year)) System.out.print("\ntrue. " + year + " is leap.\n");
                 else System.out.print("\nfalse. " + year + " is normal\n");
+                continue;
+            } else if( command.equals("s") ){
+                System.out.println("\nInput Date for schedule\n");
+                int date = scanner.nextInt();
+                System.out.println("\nInput some text for schedule\n");
+                String schedule = scanner.next();
+                calendar.registerPlan(year, month, date, schedule);
+                continue;
+            } else if( command.equals("c") ){
+                System.out.println("\nInput Date for check schedule\n");
+                int date = scanner.nextInt();
+                System.out.print("\n"+calendar.checkPlan(year, month, date)+"\n");
                 continue;
             } else if( command.equals("e") || command.equals("r") ){
                 calendar.print(year, month);

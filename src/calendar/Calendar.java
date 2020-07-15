@@ -1,9 +1,18 @@
 package calendar;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Calendar {
+
+    Map<LocalDate, String> schedules;
+
     int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    public Calendar() {
+        this.schedules = new HashMap<>();
+    }
 
     public static boolean is_lib (int year) {
         return year % 400 == 0 || year % 4 == 0  && year % 100 != 0;
@@ -35,5 +44,16 @@ public class Calendar {
             if ((i + emptyPrepend) % 7  == 0) System.out.print("\n");
         }
         System.out.print("\n");
+    }
+
+    public void registerPlan(int year, int month, int date, String schedule) {
+        LocalDate localDate = LocalDate.of(year, month, date);
+        this.schedules.put(localDate, schedule);
+    }
+
+
+    public String checkPlan(int year, int month, int date) {
+        LocalDate localDate = LocalDate.of(year, month, date);
+        return schedules.keySet().contains(localDate) ? schedules.get(localDate) : "No schedule";
     }
 }
