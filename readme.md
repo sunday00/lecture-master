@@ -11,3 +11,5 @@ git aa
 git c "re upload"
 
 git push -u origin super-basic
+
+TODO :: schedule is not support space bar... : (
