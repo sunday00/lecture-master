@@ -43,15 +43,18 @@ public class Prompter {
                 continue;
             } else if( command.equals("s") ){
                 System.out.println("\nInput Date for schedule\n");
-                int date = scanner.nextInt();
-                System.out.println("\nInput some text for schedule\n");
+                int date = 1;
+                if( scanner.hasNextInt() ) date = scanner.nextInt();
+                else continue;
+                System.out.println("\nInput some text for schedule.\n");
+                System.out.println("\n\\c! is cancel.( Warring! Dont command now. The command will be register as schedule )\n");
                 String schedule = scanner.next();
-                calendar.registerPlan(year, month, date, schedule);
-                continue;
+                if( !schedule.equals("\\c!") ) calendar.registerPlan(year, month, date, schedule);
+                else continue;
             } else if( command.equals("c") ){
                 System.out.println("\nInput Date for check schedule\n");
                 int date = scanner.nextInt();
-                System.out.print("\n"+calendar.checkPlan(year, month, date)+"\n");
+                System.out.print("\n"+Calendar.ANSI_YELLOW+calendar.checkPlan(year, month, date)+Calendar.ANSI_RESET+"\n");
                 continue;
             } else if( command.equals("e") || command.equals("r") ){
                 calendar.print(year, month);
