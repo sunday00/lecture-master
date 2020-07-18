@@ -1,9 +1,10 @@
 package calendar;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Prompter {
-    public void show () {
+    public void show () throws IOException {
         Scanner scanner = new Scanner(System.in);
         Calendar calendar = new Calendar();
 

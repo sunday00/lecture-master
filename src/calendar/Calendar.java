@@ -1,5 +1,6 @@
 package calendar;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class Calendar {
         return localDate.getDayOfWeek().getValue() % 7;
     }
 
-    public void print(int year, int month){
+    public void print(int year, int month) throws IOException {
         if( is_lib(year) ) this.MAX_DAYS[1] = 29;
         LocalDate now = LocalDate.now();
         int today = -1;
@@ -72,13 +73,35 @@ public class Calendar {
         System.out.print("\n");
     }
 
-    public void registerPlan(int year, int month, int date, String schedule) {
+    public void registerPlan(int year, int month, int date, String schedule) throws IOException {
         LocalDate localDate = LocalDate.of(year, month, date);
         this.schedules.put(localDate, schedule);
+
+        File file = new File("./Schedule.dat");
+
+        FileWriter fw = new FileWriter(file, true);
+        fw.write("\"" + localDate + ", " + schedule + "\"\n");
+        fw.close();
     }
 
-    public String checkPlan(int year, int month, int date) {
+    public String checkPlan(int year, int month, int date) throws IOException {
         LocalDate localDate = LocalDate.of(year, month, date);
+
+        File f = new File("./Schedule.dat");
+        if( !f.exists() ) return null;
+        FileReader fr = new FileReader(f);
+        BufferedReader br = new BufferedReader(fr);
+
+        String buf = "";
+        while ( (buf = br.readLine()) != null){
+            String dt = buf.split(",")[0];
+            LocalDate ld = LocalDate.of(
+                    Integer.parseInt(dt.split("-")[0]),
+                    Integer.parseInt(dt.split("-")[1]),
+                    Integer.parseInt(dt.split("-")[2]));
+            schedules.put( ld, buf.split(",")[1] );
+        }
+
         return schedules.keySet().contains(localDate) ? schedules.get(localDate) : "No schedule";
     }
 }
