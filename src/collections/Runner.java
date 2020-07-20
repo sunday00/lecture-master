@@ -1,6 +1,7 @@
 package collections;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Collectors;
@@ -48,6 +49,37 @@ public class Runner {
         }).collect(Collectors.toList());
 
         uppers2.forEach(System.out::println);
+
+        System.out.println("==========");
+
+        List<Study> studies = new ArrayList<>();
+        studies.add(new Study("laravel", "php", true, 4));
+        studies.add(new Study("phalcon", "php", true, 3));
+        studies.add(new Study("spring", "java", false, 4));
+        studies.add(new Study("jpa", "java", true, 5));
+        studies.add(new Study("django", "python", false, 2));
+        studies.add(new Study("flask", "python", false, 6));
+
+        studies.stream().filter(s -> s.getLang().equals("php")).collect(Collectors.toList()).forEach(s -> {
+            System.out.println(s.toString());
+        });
+
+        System.out.println("====closed only======");
+
+        studies.stream().filter(s -> !s.isOpen())
+                .collect(Collectors.toList())
+                .forEach(s -> System.out.println(s.toString()));
+
+        System.out.println("====flat======");
+
+        List<List<Study>> filtered = new ArrayList<>();
+        filtered.add( studies.stream().filter(s -> s.getLang().equals("php")).collect(Collectors.toList()) );
+        filtered.add( studies.stream().filter(s -> s.getLang().equals("python")).collect(Collectors.toList()) );
+        filtered.stream().flatMap(Collection::stream)
+                .forEach(s -> {
+                    System.out.println(s.toString());
+                });
+
 
     }
 }
