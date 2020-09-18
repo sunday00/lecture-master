@@ -33,77 +33,79 @@ class _HomeScreenState extends State<HomeScreen> {
     double width = screenSize.width;
     double height = screenSize.height;
 
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: Text('My Quiz App'),
-        backgroundColor: Colors.deepPurple,
-        leading: Container(),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: Image.asset(
-              'images/quiz.jpeg',
-              width: width * 0.8,
-            ),
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: SafeArea(
+            child: Scaffold(
+          appBar: AppBar(
+            title: Text('My Quiz App'),
+            backgroundColor: Colors.deepPurple,
+            leading: Container(),
           ),
-          Padding(
-            padding: EdgeInsets.all(width * 0.024),
-          ),
-          Text(
-            'Flutter Quiz App',
-            style: TextStyle(
-              fontSize: width * 0.065,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            'Info',
-            textAlign: TextAlign.center,
-          ),
-          Padding(
-            padding: EdgeInsets.all(width * 0.048),
-          ),
-          _buildStep(width, '1. Solve the random quiz.'),
-          _buildStep(width, '2. Select Answer and press next button.'),
-          _buildStep(width, '3. Challenge receiving perfect score.'),
-          Padding(
-            padding: EdgeInsets.all(width * 0.024),
-          ),
-          Container(
-            padding: EdgeInsets.only(bottom: width * 0.036),
-            child: Center(
-              child: ButtonTheme(
-                minWidth: width * 0.8,
-                height: height * 0.05,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                child: RaisedButton(
-                  child: Text(
-                    'CHALLENGE NOW!',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  color: Colors.deepPurple,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuizScreen(
-                                  quizs: quizs,
-                                )));
-                  },
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Center(
+                child: Image.asset(
+                  'images/quiz.jpeg',
+                  width: width * 0.8,
                 ),
               ),
-            ),
-          )
-        ],
-      ),
-    ));
+              Padding(
+                padding: EdgeInsets.all(width * 0.024),
+              ),
+              Text(
+                'Flutter Quiz App',
+                style: TextStyle(
+                  fontSize: width * 0.065,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Info',
+                textAlign: TextAlign.center,
+              ),
+              Padding(
+                padding: EdgeInsets.all(width * 0.048),
+              ),
+              _buildStep(width, '1. Solve the random quiz.'),
+              _buildStep(width, '2. Select Answer and press next button.'),
+              _buildStep(width, '3. Challenge receiving perfect score.'),
+              Padding(
+                padding: EdgeInsets.all(width * 0.024),
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: width * 0.036),
+                child: Center(
+                  child: ButtonTheme(
+                    minWidth: width * 0.8,
+                    height: height * 0.05,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: RaisedButton(
+                      child: Text(
+                        'CHALLENGE NOW!',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: Colors.deepPurple,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => QuizScreen(
+                                      quizs: quizs,
+                                    )));
+                      },
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        )));
   }
 
   Widget _buildStep(double width, String title) {
