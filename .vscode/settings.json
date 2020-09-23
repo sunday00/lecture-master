@@ -1,3 +1,7 @@
 {
-    "python.pythonPath": "quiz_backend\\venv\\Scripts\\python.exe"
+    "python.pythonPath": "quiz_backend\\venv\\Scripts\\python.exe",
+    "cSpell.words": [
+        "Quizs"
+    ],
+    "python.linting.pylintPath": "pylint_django"
 }
