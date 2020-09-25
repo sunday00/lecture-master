@@ -10,15 +10,25 @@ const header: Jose = {
   typ: "JWT",
 };
 
-export const home = async (ctx: RouterContext) => {
+const renderViewWithData = async (ctx: RouterContext, view: string, data: object) => {
     const user = ctx.state.currentUser;
-    ctx.response.body = await renderFileToString(`${Deno.cwd()}/views/home.ejs`, {
-        user : user
+    return await renderFileToString(`${Deno.cwd()}/views/${view}.ejs`, {
+        user : user,
+        ...data
     });
 }
 
+export const home = async (ctx: RouterContext) => {
+    ctx.response.body = await renderViewWithData(ctx, 'home', {});
+}
+
 export const login = async (ctx: RouterContext) => {
-    ctx.response.body = await renderFileToString(`${Deno.cwd()}/views/login.ejs`, { error: "" });
+    let msg = null;
+    if(ctx.state.flash){
+        msg = ctx.state.flash;
+    }
+    ctx.state.flash = null;
+    ctx.response.body = await renderViewWithData(ctx, 'login', { error: msg });
 }
 
 export const logined = async (ctx: RouterContext) => {
@@ -28,7 +38,7 @@ export const logined = async (ctx: RouterContext) => {
     const user = users.find((u: User) => u.username === result.get('username'));
     
     if ( !user || !compareSync(result.get('password'), user.password.toString()) ){
-        ctx.response.body = await renderFileToString(`${Deno.cwd()}/views/login.ejs`, {
+        ctx.response.body = await renderViewWithData(ctx, 'login', {
             error: 'Failed to login. Check your username and password'
         });
     } else {
@@ -44,7 +54,7 @@ export const logined = async (ctx: RouterContext) => {
 }
 
 export const sign = async (ctx: RouterContext) => {
-    ctx.response.body = await renderFileToString(`${Deno.cwd()}/views/sign.ejs`, {});
+    ctx.response.body = await renderViewWithData(ctx, 'sign', {});
 }
 
 export const signed = async (ctx: RouterContext) => {
@@ -62,8 +72,6 @@ export const signed = async (ctx: RouterContext) => {
         password: hashedPassword,
     }
 
-    console.log(user);
-
     users.push(user);
 
     ctx.response.redirect('/login');
@@ -71,5 +79,10 @@ export const signed = async (ctx: RouterContext) => {
 }
 
 export const logout = async (ctx: RouterContext) => {
-    
+    ctx.cookies.delete('jwt');
+    ctx.response.redirect("/");
+}
+
+export const protectedView = async (ctx: RouterContext) => {
+    ctx.response.body = await renderViewWithData(ctx, 'dashboard', {});
 }

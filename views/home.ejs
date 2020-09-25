@@ -10,15 +10,18 @@
 <body>
     <div class="container">
         <div class="auth mt-5">
-            <% if(user){ %>
-                <h1>Auth with DENO - Welcome <%= user.username %></h1>
+            <% if(!user){ %>
+                <h1>Auth with DENO</h1>
                 <a href="/login" class="btn btn-info">login</a>
                 <a href="/sign" class="btn btn-outline-info">sign</a>
             <% } else { %>
-                <h1>Auth with DENO</h1>
-                <form action="/logout" method="POST">
-                    <input type="submit" value="logout" class="btn btn-danger">
-                </form>
+                <h1>Auth with DENO - Welcome <%= user.username %></h1>
+                <div class="d-flex flex-row">
+                    <a href="/protected" class="btn btn-success">dashboard</a>
+                    <form action="/logout" method="POST">
+                        <input type="submit" value="logout" class="btn btn-danger ml-3">
+                    </form>
+                </div>
             <% } %>
         </div>
     </div>

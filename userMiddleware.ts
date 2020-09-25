@@ -10,14 +10,13 @@ const userMiddleware = async (ctx: Context, next: Function) => {
         const data = await validateJwt({ jwt, key, algorithm: "HS256" });
 
         if( data.isValid ){
-            
             const payload: PayloadObject = data.payload as PayloadObject;
             const user = users.find((u: User) => u.username === payload.iss);
             ctx.state.currentUser = user;
-            console.log(user);
-        } else {
-            ctx.cookies.delete('jwt');
         }
+    } else {
+        ctx.cookies.delete('jwt');
+        ctx.state.currentUser = undefined;
     }
 
     await next();

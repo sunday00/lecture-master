@@ -1,7 +1,8 @@
 import "https://deno.land/x/dotenv@v0.5.0/mod.ts";
 import {Application, Router} from "https://deno.land/x/oak@v6.2.0/mod.ts";
-import {home, login, logined, sign, signed, logout} from "./routes.ts";
+import {home, login, logined, sign, signed, logout, protectedView} from "./routes.ts";
 import userMiddleware from "./userMiddleware.ts";
+import authMiddleware from "./authMiddleware.ts";
 
 const app = new Application();
 const router = new Router();
@@ -13,7 +14,7 @@ app.use(userMiddleware);
 router.get('/', home)
     .get('/login', login)
     .get('/sign', sign)
-    .get('/protected', home)
+    .get('/protected', authMiddleware, protectedView)
     .post('/login', logined)
     .post('/sign', signed)
     .post('/logout', logout);
