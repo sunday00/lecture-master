@@ -10,9 +10,16 @@
 <body>
     <div class="container">
         <div class="auth mt-5">
-            <h1>Auth with DENO</h1>
-            <a href="/login" class="btn btn-info">login</a>
-            <a href="/sign" class="btn btn-outline-info">sign</a>
+            <% if(user){ %>
+                <h1>Auth with DENO - Welcome <%= user.username %></h1>
+                <a href="/login" class="btn btn-info">login</a>
+                <a href="/sign" class="btn btn-outline-info">sign</a>
+            <% } else { %>
+                <h1>Auth with DENO</h1>
+                <form action="/logout" method="POST">
+                    <input type="submit" value="logout" class="btn btn-danger">
+                </form>
+            <% } %>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
