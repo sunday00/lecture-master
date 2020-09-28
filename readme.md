@@ -12,7 +12,11 @@ git push -u origin lecName
 
 ps-db:
 winter is java
+
 summer is php
+
 autumn is python
+
 blueorange is js
+
 whiteorange is etc
