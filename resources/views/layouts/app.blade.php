@@ -10,8 +10,8 @@
 </head>
 <body class="bg-gray-900 text-white">
     <header class="border-b border-gray-800">
-        <nav class="container mx-auto flex items-center justify-between px-4 py-6 ">
-            <div class="flex items-center">
+        <nav class="container mx-auto flex items-center justify-between px-4 py-6 flex-col md:flex-row">
+            <div class="flex items-center flex-col md:flex-row">
                 <a href="/">
                     <svg id="Capa_1" enable-background="new 0 0 512 512"
                          class="logo"
@@ -37,7 +37,7 @@
                     <li><a href="#" class="hover:text-blue-300">Coming soon</a></li>
                 </ul>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center mt-4 md:mt-0">
                 <div class="search relative fas fa-search text-sm">
                     <input type="text" class="w-64 bg-gray-800 text-sm rounded-full px-3 py-1 focus:outline-none focus:shadow-outline" placeholder="search...">
                 </div>

@@ -4,10 +4,10 @@
     <!--suppress SpellCheckingInspection -->
     <div class="container mx-auto px-4">
         <section class="popular-games-wrap">
-            <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8">popular games</h2>
-            <div class="popular-games text-sm grid grid-cols-6 gap-12 border-b border-gray-800 pb-16">
+            <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center md:text-justify">popular games</h2>
+            <div class="popular-games text-sm grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 border-b border-gray-800 pb-16">
                 @foreach(range(1, 12) as $i)
-                <div class="game t-8">
+                <div class="game t-8 text-center md:text-justify">
                     <div class="relative inline-block">
                         <a href="#">
                             <img src="https://via.placeholder.com/264x352" alt="cover"
@@ -29,8 +29,8 @@
         </section>
 
         <section class="recently-reviewed-wrap">
-            <div class="flex my-8">
-                <div class="recently-reviewed w-3/4 mr-32">
+            <div class="flex flex-col lg:flex-row my-8">
+                <div class="recently-reviewed w-full lg:w-3/4  mr-0 lg:mr-32">
                     <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8">recently reviewed</h2>
                     <div class="recently-reviewed-container space-y-12 mt-8">
                         @foreach(range(1,3) as $i)
@@ -51,7 +51,7 @@
                                         game name
                                     </a>
                                     <p class="text-gray-400 mt-1">Console name</p>
-                                    <p class="mt-6 text-gray-400">
+                                    <p class="mt-6 text-gray-400 hidden md:block">
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolores minus nam vero. Ab consequuntur deserunt, dolorem dolorum inventore magni maiores nesciunt nisi optio pariatur quas qui, rerum, similique ut?
                                     </p>
                                 </div>
@@ -60,37 +60,41 @@
                     </div>
                 </div>{{-- recently reviewd --}}
 
-                <div class="most-anticipated coming-soon w-1/4">
-                    <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8">most anticipated</h2>
-                    <div class="most-anticipated-container space-y-10 mt-8">
-                        @foreach(range(1,4) as $i)
-                        <div class="game flex">
-                            <a href="#">
-                                <img src="https://via.placeholder.com/264x352" alt="cover"
-                                     class="w-16 hover:opacity-75 transition easy-in-out duration-150">
-                            </a>
-                            <div class="ml-4 ">
-                                <a href="#" class="hover:text-gray-300">game name</a>
-                                <p class="text-gray-400 text-sm mt-1">2020.Sep.16</p>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>{{-- most anticipated --}}
-
-                    <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8">coming soon</h2>
-                    <div class="coming-soon-container space-y-10 mt-8">
-                        @foreach(range(1,4) as $i)
-                            <div class="game flex">
+                <div class="most-anticipated coming-soon w-full lg:w-1/4 flex flex-col md:flex-row lg:flex-col mt-8 md:mt-0">
+                    <div class="w-full md:w-1/2 lg:w-full">
+                        <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center lg:text-justify">most anticipated</h2>
+                        <div class="most-anticipated-container space-y-10 mt-8">
+                            @foreach(range(1,4) as $i)
+                            <div class="game flex justify-center lg:justify-start">
                                 <a href="#">
                                     <img src="https://via.placeholder.com/264x352" alt="cover"
                                          class="w-16 hover:opacity-75 transition easy-in-out duration-150">
                                 </a>
-                                <div class="ml-4 ">
+                                <div class="ml-4">
                                     <a href="#" class="hover:text-gray-300">game name</a>
                                     <p class="text-gray-400 text-sm mt-1">2020.Sep.16</p>
                                 </div>
                             </div>
-                        @endforeach
+                            @endforeach
+                        </div>
+                    </div>{{-- most anticipated --}}
+
+                    <div class="w-full md:w-1/2 lg:w-full">
+                        <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center lg:text-justify">coming soon</h2>
+                        <div class="coming-soon-container space-y-10 mt-8">
+                            @foreach(range(1,4) as $i)
+                                <div class="game flex justify-center lg:justify-start">
+                                    <a href="#">
+                                        <img src="https://via.placeholder.com/264x352" alt="cover"
+                                             class="w-16 hover:opacity-75 transition easy-in-out duration-150">
+                                    </a>
+                                    <div class="ml-4 ">
+                                        <a href="#" class="hover:text-gray-300">game name</a>
+                                        <p class="text-gray-400 text-sm mt-1">2020.Sep.16</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>{{-- coming soon --}}
                 </div>
             </div>
