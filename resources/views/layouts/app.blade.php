@@ -42,7 +42,7 @@
                     <input type="text" class="w-64 bg-gray-800 text-sm rounded-full px-3 py-1 focus:outline-none focus:shadow-outline" placeholder="search...">
                 </div>
                 <div class="ml-6">
-                    <a href="#">
+                    <a href="#" title="sign in and register your image">
                         <svg data-jdenticon-value="guest{{ random_int(0, 255)  }}" width="40" height="40" class="rounded-full bg-white">
                             sign in and register your image
                         </svg>
@@ -56,7 +56,7 @@
         @yield('content')
     </main>
 
-    <footer class="text-center border-t border-gray-800">
+    <footer class="text-center border-t border-gray-800 text-sm">
         <div class="container mx-auto px-4 py-6">
             <p>Logo Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
             <p>Powered by <a href="#" class="underline hover:text-gray-400">IGDB API</a></p>

@@ -27357,6 +27357,11 @@ readers do not read off random characters that represent icons */
   fill: #1cb593;
 }
 
+.game .round-score {
+  right: -20px;
+  bottom: -20px;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;
