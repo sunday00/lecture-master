@@ -20,14 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce7e0ae-72d4-4872-9ec9-bc657cdcc9dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Services/Common/IgdbTokenService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae/storage_v2/_src_/database/gameaggregator.O0FuiA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae/storage_v2/_src_/database/gameaggregator.O0FuiA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/Common/IgdbTokenService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Common/IgdbTokenService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +192,7 @@
       <workItem from="1601292537970" duration="474000" />
       <workItem from="1601295527008" duration="285000" />
       <workItem from="1601295839852" duration="11165000" />
-      <workItem from="1601383343706" duration="9457000" />
+      <workItem from="1601383343706" duration="11804000" />
     </task>
     <servers />
   </component>

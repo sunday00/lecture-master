@@ -5,6 +5,7 @@ namespace App\Services\Common;
 
 
 use App\Models\CommonConfig;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 
@@ -48,12 +49,17 @@ class IgdbTokenService
 
     public function getPopularGames()
     {
+        $before = Carbon::now()->subMonth(2)->timestamp;
+        $after = Carbon::now()->addMonth(2)->timestamp;
+
         $response = Http::withHeaders([
             'Client-ID'     => config('services.igdb.key'),
             'Authorization' => 'Bearer '.$this->getAccessToken()
         ])->withBody("
                 fields name, cover.url, first_release_date, rating, platforms.abbreviation;
-                where rating != null;
+                where rating != null
+                   & platforms = (48,49,6,130,167,5,169,14)
+                   & (first_release_date >= {$before} & first_release_date <= {$after});
                 sort rating desc;
                 limit 12;
             ", 'text')->post('https://api.igdb.com/v4/games');
