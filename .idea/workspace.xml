@@ -20,8 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce7e0ae-72d4-4872-9ec9-bc657cdcc9dc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Services/Common/IgdbTokenService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae/storage_v2/_src_/database/gameaggregator.O0FuiA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae/storage_v2/_src_/database/gameaggregator.O0FuiA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +196,8 @@
       <workItem from="1601223766155" duration="1011000" />
       <workItem from="1601292537970" duration="474000" />
       <workItem from="1601295527008" duration="285000" />
-      <workItem from="1601295839852" duration="10808000" />
+      <workItem from="1601295839852" duration="11165000" />
+      <workItem from="1601383343706" duration="9457000" />
     </task>
     <servers />
   </component>
@@ -218,14 +225,26 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1601118683587" />
+    <state x="425" y="250" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601385238112">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="425" y="250" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1601385238112" />
+    <state x="553" y="227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601385556389">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="553" y="227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1601385556389" />
     <state width="250" height="553" key="HiddenNamespacesPopup" timestamp="1601119371035">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="250" height="553" key="HiddenNamespacesPopup/0.0.1440.900@0.0.1440.900" timestamp="1601119371035" />
-    <state x="539" y="376" key="NewPhpFileDialog" timestamp="1601372817321">
+    <state x="345" y="167" key="NewPhpClassDialog" timestamp="1601385522427">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="539" y="376" key="NewPhpFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1601372817321" />
+    <state x="345" y="167" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1601385522427" />
+    <state x="539" y="376" key="NewPhpFileDialog" timestamp="1601385324857">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="539" y="376" key="NewPhpFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1601385324857" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1601373323380">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -6,7 +6,7 @@
         <section class="popular-games-wrap">
             <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center md:text-justify">popular games</h2>
             <div class="popular-games text-sm grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 border-b border-gray-800 pb-16">
-                @foreach(range(1, 12) as $i)
+                @foreach($popularGames as $game)
                 <div class="game t-8 text-center md:text-justify">
                     <div class="relative inline-block">
                         <a href="#">
