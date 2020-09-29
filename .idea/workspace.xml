@@ -20,9 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce7e0ae-72d4-4872-9ec9-bc657cdcc9dc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +158,6 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -167,7 +167,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.spelling" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -176,7 +176,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6ce7e0ae-72d4-4872-9ec9-bc657cdcc9dc" name="Default Changelist" comment="" />
@@ -192,7 +192,7 @@
       <workItem from="1601223766155" duration="1011000" />
       <workItem from="1601292537970" duration="474000" />
       <workItem from="1601295527008" duration="285000" />
-      <workItem from="1601295839852" duration="5492000" />
+      <workItem from="1601295839852" duration="9348000" />
     </task>
     <servers />
   </component>
@@ -212,10 +212,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="354" y="135" key="#Inspections" timestamp="1601291474036">
+    <state x="354" y="135" key="#Inspections" timestamp="1601373186792">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="354" y="135" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1601291474036" />
+    <state x="354" y="135" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1601373186792" />
     <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601118683587">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -224,9 +224,13 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="250" height="553" key="HiddenNamespacesPopup/0.0.1440.900@0.0.1440.900" timestamp="1601119371035" />
-    <state x="221" y="89" key="SettingsEditor" timestamp="1601295812529">
+    <state x="539" y="376" key="NewPhpFileDialog" timestamp="1601372817321">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1601295812529" />
+    <state x="539" y="376" key="NewPhpFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1601372817321" />
+    <state x="221" y="89" key="SettingsEditor" timestamp="1601373323380">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1601373323380" />
   </component>
 </project>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body class="bg-gray-900 text-white">
-    <header class="border-b border-gray-800">
+    <header class="border-b border-gray-800 mb-8">
         <nav class="container mx-auto flex items-center justify-between px-4 py-6 flex-col md:flex-row">
             <div class="flex items-center flex-col md:flex-row">
                 <a href="/">
