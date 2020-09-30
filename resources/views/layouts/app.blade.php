@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @livewireStyles
 </head>
 <body class="bg-gray-900 text-white">
     <header class="border-b border-gray-800 mb-8">
@@ -38,8 +39,9 @@
                 </ul>
             </div>
             <div class="flex items-center mt-4 md:mt-0">
-                <div class="search relative fas fa-search text-sm">
-                    <input type="text" class="w-64 bg-gray-800 text-sm rounded-full px-3 py-1 focus:outline-none focus:shadow-outline" placeholder="search...">
+                <div class="search relative text-sm">
+                    <label for="search" class="fas fa-search mr-1"></label>
+                    <input id="search" type="text" class="w-64 bg-gray-800 text-sm rounded-full px-3 py-1 focus:outline-none focus:shadow-outline" placeholder="search...">
                 </div>
                 <div class="ml-6">
                     <a href="#" title="sign in and register your image">
@@ -65,5 +67,6 @@
     </footer>
 
     <script src="{{ mix('js/app.js') }}"></script>
+    @livewireScripts
 </body>
 </html>

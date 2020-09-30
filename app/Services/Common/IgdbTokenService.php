@@ -8,6 +8,7 @@ use App\Models\CommonConfig;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class IgdbTokenService
 {
@@ -44,32 +45,24 @@ class IgdbTokenService
             Cookie::queue('igdb_access_token', $accessToken, 3600);
         }
 
+        $response = Http::withHeaders([
+            'Client-ID'     => config('services.igdb.key'),
+            'Authorization' => 'Bearer '.$accessToken
+        ])->post('https://api.igdb.com/v4/games');
+
+        if( $response->status() == 403){
+            $this->deleteCommonConfig();
+            Cookie::queue(Cookie::forget('igdb_access_token'));
+            return $this->getAccessToken();
+        }
+
         return $accessToken;
     }
 
-    public function getPopularGames()
+    public function deleteCommonConfig()
     {
-        $before = Carbon::now()->subMonth(2)->timestamp;
-        $after = Carbon::now()->addMonth(2)->timestamp;
-
-        $response = Http::withHeaders([
-            'Client-ID'     => config('services.igdb.key'),
-            'Authorization' => 'Bearer '.$this->getAccessToken()
-        ])->withBody("
-                fields name, cover.url, first_release_date, rating, platforms.abbreviation;
-                where rating != null
-                   & platforms = (48,49,6,130,167,5,169,14)
-                   & (first_release_date >= {$before} & first_release_date <= {$after});
-                sort rating desc;
-                limit 12;
-            ", 'text')->post('https://api.igdb.com/v4/games');
-
-        if( $response->status() == 403){
-            $this->commonConfig->first()->delete();
-            Cookie::queue(Cookie::forget('igdb_access_token'));
-            $this->getPopularGames();
-        }
-
-        return $response->object();
+        $con = $this->commonConfig->first();
+        $con->igdb_access_token = null;
+        $con->save();
     }
 }

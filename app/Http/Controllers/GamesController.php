@@ -25,12 +25,8 @@ class GamesController extends Controller
      */
     public function index()
     {
-        $popularGames = $this->igdbTokenService->getPopularGames();
-
-        dump($popularGames);
-
         return view('index', [
-            'popularGames' => $popularGames
+            'igdbTokenService' => $this->igdbTokenService,
         ]);
     }
 

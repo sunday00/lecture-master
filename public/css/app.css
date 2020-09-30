@@ -21236,6 +21236,48 @@ video {
           animation: bounce 1s infinite;
 }
 
+.spinner{
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.spinner::after{
+  content: '';
+  position: absolute !important;
+  top: calc(50% - (2rem / 2));
+  left: calc(50% - (2rem / 2));
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid #dae1e7;
+  border-radius: 9999px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  -webkit-animation: spinAround 450ms infinite linear;
+          animation: spinAround 450ms infinite linear;
+}
+
+@-webkit-keyframes spinAround{
+  from{
+    transform: rotate(0deg);
+  }
+
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinAround{
+  from{
+    transform: rotate(0deg);
+  }
+
+  to{
+    transform: rotate(360deg);
+  }
+}
+
 /*!
  * Font Awesome Free 5.14.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -47944,6 +47986,28 @@ readers do not read off random characters that represent icons */
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
   }
+
+  .sm\:spinner{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .sm\:spinner::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (2rem / 2));
+    left: calc(50% - (2rem / 2));
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
+  }
 }
 
 @media (min-width: 768px){
@@ -68527,6 +68591,28 @@ readers do not read off random characters that represent icons */
   .md\:animate-bounce{
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .md\:spinner{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .md\:spinner::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (2rem / 2));
+    left: calc(50% - (2rem / 2));
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
   }
 }
 
@@ -89112,6 +89198,28 @@ readers do not read off random characters that represent icons */
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
   }
+
+  .lg\:spinner{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .lg\:spinner::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (2rem / 2));
+    left: calc(50% - (2rem / 2));
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
+  }
 }
 
 @media (min-width: 1280px){
@@ -109695,5 +109803,27 @@ readers do not read off random characters that represent icons */
   .xl\:animate-bounce{
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .xl\:spinner{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .xl\:spinner::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (2rem / 2));
+    left: calc(50% - (2rem / 2));
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
   }
 }

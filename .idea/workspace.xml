@@ -20,9 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce7e0ae-72d4-4872-9ec9-bc657cdcc9dc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/game-aggregator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/game-aggregator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GamesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GamesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Services/Common/IgdbTokenService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Common/IgdbTokenService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +45,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/resources/views/livewire/most-anticipated-games.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/livewire/popular-games.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/livewire/recently-reviewed-games.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -145,6 +160,7 @@
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/vendor/livewire/livewire" />
     </include_path>
   </component>
   <component name="ProjectId" id="1i2rncPzhVqLam5M77kQqjKIDfe" />
@@ -166,7 +182,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.spelling" />
+    <property name="settings.editor.selected.configurable" value="MTCustomThemeConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -192,7 +208,8 @@
       <workItem from="1601292537970" duration="474000" />
       <workItem from="1601295527008" duration="285000" />
       <workItem from="1601295839852" duration="11165000" />
-      <workItem from="1601383343706" duration="11804000" />
+      <workItem from="1601383343706" duration="21129000" />
+      <workItem from="1601467709882" duration="6398000" />
     </task>
     <servers />
   </component>
@@ -212,10 +229,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="354" y="135" key="#Inspections" timestamp="1601373186792">
+    <state x="354" y="135" key="#Inspections" timestamp="1601470507068">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="354" y="135" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1601373186792" />
+    <state x="354" y="135" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1601470507068" />
     <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601118683587">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -224,10 +241,14 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="425" y="250" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1601385238112" />
-    <state x="553" y="227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601385556389">
+    <state x="553" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601464575452">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="553" y="227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1601385556389" />
+    <state x="553" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1601464575452" />
+    <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601474909954">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1601474909954" />
     <state width="250" height="553" key="HiddenNamespacesPopup" timestamp="1601119371035">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -240,9 +261,17 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="539" y="376" key="NewPhpFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1601385324857" />
-    <state x="221" y="89" key="SettingsEditor" timestamp="1601373323380">
+    <state x="221" y="89" key="SettingsEditor" timestamp="1601472650830">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1601373323380" />
+    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1601472650830" />
+    <state x="546" y="225" key="refactoring.ChangeSignatureDialog" timestamp="1601462401527">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="546" y="225" key="refactoring.ChangeSignatureDialog/0.0.1440.900@0.0.1440.900" timestamp="1601462401527" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1601469616642">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1601469616642" />
   </component>
 </project>
