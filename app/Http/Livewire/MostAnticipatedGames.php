@@ -23,7 +23,7 @@ class MostAnticipatedGames extends Component
                 'Client-ID' => config('services.igdb.key'),
                 'Authorization' => 'Bearer ' . $igdbTokenService->getAccessToken()
             ])->withBody("
-                fields name, cover.url, first_release_date, follows, aggregated_rating;
+                fields name, slug, cover.url, first_release_date, follows, aggregated_rating;
                 where aggregated_rating != null
                    & platforms = (48,49,6,130,167,5,169,14)
                    & (first_release_date >= {$current} & first_release_date < {$after});

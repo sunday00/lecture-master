@@ -23,7 +23,7 @@ class PopularGames extends Component
                 'Client-ID'     => config('services.igdb.key'),
                 'Authorization' => 'Bearer '.$igdbTokenService->getAccessToken()
             ])->withBody("
-                fields name, cover.url, first_release_date, rating, platforms.abbreviation;
+                fields name, slug, cover.url, first_release_date, rating, platforms.abbreviation;
                 where rating != null
                    & platforms = (48,49,6,130,167,5,169,14)
                    & (first_release_date >= {$before} & first_release_date <= {$after});

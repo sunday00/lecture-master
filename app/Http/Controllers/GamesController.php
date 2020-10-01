@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Games\GameService;
 use Illuminate\Http\Request;
 use App\Services\Common\IgdbTokenService;
 use Illuminate\View\View;
 
 class GamesController extends Controller
 {
-    private $igdbTokenService;
+    private IgdbTokenService $igdbTokenService;
+    private GameService $gameService;
 
     /**
      * GamesController constructor.
+     * @param IgdbTokenService $igdbTokenService
+     * @param GameService $gameService
      */
-    public function __construct(IgdbTokenService $igdbTokenService)
+    public function __construct(IgdbTokenService $igdbTokenService, GameService $gameService)
     {
         $this->igdbTokenService = $igdbTokenService;
+        $this->gameService = $gameService;
     }
 
     /**
@@ -54,12 +59,16 @@ class GamesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param string $slug
+     * @return View
      */
-    public function show($id)
+    public function show(string $slug)
     {
-        //
+        $game = $this->gameService->getOneFromIgdbBySlug($slug, $this->igdbTokenService);
+        dump($game);
+        return view('show', [
+            'game' => $game
+        ]);
     }
 
     /**

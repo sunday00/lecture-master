@@ -23,7 +23,7 @@ class RecentlyReviewedGames extends Component
                 'Client-ID' => config('services.igdb.key'),
                 'Authorization' => 'Bearer ' . $igdbTokenService->getAccessToken()
             ])->withBody("
-                fields name, cover.url, first_release_date, platforms.abbreviation,
+                fields name, slug, cover.url, first_release_date, platforms.abbreviation,
                  rating, rating_count, summary;
                 where rating != null
                    & platforms = (48,49,6,130,167,5,169,14)

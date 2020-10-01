@@ -4,17 +4,17 @@
     <section class="container mx-auto px-4">
         <div class="game-details border-b border-gray-800 pb-8 flex flex-col md:flex-row">
             <div class="flex-none">
-                <img src="https://via.placeholder.com/264x352" alt="cover"
+                <img src="{{$game->cover->url}}" alt="cover"
                      class="w-full inline-block hover:opacity-75 transition easy-in-out duration-150">
             </div>
             <div class="ml-8">
-                <h2 class="font-semibold text-4xl">Game name</h2>
+                <h2 class="font-semibold text-4xl">{{$game->name}}</h2>
                 <div class="text-gray-400">
-                    <span>Genre</span>
+                    <span>{{$game->stringGenres}}</span>
                     &middot;
-                    <span>Publisher</span>
+                    <span>{{$game->company}}</span>
                     &middot;
-                    <span>console</span>
+                    <span>{{$game->stringPlatforms}}</span>
                 </div>
                 <div class="flex flex-col md:flex-row flex-wrap items-baseline md:items-center mt-8 space-x-0 md:space-x-4 space-y-8 md:space-y-0">
                     <div class="flex items-center">
