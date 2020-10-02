@@ -17,8 +17,10 @@ class GameService
                 'Authorization' => 'Bearer '.$igdbTokenService->getAccessToken()
             ])->withBody("
                 fields name, slug, genres.name, cover.url, first_release_date,
-                involved_companies.company.name,
-                rating, platforms.abbreviation, summary;
+                involved_companies.company.name, websites.*, videos.*, screenshots.*,
+                similar_games.cover.url, similar_games.name, similar_games.rating,
+                similar_games.platforms.abbreviation, similar_games.slug,
+                rating, aggregated_rating, platforms.abbreviation, summary;
                 where slug = \"{$slug}\";
             ", 'text')->post('https://api.igdb.com/v4/games');
 
@@ -26,6 +28,22 @@ class GameService
             $_game = $response->object()[0];
 
             $_game->cover->url = Str::replaceFirst('thumb','cover_big',$_game->cover->url);
+            $_game->screenshots = collect($_game->screenshots)->map(function($s){
+                $s->big = str_replace('thumb','screenshot_big',$s->url);
+                $s->huge = str_replace('thumb','screenshot_huge',$s->url);
+                return $s;
+            });
+            $_game->similar_games = collect($_game->similar_games)->map(function($g){
+                $g->cover->url = str_replace('thumb','cover_big',$g->cover->url);
+                $g->platforms =collect($g->platforms)->filter(function ($p){
+                    if( property_exists($p, 'abbreviation') ){
+                        return $p->abbreviation != 'Linux';
+                    }
+                    return false;
+                });
+                $g->stringPlatforms = implode(' | ', \Arr::pluck($g->platforms, 'abbreviation'));
+                return $g;
+            });
             $_game->platforms = collect($_game->platforms)->filter(function($p){
                 if( property_exists($p, 'abbreviation') ){
                     return $p->abbreviation != 'Linux';

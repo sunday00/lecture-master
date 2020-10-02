@@ -20,16 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce7e0ae-72d4-4872-9ec9-bc657cdcc9dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Services/Games/GameService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GamesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GamesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/ComingSoonGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/ComingSoonGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/MostAnticipatedGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/MostAnticipatedGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/PopularGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/PopularGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/RecentlyReviewedGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/RecentlyReviewedGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/popular-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/popular-games.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/Games/GameService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Games/GameService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +225,7 @@
       <workItem from="1601383343706" duration="21129000" />
       <workItem from="1601467709882" duration="6436000" />
       <workItem from="1601475030940" duration="3290000" />
-      <workItem from="1601478806513" duration="7353000" />
+      <workItem from="1601478806513" duration="10054000" />
     </task>
     <servers />
   </component>
