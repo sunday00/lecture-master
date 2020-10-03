@@ -32,7 +32,10 @@ class PopularGames extends Component
             ", 'text')->post('https://api.igdb.com/v4/games');
 
             return collect($response->object())->map(function($g){
-                $g->cover->url = Str::replaceFirst('thumb','cover_big',$g->cover->url);
+                $g->rating = isset($g->rating) ? round($g->rating).'%' : null;
+                $g->coverImage = isset($g->cover)
+                    ? Str::replaceFirst('thumb','cover_big',$g->cover->url)
+                    : 'https://via.placeholder.com/264x352.png?text=Not+prepared';
                 $g->platforms = collect($g->platforms)->filter(function($p){
                     if( property_exists($p, 'abbreviation') ){
                         return $p->abbreviation != 'Linux';

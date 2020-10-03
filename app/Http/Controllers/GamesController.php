@@ -65,7 +65,7 @@ class GamesController extends Controller
     public function show(string $slug)
     {
         $game = $this->gameService->getOneFromIgdbBySlug($slug, $this->igdbTokenService);
-        dump($game);
+
         return view('show', [
             'game' => $game
         ]);
