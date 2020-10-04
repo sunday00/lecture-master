@@ -104,7 +104,7 @@ false America/Argentina/San_Luis
 false America/Argentina/Tucuman
 false America/Argentina/Ushuaia
 false America/Aruba
-false America/Asuncion
+true America/Asuncion
 false America/Atikokan
 true America/Atka
 false America/Bahia
@@ -376,29 +376,29 @@ false Atlantic/Reykjavik
 false Atlantic/South_Georgia
 false Atlantic/St_Helena
 false Atlantic/Stanley
-false Australia/ACT
-false Australia/Adelaide
+true Australia/ACT
+true Australia/Adelaide
 false Australia/Brisbane
-false Australia/Broken_Hill
-false Australia/Canberra
-false Australia/Currie
+true Australia/Broken_Hill
+true Australia/Canberra
+true Australia/Currie
 false Australia/Darwin
 false Australia/Eucla
-false Australia/Hobart
-false Australia/LHI
+true Australia/Hobart
+true Australia/LHI
 false Australia/Lindeman
-false Australia/Lord_Howe
-false Australia/Melbourne
-false Australia/NSW
+true Australia/Lord_Howe
+true Australia/Melbourne
+true Australia/NSW
 false Australia/North
 false Australia/Perth
 false Australia/Queensland
-false Australia/South
-false Australia/Sydney
-false Australia/Tasmania
-false Australia/Victoria
+true Australia/South
+true Australia/Sydney
+true Australia/Tasmania
+true Australia/Victoria
 false Australia/West
-false Australia/Yancowinna
+true Australia/Yancowinna
 true BDST
 false BDT
 false BNT
@@ -612,7 +612,7 @@ false KRAST
 false KRAT
 false KST
 false Kwajalein
-false LHDT
+true LHDT
 false LHST
 false LIGT
 false LINT
@@ -674,7 +674,7 @@ false PST
 true PST8PDT
 false PWT
 true PYST
-false PYT
+true PYT
 true Pacific/Apia
 true Pacific/Auckland
 false Pacific/Bougainville
@@ -700,7 +700,7 @@ false Pacific/Marquesas
 false Pacific/Midway
 false Pacific/Nauru
 false Pacific/Niue
-false Pacific/Norfolk
+true Pacific/Norfolk
 false Pacific/Noumea
 false Pacific/Pago_Pago
 false Pacific/Palau
@@ -790,12 +790,12 @@ true posixrules
     <database id="2" parent="1" name="gameaggregator">
       <ObjectId>16385</ObjectId>
       <Owner>sunday00</Owner>
-      <IntrospectionStateNumber>562</IntrospectionStateNumber>
+      <IntrospectionStateNumber>651</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16521|16523|1
-sequence|table|16529|16531|1
-sequence|table|16549|16551|1
-sequence|table|16563|16565|1
+      <Relations>sequence|table|16571|16573|1
+sequence|table|16579|16581|1
+sequence|table|16599|16601|1
+sequence|table|16613|16615|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -857,7 +857,7 @@ sequence|table|16563|16565|1
       <Comment>standard public schema</Comment>
       <StateNumber>275</StateNumber>
       <Owner>sunday00</Owner>
-      <IntrospectionStateNumber>563</IntrospectionStateNumber>
+      <IntrospectionStateNumber>652</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="17" parent="2" name="heap">
@@ -928,92 +928,90 @@ sequence|table|16563|16565|1
     <language id="27" parent="2" name="plpgsql"/>
     <language id="28" parent="2" name="sql"/>
     <sequence id="29" parent="16" name="common_configs_id_seq">
-      <ObjectId>16563</ObjectId>
+      <ObjectId>16613</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>559</StateNumber>
+      <StateNumber>575</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <sequence id="30" parent="16" name="failed_jobs_id_seq">
-      <ObjectId>16549</ObjectId>
+      <ObjectId>16599</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <sequence id="31" parent="16" name="migrations_id_seq">
-      <ObjectId>16521</ObjectId>
+      <ObjectId>16571</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>552</StateNumber>
+      <StateNumber>568</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="32" parent="16" name="users_id_seq">
-      <ObjectId>16529</ObjectId>
+      <ObjectId>16579</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
     <table id="33" parent="16" name="common_configs">
-      <ObjectId>16565</ObjectId>
-      <Outdated>1</Outdated>
+      <ObjectId>16615</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>559</StateNumber>
+      <StateNumber>575</StateNumber>
     </table>
     <table id="34" parent="16" name="failed_jobs">
-      <ObjectId>16551</ObjectId>
+      <ObjectId>16601</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
     </table>
     <table id="35" parent="16" name="migrations">
-      <ObjectId>16523</ObjectId>
+      <ObjectId>16573</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>552</StateNumber>
+      <StateNumber>568</StateNumber>
     </table>
     <table id="36" parent="16" name="password_resets">
-      <ObjectId>16542</ObjectId>
+      <ObjectId>16592</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>555</StateNumber>
+      <StateNumber>571</StateNumber>
     </table>
     <table id="37" parent="16" name="users">
-      <ObjectId>16531</ObjectId>
+      <ObjectId>16581</ObjectId>
       <Owner>winter</Owner>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
     </table>
     <column id="38" parent="33" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>559</StateNumber>
+      <StateNumber>575</StateNumber>
       <DefaultExpression>nextval(&apos;common_configs_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
     <column id="39" parent="33" name="igdb_access_token">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>559</StateNumber>
+      <StateNumber>575</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="40" parent="33" name="created_at">
       <Position>3</Position>
       <DataType>timestamp(0)|0s</DataType>
-      <StateNumber>559</StateNumber>
+      <StateNumber>575</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <column id="41" parent="33" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp(0)|0s</DataType>
-      <StateNumber>559</StateNumber>
+      <StateNumber>575</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <index id="42" parent="33" name="common_configs_pkey">
-      <ObjectId>16569</ObjectId>
-      <StateNumber>559</StateNumber>
+      <ObjectId>16619</ObjectId>
+      <StateNumber>575</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="43" parent="33" name="common_configs_pkey">
-      <ObjectId>16570</ObjectId>
-      <StateNumber>559</StateNumber>
+      <ObjectId>16620</ObjectId>
+      <StateNumber>575</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>common_configs_pkey</UnderlyingIndexName>
@@ -1022,7 +1020,7 @@ sequence|table|16563|16565|1
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <DefaultExpression>nextval(&apos;failed_jobs_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
@@ -1030,68 +1028,68 @@ sequence|table|16563|16565|1
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="46" parent="34" name="connection">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="47" parent="34" name="queue">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="48" parent="34" name="payload">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="49" parent="34" name="exception">
       <Position>6</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="50" parent="34" name="failed_at">
       <Position>7</Position>
       <DataType>timestamp(0)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>557</StateNumber>
+      <StateNumber>573</StateNumber>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
     <index id="51" parent="34" name="failed_jobs_pkey">
-      <ObjectId>16559</ObjectId>
-      <StateNumber>557</StateNumber>
+      <ObjectId>16609</ObjectId>
+      <StateNumber>573</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <index id="52" parent="34" name="failed_jobs_uuid_unique">
-      <ObjectId>16561</ObjectId>
-      <StateNumber>557</StateNumber>
+      <ObjectId>16611</ObjectId>
+      <StateNumber>573</StateNumber>
       <ColNames>uuid</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="53" parent="34" name="failed_jobs_pkey">
-      <ObjectId>16560</ObjectId>
-      <StateNumber>557</StateNumber>
+      <ObjectId>16610</ObjectId>
+      <StateNumber>573</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>failed_jobs_pkey</UnderlyingIndexName>
     </key>
     <key id="54" parent="34" name="failed_jobs_uuid_unique">
-      <ObjectId>16562</ObjectId>
-      <StateNumber>557</StateNumber>
+      <ObjectId>16612</ObjectId>
+      <StateNumber>573</StateNumber>
       <ColNames>uuid</ColNames>
       <UnderlyingIndexName>failed_jobs_uuid_unique</UnderlyingIndexName>
     </key>
@@ -1099,7 +1097,7 @@ sequence|table|16563|16565|1
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>552</StateNumber>
+      <StateNumber>568</StateNumber>
       <DefaultExpression>nextval(&apos;migrations_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1107,26 +1105,26 @@ sequence|table|16563|16565|1
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>552</StateNumber>
+      <StateNumber>568</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="57" parent="35" name="batch">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>552</StateNumber>
+      <StateNumber>568</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="58" parent="35" name="migrations_pkey">
-      <ObjectId>16527</ObjectId>
-      <StateNumber>552</StateNumber>
+      <ObjectId>16577</ObjectId>
+      <StateNumber>568</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="59" parent="35" name="migrations_pkey">
-      <ObjectId>16528</ObjectId>
-      <StateNumber>552</StateNumber>
+      <ObjectId>16578</ObjectId>
+      <StateNumber>568</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>migrations_pkey</UnderlyingIndexName>
@@ -1135,32 +1133,32 @@ sequence|table|16563|16565|1
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>555</StateNumber>
+      <StateNumber>571</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="61" parent="36" name="token">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>555</StateNumber>
+      <StateNumber>571</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="62" parent="36" name="created_at">
       <Position>3</Position>
       <DataType>timestamp(0)|0s</DataType>
-      <StateNumber>555</StateNumber>
+      <StateNumber>571</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <index id="63" parent="36" name="password_resets_email_index">
-      <ObjectId>16548</ObjectId>
-      <StateNumber>555</StateNumber>
+      <ObjectId>16598</ObjectId>
+      <StateNumber>571</StateNumber>
       <ColNames>email</ColNames>
     </index>
     <column id="64" parent="37" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
@@ -1168,70 +1166,70 @@ sequence|table|16563|16565|1
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="66" parent="37" name="email">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="67" parent="37" name="email_verified_at">
       <Position>4</Position>
       <DataType>timestamp(0)|0s</DataType>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <column id="68" parent="37" name="password">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="69" parent="37" name="remember_token">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="70" parent="37" name="created_at">
       <Position>7</Position>
       <DataType>timestamp(0)|0s</DataType>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <column id="71" parent="37" name="updated_at">
       <Position>8</Position>
       <DataType>timestamp(0)|0s</DataType>
-      <StateNumber>553</StateNumber>
+      <StateNumber>569</StateNumber>
       <TypeId>1114</TypeId>
     </column>
     <index id="72" parent="37" name="users_pkey">
-      <ObjectId>16538</ObjectId>
-      <StateNumber>553</StateNumber>
+      <ObjectId>16588</ObjectId>
+      <StateNumber>569</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <index id="73" parent="37" name="users_email_unique">
-      <ObjectId>16540</ObjectId>
-      <StateNumber>553</StateNumber>
+      <ObjectId>16590</ObjectId>
+      <StateNumber>569</StateNumber>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="74" parent="37" name="users_pkey">
-      <ObjectId>16539</ObjectId>
-      <StateNumber>553</StateNumber>
+      <ObjectId>16589</ObjectId>
+      <StateNumber>569</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
     <key id="75" parent="37" name="users_email_unique">
-      <ObjectId>16541</ObjectId>
-      <StateNumber>553</StateNumber>
+      <ObjectId>16591</ObjectId>
+      <StateNumber>569</StateNumber>
       <ColNames>email</ColNames>
       <UnderlyingIndexName>users_email_unique</UnderlyingIndexName>
     </key>

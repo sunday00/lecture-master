@@ -1,6 +1,6 @@
 <div class="game flex justify-center lg:justify-start">
     <a href="{{route('games.show', $game->slug)}}" class="flex-none">
-        <img src="{{ $game->cover->url }}" alt="cover"
+        <img src="{{ $game->coverImage }}" alt="cover"
              class="w-16 opacity-75 hover:opacity-100 transition easy-in-out duration-150">
     </a>
     <div class="ml-4">

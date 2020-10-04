@@ -68,5 +68,6 @@
 
     <script src="{{ mix('js/app.js') }}"></script>
     @livewireScripts
+    @stack('script')
 </body>
 </html>

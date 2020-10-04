@@ -30,7 +30,9 @@ class ComingSoonGames extends Component
             ", 'text')->post('https://api.igdb.com/v4/games');
 
             return collect($response->object())->map(function ($g) {
-                $g->cover->url = Str::replaceFirst('thumb', 'cover_small', $g->cover->url);
+                $g->coverImage = isset($g->cover)
+                    ? Str::replaceFirst('thumb', 'cover_small', $g->cover->url)
+                    : 'https://via.placeholder.com/264x352.png?text=Not+prepared';
                 $g->first_release_date = Carbon::parse($g->first_release_date)->format('Y.M.d');
                 return $g;
             });

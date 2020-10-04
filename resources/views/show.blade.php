@@ -18,14 +18,14 @@
                 </div>
                 <div class="flex flex-col md:flex-row flex-wrap items-baseline md:items-center mt-8 space-x-0 md:space-x-4 space-y-8 md:space-y-0">
                     <div class="flex items-center">
-                        <div class="w-12 lg:w-16 h-12 lg:h-16 bg-gray-800 rounded-full">
-                            <div class="font-semibold text-xs flex justify-center items-center h-full">{{$game->rating}}</div>
+                        <div class="member-score w-12 lg:w-16 h-12 lg:h-16 bg-gray-800 rounded-full relative text-sm">
+{{--                            <div class="font-semibold text-xs flex justify-center items-center h-full">{{$game->rating}}</div>--}}
                         </div>
                         <div class="ml-4 text-xs">Member<br />Score</div>
                     </div>
                     <div class="flex items-center">
-                        <div class="w-12 lg:w-16 h-12 lg:h-16 bg-gray-800 rounded-full">
-                            <div class="font-semibold text-xs flex justify-center items-center h-full">{{$game->aggregated_rating}}</div>
+                        <div class="critic-score w-12 lg:w-16 h-12 lg:h-16 bg-gray-800 rounded-full relative text-sm">
+{{--                            <div class="font-semibold text-xs flex justify-center items-center h-full">{{$game->aggregated_rating}}</div>--}}
                         </div>
                         <div class="ml-4 text-xs">Critic<br />Score</div>
                     </div>
@@ -52,55 +52,68 @@
                         </li>
                         @endif
                     @endif
-</ul>
-</div>
-<p class="mt-8 mr-0 lg:mr-64">
-{{ $game->summary }}
-</p>
-@if($game->trailerUrl)
-<div class="mt-8">
-    <button class="play_trailer flex bg-blue-500 text-white font-semibold px-3 py-3 hover:bg-blue-600 rounded transition ease-in-out duration-150 items-center">
-        <i class="fas fa-play-circle"></i> <span class="ml-1">Play Trailer</span>
-    </button>
+                    </ul>
+                </div>
+                <p class="mt-8 mr-0 lg:mr-64">
+                    {{ $game->summary }}
+                </p>
+                @if($game->trailerUrl)
+                    <div class="mt-8">
+                        <button class="play_trailer flex bg-blue-500 text-white font-semibold px-3 py-3 hover:bg-blue-600 rounded transition ease-in-out duration-150 items-center">
+                            <i class="fas fa-play-circle"></i> <span class="ml-1">Play Trailer</span>
+                        </button>
 
-    <script>
-        document.querySelector('.play_trailer').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open('{{$game->trailerUrl}}', 'play_trailer', '');
-        });
-    </script>
-</div>
-@endif
-</div>
-</div>
-</section>{{--  game-details  --}}
+                        <script>
+                            document.querySelector('.play_trailer').addEventListener('click', (e) => {
+                                e.preventDefault();
+                                window.open('{{$game->trailerUrl}}', 'play_trailer', '');
+                            });
+                        </script>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </section>{{--  game-details  --}}
 
-<section class="container images-container mx-auto px-4">
-<div class="border-b border-gray-800 pb-8">
-<h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center md:text-justify">Images</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8 w-full ">
-@foreach($game->screenshots as $screenshot)
-<div>
-<a href="{{$screenshot->huge}}">
-    <img src="{{$screenshot->big}}" alt="screen-shot"
-         class="w-full inline-block opacity-75 hover:opacity-100 transition easy-in-out duration-150">
-</a>
-</div>
-@endforeach
-</div>
-</div>
-</section>{{--  images  --}}
+    <section class="container images-container mx-auto px-4">
+        <div class="border-b border-gray-800 pb-8">
+            <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center md:text-justify">Images</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8 w-full ">
+                @foreach($game->screenshots as $screenshot)
+                <div>
+                    <a href="{{$screenshot->huge}}">
+                        <img src="{{$screenshot->big}}" alt="screen-shot"
+                             class="w-full inline-block opacity-75 hover:opacity-100 transition easy-in-out duration-150">
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>{{--  images  --}}
 
-<section class="container similar-games-container mx-auto px-4">
-<div>
-<h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center md:text-justify">Similar games</h2>
-<div class="similar-games text-sm grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 border-b border-gray-800 pb-16">
-@foreach($game->similar_games as $similar_game)
-<x-game-card :game="$similar_game"></x-game-card>
-@endforeach
-</div>
-</div>
-</section>{{--  similar-games  --}}
+    <section class="container similar-games-container mx-auto px-4">
+        <div>
+            <h2 class="text-blue-500 uppercase tracking-wide font-semibold my-8 text-center md:text-justify">Similar games</h2>
+            <div class="similar-games text-sm grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-12 border-b border-gray-800 pb-16">
+                @foreach($game->similar_games as $similar_game)
+                <x-game-card :game="$similar_game"></x-game-card>
+                @endforeach
+            </div>
+        </div>
+    </section>{{--  similar-games  --}}
+
+    @push('script')
+        @include('_rating', [
+            'container' => '.member-score',
+            'rating'    => $game->rating,
+            'event'     => null
+        ])
+        @include('_rating', [
+            'container' => '.critic-score',
+            'rating'    => $game->aggregated_rating,
+            'event'     => null
+        ])
+    @endpush
 @endsection
 
 

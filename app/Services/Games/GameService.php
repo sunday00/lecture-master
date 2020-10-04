@@ -28,8 +28,8 @@ class GameService
             abort_if( !$response->object(), 404 );
             $_game = $response->object()[0];
 
-            $_game->rating = isset($_game->rating) ? round($_game->rating).'%' : '-';
-            $_game->aggregated_rating = isset($_game->aggregated_rating) ? round($_game->aggregated_rating).'%' : '-';
+            $_game->rating = isset($_game->rating) ? round($_game->rating) : '0';
+            $_game->aggregated_rating = isset($_game->aggregated_rating) ? round($_game->aggregated_rating) : '0';
 
             $_game->social = isset($_game->websites) ? collect($_game->websites)->pluck('url')->toArray() : null;
             $_game->social = isset($_game->websites) ? [
@@ -58,7 +58,7 @@ class GameService
                 return $s;
             })->take(9) : [];
             $_game->similar_games = collect($_game->similar_games)->map(function($g){
-                $g->rating = isset($g->rating) ? round($g->rating).'%' : null;
+                $g->rating = isset($g->rating) ? round($g->rating) : null;
                 $g->coverImage = isset($g->cover)
                     ? str_replace('thumb','cover_big',$g->cover->url)
                     : 'https://via.placeholder.com/264x352.png?text=Not+prepared';

@@ -34,6 +34,7 @@ class RecentlyReviewedGames extends Component
 
             return collect($response->object())->map(function ($g) {
                 $g->cover->url = Str::replaceFirst('thumb', 'cover_big', $g->cover->url);
+                $g->rating = isset($g->rating) ? round($g->rating) : null;
                 return $g;
             });
         });
