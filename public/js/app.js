@@ -20340,6 +20340,43 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
+window.ProgressBar = __webpack_require__(/*! progressbar.js */ "./node_modules/progressbar.js/src/main.js");
+
+window.makeProgressBar = function (container, rating) {
+  new ProgressBar.Circle(document.querySelector(container), {
+    color: 'white',
+    // This has to be the same size as the maximum width to
+    // prevent clipping
+    strokeWidth: 6,
+    trailWidth: 3,
+    trailColor: '#737574',
+    easing: 'easeInOut',
+    duration: 1500,
+    text: {
+      autoStyleContainer: false
+    },
+    from: {
+      color: '#48BB78',
+      width: 6
+    },
+    to: {
+      color: '#48BB78',
+      width: 6
+    },
+    // Set default step function for all animate calls
+    step: function step(state, circle) {
+      circle.path.setAttribute('stroke', state.color);
+      circle.path.setAttribute('stroke-width', state.width);
+      var value = Math.round(circle.value() * 100);
+
+      if (value === 0) {
+        circle.setText('0%');
+      } else {
+        circle.setText(value + '%');
+      }
+    }
+  }).animate(rating / 100);
+};
 
 /***/ }),
 
@@ -20359,7 +20396,6 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.ProgressBar = __webpack_require__(/*! progressbar.js */ "./node_modules/progressbar.js/src/main.js");
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

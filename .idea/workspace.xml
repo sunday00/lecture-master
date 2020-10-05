@@ -20,24 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce7e0ae-72d4-4872-9ec9-bc657cdcc9dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/_rating.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae/storage_v2/_src_/database/gameaggregator.O0FuiA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/12be6bb8-c87e-4785-b37a-893c0aeedbae/storage_v2/_src_/database/gameaggregator.O0FuiA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/ComingSoonGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/ComingSoonGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/MostAnticipatedGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/MostAnticipatedGames.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/PopularGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/PopularGames.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/RecentlyReviewedGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/RecentlyReviewedGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Games/GameService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Games/GameService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/View/Components/GameCardSmall.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/Components/GameCardSmall.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/game-card-small.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/game-card-small.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/game-card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/game-card.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/_rating.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_rating.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/popular-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/popular-games.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/recently-reviewed-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/recently-reviewed-games.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +241,7 @@
       <workItem from="1601383343706" duration="21129000" />
       <workItem from="1601467709882" duration="6436000" />
       <workItem from="1601475030940" duration="3290000" />
-      <workItem from="1601478806513" duration="25421000" />
+      <workItem from="1601478806513" duration="27875000" />
     </task>
     <servers />
   </component>

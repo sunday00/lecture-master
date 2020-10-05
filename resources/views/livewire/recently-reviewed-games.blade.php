@@ -7,10 +7,8 @@
                     <img src="{{ $game->cover->url }}" alt="cover"
                          class="w-48 opacity-75 hover:opacity-100 transition easy-in-out duration-150">
                 </a>
-                <div class="round-score absolute bottom-0 right-0 w-16 h-16 rounded-full bg-gray-900">
-                    <div class="font-semibold text-xs flex justify-center items-center h-full">
-                        {{ round($game->rating) }}%
-                    </div>
+                <div class="round-score round-score-{{$game->slug}} absolute bottom-0 right-0 w-16 h-16 rounded-full bg-gray-900">
+
                 </div>
             </div>
             <div class="ml-12">
@@ -30,3 +28,10 @@
     @endforelse
 </div>
 </div>
+
+@push('script')
+    @include('_rating', [
+        'event'     => 'recentlyReviewedGameRatingAdded'
+    ])
+@endpush
+

@@ -43,6 +43,12 @@ class PopularGames extends Component
                     return false;
                 });
                 $g->stringPlatforms = implode(' | ', \Arr::pluck($g->platforms, 'abbreviation'));
+
+                $this->emit('popularGameRatingAdded', [
+                    'slug'      => $g->slug,
+                    'rating'    => $g->rating,
+                ]);
+
                 return $g;
             });
         });

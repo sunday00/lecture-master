@@ -7,3 +7,9 @@
     @endforelse
 </div>{{-- popular games --}}
 </div>
+
+@push('script')
+    @include('_rating', [
+        'event'     => 'popularGameRatingAdded'
+    ])
+@endpush
