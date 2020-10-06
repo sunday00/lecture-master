@@ -409,6 +409,12 @@ module.exports = {
           border: '3px', // border-width of the spinner (shouldn't be bigger than half the spinner's size)
           speed: '450ms', // the speed at which the spinner should rotate
       },
+      sm: {
+          color: '#dae1e7',
+          size: '1em',
+          border: '2px',
+          speed: '450ms',
+      },
       // md: {
       //   color: theme('colors.red.500', 'red'),
       //   size: '2em',

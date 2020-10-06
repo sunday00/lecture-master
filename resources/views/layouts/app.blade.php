@@ -39,10 +39,7 @@
                 </ul>
             </div>
             <div class="flex items-center mt-4 md:mt-0">
-                <div class="search relative text-sm">
-                    <label for="search" class="fas fa-search mr-1"></label>
-                    <input id="search" type="text" class="w-64 bg-gray-800 text-sm rounded-full px-3 py-1 focus:outline-none focus:shadow-outline" placeholder="search...">
-                </div>
+               @livewire('search-dropdown')
                 <div class="ml-6">
                     <a href="#" title="sign in and register your image">
                         <svg data-jdenticon-value="guest{{ random_int(0, 255)  }}" width="40" height="40" class="rounded-full bg-white">

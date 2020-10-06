@@ -21258,6 +21258,28 @@ video {
           animation: spinAround 450ms infinite linear;
 }
 
+.spinner-sm{
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.spinner-sm::after{
+  content: '';
+  position: absolute !important;
+  top: calc(50% - (1em / 2));
+  left: calc(50% - (1em / 2));
+  display: block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid #dae1e7;
+  border-radius: 9999px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  -webkit-animation: spinAround 450ms infinite linear;
+          animation: spinAround 450ms infinite linear;
+}
+
 @-webkit-keyframes spinAround{
   from{
     transform: rotate(0deg);
@@ -48008,6 +48030,28 @@ readers do not read off random characters that represent icons */
     -webkit-animation: spinAround 450ms infinite linear;
             animation: spinAround 450ms infinite linear;
   }
+
+  .sm\:spinner-sm{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .sm\:spinner-sm::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (1em / 2));
+    left: calc(50% - (1em / 2));
+    display: block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
+  }
 }
 
 @media (min-width: 768px){
@@ -68608,6 +68652,28 @@ readers do not read off random characters that represent icons */
     width: 2rem;
     height: 2rem;
     border: 3px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
+  }
+
+  .md\:spinner-sm{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .md\:spinner-sm::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (1em / 2));
+    left: calc(50% - (1em / 2));
+    display: block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #dae1e7;
     border-radius: 9999px;
     border-right-color: transparent;
     border-top-color: transparent;
@@ -89220,6 +89286,28 @@ readers do not read off random characters that represent icons */
     -webkit-animation: spinAround 450ms infinite linear;
             animation: spinAround 450ms infinite linear;
   }
+
+  .lg\:spinner-sm{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .lg\:spinner-sm::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (1em / 2));
+    left: calc(50% - (1em / 2));
+    display: block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
+  }
 }
 
 @media (min-width: 1280px){
@@ -109820,6 +109908,28 @@ readers do not read off random characters that represent icons */
     width: 2rem;
     height: 2rem;
     border: 3px solid #dae1e7;
+    border-radius: 9999px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    -webkit-animation: spinAround 450ms infinite linear;
+            animation: spinAround 450ms infinite linear;
+  }
+
+  .xl\:spinner-sm{
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+  }
+
+  .xl\:spinner-sm::after{
+    content: '';
+    position: absolute !important;
+    top: calc(50% - (1em / 2));
+    left: calc(50% - (1em / 2));
+    display: block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #dae1e7;
     border-radius: 9999px;
     border-right-color: transparent;
     border-top-color: transparent;

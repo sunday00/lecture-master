@@ -22,6 +22,9 @@ class IgdbTokenService
         $this->commonConfig = $commonConfig;
     }
 
+    /**
+     * @return string
+     */
     public function getAccessToken()
     {
         $accessToken = Cookie::get('igdb_access_token');
