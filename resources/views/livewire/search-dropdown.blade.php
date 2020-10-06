@@ -1,13 +1,15 @@
-<div class="search relative text-sm" xmlns:wire="http://www.w3.org/1999/xhtml">
+<div class="search relative text-sm" xmlns:wire="http://www.w3.org/1999/xhtml"
+     x-data="{ isVisible: true }" @click.away="isVisible=false">
     <label for="search" class="fas fa-search mr-1"></label>
     <input
         wire:model.debounce.50ms="search"
+        @focus="isVisible=true"
         id="search" type="text" class="w-64 bg-gray-800 text-sm rounded-full px-3 py-1 focus:outline-none focus:shadow-outline"
         placeholder="search...">
 
     <div wire:loading class="spinner-sm top-0 right-0 mr-4 mt-4" style="position: absolute"></div>
 
-    <div class="absolute z-50 bg-gray-800 text-xs rounded w-64 mt-2 ml-6">
+    <div class="absolute z-50 bg-gray-800 text-xs rounded w-64 mt-2 ml-6" x-show="isVisible">
         <ul class="">
             @if( count($result) )
                 @foreach($result as $game)
