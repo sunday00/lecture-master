@@ -82,7 +82,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8 w-full ">
                 @foreach($game->screenshots as $screenshot)
                 <div>
-                    <a href="{{$screenshot->huge}}">
+                    <a href="{{$screenshot->huge}}" class="screen-shot">
                         <img src="{{$screenshot->big}}" alt="screen-shot"
                              class="w-full inline-block opacity-75 hover:opacity-100 transition easy-in-out duration-150">
                     </a>

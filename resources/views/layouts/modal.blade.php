@@ -17,12 +17,12 @@
 
             <!--Body-->
             <div class="responsive-container overflow-hidden relative" style="padding-top: 56.2%;">
-                <iframe width="100%" height="450" id="video"
-                        class="responsive-iframe absolute top-0 left-0 w-full h-full"
-                        src="https://www.youtube.com/embed/{{$src}}"
-                        frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
+                    <iframe width="100%" height="450" id="target-media"
+                            class="responsive-iframe absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/{{$src}}"
+                            frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
             </div>
 
             <!--Footer-->

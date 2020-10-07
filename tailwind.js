@@ -3,7 +3,13 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: {
+      mode: 'all',
+      content: [
+        './app/**/*.php',
+        './resources/**/*.php'
+      ]
+  },
   target: 'relaxed',
   prefix: '',
   important: false,

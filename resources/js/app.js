@@ -45,11 +45,22 @@ window.focusSearch = function (event) {
 
 
 const playBtn = document.querySelector('.play-trailer');
-const src = document.querySelector('#video').getAttribute('src');
+const screenShot = document.querySelectorAll('.screen-shot');
+const videoSrc = document.querySelector('#target-media').getAttribute('src');
+let src = '';
 
 playBtn.addEventListener('click', function(event){
     event.preventDefault();
+    src = videoSrc;
     toggleModal();
+});
+
+screenShot.forEach(s => {
+    s.addEventListener('click', e => {
+        e.preventDefault();
+        src = s.getAttribute('href');
+        toggleModal();
+    });
 });
 
 const overlay = document.querySelector('.modal-overlay');
@@ -76,12 +87,12 @@ document.onkeydown = function(evt) {
 function toggleModal () {
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
-    const video = document.querySelector('#video');
+    const media = document.querySelector('#target-media');
 
     modal.classList.toggle('opacity-0');
     modal.classList.toggle('pointer-events-none');
     body.classList.toggle('modal-active');
 
     let currentSrc = body.classList.contains('modal-active') ? src : '';
-    video.setAttribute('src', currentSrc);
+    media.setAttribute('src', currentSrc);
 }
