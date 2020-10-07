@@ -59,16 +59,17 @@
                 </p>
                 @if($game->trailerUrl)
                     <div class="mt-8">
-                        <button class="play_trailer flex bg-blue-500 text-white font-semibold px-3 py-3 hover:bg-blue-600 rounded transition ease-in-out duration-150 items-center">
+                        <button class="play-trailer flex bg-blue-500 text-white font-semibold px-3 py-3 hover:bg-blue-600 rounded transition ease-in-out duration-150 items-center">
                             <i class="fas fa-play-circle"></i> <span class="ml-1">Play Trailer</span>
                         </button>
 
-                        <script>
-                            document.querySelector('.play_trailer').addEventListener('click', (e) => {
-                                e.preventDefault();
-                                window.open('{{$game->trailerUrl}}', 'play_trailer', '');
-                            });
-                        </script>
+{{--                        <script>--}}
+{{--                            document.querySelector('.play-trailer').addEventListener('click', (e) => {--}}
+{{--                                e.preventDefault();--}}
+{{--                                window.open('{{$game->trailerUrl}}', 'play_trailer', '');--}}
+{{--                            });--}}
+{{--                        </script>--}}
+                        @include('layouts.modal', ['src' => $game->videos[0]->video_id])
                     </div>
                 @endif
             </div>

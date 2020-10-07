@@ -42,3 +42,46 @@ window.focusSearch = function (event) {
         document.querySelector('#search').focus();
     }
 }
+
+
+const playBtn = document.querySelector('.play-trailer');
+const src = document.querySelector('#video').getAttribute('src');
+
+playBtn.addEventListener('click', function(event){
+    event.preventDefault();
+    toggleModal();
+});
+
+const overlay = document.querySelector('.modal-overlay');
+overlay.addEventListener('click', toggleModal);
+
+const closeModal = document.querySelectorAll('.modal-close');
+for( let i=closeModal.length-1;i>=0;i-- ){
+    closeModal[i].addEventListener('click', toggleModal);
+}
+
+document.onkeydown = function(evt) {
+    evt = evt || window.event
+    let isEscape = false;
+    if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+    } else {
+        isEscape = (evt.keyCode === 27)
+    }
+    if (isEscape && document.body.classList.contains('modal-active')) {
+        toggleModal();
+    }
+};
+
+function toggleModal () {
+    const body = document.querySelector('body');
+    const modal = document.querySelector('.modal');
+    const video = document.querySelector('#video');
+
+    modal.classList.toggle('opacity-0');
+    modal.classList.toggle('pointer-events-none');
+    body.classList.toggle('modal-active');
+
+    let currentSrc = body.classList.contains('modal-active') ? src : '';
+    video.setAttribute('src', currentSrc);
+}

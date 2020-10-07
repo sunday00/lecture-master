@@ -22286,6 +22286,46 @@ window.focusSearch = function (event) {
   }
 };
 
+var playBtn = document.querySelector('.play-trailer');
+var src = document.querySelector('#video').getAttribute('src');
+playBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  toggleModal();
+});
+var overlay = document.querySelector('.modal-overlay');
+overlay.addEventListener('click', toggleModal);
+var closeModal = document.querySelectorAll('.modal-close');
+
+for (var i = closeModal.length - 1; i >= 0; i--) {
+  closeModal[i].addEventListener('click', toggleModal);
+}
+
+document.onkeydown = function (evt) {
+  evt = evt || window.event;
+  var isEscape = false;
+
+  if ("key" in evt) {
+    isEscape = evt.key === "Escape" || evt.key === "Esc";
+  } else {
+    isEscape = evt.keyCode === 27;
+  }
+
+  if (isEscape && document.body.classList.contains('modal-active')) {
+    toggleModal();
+  }
+};
+
+function toggleModal() {
+  var body = document.querySelector('body');
+  var modal = document.querySelector('.modal');
+  var video = document.querySelector('#video');
+  modal.classList.toggle('opacity-0');
+  modal.classList.toggle('pointer-events-none');
+  body.classList.toggle('modal-active');
+  var currentSrc = body.classList.contains('modal-active') ? src : '';
+  video.setAttribute('src', currentSrc);
+}
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
