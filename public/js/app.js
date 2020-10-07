@@ -22278,6 +22278,14 @@ window.makeProgressBar = function (container, rating) {
   }).animate(rating / 100);
 };
 
+window.focusSearch = function (event) {
+  // if( event.keyCode === 191 ){
+  if (event.key === '/') {
+    event.preventDefault();
+    document.querySelector('#search').focus();
+  }
+};
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

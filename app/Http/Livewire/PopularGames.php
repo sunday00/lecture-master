@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Services\Common\IgdbTokenService;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -42,15 +43,17 @@ class PopularGames extends Component
                     }
                     return false;
                 });
-                $g->stringPlatforms = implode(' | ', \Arr::pluck($g->platforms, 'abbreviation'));
-
-                $this->emit('popularGameRatingAdded', [
-                    'slug'      => $g->slug,
-                    'rating'    => $g->rating,
-                ]);
+                $g->stringPlatforms = implode(' | ', Arr::pluck($g->platforms, 'abbreviation'));
 
                 return $g;
             });
+        });
+
+        collect($this->games)->map(function ($g){
+            $this->emit('popularGameRatingAdded', [
+                'container' => '.popular-games-container .round-score-'.$g->slug,
+                'rating'    => $g->rating,
+            ]);
         });
     }
 

@@ -13,11 +13,12 @@
     <header class="border-b border-gray-800 mb-8">
         <nav class="container mx-auto flex items-center justify-between px-4 py-6 flex-col md:flex-row">
             <div class="flex items-center flex-col md:flex-row">
-                <a href="/">
+                <a href="/" title="go to home">
                     <svg id="Capa_1" enable-background="new 0 0 512 512"
                          class="logo"
                          width="50" height="50" viewBox="0 0 512 512"
                          xmlns="http://www.w3.org/2000/svg">
+                        <title>main logo image (game controller)</title>
                         <g>
                             <path d="m175.282 239.71c-17.127 0-31.061 13.934-31.061 31.061s13.934 31.062 31.061 31.062 31.061-13.935 31.061-31.062-13.934-31.061-31.061-31.061zm0 47.095c-8.84 0-16.033-7.192-16.033-16.033 0-8.84 7.192-16.032 16.033-16.032s16.033 7.192 16.033 16.032-7.193 16.033-16.033 16.033z"/>
                             <path d="m305.657 270.771c0 17.127 13.934 31.062 31.061 31.062s31.061-13.935 31.061-31.062-13.934-31.061-31.061-31.061-31.061 13.934-31.061 31.061zm31.061-16.032c8.841 0 16.033 7.192 16.033 16.032 0 8.841-7.192 16.033-16.033 16.033-8.84 0-16.033-7.192-16.033-16.033 0-8.84 7.193-16.032 16.033-16.032z"/>
@@ -33,16 +34,16 @@
                     </svg>
                 </a>
                 <ul class="flex ml-8 space-x-4">
-                    <li><a href="#" class="hover:text-blue-300">Games</a></li>
-                    <li><a href="#" class="hover:text-blue-300">Reviews</a></li>
-                    <li><a href="#" class="hover:text-blue-300">Coming soon</a></li>
+                    <li><a href="#" class="hover:text-blue-300" title="go to games">Games</a></li>
+                    <li><a href="#" class="hover:text-blue-300" title="go to reviews">Reviews</a></li>
+                    <li><a href="#" class="hover:text-blue-300" title="go to coming soon">Coming soon</a></li>
                 </ul>
             </div>
             <div class="flex items-center mt-4 md:mt-0">
                @livewire('search-dropdown')
                 <div class="ml-6">
                     <a href="#" title="sign in and register your image">
-                        <svg data-jdenticon-value="guest{{ random_int(0, 255)  }}" width="40" height="40" class="rounded-full bg-white">
+                        <svg data-jdenticon-value="guest{{ random_int(0, 255)  }}" width="40" height="40" class="rounded-full bg-white" aria-label="sign in and register your image">
                             sign in and register your image
                         </svg>
                     </a>

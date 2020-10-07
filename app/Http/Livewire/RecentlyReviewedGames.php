@@ -36,13 +36,15 @@ class RecentlyReviewedGames extends Component
                 $g->cover->url = Str::replaceFirst('thumb', 'cover_big', $g->cover->url);
                 $g->rating = isset($g->rating) ? round($g->rating) : null;
 
-                $this->emit('recentlyReviewedGameRatingAdded', [
-                    'slug'      => $g->slug,
-                    'rating'    => $g->rating,
-                ]);
-
                 return $g;
             });
+        });
+
+        collect($this->games)->map(function ($g){
+            $this->emit('recentlyReviewedGameRatingAdded', [
+                'container'   => '.recently-reviewed-container .round-score-'.$g->slug,
+                'rating'      => $g->rating,
+            ]);
         });
     }
 

@@ -1,7 +1,7 @@
 @if($event)
     <script>
         Livewire.on( "{{$event}}" , params => {
-            makeProgressBar( ".round-score-" + params.slug, params.rating );
+            makeProgressBar( params.container, params.rating );
         })
     </script>
 @else

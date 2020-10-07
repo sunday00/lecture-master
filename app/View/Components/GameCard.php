@@ -14,7 +14,7 @@ class GameCard extends Component
      *
      * @param $game
      */
-    public function __construct($game)
+    public function __construct(object $game)
     {
         $this->game = $game;
     }
@@ -27,7 +27,7 @@ class GameCard extends Component
     public function render()
     {
         return view('components.game-card', [
-            'game' => $this->game
+            'game' => $this->game,
         ]);
     }
 }

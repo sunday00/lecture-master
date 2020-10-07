@@ -4,7 +4,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="8">
+          <list size="24">
             <item index="0" class="java.lang.String" itemvalue="wire:init" />
             <item index="1" class="java.lang.String" itemvalue="wire:model" />
             <item index="2" class="java.lang.String" itemvalue="wire:model.debounce" />
@@ -13,6 +13,22 @@
             <item index="5" class="java.lang.String" itemvalue="wire:model.debounce.180ms" />
             <item index="6" class="java.lang.String" itemvalue="wire:model.debounce.50ms" />
             <item index="7" class="java.lang.String" itemvalue="wire:loading" />
+            <item index="8" class="java.lang.String" itemvalue="x-show" />
+            <item index="9" class="java.lang.String" itemvalue="@focus" />
+            <item index="10" class="java.lang.String" itemvalue="@click.away" />
+            <item index="11" class="java.lang.String" itemvalue="x-data" />
+            <item index="12" class="java.lang.String" itemvalue="@keydown" />
+            <item index="13" class="java.lang.String" itemvalue="@keydown.escape" />
+            <item index="14" class="java.lang.String" itemvalue="@keydown.escape.window" />
+            <item index="15" class="java.lang.String" itemvalue="@keydown.shift" />
+            <item index="16" class="java.lang.String" itemvalue="@keydown.shift.tab" />
+            <item index="17" class="java.lang.String" itemvalue="@keydown.tab" />
+            <item index="18" class="java.lang.String" itemvalue="@keydown.window" />
+            <item index="19" class="java.lang.String" itemvalue="x-show.transition.opacity" />
+            <item index="20" class="java.lang.String" itemvalue="x-show.transition" />
+            <item index="21" class="java.lang.String" itemvalue="x-show.transition.opacity.duration.1000" />
+            <item index="22" class="java.lang.String" itemvalue="x-show.transition.opacity.duration.500" />
+            <item index="23" class="java.lang.String" itemvalue="x-show.transition.opacity.duration.200" />
           </list>
         </value>
       </option>
