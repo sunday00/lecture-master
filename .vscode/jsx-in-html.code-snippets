@@ -10,17 +10,9 @@
 		"scope": "javascript,typescript,jsx,html",
 		"prefix": "cc",
 		"body": [
-			"const Example = React.createClass({",
-			"",
-			"\trender: function(){",
-			"\t\treturn (",
-			"\t\t\t<div />",
-			"\t\t);",
-			"\t}",
-			"});",
-			"",
-			"React.render(<Example />, document.body);"
+			"const $1 = <h1>$2</h1>;",
+			"ReactDOM.render($1, document.querySelector('$3'));"
 		],
-		"description": "make a create react class syntax."
+		"description": "make a component via jsx"
 	}
 }
