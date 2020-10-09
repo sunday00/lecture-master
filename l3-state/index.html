@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="container"></section>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    
+    <script type="text/babel">
+        class Counter extends React.Component {
+            
+            constructor(props) {
+                super(props);
+                this.state = {count: 0};
+
+                // this.add = this.add.bind(this);
+                // this.sub = this.sub.bind(this);
+            }
+
+            static defaultProps = {
+                
+            }
+
+            // add(){
+            //     this.setState({
+            //         count : this.state.count + 1
+            //     });
+            // }
+
+            // sub(){
+            //     this.setState({
+            //         count : this.state.count - 1
+            //     });
+            // }
+
+            add = () => {
+                let count = this.state.count + 1;
+
+                this.setState({ count });
+            }
+
+            sub = () => {
+                let count = this.state.count - 1;
+
+                this.setState({ count });
+            }
+            
+            render() {
+                return <div>
+                    <h1>Counter : {this.state.count}</h1>
+
+                    <button onClick={this.sub}>-</button>
+                    <button onClick={this.add}>+</button>
+                </div>;
+            }
+        }
+        
+        ReactDOM.render(<Counter />, document.querySelector('.container'));
+    </script>
+</body>
+</html>
