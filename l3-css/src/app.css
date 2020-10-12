@@ -1,0 +1,19 @@
+div.box.small {
+    width: 100px;
+    height: 100px;
+    background-color: tomato;
+}
+div.box.big {
+    width: 200px;
+    height: 200px;
+    background-color: cornflowerblue;
+}
+
+button.btn.small {
+    width: 100px;
+    height: 100px;
+}
+button.btn.big {
+    width: 200px;
+    height: 200px;
+}
