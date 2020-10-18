@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function App() {
 
@@ -16,6 +16,10 @@ function App() {
 
     console.log('click');
   }
+
+  useEffect(() => {
+    document.title = a;
+  });
 
   return (
     <div className="App">
