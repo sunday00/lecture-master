@@ -28,5 +28,13 @@
 			"}"
 		],
 		"description": "Log output to console"
+	},
+	"PrintLn": {
+		"scope": "go",
+		"prefix": ["console.log","ppp"],
+		"body": [
+			"fmt.Println($1)"
+		],
+		"description": "Log output to console"
 	}
 }
