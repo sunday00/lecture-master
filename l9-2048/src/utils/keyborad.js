@@ -13,7 +13,7 @@ export function addKeyObserver(key, callback)
 
 export function removeKeyObserver(key, callback)
 {
-    observeMap[key] = observeMap[key].filter(item => item != callback);
+    observeMap[key] = observeMap[key].filter(item => item !== callback);
 }
 
 function executeCallbacks(e, key)

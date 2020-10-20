@@ -1,10 +1,20 @@
 import { useEffect } from "react";
 import { addKeyObserver, removeKeyObserver } from "../utils/keyborad";
+import { makeTile, moveTile } from "../utils/tile";
 
-export default function useMoveTile()
+export default function useMoveTile({ tileList, setTileList, setScore })
 {
     function moveAndAddOne({x,y}){
+        const newTileList = moveTile({tileList, x, y});
 
+        const score = newTileList.reduce((acc, item) => (
+            item.isMerged ? acc + item.value : acc
+        ), 0);
+        setScore(s => s + score);
+        const newTile = makeTile(newTileList);
+        newTile.isNew = true;
+        newTileList.push(newTile);
+        setTileList(newTileList);
     }
 
     function moveUp(){
