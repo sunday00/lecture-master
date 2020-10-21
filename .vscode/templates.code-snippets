@@ -24,10 +24,16 @@
 			"import \"${1:fmt}\"",
 			"",
 			"func main () {",
+			"\tprint(\"\\033[H\\033[2J\")",
+			"\tfmt.Print(\"\\033[33m============= start go app =============\\n\\n\\033[0m\")",
+			"",
 			"\t$2",
+			"",
+			"\tfmt.Print(\"\\033[33m\\n\\n============== terminated ==============\\n\\n\\033[0m\")",
+			"",
 			"}"
 		],
-		"description": "Log output to console"
+		"description": "Create main method"
 	},
 	"PrintLn": {
 		"scope": "go",
@@ -36,5 +42,13 @@
 			"fmt.Println($1)"
 		],
 		"description": "Log output to console"
-	}
+	},
+	"Clear console": {
+		"scope": "go",
+		"prefix": ["clear"],
+		"body": [
+			"print(\"\\033[H\\033[2J\")"
+		],
+		"description": "clear console"
+	},
 }
