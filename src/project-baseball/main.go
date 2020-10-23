@@ -9,7 +9,7 @@ func main() {
 	fmt.Print("\033[33m============= start go app =============\n\n\033[0m")
 
 	var numbers [3]int = MakeNumbers()
-	fmt.Print(numbers)
+	fmt.Println(numbers)
 	score := 100
 game:
 	for {
