@@ -9,8 +9,11 @@ func main() {
 	fmt.Print("\033[33m============= start go app =============\n\n\033[0m")
 
 	var numbers [3]int = MakeNumbers()
-	fmt.Println(numbers)
-	score := 100
+	// fmt.Println(numbers)
+
+	score := 110
+	var history string = fmt.Sprint("\n")
+
 game:
 	for {
 		score -= 10
@@ -19,7 +22,9 @@ game:
 
 		result := CheckCorrect(numbers, answer)
 
-		if IsEnded(result) {
+		history = history + fmt.Sprintf("%d%d%d : %s\n", answer[0], answer[1], answer[2], result)
+
+		if IsEnded(result, score, history) {
 			break game
 		}
 	}
