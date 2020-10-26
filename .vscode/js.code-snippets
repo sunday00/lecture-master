@@ -29,5 +29,38 @@
 			""
 		],
 		"description": "Log output to console"
+	},
+	"Route with main": {
+		"prefix": "Rmain",
+		"body": [
+			"import React from 'react';",
+			"import { BrowserRouter, Route, Link } from 'react-router-dom';",
+			"import $2 from './$2';",
+			"",
+			"function $1() {",
+			"\treturn (",
+			"\t\t<div className=\"App\">",
+			"\t\t\t<BrowserRouter>",
+			"\t\t\t\t<ul>",
+			"\t\t\t\t\t<li>",
+			"\t\t\t\t\t\t<Link to=\"/\">home</Link>",
+			"\t\t\t\t\t</li>",
+			"\t\t\t\t\t<li>",
+			"\t\t\t\t\t\t<Link to=\"/$2\">$2</Link>",
+			"\t\t\t\t\t</li>",
+			"\t\t\t\t</ul>",
+			"",
+			"\t\t\t\t<section className=\"contents\">",
+			"\t\t\t\t\t<Route exact path=\"/\"></Route>",
+			"\t\t\t\t\t<Route path=\"/$2\" render={() => <$2 p1='aaa' p2={100} />}></Route>",
+			"\t\t\t\t\t<Route path=\"/$2\" component={$2}></Route>",
+			"\t\t\t\t</section>",
+			"\t\t\t</BrowserRouter>",
+			"\t\t</div>",
+			"\t);",
+			"}",
+			"",
+			"export default $1;"
+		]	
 	}
 }
