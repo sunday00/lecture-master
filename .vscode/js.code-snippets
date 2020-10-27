@@ -62,5 +62,12 @@
 			"",
 			"export default $1;"
 		]	
-	}
+	},
+	"Redux dev-tool enable": {
+		"prefix": "redux-dev",
+		"body": [
+			"window.__REDUX_DEVTOOLS_EXTENSION__?.()"
+		],
+		"description": "enable redux dev tool"
+	},
 }
