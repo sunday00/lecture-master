@@ -7,7 +7,7 @@ export default function TimelineList({timelines})
         <ul>
             {
                 timelines.map(timeline => ( 
-                    <li key={timeline.id}>{timeline.desc}</li> 
+                    <li key={timeline.id}>{timeline.desc} {timeline.subject}</li> 
                 ))
             }
         </ul>

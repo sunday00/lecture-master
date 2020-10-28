@@ -1,10 +1,11 @@
 import React from 'react'
 import store from '../../common/store';
-import { addTimeline } from '../../services/timeline/state';
-import { getNextTimeline } from '../../common/mockData';
+import { addTimeline, setFilter } from '../../services/timeline/state';
+import { FILTER, getNextTimeline } from '../../common/mockData';
 
 import TimelineList from './TimelineList'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import Select from '../numbers/Select';
 
 export default function TimelineMain(props)
 {
@@ -16,7 +17,19 @@ export default function TimelineMain(props)
     // } );
 
     // @ts-ignore
-    const [timelines, timelines2] = useSelector( state => [ state.timeline.timelines, state.timeline.timelines2 ], shallowEqual );
+    // const [timelines, timelines2] = useSelector( state => [ state.timeline.timelines, state.timeline.timelines2 ], shallowEqual );
+    const [
+        filter,
+        filteredTimelines
+    ] = useSelector( state => {
+        // @ts-ignore
+        const {filter, timelines} = state.timeline;
+        const filteredTimelines = timelines.filter(t => {
+            if( filter === '' ) return t;
+            return t.subject === filter
+        });
+        return [filter, filteredTimelines];
+    }, shallowEqual );
 
     const dispatch = useDispatch();
 
@@ -24,19 +37,26 @@ export default function TimelineMain(props)
         let prevTimeline = store.getState().timeline.timelines;
         const timeline = getNextTimeline();
 
-        if( prevTimeline != timeline ){
+        if( prevTimeline !== timeline ){
             dispatch( addTimeline(timeline) );
         }
         
         prevTimeline = timeline;
     }
 
-    console.log( 'added' );
-
+    // console.log( 'added' );
     return (
         <div>
             <button onClick={onAdd}>add</button>
-            <TimelineList timelines={timelines} />
+            {/* <TimelineList timelines={timelines} /> */}
+            <Select options={FILTER_OPTIONS}
+                value={filter}
+                postfix={'filter subject'} 
+                onChange={v => dispatch(setFilter(v)) } />
+            {/* <TimelineList timelines={timelines} /> */}
+            <TimelineList timelines={filteredTimelines} />
         </div>
     );
 }
+
+const FILTER_OPTIONS = [FILTER, 'sports', 'cartoon', 'detective', ];
