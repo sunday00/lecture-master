@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../common/store';
-import { actions, setValue } from '../../services/timeline/state';
+import { actions } from '../../services/timeline/state';
 import { FILTER, getNextTimeline } from '../../common/mockData';
 
 import TimelineList from './TimelineList'
@@ -43,7 +43,7 @@ export default function TimelineMain(props)
     const dispatch = useDispatch();
 
     function onAdd () {
-        dispatch( setValue('cnt', store.getState().timeline.cnt + 1) );
+        dispatch( actions.setValue('cnt', store.getState().timeline.cnt + 1) );
         console.log(store.getState().timeline.cnt);
 
         let prevTimeline = store.getState().timeline.timelines;
