@@ -1,4 +1,4 @@
-import createReducer from '../../common/createReducer';
+import { createReducer } from '../../common/redux-helper';
 
 const ADD = 'friend/Add';
 const REMOVE = 'friend/REMOVE';

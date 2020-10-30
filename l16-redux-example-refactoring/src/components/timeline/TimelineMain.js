@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../common/store';
-import { addTimeline, setFilter } from '../../services/timeline/state';
+import { actions, setValue } from '../../services/timeline/state';
 import { FILTER, getNextTimeline } from '../../common/mockData';
 
 import TimelineList from './TimelineList'
@@ -34,7 +34,7 @@ export default function TimelineMain(props)
 
     const [
         filter,
-        filteredTimelines
+        filteredTimelines,
     ] = useSelector( state => [
         getFilter(state),
         getFilteredTimelines(state)
@@ -43,11 +43,14 @@ export default function TimelineMain(props)
     const dispatch = useDispatch();
 
     function onAdd () {
+        dispatch( setValue('cnt', store.getState().timeline.cnt + 1) );
+        console.log(store.getState().timeline.cnt);
+
         let prevTimeline = store.getState().timeline.timelines;
         const timeline = getNextTimeline();
 
         if( prevTimeline !== timeline ){
-            dispatch( addTimeline(timeline) );
+            dispatch( actions.addTimeline(timeline) );
         }
         
         prevTimeline = timeline;
@@ -61,7 +64,7 @@ export default function TimelineMain(props)
             <Select options={FILTER_OPTIONS}
                 value={filter}
                 postfix={'filter subject'} 
-                onChange={v => dispatch(setFilter(v)) } />
+                onChange={v => dispatch(actions.setFilter(v)) } />
             {/* <TimelineList timelines={timelines} /> */}
             <TimelineList timelines={filteredTimelines} />
         </div>

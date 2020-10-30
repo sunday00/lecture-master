@@ -1,6 +1,6 @@
 import produce from 'immer'
 
-export default function createReducer (initState, handlerMap) {
+export function createReducer (initState, handlerMap) {
     return function (state = initState, action) {
         return produce(state, draft => {
             const handler = handlerMap[action.type];
@@ -9,4 +9,12 @@ export default function createReducer (initState, handlerMap) {
             }
         });
     }
+}
+
+export function createSetValueAction (type) {
+    return (k, v) => ({type, k, v});
+}
+
+export function setValueReducer (state, action) {
+    state[action.k] = action.v;
 }
