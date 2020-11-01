@@ -6,7 +6,7 @@ import { FILTER, getNextTimeline } from '../../common/mockData';
 import TimelineList from './TimelineList'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Select from '../numbers/Select';
-import { getFilter, getFilteredTimelines } from '../../services/timeline/Selector';
+import { getFilter, getFilteredTimelines, getIsLoading } from '../../services/timeline/Selector';
 
 export default function TimelineMain(props)
 {
@@ -35,9 +35,11 @@ export default function TimelineMain(props)
     const [
         filter,
         filteredTimelines,
+        isLoading
     ] = useSelector( state => [
         getFilter(state),
-        getFilteredTimelines(state)
+        getFilteredTimelines(state),
+        getIsLoading(state),
     ], shallowEqual );
 
     const dispatch = useDispatch();
@@ -56,6 +58,13 @@ export default function TimelineMain(props)
         prevTimeline = timeline;
     }
 
+    function onLike(e){
+        const id = Number(e.target.dataset.id);
+        const timeline = filteredTimelines.find(item => item.id === id);
+
+        dispatch(actions.requestLikes(timeline));
+    }
+
     // console.log( 'added' );
     return (
         <div>
@@ -66,7 +75,8 @@ export default function TimelineMain(props)
                 postfix={'filter subject'} 
                 onChange={v => dispatch(actions.setFilter(v)) } />
             {/* <TimelineList timelines={timelines} /> */}
-            <TimelineList timelines={filteredTimelines} />
+            <TimelineList timelines={filteredTimelines} onLike={onLike} />
+            <p>{isLoading && 'LOADING'}</p>
         </div>
     );
 }

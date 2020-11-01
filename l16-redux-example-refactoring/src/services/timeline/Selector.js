@@ -8,3 +8,5 @@ export const getFilteredTimelines = createSelector([getTimeline, getFilter], (ti
     if( filter === '' ) return t;
     return t.subject === filter
 }));
+
+export const getIsLoading = state => state.timeline.isLoading;

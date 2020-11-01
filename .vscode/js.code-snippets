@@ -28,7 +28,7 @@
 			"}",
 			""
 		],
-		"description": "Log output to console"
+		"description": "Make main functional component "
 	},
 	"Route with main": {
 		"prefix": "Rmain",
@@ -61,7 +61,32 @@
 			"}",
 			"",
 			"export default $1;"
-		]	
+		],
+		"description": "Make main functional component for react-route"	
+	},
+	"Default Function ts": {
+		"prefix": "TS-main",
+		"body": [
+			"import React from 'react'",
+			"",
+			"type $1Props = {",
+			"\t",
+			"}",
+			"",
+			"const $1: React.FC<$1Props> = (props) => ",
+			"{",
+			"\t",
+			"",
+			"\treturn (",
+        	"\t\t<>",
+            "\t\t\t<div></div>",
+        	"\t\t</>",
+    		"\t);",
+			"}",
+			"",
+			"export default $1;"
+		],
+		"description": "Make main functional component for typescript"
 	},
 	"Redux dev-tool enable": {
 		"prefix": "redux-dev",

@@ -70,7 +70,8 @@ const reducer = createReducer(INITIAL_STATE, {
     [types.ADD_LIKE] : (state, action) => {
         const timeline = state.timelines.find( i => i.id === action.timelineId );
         if (timeline) { timeline.likes += action.value; }
-    }
+    },
+    [types.SET_LOADING] : (state, action) => ( state.isLoading =  action.isLoading),
 });
 
 export default reducer;
