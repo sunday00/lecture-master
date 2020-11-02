@@ -1,6 +1,7 @@
 import { Typography } from 'antd';
 import { Col, Row } from 'antd';
 import React from 'react'
+import SearchInput from './components/SearchInput';
 import Settings from './components/Settings';
 
 type SearchProps = {
@@ -21,7 +22,7 @@ const Search: React.FC<SearchProps> = (props) =>
             </Row>
             <Row justify="center" style={{ marginTop:50 }}>
                 <Col span={12}>
-                    <input type="text"/>
+                    <SearchInput />
                 </Col>
             </Row>
         </section>
