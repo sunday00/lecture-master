@@ -1,7 +1,7 @@
 import { createReducer, createSetValueAction, setValueReducer } from '../../../common/redux-helper';
 
 type ActionsType = {
-    setValue: object,
+    setValue: Function,
     fetchAutoComplete: (keyword: string) => object
 }
 
@@ -19,7 +19,7 @@ export const actions:ActionsType = {
 }
 
 const INITIAL_STATE = {
-    k: '',
+    keyword: '',
     autoCompletes: []
 }
 

@@ -1,15 +1,15 @@
 import produce from 'immer';
 
 type ActionType = {
-    [k: string] : string,
+    [key: string] : string,
 }
 
 type StateType = {
-    [k: string] : string|Array<any>,
+    [key: string] : string|Array<any>,
 }
 
 type HandlerMapType = {
-    [k: string] : Function,
+    [key: string] : Function,
 }
 
 export function createReducer(initialState: StateType, handlerMap:HandlerMapType)
@@ -29,10 +29,10 @@ export function createReducer(initialState: StateType, handlerMap:HandlerMapType
 
 export function createSetValueAction(type: string)
 {
-    return (k:string, v:any) => ({type, k, v});
+    return (key:string, value:any) => ({type, key, value});
 }
 
 export function setValueReducer(state: StateType, action:ActionType): void
 {
-    state[action.k] = action.v;
+    state[action.key] = action.value;
 }
