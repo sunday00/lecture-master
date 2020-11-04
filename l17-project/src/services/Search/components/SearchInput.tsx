@@ -2,7 +2,9 @@ import { SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { AutoComplete, Input, Space, Typography } from 'antd';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { actions } from '../states';
+import { actions as userAction } from '../../User/states';
 
 type SearchInputProps = {
     
@@ -35,8 +37,14 @@ const SearchInput: React.FC<SearchInputProps> = (props) =>
 
     const autoCompletes = useSelector( (state: StateType) => state.search.autoCompletes );
 
-    function goToUser(value: string){
+    const history = useHistory(); 
 
+    function goToUser(userName: string){
+        const user = autoCompletes.find( item => item.name === userName );
+        if(user){
+            dispatch(userAction.setValue('user', user));
+            history.push(`/user/${userName}`);
+        }
     }
 
     return (

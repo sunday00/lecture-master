@@ -5,7 +5,7 @@ type ActionType = {
 }
 
 type StateType = {
-    [key: string] : string|Array<any>,
+    [key: string] : string|Array<any>|undefined,
 }
 
 type HandlerMapType = {
