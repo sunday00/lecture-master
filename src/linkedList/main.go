@@ -42,6 +42,12 @@ func main() {
 	root.toStringAll()
 	popped.toStringAll()
 
+	fmt.Print("\033[34m\n============= middle go app =============\n\n\033[0m")
+
+	var newNode = &Node{nil, root.getLastNode().val + 10}
+	root.push(newNode)
+	root.toStringAll()
+
 	fmt.Print("\033[33m\n\n============== terminated ==============\n\n\033[0m")
 
 }
@@ -120,4 +126,9 @@ func (n *Node) pop() *Node {
 	var m = n.getLastNode()
 	n.removeNode(m.val)
 	return m
+}
+
+func (n *Node) push(m *Node) {
+	o := n.getLastNode()
+	o.next = m
 }
