@@ -30,9 +30,17 @@ func main() {
 	root.removeNode(0)
 	root.toStringAll()
 
+	fmt.Print("\033[34m\n============= middle go app =============\n\n\033[0m")
+
 	shifted := root.shift()
 	root.toStringAll()
-	print(shifted)
+	shifted.toStringAll()
+
+	fmt.Print("\033[34m\n============= middle go app =============\n\n\033[0m")
+
+	popped := root.pop()
+	root.toStringAll()
+	popped.toStringAll()
 
 	fmt.Print("\033[33m\n\n============== terminated ==============\n\n\033[0m")
 
@@ -103,7 +111,13 @@ func (n *Node) removeNode(val int) {
 }
 
 func (n *Node) shift() *Node {
-	m := n
+	var m = &Node{nil, n.val}
 	n.removeNode(n.val)
+	return m
+}
+
+func (n *Node) pop() *Node {
+	var m = n.getLastNode()
+	n.removeNode(m.val)
 	return m
 }
