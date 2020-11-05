@@ -51,4 +51,12 @@
 		],
 		"description": "clear console"
 	},
+	"Half line": {
+		"scope": "go",
+		"prefix": ["hr"],
+		"body": [
+			"fmt.Print(\"\\033[34m\\n============= middle go app =============\\n\\n\\033[0m\")"
+		],
+		"description": "half line on middle app"
+	},
 }
