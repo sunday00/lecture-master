@@ -2,12 +2,14 @@ package main
 
 import "fmt"
 
+//Node is linked list object
 type Node struct {
 	next *Node
 	val  int
 }
 
-func main() {
+// func main() {
+func base() {
 	print("\033[H\033[2J")
 	fmt.Print("\033[33m============= start go app =============\n\n\033[0m")
 
