@@ -1,6 +1,7 @@
 import {all, put, call, takeEvery} from 'redux-saga/effects';
 import {actions, Types} from './index';
 import {callApi} from '../../../common/util/api';
+import {makeFetchSaga} from '../../../common/util/fetches'
 
 type NameType = {
     name: string
@@ -23,6 +24,7 @@ export default function* ()
 {
     yield all ([
         //@ts-ignore
-        takeEvery(Types.FetchUser, fetchUser),
+        // takeEvery(Types.FetchUser, fetchUser),
+        makeFetchSaga({ fetchSaga: fetchUser, isCached: false  }),
     ]);
 }

@@ -5,7 +5,7 @@ type ActionType = {
 }
 
 type StateType = {
-    [key: string] : string|Array<any>|undefined,
+    [key: string] : string|Array<any>|object|undefined,
 }
 
 type HandlerMapType = {
@@ -36,3 +36,7 @@ export function setValueReducer(state: StateType, action:ActionType): void
 {
     state[action.key] = action.value;
 }
+
+export const FETCH_PAGE = Symbol('FETCH_PAGE');
+export const FETCH_KEY = Symbol('FETCH_KEY');
+export const NOT_IMMUTABLE = Symbol('NOT_IMMUTABLE');

@@ -5,8 +5,10 @@ import searchReducer from '../services/Search/states';
 import searchSaga from '../services/Search/states/saga';
 import userReducer from '../services/User/states';
 import userSaga from '../services/User/states/saga';
+import commonReducer from '../common/state'
 
 const reducer = combineReducers({
+    common: commonReducer,
     search: searchReducer,
     user: userReducer,
 });
