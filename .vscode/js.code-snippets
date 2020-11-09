@@ -1,0 +1,98 @@
+{
+	// Place your snippets for javascriptreact here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Default Function": {
+		"prefix": "main",
+		"body": [
+			"import React from 'react'",
+			"",
+			"export default function $1(props)",
+			"{",
+			"\t$3",
+			"\treturn (",
+			"\t\t<>",
+			"\t\t\t<$2></$2>",
+			"\t\t</>",
+			"\t);",
+			"}",
+			""
+		],
+		"description": "Make main functional component "
+	},
+	"Route with main": {
+		"prefix": "Rmain",
+		"body": [
+			"import React from 'react';",
+			"import { BrowserRouter, Route, Link } from 'react-router-dom';",
+			"import $2 from './$2';",
+			"",
+			"function $1() {",
+			"\treturn (",
+			"\t\t<div className=\"App\">",
+			"\t\t\t<BrowserRouter>",
+			"\t\t\t\t<ul>",
+			"\t\t\t\t\t<li>",
+			"\t\t\t\t\t\t<Link to=\"/\">home</Link>",
+			"\t\t\t\t\t</li>",
+			"\t\t\t\t\t<li>",
+			"\t\t\t\t\t\t<Link to=\"/$2\">$2</Link>",
+			"\t\t\t\t\t</li>",
+			"\t\t\t\t</ul>",
+			"",
+			"\t\t\t\t<section className=\"contents\">",
+			"\t\t\t\t\t<Route exact path=\"/\"></Route>",
+			"\t\t\t\t\t<Route path=\"/$2\" render={() => <$2 p1='aaa' p2={100} />}></Route>",
+			"\t\t\t\t\t<Route path=\"/$2\" component={$2}></Route>",
+			"\t\t\t\t</section>",
+			"\t\t\t</BrowserRouter>",
+			"\t\t</div>",
+			"\t);",
+			"}",
+			"",
+			"export default $1;"
+		],
+		"description": "Make main functional component for react-route"	
+	},
+	"Default Function ts": {
+		"prefix": "TS-main",
+		"body": [
+			"import React from 'react'",
+			"",
+			"type $1Props = {",
+			"\t",
+			"}",
+			"",
+			"const $1: React.FC<$1Props> = (props) => ",
+			"{",
+			"\t",
+			"",
+			"\treturn (",
+        	"\t\t<>",
+            "\t\t\t<div></div>",
+        	"\t\t</>",
+    		"\t);",
+			"}",
+			"",
+			"export default $1;"
+		],
+		"description": "Make main functional component for typescript"
+	},
+	"Redux dev-tool enable": {
+		"prefix": "redux-dev",
+		"body": [
+			"window.__REDUX_DEVTOOLS_EXTENSION__?.()"
+		],
+		"description": "enable redux dev tool"
+	},
+}
