@@ -39,6 +39,26 @@ func main() {
 
 	seven.Dfs2(fmt.Println)
 
+	fmt.Print("\033[34m\n============= middle go app =============\n\n\033[0m")
+
+	seven.Bfs(fmt.Println)
+
+	fmt.Print("\033[34m\n============= middle go app =============\n\n\033[0m")
+	fmt.Print("\033[34m\n============= middle go app =============\n\n\033[0m")
+
+	bt := tree.BTree{}
+	bt.Root = &tree.BTreeNode{Val: 5}
+	bt.Root.AddNode(3)
+	bt.Root.AddNode(7)
+	bt.Root.AddNode(2)
+	bt.Root.AddNode(4)
+	bt.Root.AddNode(6)
+	bt.Root.AddNode(8)
+	bt.Root.AddNode(9)
+	bt.Root.AddNode(1)
+
+	bt.Root.GetChildrenToSting(true, true)
+
 	fmt.Print("\033[33m\n\n============== terminated ==============\n\n\033[0m")
 
 }

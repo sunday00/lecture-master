@@ -2,30 +2,29 @@ package helpers
 
 // Collection ..
 type Collection struct {
-	body []interface{}
+	body []int
 }
 
 // Collect ..
-func Collect(slice interface{}) Collection {
+func Collect(slice []int) Collection {
 	C := Collection{}
-	C.Push(slice)
-	C.body = C.body[0]
+	C.body = slice
 	return C
 }
 
 // Push ..
-func (a *Collection) Push(v interface{}) {
+func (a *Collection) Push(v int) {
 	a.body = append(a.body, v)
 }
 
 // Pop ..
-func (a *Collection) Pop() interface{} {
+func (a *Collection) Pop() int {
 	v := a.body[len(a.body)-1]
 	a.body = a.body[:len(a.body)-2]
 	return v
 }
 
 // ToSlice ..
-func (a *Collection) ToSlice() []interface{} {
+func (a *Collection) ToSlice() []int {
 	return a.body
 }
