@@ -2,12 +2,11 @@ import React from 'react';
 
 function NavList (props)
 {
-
     function onClick (e, li) {
         e.preventDefault();
-        props.onChangePage(e, li.id, 'read')
+        props.onChangePage(li.id, 'read')
     }
-
+    
     return (
         <ul>
             {props.list && props.list.map((li) => (

@@ -5,7 +5,7 @@ function Header (props)
 
     function onClick (e) {
         e.preventDefault();
-        props.onChangePage(e, 'welcome')
+        props.onChangePage('welcome')
     }
 
     return (

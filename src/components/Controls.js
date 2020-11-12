@@ -5,7 +5,7 @@ export default function Controls(props)
     
     function onClick (e, mode) {
         e.preventDefault();
-        props.onChangePage(e, null, mode);
+        props.onChangePage(null, mode);
     }
 
     return (
