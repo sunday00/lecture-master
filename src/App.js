@@ -68,11 +68,23 @@ function App() {
 
   }
 
+  function onDelete(){
+
+    if ( !window.confirm('sure?') ) return false;
+
+    setList( list.filter(l => {
+      return l.id !== content.id
+    }) );
+
+    setMode('welcome');
+    onChange('welcome', 'welcome');
+  }
+
   return (
     <>
       <Header mainTitle="WEB" subTitle="word wide web" onChangePage={(val) => onChange(val, 'welcome')}></Header>
       <NavList list={list} onChangePage={onChange}></NavList>
-      <Controls onChangePage={onChange}></Controls>
+      <Controls onChangePage={onChange} onDelete={onDelete} mode={mode}></Controls>
       { (mode==='welcome' || mode ==='read') && <Content content={content}></Content>}
       { mode==='create' && <Create onCreate={(e, title, description) => onCreate(e, title, description)}></Create>}
       { mode==='update' && <Update content={content} onUpdate={(e, id, title, description) => onUpdate(e, id, title, description)}></Update>}
