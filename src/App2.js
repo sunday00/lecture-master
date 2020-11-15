@@ -7,8 +7,8 @@ function App() {
 
   return (
     <>
-      <FunctionalApp></FunctionalApp>
-      <ClassStyleApp></ClassStyleApp>
+      <FunctionalApp initNumber={2}></FunctionalApp>
+      <ClassStyleApp initNumber={2}></ClassStyleApp>
     </>
   );
 }
