@@ -15,9 +15,9 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"Create main": {
+	"Create main-noConsole": {
 		"scope": "go",
-		"prefix": "main",
+		"prefix": "main-noConsole",
 		"body": [
 			"package main",
 			"",
@@ -30,6 +30,29 @@
 			"\t$2",
 			"",
 			"\tfmt.Print(\"\\033[33m\\n\\n============== terminated ==============\\n\\n\\033[0m\")",
+			"",
+			"}"
+		],
+		"description": "Create main method"
+	},
+	"Create main": {
+		"scope": "go",
+		"prefix": "main",
+		"body": [
+			"package main",
+			"",
+			"import (",
+			"\t\"${1:fmt}\"",
+			"\t\"${2:github.com/sunday00/go-console}\"",
+			")",
+			"",
+			"func main () {",
+			"\tprint(\"\\033[H\\033[2J\")",
+			"\tconsole.PrintColoredLn(\"\\n============= start go app =============\\n\", console.Warning)",
+			"",
+			"\t$3",
+			"",
+			"\tconsole.PrintColoredLn(\"\\n============== terminated ==============\\n\", console.Warning)",
 			"",
 			"}"
 		],

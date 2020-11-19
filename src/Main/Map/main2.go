@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func main2() {
 	print("\033[H\033[2J")
 	fmt.Print("\033[33m============= start go app =============\n\n\033[0m")
 
