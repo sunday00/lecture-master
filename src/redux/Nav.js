@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {store} from './stores/nav';
-import {store as articleStore} from './stores/article'
+import {store as articleStore} from './stores/article';
+import {store as homeStore} from './stores/home';
 
 export default function Nav(props)
 {
  
     const [list, setList] = useState(store.getState());
+    store.subscribe( () => { setList(store.getState()) } );
 
     useEffect(() => {
         setList( store.getState() );
@@ -21,6 +23,7 @@ export default function Nav(props)
 
     function onClick(e, id){
         e.preventDefault();
+        homeStore.dispatch({type:'CHANGE_MODE', mode:'read'});
         articleStore.dispatch({type:'CHANGE_ARTICLE', currentId:id});
     }
 
@@ -29,7 +32,7 @@ export default function Nav(props)
             <ul>
                 {makeList(list)}
             </ul>
-            {console.log('re-render lists')}
+            {console.log('render lists')}
         </nav>
     );
 }
