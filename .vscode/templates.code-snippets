@@ -47,7 +47,6 @@
 			")",
 			"",
 			"func main () {",
-			"\tprint(\"\\033[H\\033[2J\")",
 			"\tconsole.PrintColoredLn(\"\\n============= start go app =============\\n\", console.Warning)",
 			"",
 			"\t$3",
