@@ -1,25 +1,11 @@
-import React, { useReducer } from 'react';
-
-function reducer(state, action) {
-    return {
-        ...state,
-        [action.name]: action.value,
-    };
-}
+import React from 'react';
+import { useInput } from '../hooks/useInput';
 
 const Info = () => {
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, onChange] = useInput({
         name: '',
         age: 0,
     });
-
-    function onChange(e) {
-        dispatch({
-            type: 'changeValue',
-            name: e.target.name,
-            value: e.target.value,
-        });
-    }
 
     return (
         <div>

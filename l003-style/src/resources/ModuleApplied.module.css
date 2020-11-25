@@ -1,0 +1,7 @@
+.inner{
+    background-color: tomato;
+}
+
+:global h2 {
+    color: gold;
+}

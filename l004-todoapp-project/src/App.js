@@ -1,0 +1,62 @@
+import React, { useCallback, useRef, useState } from 'react';
+import './App.css';
+import TodoInsert from './components/TodoInsert';
+import TodoList from './components/TodoList';
+import TodoTemplate from './components/TodoTemplate';
+
+function App() {
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Learn Laravel8', checked: true },
+    { id: 2, text: 'Learn Spring-boot', checked: false },
+    { id: 3, text: 'Learn React and Redux', checked: true },
+  ]);
+
+  const nextId = useRef(4);
+
+  const onInsert = useCallback(
+    (text) => {
+      setTodos(
+        todos.concat({
+          id: nextId.current,
+          text,
+          checked: false,
+        }),
+      );
+      nextId.current++;
+    },
+    [todos],
+  );
+
+  const onToggle = useCallback(
+    (id) => {
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo,
+        ),
+      );
+    },
+    [todos],
+  );
+
+  const onRemove = useCallback((id) => {
+    setTodos(
+      todos.filter((todo) => todo.id !== id),
+      [todos],
+    );
+  });
+
+  return (
+    <div className="App">
+      <TodoTemplate>
+        <TodoInsert onInsert={onInsert}></TodoInsert>
+        <TodoList
+          todos={todos}
+          onToggle={onToggle}
+          onRemove={onRemove}
+        ></TodoList>
+      </TodoTemplate>
+    </div>
+  );
+}
+
+export default App;

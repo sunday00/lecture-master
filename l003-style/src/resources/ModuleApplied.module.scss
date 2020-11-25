@@ -1,0 +1,11 @@
+.inner{
+    background-color: tomato;
+}
+
+.border {
+    border : 2px solid cornflowerblue
+}
+
+:global h2 {
+    color: gold;
+}

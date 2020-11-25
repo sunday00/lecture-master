@@ -1,0 +1,25 @@
+$radius : 8px;
+
+.TodoTemplate {
+    width:512px;
+    margin: 6rem auto auto auto;
+    overflow:hidden;
+    border-radius:$radius; 
+    
+    .app-title {
+        border-top-left-radius:$radius; 
+        border-top-right-radius:$radius; 
+        background:#22b8cf;
+        color:white;
+        height: 4rem; 
+        font-size:1.5rem;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        margin-bottom: 0;
+    }
+
+    .content { 
+        background:white; 
+    }
+}

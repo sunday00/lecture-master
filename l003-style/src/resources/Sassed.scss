@@ -1,0 +1,35 @@
+@import "./Utiles";
+@import '~include-media/dist/include-media';
+@import "~open-color/open-color";
+
+div.Sassed-div {
+    background-color: rgb(214, 99, 224);
+    padding: 10px;
+
+    h1 {
+        font-size: medium;
+        color: mediumaquamarine;
+    }
+
+    .boxes{
+        display: flex;
+        .box{
+            &.red {
+                background-color: $red;
+                @include square (1);
+            }
+            &.orange {
+                background-color: $orange;
+                @include square (2);
+            }
+            &.indigo {
+                background-color: $oc-indigo-4;
+                @include square (3);
+            }
+        }
+        @include media('<368px') {
+            background:$oc-gray-9; 
+        }
+    }
+    
+}

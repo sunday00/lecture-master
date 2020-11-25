@@ -1,0 +1,12 @@
+:local .radius {
+    border-radius: 8px;
+    width: 100px;
+    height: 100px;
+    background-color: yellowgreen;
+}
+
+
+.action {
+    color: lightblue;
+    font-size: 2rem;
+}

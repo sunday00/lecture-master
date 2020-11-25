@@ -6,6 +6,7 @@ import GoDownButton from './components/GoDownButton';
 import Clearable from './components/Clearable';
 import UseReducerComponent from './components/UseReducerComponent';
 import Info from './components/Info';
+import Average from './components/Average';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
             <Clearable></Clearable>
             <UseReducerComponent></UseReducerComponent>
             <Info></Info>
+            <Average></Average>
         </div>
     );
 }
