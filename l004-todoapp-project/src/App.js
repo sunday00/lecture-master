@@ -4,12 +4,25 @@ import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 import TodoTemplate from './components/TodoTemplate';
 
+import faker from 'faker';
+// dev
+function createBulkData(length) {
+  return [...Array(length).keys()].map((k) => ({
+    id: k,
+    text: faker.name.jobTitle(),
+    checked: faker.random.boolean(),
+  }));
+}
+//
+
 function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn Laravel8', checked: true },
-    { id: 2, text: 'Learn Spring-boot', checked: false },
-    { id: 3, text: 'Learn React and Redux', checked: true },
-  ]);
+  //   const [todos, setTodos] = useState([
+  //     { id: 1, text: 'Learn Laravel8', checked: true },
+  //     { id: 2, text: 'Learn Spring-boot', checked: false },
+  //     { id: 3, text: 'Learn React and Redux', checked: true },
+  //   ]);
+
+  const [todos, setTodos] = useState(createBulkData(2500));
 
   const nextId = useRef(4);
 
@@ -38,12 +51,12 @@ function App() {
     [todos],
   );
 
-  const onRemove = useCallback((id) => {
-    setTodos(
-      todos.filter((todo) => todo.id !== id),
-      [todos],
-    );
-  });
+  const onRemove = useCallback(
+    (id) => {
+      setTodos(todos.filter((todo) => todo.id !== id));
+    },
+    [todos],
+  );
 
   return (
     <div className="App">
