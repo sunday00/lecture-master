@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useRef, useEffect } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import './App.css';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
@@ -15,21 +15,6 @@ function createBulkData(length) {
 }
 //
 
-function todoReducer(todos, action) {
-  switch (action.type) {
-    case 'INSERT':
-      return todos.concat(action.todo);
-    case 'TOGGLE':
-      return todos.map((todo) =>
-        todo.id === action.id ? { ...todo, checked: !todo.checked } : todo,
-      );
-    case 'REMOVE':
-      return todos.filter((todo) => todo.id !== action.id);
-    default:
-      return todos;
-  }
-}
-
 function App() {
   //   const [todos, setTodos] = useState([
   //     { id: 1, text: 'Learn Laravel8', checked: true },
@@ -37,35 +22,32 @@ function App() {
   //     { id: 3, text: 'Learn React and Redux', checked: true },
   //   ]);
 
-  // const [todos, setTodos] = useState(createBulkData(2500));
-  const [todos, dispatch] = useReducer(todoReducer, undefined, () =>
-    createBulkData(2500),
-  );
+  const [todos, setTodos] = useState(createBulkData(2500));
 
   const nextId = useRef(2501);
 
-  const listDom = useRef();
-
-  useEffect(() => {
-    listDom.current.scrollTo(0, listDom.current.scrollTopMax);
-  }, [todos]);
-
   const onInsert = useCallback((text) => {
-    dispatch({
-      type: 'INSERT',
-      todo: {
+    setTodos((todos) =>
+      todos.concat({
         id: nextId.current,
         text,
         checked: false,
-      },
-    });
+      }),
+    );
     nextId.current++;
-    listDom.current.scrollTo(0, listDom.current.scrollTopMax);
   }, []);
 
-  const onToggle = useCallback((id) => dispatch({ type: 'TOGGLE', id }), []);
+  const onToggle = useCallback((id) => {
+    setTodos((todos) =>
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
+      ),
+    );
+  }, []);
 
-  const onRemove = useCallback((id) => dispatch({ type: 'REMOVE', id }), []);
+  const onRemove = useCallback((id) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  }, []);
 
   return (
     <div className="App">
@@ -75,7 +57,6 @@ function App() {
           todos={todos}
           onToggle={onToggle}
           onRemove={onRemove}
-          ref={listDom}
         ></TodoList>
       </TodoTemplate>
     </div>
