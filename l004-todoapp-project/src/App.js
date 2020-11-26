@@ -47,7 +47,7 @@ function App() {
   const listDom = useRef();
 
   useEffect(() => {
-    listDom.current.scrollTo(0, listDom.current.scrollTopMax);
+    listDom.current.scrollToRow(todos.length - 1);
   }, [todos]);
 
   const onInsert = useCallback((text) => {
@@ -60,7 +60,6 @@ function App() {
       },
     });
     nextId.current++;
-    listDom.current.scrollTo(0, listDom.current.scrollTopMax);
   }, []);
 
   const onToggle = useCallback((id) => dispatch({ type: 'TOGGLE', id }), []);
