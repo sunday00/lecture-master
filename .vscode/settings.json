@@ -1,6 +1,13 @@
 {
     "cSpell.words": [
+        "Immer",
         "crossorigin",
+        "lightgreen",
         "todos"
-    ]
+    ],
+    "colorize.languages": [
+        "javascript",
+      ],
+    "colorize.include": ["**/*.js"],
+    "colorize.colorized_colors": ["HEXA", "ARGB", "RGB", "HSL", "BROWSERS_COLORS"]
 }
