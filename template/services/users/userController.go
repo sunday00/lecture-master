@@ -22,6 +22,18 @@ func (c *UserController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	uri := mux.Vars(r)
 
+	if r.Method == "DELETE" {
+		id, _ := strconv.Atoi(uri["id"])
+		deleteOne(w, r, id)
+		return
+	}
+
+	if r.Method == "PUT" {
+		id, _ := strconv.Atoi(uri["id"])
+		updateOne(w, r, id)
+		return
+	}
+
 	if uri["id"] == "" || uri["id"] == "/" {
 		getIndex(w, r)
 		return
@@ -73,4 +85,26 @@ func postCreate(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	res, _ := json.Marshal(user)
 	fmt.Fprint(w, string(res))
+}
+
+func deleteOne(w http.ResponseWriter, r *http.Request, id int) {
+
+	// if data is already deleted
+	// _, ok := userMap[id]
+	// if !ok { w.WriteHeader(http.StatusOK); fmt.Fprint(w, "no user") }
+	// and delete logic
+
+	w.WriteHeader(http.StatusAccepted)
+	fmt.Fprintf(w, "deleted : %d\n", id)
+}
+
+func updateOne(w http.ResponseWriter, r *http.Request, id int) {
+
+	// if data is already deleted
+	// _, ok := userMap[id]
+	// if !ok { w.WriteHeader(http.StatusOK); fmt.Fprint(w, "no user") }
+	// and delete logic
+
+	w.WriteHeader(http.StatusAccepted)
+	fmt.Fprintf(w, "updated : %d\n", id)
 }

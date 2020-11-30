@@ -87,3 +87,34 @@ func TestCreateUser(t *testing.T) {
 	assert.Contains(string(data), strconv.Itoa(id))
 
 }
+
+func TestDeleteUser(t *testing.T) {
+	assert := assert.New(t)
+
+	ts := httptest.NewServer(routers.Routes())
+	defer ts.Close()
+
+	deleteReq, _ := http.NewRequest("DELETE", ts.URL+"/users/1", nil)
+	res, err := http.DefaultClient.Do(deleteReq)
+
+	assert.NoError(err)
+	assert.Equal(http.StatusAccepted, res.StatusCode)
+
+}
+
+func TestUpdateUser(t *testing.T) {
+	assert := assert.New(t)
+
+	ts := httptest.NewServer(routers.Routes())
+	defer ts.Close()
+
+	updateReq, _ := http.NewRequest("PUT", ts.URL+"/users/1", nil)
+	res, err := http.DefaultClient.Do(updateReq)
+
+	assert.NoError(err)
+	assert.Equal(http.StatusAccepted, res.StatusCode)
+
+	//// check ioutil.ReadAll(res.Body)
+	//
+
+}
