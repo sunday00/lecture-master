@@ -1,0 +1,1 @@
+{"version":3,"sources":["../resources/index.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;EACA;;;AAGF;EACE","file":"resources.88a9fe76.css","sourceRoot":"../public","sourcesContent":[".toggle {\n  border:2px solid black;\n  width:64px;\n  height:64px;\n  border-radius: 32px;\n  box-sizing: border-box;\n}\n  \n.toggle.active { \n  background:yellow; \n}\n"]}
