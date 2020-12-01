@@ -1,11 +1,13 @@
 import React from 'react';
 import { ColorProvider, ColorConsumer } from '../context/UpdatableColor';
+import ColorSelector from './ColorSelector';
 
 const ColorBox2 = () => {
   return (
     <section>
       <ColorProvider color="lightyellow" subColor="indigo">
         <div>
+          <ColorSelector></ColorSelector>
           <ColorConsumer>
             {(val) => (
               <div
@@ -13,7 +15,7 @@ const ColorBox2 = () => {
                   width: 64,
                   height: 64,
                   backgroundColor: val.state.color,
-                  border: `1px solid ${val.state.subColor}`,
+                  border: `3px solid ${val.state.subColor}`,
                 }}
               ></div>
             )}
