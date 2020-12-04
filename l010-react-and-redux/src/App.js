@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './modules';
 // import Counter from './components/Counter';
 import CounterContainer from './containers/CounterContainer';
+import TodosContainer from './containers/TodosContainer';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         ></img>
         <CounterContainer></CounterContainer>
         <hr />
-        <Todos></Todos>
+        <TodosContainer></TodosContainer>
       </div>
     </Provider>
   );
