@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Todos from '../components/Todos';
 import { changeInput, insert, toggle, remove } from '../modules/todos';
+import useActions from '../hooks/useActions';
 
 const TodosContainer = (props) => {
   const state = useSelector((state) => ({
@@ -10,14 +11,18 @@ const TodosContainer = (props) => {
     todos: state.todos.todos,
   }));
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const onChange = useCallback((input) => dispatch(changeInput(input)), [
-    dispatch,
-  ]);
-  const onInsert = useCallback((text) => dispatch(insert(text)), [dispatch]);
-  const onToggle = useCallback((id) => dispatch(toggle(id)), [dispatch]);
-  const onRemove = useCallback((id) => dispatch(remove(id)), [dispatch]);
+  // const onChange = useCallback((input) => dispatch(changeInput(input)), [
+  //   dispatch,
+  // ]);
+  // const onInsert = useCallback((text) => dispatch(insert(text)), [dispatch]);
+  // const onToggle = useCallback((id) => dispatch(toggle(id)), [dispatch]);
+  // const onRemove = useCallback((id) => dispatch(remove(id)), [dispatch]);
+  const [onChangeInput, onInsert, onToggle, onRemove] = useActions(
+    [changeInput, insert, toggle, remove],
+    [],
+  );
 
   // return (
   //   <Todos
@@ -34,7 +39,8 @@ const TodosContainer = (props) => {
     <Todos
       input={state.input}
       todos={state.todos}
-      onChange={onChange}
+      // onChange={onChange}
+      onChange={onChangeInput}
       onInsert={onInsert}
       onToggle={onToggle}
       onRemove={onRemove}
