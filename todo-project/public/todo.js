@@ -44,7 +44,10 @@
 
         todoListItem.on('change', '.checkbox', function () {
             const id = $(this).parents('li').attr('id');
-            $.post(`/complete/${id}`).then((res) => {
+            $.ajax({
+                url: `/todos/${id}`,
+                type: "PATCH"
+            }).then((res) => {
                 if ($(this).attr('checked')) {
                     $(this).removeAttr('checked');
                 } else {

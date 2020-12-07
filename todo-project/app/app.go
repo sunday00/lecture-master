@@ -23,15 +23,15 @@ type ResponseStatus struct {
 	Item    int  `json:"item"`
 }
 
-var todoMap map[int]*Todo
+var Todomap map[int]*Todo
 
-func addTestTodos() {
-	todoMap[1] = &Todo{1, "Buy some tea", false, time.Now().AddDate(0, 0, -3)}
-	todoMap[2] = &Todo{2, "Buy some cocoa", true, time.Now().AddDate(0, 0, -2)}
-	todoMap[3] = &Todo{3, "Run track on playground", false, time.Now().Add(time.Duration(-3) * time.Hour)}
-	todoMap[4] = &Todo{4, "Spit on the Park's grave", false, time.Now().Add(time.Duration(-2) * time.Hour)}
-	todoMap[5] = &Todo{5, "Learn golang", false, time.Now().Add(time.Duration(-30) * time.Minute)}
-}
+// func addTestTodos() {
+// 	Todomap[1] = &Todo{1, "Buy some tea", false, time.Now().AddDate(0, 0, -3)}
+// 	Todomap[2] = &Todo{2, "Buy some cocoa", true, time.Now().AddDate(0, 0, -2)}
+// 	Todomap[3] = &Todo{3, "Run track on playground", false, time.Now().Add(time.Duration(-3) * time.Hour)}
+// 	Todomap[4] = &Todo{4, "Spit on the Park's grave", false, time.Now().Add(time.Duration(-2) * time.Hour)}
+// 	Todomap[5] = &Todo{5, "Learn golang", false, time.Now().Add(time.Duration(-30) * time.Minute)}
+// }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/todo.html", http.StatusTemporaryRedirect)
@@ -39,7 +39,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func getTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	list := []*Todo{}
-	for _, v := range todoMap {
+	for _, v := range Todomap {
 		list = append(list, v)
 	}
 	rd.JSON(w, http.StatusOK, list)
@@ -49,21 +49,21 @@ func getTodoListHandler(w http.ResponseWriter, r *http.Request) {
 func addTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	id := 0
-	for _, v := range todoMap {
+	for _, v := range Todomap {
 		if id < v.ID {
 			id = v.ID
 		}
 	}
 	id = id + 1
-	todoMap[id] = &Todo{id, name, false, time.Now()}
-	rd.JSON(w, http.StatusOK, todoMap[id])
+	Todomap[id] = &Todo{id, name, false, time.Now()}
+	rd.JSON(w, http.StatusCreated, Todomap[id])
 }
 
 func removeTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
-	if _, ok := todoMap[id]; ok {
-		delete(todoMap, id)
+	if _, ok := Todomap[id]; ok {
+		delete(Todomap, id)
 		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
 	} else {
 		rd.JSON(w, http.StatusBadRequest, ResponseStatus{false, id})
@@ -73,8 +73,8 @@ func removeTodoListHandler(w http.ResponseWriter, r *http.Request) {
 func toggleTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
-	if _, ok := todoMap[id]; ok {
-		todoMap[id].Completed = !todoMap[id].Completed
+	if _, ok := Todomap[id]; ok {
+		Todomap[id].Completed = !Todomap[id].Completed
 		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
 	} else {
 		rd.JSON(w, http.StatusBadRequest, ResponseStatus{false, id})
@@ -83,8 +83,8 @@ func toggleTodoListHandler(w http.ResponseWriter, r *http.Request) {
 
 func MakeHandler() http.Handler {
 
-	todoMap = make(map[int]*Todo)
-	addTestTodos()
+	Todomap = make(map[int]*Todo)
+	// addTestTodos()
 
 	rd = render.New()
 	r := mux.NewRouter()
@@ -92,7 +92,7 @@ func MakeHandler() http.Handler {
 	r.HandleFunc("/todos", getTodoListHandler).Methods("GET")
 	r.HandleFunc("/todos", addTodoListHandler).Methods("POST")
 	r.HandleFunc("/todos/item{id:[0-9]+}", removeTodoListHandler).Methods("DELETE")
-	r.HandleFunc("/complete/item{id:[0-9]+}", toggleTodoListHandler).Methods("POST")
+	r.HandleFunc("/todos/item{id:[0-9]+}", toggleTodoListHandler).Methods("PATCH")
 	r.HandleFunc("/", indexHandler)
 
 	return r
