@@ -3,7 +3,7 @@ import { all } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import counter, { counterSaga } from './counter';
-import sample from './sample';
+import sample, { sampleSaga } from './sample';
 import loading from './loading';
 import loggerMiddleware from '../lib/loggerMiddleware';
 import ReduxThunk from 'redux-thunk';
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({ counter, sample, loading });
 const sagaMiddleware = createSagaMiddleware();
 
 export function* rootSaga() {
-  yield all([counterSaga()]);
+  yield all([counterSaga(), sampleSaga()]);
 }
 
 const store = createStore(
