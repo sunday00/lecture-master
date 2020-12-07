@@ -2,6 +2,7 @@ package app
 
 import (
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -15,6 +16,11 @@ type Todo struct {
 	Name      string    `json:"name"`
 	Completed bool      `json:"completed"`
 	CreatedAt time.Time `json:"created_at"`
+}
+
+type ResponseStatus struct {
+	Success bool `json:"success"`
+	Item    int  `json:"item"`
 }
 
 var todoMap map[int]*Todo
@@ -40,6 +46,41 @@ func getTodoListHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func addTodoListHandler(w http.ResponseWriter, r *http.Request) {
+	name := r.FormValue("name")
+	id := 0
+	for _, v := range todoMap {
+		if id < v.ID {
+			id = v.ID
+		}
+	}
+	id = id + 1
+	todoMap[id] = &Todo{id, name, false, time.Now()}
+	rd.JSON(w, http.StatusOK, todoMap[id])
+}
+
+func removeTodoListHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, _ := strconv.Atoi(vars["id"])
+	if _, ok := todoMap[id]; ok {
+		delete(todoMap, id)
+		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
+	} else {
+		rd.JSON(w, http.StatusBadRequest, ResponseStatus{false, id})
+	}
+}
+
+func toggleTodoListHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, _ := strconv.Atoi(vars["id"])
+	if _, ok := todoMap[id]; ok {
+		todoMap[id].Completed = !todoMap[id].Completed
+		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
+	} else {
+		rd.JSON(w, http.StatusBadRequest, ResponseStatus{false, id})
+	}
+}
+
 func MakeHandler() http.Handler {
 
 	todoMap = make(map[int]*Todo)
@@ -49,6 +90,9 @@ func MakeHandler() http.Handler {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/todos", getTodoListHandler).Methods("GET")
+	r.HandleFunc("/todos", addTodoListHandler).Methods("POST")
+	r.HandleFunc("/todos/item{id:[0-9]+}", removeTodoListHandler).Methods("DELETE")
+	r.HandleFunc("/complete/item{id:[0-9]+}", toggleTodoListHandler).Methods("POST")
 	r.HandleFunc("/", indexHandler)
 
 	return r
