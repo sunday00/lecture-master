@@ -2,6 +2,7 @@ package tests
 
 import (
 	"encoding/json"
+	model "go-web/todo-project/models"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -19,14 +20,14 @@ func TestTodos(t *testing.T) {
 	ts := httptest.NewServer(app.MakeHandler())
 	defer ts.Close()
 
-	totallen := len(app.Todomap)
+	totallen := len(model.GetTodos())
 
 	resp, err := http.PostForm(ts.URL+"/todos", url.Values{"name": {"test todo"}})
 	assert.NoError(err)
 	assert.Equal(http.StatusCreated, resp.StatusCode)
-	assert.Equal(totallen+1, len(app.Todomap))
+	assert.Equal(totallen+1, len(model.GetTodos()))
 
-	var todo app.Todo
+	var todo model.Todo
 	err = json.NewDecoder(resp.Body).Decode(&todo)
 	assert.NoError(err)
 	assert.Equal(todo.Name, "test todo")
@@ -36,7 +37,7 @@ func TestTodos(t *testing.T) {
 	resp, err = http.PostForm(ts.URL+"/todos", url.Values{"name": {"test todo2"}})
 	assert.NoError(err)
 	assert.Equal(http.StatusCreated, resp.StatusCode)
-	assert.Equal(totallen+2, len(app.Todomap))
+	assert.Equal(totallen+2, len(model.GetTodos()))
 
 	err = json.NewDecoder(resp.Body).Decode(&todo)
 	assert.NoError(err)
@@ -47,7 +48,7 @@ func TestTodos(t *testing.T) {
 	assert.NoError(err)
 	assert.Equal(http.StatusOK, resp.StatusCode)
 
-	todos := []*app.Todo{}
+	todos := []*model.Todo{}
 	err = json.NewDecoder(resp.Body).Decode(&todos)
 	assert.NoError(err)
 	assert.Equal(len(todos), totallen+2)
@@ -69,7 +70,7 @@ func TestChecked(t *testing.T) {
 	ts := httptest.NewServer(app.MakeHandler())
 	defer ts.Close()
 
-	var todo app.Todo
+	var todo model.Todo
 	resp, err := http.PostForm(ts.URL+"/todos", url.Values{"name": {"test todo!!!"}})
 	err = json.NewDecoder(resp.Body).Decode(&todo)
 	assert.NoError(err)
@@ -78,7 +79,8 @@ func TestChecked(t *testing.T) {
 
 	req, _ := http.NewRequest("PATCH", ts.URL+"/todos/item"+strconv.Itoa(id1), nil)
 	http.DefaultClient.Do(req)
-	assert.True(app.Todomap[id1].Completed)
+	todos := model.GetTodosMap()
+	assert.True(todos[id1].Completed)
 }
 
 func TestRemoved(t *testing.T) {
@@ -87,15 +89,15 @@ func TestRemoved(t *testing.T) {
 	ts := httptest.NewServer(app.MakeHandler())
 	defer ts.Close()
 
-	var todo app.Todo
+	var todo model.Todo
 	resp, err := http.PostForm(ts.URL+"/todos", url.Values{"name": {"test todo!!!"}})
 	err = json.NewDecoder(resp.Body).Decode(&todo)
 	assert.NoError(err)
 
 	id1 := todo.ID
-	totallen := len(app.Todomap)
+	totallen := len(model.GetTodos())
 
 	req, _ := http.NewRequest("DELETE", ts.URL+"/todos/item"+strconv.Itoa(id1), nil)
 	http.DefaultClient.Do(req)
-	assert.Equal(len(app.Todomap), totallen-1)
+	assert.Equal(len(model.GetTodos()), totallen-1)
 }
