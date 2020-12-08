@@ -1,5 +1,14 @@
 {
     "cSpell.words": [
         "myapp"
-    ]
+    ],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:go-web}/todo-project/todo.db",
+            "name": "go-todo"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
 }

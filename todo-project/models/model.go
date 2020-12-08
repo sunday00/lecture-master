@@ -1,6 +1,11 @@
-package model
+package models
 
-import "time"
+import (
+	"os"
+	"time"
+
+	"github.com/joho/godotenv"
+)
 
 type Todo struct {
 	ID        int       `json:"id"`
@@ -9,51 +14,47 @@ type Todo struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-var todomap map[int]*Todo
+type dbHandler interface {
+	getTodos() []*Todo
+	addTodo(name string) *Todo
+	getTodosMap() map[int]*Todo
+	updateTodo(id int) bool
+	removeTodo(id int) bool
+	closeDB()
+}
+
+var handler dbHandler
 
 func init() {
-	todomap = make(map[int]*Todo)
+	godotenv.Load(os.Getenv("GOPATH") + "/src/GO-WEB/todo-project/.env")
+	if os.Getenv("DB_DRIVER") == "memory" {
+		handler = newMemoryHandler()
+	} else if os.Getenv("DB_DRIVER") == "sqlite" {
+		handler = newSqliteHandler()
+	}
+
 }
 
 func GetTodos() []*Todo {
-	list := []*Todo{}
-	for _, v := range todomap {
-		list = append(list, v)
-	}
-	return list
+	return handler.getTodos()
 }
 
 func GetTodosMap() map[int]*Todo {
-	return todomap
+	return handler.getTodosMap()
 }
 
 func AddTodo(name string) *Todo {
-	id := 0
-	for _, v := range todomap {
-		if id < v.ID {
-			id = v.ID
-		}
-	}
-	id = id + 1
-	todo := &Todo{id, name, false, time.Now()}
-	todomap[id] = todo
-	return todo
+	return handler.addTodo(name)
 }
 
 func RemoveTodo(id int) bool {
-	if _, ok := todomap[id]; ok {
-		delete(todomap, id)
-		return true
-	} else {
-		return false
-	}
+	return handler.removeTodo(id)
 }
 
 func UpdateTodo(id int) bool {
-	if _, ok := todomap[id]; ok {
-		todomap[id].Completed = !todomap[id].Completed
-		return true
-	} else {
-		return false
-	}
+	return handler.updateTodo(id)
+}
+
+func CloseDB() {
+	handler.closeDB()
 }

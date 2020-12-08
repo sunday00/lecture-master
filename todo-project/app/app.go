@@ -1,7 +1,7 @@
 package app
 
 import (
-	model "go-web/todo-project/models"
+	models "go-web/todo-project/models"
 	"net/http"
 	"strconv"
 
@@ -21,15 +21,14 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getTodoListHandler(w http.ResponseWriter, r *http.Request) {
-	list := model.GetTodos()
+	list := models.GetTodos()
 	rd.JSON(w, http.StatusOK, list)
-
 }
 
 func addTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 
-	todo := model.AddTodo(name)
+	todo := models.AddTodo(name)
 	rd.JSON(w, http.StatusCreated, todo)
 }
 
@@ -37,7 +36,7 @@ func removeTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
 
-	ok := model.RemoveTodo(id)
+	ok := models.RemoveTodo(id)
 	if ok {
 		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
 	} else {
@@ -48,7 +47,7 @@ func removeTodoListHandler(w http.ResponseWriter, r *http.Request) {
 func toggleTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
-	ok := model.UpdateTodo(id)
+	ok := models.UpdateTodo(id)
 	if ok {
 		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
 	} else {
