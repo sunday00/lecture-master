@@ -1,64 +1,31 @@
 package app
 
 import (
-	models "go-web/todo-project/models"
 	"net/http"
-	"strconv"
+	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 	"github.com/unrolled/render"
+	"github.com/urfave/negroni"
 )
 
+var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 var rd *render.Render
-
-type ResponseStatus struct {
-	Success bool `json:"success"`
-	Item    int  `json:"item"`
-}
-
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "/todo.html", http.StatusTemporaryRedirect)
-}
-
-func getTodoListHandler(w http.ResponseWriter, r *http.Request) {
-	list := models.GetTodos()
-	rd.JSON(w, http.StatusOK, list)
-}
-
-func addTodoListHandler(w http.ResponseWriter, r *http.Request) {
-	name := r.FormValue("name")
-
-	todo := models.AddTodo(name)
-	rd.JSON(w, http.StatusCreated, todo)
-}
-
-func removeTodoListHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
-
-	ok := models.RemoveTodo(id)
-	if ok {
-		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
-	} else {
-		rd.JSON(w, http.StatusBadRequest, ResponseStatus{false, id})
-	}
-}
-
-func toggleTodoListHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
-	ok := models.UpdateTodo(id)
-	if ok {
-		rd.JSON(w, http.StatusOK, ResponseStatus{true, id})
-	} else {
-		rd.JSON(w, http.StatusBadRequest, ResponseStatus{false, id})
-	}
-}
 
 func MakeHandler() http.Handler {
 
 	rd = render.New()
 	r := mux.NewRouter()
+
+	// n := negroni.Classic()
+	n := negroni.New(
+		negroni.NewRecovery(),
+		negroni.NewLogger(),
+		negroni.HandlerFunc(Middlewares),
+		negroni.NewStatic(http.Dir("public")),
+	)
+	n.UseHandler(r)
 
 	r.HandleFunc("/todos", getTodoListHandler).Methods("GET")
 	r.HandleFunc("/todos", addTodoListHandler).Methods("POST")
@@ -66,5 +33,8 @@ func MakeHandler() http.Handler {
 	r.HandleFunc("/todos/item{id:[0-9]+}", toggleTodoListHandler).Methods("PATCH")
 	r.HandleFunc("/", indexHandler)
 
-	return r
+	r.HandleFunc("/auth/google/login", googleLoginHandler)
+	r.HandleFunc("/auth/google/callback", googleCallbackHandler)
+
+	return n
 }
