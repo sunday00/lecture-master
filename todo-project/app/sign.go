@@ -39,6 +39,16 @@ func init() {
 	googleOauthConfig.ClientSecret = os.Getenv("GOOGLE_SECRET_KEY")
 }
 
+var GetUserID = func(r *http.Request) string {
+	session, err := store.Get(r, "session-user")
+	userID := session.Values["user_id"]
+	if err != nil || userID == nil {
+		return ""
+	}
+
+	return userID.(string)
+}
+
 func generateStateOauthCookie(w http.ResponseWriter) string {
 	expiration := time.Now().Add(24 * time.Hour)
 	b := make([]byte, 16)

@@ -7,17 +7,19 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Todo ...
 type Todo struct {
 	ID        int       `json:"id"`
+	UserID    string    `json:"user_id"`
 	Name      string    `json:"name"`
 	Completed bool      `json:"completed"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
 type dbHandler interface {
-	getTodos() []*Todo
-	addTodo(name string) *Todo
-	getTodosMap() map[int]*Todo
+	getTodos(userID string) []*Todo
+	getTodosMap(userID string) map[int]*Todo
+	addTodo(name string, userID string) *Todo
 	updateTodo(id int) bool
 	removeTodo(id int) bool
 	closeDB()
@@ -35,26 +37,32 @@ func init() {
 
 }
 
-func GetTodos() []*Todo {
-	return handler.getTodos()
+// GetTodos ...
+func GetTodos(userID string) []*Todo {
+	return handler.getTodos(userID)
 }
 
-func GetTodosMap() map[int]*Todo {
-	return handler.getTodosMap()
+//GetTodosMap ...
+func GetTodosMap(userID string) map[int]*Todo {
+	return handler.getTodosMap(userID)
 }
 
-func AddTodo(name string) *Todo {
-	return handler.addTodo(name)
+// AddTodo ...
+func AddTodo(name string, userID string) *Todo {
+	return handler.addTodo(name, userID)
 }
 
+// RemoveTodo ...
 func RemoveTodo(id int) bool {
 	return handler.removeTodo(id)
 }
 
+// UpdateTodo ...
 func UpdateTodo(id int) bool {
 	return handler.updateTodo(id)
 }
 
+// CloseDB ...
 func CloseDB() {
 	handler.closeDB()
 }

@@ -19,14 +19,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getTodoListHandler(w http.ResponseWriter, r *http.Request) {
-	list := models.GetTodos()
+	list := models.GetTodos(GetUserID(r))
 	rd.JSON(w, http.StatusOK, list)
 }
 
 func addTodoListHandler(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
-
-	todo := models.AddTodo(name)
+	todo := models.AddTodo(name, GetUserID(r))
 	rd.JSON(w, http.StatusCreated, todo)
 }
 

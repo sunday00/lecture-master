@@ -15,17 +15,22 @@ import (
 )
 
 func TestTodos(t *testing.T) {
+
+	app.GetUserID = func(r *http.Request) string {
+		return "sunday00"
+	}
+
 	assert := assert.New(t)
 
 	ts := httptest.NewServer(app.MakeHandler())
 	defer ts.Close()
 
-	totallen := len(models.GetTodos())
+	totallen := len(models.GetTodos("sunday00"))
 
 	resp, err := http.PostForm(ts.URL+"/todos", url.Values{"name": {"test todo"}})
 	assert.NoError(err)
 	assert.Equal(http.StatusCreated, resp.StatusCode)
-	assert.Equal(totallen+1, len(models.GetTodos()))
+	assert.Equal(totallen+1, len(models.GetTodos("sunday00")))
 
 	var todo models.Todo
 	err = json.NewDecoder(resp.Body).Decode(&todo)
@@ -37,7 +42,7 @@ func TestTodos(t *testing.T) {
 	resp, err = http.PostForm(ts.URL+"/todos", url.Values{"name": {"test todo2"}})
 	assert.NoError(err)
 	assert.Equal(http.StatusCreated, resp.StatusCode)
-	assert.Equal(totallen+2, len(models.GetTodos()))
+	assert.Equal(totallen+2, len(models.GetTodos("sunday00")))
 
 	err = json.NewDecoder(resp.Body).Decode(&todo)
 	assert.NoError(err)
@@ -79,7 +84,7 @@ func TestChecked(t *testing.T) {
 
 	req, _ := http.NewRequest("PATCH", ts.URL+"/todos/item"+strconv.Itoa(id1), nil)
 	http.DefaultClient.Do(req)
-	todos := models.GetTodosMap()
+	todos := models.GetTodosMap("sunday00")
 	assert.True(todos[id1].Completed)
 }
 
@@ -95,9 +100,9 @@ func TestRemoved(t *testing.T) {
 	assert.NoError(err)
 
 	id1 := todo.ID
-	totallen := len(models.GetTodos())
+	totallen := len(models.GetTodos("sunday00"))
 
 	req, _ := http.NewRequest("DELETE", ts.URL+"/todos/item"+strconv.Itoa(id1), nil)
 	http.DefaultClient.Do(req)
-	assert.Equal(len(models.GetTodos()), totallen-1)
+	assert.Equal(len(models.GetTodos("sunday00")), totallen-1)
 }

@@ -8,19 +8,29 @@ type memoryHandler struct {
 	todomap map[int]*Todo
 }
 
-func (m *memoryHandler) getTodos() []*Todo {
+func (m *memoryHandler) getTodos(userID string) []*Todo {
 	list := []*Todo{}
 	for _, v := range m.todomap {
-		list = append(list, v)
+		if v.UserID == userID {
+			list = append(list, v)
+		}
 	}
 	return list
 }
 
-func (m *memoryHandler) getTodosMap() map[int]*Todo {
-	return m.todomap
+func (m *memoryHandler) getTodosMap(userID string) map[int]*Todo {
+	filtered := make(map[int]*Todo)
+
+	for _, v := range m.todomap {
+		if v.UserID == userID {
+			filtered[v.ID] = v
+		}
+	}
+
+	return filtered
 }
 
-func (m *memoryHandler) addTodo(name string) *Todo {
+func (m *memoryHandler) addTodo(name string, userID string) *Todo {
 	id := 0
 	for _, v := range m.todomap {
 		if id < v.ID {
@@ -28,7 +38,7 @@ func (m *memoryHandler) addTodo(name string) *Todo {
 		}
 	}
 	id = id + 1
-	todo := &Todo{id, name, false, time.Now()}
+	todo := &Todo{id, userID, name, false, time.Now()}
 	m.todomap[id] = todo
 	return todo
 }

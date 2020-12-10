@@ -13,18 +13,8 @@ func Middlewares(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) 
 	next(w, r)
 }
 
-func getUserId(r *http.Request) string {
-	session, err := store.Get(r, "session-user")
-	userID := session.Values["user_id"]
-	if err != nil || userID == nil {
-		return ""
-	}
-
-	return userID.(string)
-}
-
 func CheckSignIn(w http.ResponseWriter, r *http.Request) {
-	if getUserId(r) != "" {
+	if GetUserID(r) != "" {
 		if strings.Contains(r.URL.Path, "/sign") {
 			http.Redirect(w, r, "/todo.html", http.StatusTemporaryRedirect)
 			return

@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	// sqlite3 orm
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -12,19 +13,20 @@ type sqliteHandler struct {
 	db *sql.DB
 }
 
-func (m *sqliteHandler) getTodos() []*Todo {
+func (m *sqliteHandler) getTodos(userID string) []*Todo {
 	list := []*Todo{}
 
 	r, err := m.db.Query(`
 		SELECT 
-			id, name, completed, createdAt 
+			id, user_id, name, completed, createdAt 
 		FROM todos
-	`)
+		WHERE user_id = ?
+	`, userID)
 	defer r.Close()
 
 	for r.Next() {
 		todo := new(Todo)
-		r.Scan(&todo.ID, &todo.Name, &todo.Completed, &todo.CreatedAt)
+		r.Scan(&todo.ID, &todo.UserID, &todo.Name, &todo.Completed, &todo.CreatedAt)
 		list = append(list, todo)
 	}
 
@@ -35,32 +37,35 @@ func (m *sqliteHandler) getTodos() []*Todo {
 	return list
 }
 
-func (m *sqliteHandler) getTodosMap() map[int]*Todo {
-	list := m.getTodos()
+func (m *sqliteHandler) getTodosMap(userID string) map[int]*Todo {
+	list := m.getTodos(userID)
 	todomap := make(map[int]*Todo)
 
 	for _, l := range list {
-		var todo = &Todo{l.ID, l.Name, l.Completed, l.CreatedAt}
-		todomap[todo.ID] = todo
+		if l.UserID == userID {
+			var todo = &Todo{l.ID, l.UserID, l.Name, l.Completed, l.CreatedAt}
+			todomap[todo.ID] = todo
+		}
 	}
 
 	return todomap
 }
 
-func (m *sqliteHandler) addTodo(name string) *Todo {
+func (m *sqliteHandler) addTodo(name string, userID string) *Todo {
 	pstmt, err := m.db.Prepare(`
 		INSERT INTO todos (
-			name, completed, createdAt
+			user_id, name, completed, createdAt
 		) VALUES (
-			?, ?, datetime('now')
+			?, ?, ?, datetime('now')
 		)
 	`)
 	defer pstmt.Close()
-	result, err := pstmt.Exec(name, false)
+	result, err := pstmt.Exec(userID, name, false)
 	id, err := result.LastInsertId()
 
 	todo := new(Todo)
 	todo.ID = int(id)
+	todo.UserID = userID
 	todo.Name = name
 	todo.Completed = false
 	todo.CreatedAt = time.Now()
@@ -126,11 +131,15 @@ func newSqliteHandler() dbHandler {
 	db, err := sql.Open("sqlite3", dbname)
 	pstmt, err := db.Prepare(`
 		CREATE TABLE IF NOT EXISTS todos (
-			id			INTEGER PRIMARY KEY AUTOINCREMENT,
+			id			INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+			user_id		STRING (100) NOT NULL , 
 			name		TEXT,
 			completed	BOOLEAN,
 			createdAt	DATETIME
-		)
+		);
+		CREATE INDEX IF NOT EXISTS userIdIndexOnTodos ON todos (
+			user_id ASC 
+		);
 	`)
 
 	pstmt.Exec()
