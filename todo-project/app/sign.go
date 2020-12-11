@@ -19,7 +19,7 @@ import (
 )
 
 var googleOauthConfig = oauth2.Config{
-	RedirectURL:  "http://localhost:3001/auth/google/callback",
+	RedirectURL:  "",
 	ClientID:     "",
 	ClientSecret: "",
 	Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
@@ -35,6 +35,7 @@ type GoogleUser struct {
 
 func init() {
 	godotenv.Load()
+	googleOauthConfig.RedirectURL = os.Getenv("DOMAIN_NAME") + "/auth/google/callback"
 	googleOauthConfig.ClientID = os.Getenv("GOOGLE_CLIENT_ID")
 	googleOauthConfig.ClientSecret = os.Getenv("GOOGLE_SECRET_KEY")
 }
