@@ -1,0 +1,25 @@
+const Koa = require('koa');
+const app = new Koa();
+
+app.use((ctx, next) => {
+  if (ctx.query.auth !== '1') {
+    ctx.status = 401;
+    return;
+  }
+  next().then(() => {
+    console.log('now call next ');
+  });
+});
+
+app.use(async (ctx, next) => {
+  await next();
+  console.log('async await');
+});
+
+app.use((ctx) => {
+  ctx.body = 'hello word';
+});
+
+app.listen(4000, () => {
+  console.log('Listening to port 4000');
+});
