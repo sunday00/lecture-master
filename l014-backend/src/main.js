@@ -11,6 +11,8 @@ import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 import api from './api';
 
+// import postFactory from './factories/postsFactory'; //dev
+
 const app = new Koa();
 const router = new Router();
 
@@ -21,6 +23,7 @@ mongoose
   })
   .then(() => {
     console.info('mongoose connected');
+    // postFactory(40);
   })
   .catch((err) => {
     console.error('mongoose connection failed', err);
