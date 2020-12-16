@@ -1,17 +1,18 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
+import Header from './components/Header';
+import Content from './components/Content';
 
 function App() {
   return (
     <Grid container direction="column">
-      <Grid item>HEADER</Grid>
+      <Grid item>
+        <Header></Header>
+      </Grid>
       <Grid item container>
         <Grid item xs={false} sm={2} />
         <Grid item xs={12} sm={8}>
-          this is where the content will bethis is where the content will bethis
-          is where the content will bethis is where the content will bethis is
-          where the content will bethis is where the content will bethis is
-          where the content will be
+          <Content></Content>
         </Grid>
         <Grid item xs={false} sm={2} />
       </Grid>
