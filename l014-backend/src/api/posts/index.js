@@ -4,6 +4,8 @@ import Router from 'koa-router';
 // const postController = require('./post.controller');
 import * as postController from './post.controller.js';
 
+import checkLogin from '../../lib/checkLogin.middleware';
+
 const posts = new Router();
 // const printInfo = (ctx) => {
 //   ctx.body = {
@@ -21,11 +23,23 @@ const posts = new Router();
 // posts.patch('/:id', printInfo);
 
 posts.get('/', postController.list);
-posts.post('/', postController.write);
-posts.get('/:id', postController.checkObjectId, postController.read);
-posts.delete('/:id', postController.checkObjectId, postController.remove);
+posts.post('/', checkLogin, postController.write);
+posts.get('/:id', postController.getPostById, postController.read);
+posts.delete(
+  '/:id',
+  checkLogin,
+  postController.getPostById,
+  postController.checkOwnPost,
+  postController.remove,
+);
 // posts.put('/:id', postController.replace);
-posts.patch('/:id', postController.checkObjectId, postController.update);
+posts.patch(
+  '/:id',
+  checkLogin,
+  postController.getPostById,
+  postController.checkOwnPost,
+  postController.update,
+);
 
 // module.exports = posts;
 export default posts;

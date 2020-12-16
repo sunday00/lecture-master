@@ -2,6 +2,7 @@
 // const posts = require('./posts');
 import Router from 'koa-router';
 import posts from './posts';
+import auths from './auths';
 
 const api = new Router();
 
@@ -11,6 +12,7 @@ api.get('/test', (ctx) => {
 });
 
 api.use('/posts', posts.routes());
+api.use('/auths', auths.routes());
 
 // module.exports = api;
 export default api;

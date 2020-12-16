@@ -13,11 +13,13 @@ import api from './api';
 
 // import postFactory from './factories/postsFactory'; //dev
 
+import jwtMiddleware from './lib/jwt.middleware';
+
 const app = new Koa();
 const router = new Router();
 
 mongoose
-  .connect(process.env.M0NG0_URI, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useFindAndModify: false,
   })
@@ -50,6 +52,7 @@ router.get('/post', (ctx) => {
 router.use('/api', api.routes());
 
 app.use(bodyParser());
+app.use(jwtMiddleware);
 
 app.use(router.routes()).use(router.allowedMethods());
 
