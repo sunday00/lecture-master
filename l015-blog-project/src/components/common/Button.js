@@ -35,7 +35,7 @@ const StyledButton = styled.button`
       }
     `}
 
-    ${(props) =>
+  ${(props) =>
     props.spacing &&
     css`
       ${spacing(props.spacing)}
