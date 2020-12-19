@@ -42,23 +42,27 @@ const Footer = styled.div`
 
 const textMap = { login: 'login', register: 'register' };
 
-const AuthForm = ({ type }) => {
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
   const text = textMap[type];
   return (
     <div>
       <AuthFormBlock>
         <h3>{text}</h3>
-        <form action="">
+        <form onSubmit={onSubmit}>
           <StyledInput
             autoComplete="username"
             name="username"
             placeholder="ID"
+            onChange={onChange}
+            value={form.username}
           />
           <StyledInput
             autoComplete="new-password"
             name="password"
             placeholder="password"
             type="password"
+            onChange={onChange}
+            value={form.password}
           />
           {type === 'register' && (
             <StyledInput
@@ -66,6 +70,8 @@ const AuthForm = ({ type }) => {
               name="passwordConfirm"
               placeholder="passwordConfirm"
               type="password"
+              onChange={onChange}
+              value={form.passwordConfirm}
             />
           )}
 
