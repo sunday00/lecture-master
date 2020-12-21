@@ -1,9 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import spacing from '../../lib/styles/spacing';
 
-const StyledButton = styled.button`
+const clickable = css`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -35,15 +36,27 @@ const StyledButton = styled.button`
       }
     `}
 
-  ${(props) =>
+${(props) =>
     props.spacing &&
     css`
       ${spacing(props.spacing)}
     `}
 `;
 
+const StyledButton = styled.button`
+  ${clickable}
+`;
+
+const StyledLink = styled(Link)`
+  ${clickable}
+`;
+
 const Button = (props) => {
-  return <StyledButton {...props}></StyledButton>;
+  return props.to ? (
+    <StyledLink {...props} cyan={props.cyan ? 1 : 0} />
+  ) : (
+    <StyledButton {...props} />
+  );
 };
 
 export default Button;

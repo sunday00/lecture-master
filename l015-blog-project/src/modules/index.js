@@ -4,15 +4,17 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import auth, { authSaga } from './auth';
+import user, { userSaga } from './users';
 import loading from './loading';
 
 const rootReducer = combineReducers({
   auth,
   loading,
+  user,
 });
 
 export function* rootSaga() {
-  yield all([authSaga()]);
+  yield all([authSaga(), userSaga()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();
