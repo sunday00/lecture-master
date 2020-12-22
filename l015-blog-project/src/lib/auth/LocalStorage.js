@@ -19,3 +19,15 @@ export const get = (key, callback = null) => {
     console.error(err);
   }
 };
+
+export const del = (key, callback = null) => {
+  try {
+    localStorage.removeItem(key);
+  } catch (err) {
+    console.error(err);
+  }
+
+  if (typeof callback === 'function') {
+    callback();
+  }
+};
