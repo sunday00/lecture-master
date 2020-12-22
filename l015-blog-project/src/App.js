@@ -7,6 +7,13 @@ import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
 import store from './modules';
+import { tempSetUser, check } from './modules/users';
+import * as LocalStorage from './lib/auth/LocalStorage';
+
+LocalStorage.get('user', (user) => {
+  store.dispatch(tempSetUser(user));
+  store.dispatch(check());
+});
 
 function App() {
   return (

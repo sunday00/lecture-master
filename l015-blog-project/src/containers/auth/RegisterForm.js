@@ -4,6 +4,7 @@ import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/users';
 import { withRouter } from 'react-router-dom';
+import * as LocalStorage from '../../lib/auth/LocalStorage';
 
 const RegisterForm = ({ history }) => {
   const [error, setError] = useState(null);
@@ -31,7 +32,7 @@ const RegisterForm = ({ history }) => {
     const { username, password, passwordConfirm } = form;
 
     if ([username, password, passwordConfirm].includes('')) {
-      setError('빈 칸을모두입력하세요');
+      setError('빈 칸을 모두입력하세요');
       return;
     }
 
@@ -74,6 +75,7 @@ const RegisterForm = ({ history }) => {
       console.log('check API 성공');
       console.log(user);
       history.push('/');
+      LocalStorage.set('user', user);
     }
   }, [history, user]);
 

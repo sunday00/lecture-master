@@ -4,6 +4,7 @@ import { changeField, initializeForm, login } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { withRouter } from 'react-router-dom';
 import { check } from '../../modules/users';
+import * as LocalStorage from '../../lib/auth/LocalStorage';
 
 const LoginForm = ({ history }) => {
   const [error, setError] = useState(null);
@@ -53,6 +54,7 @@ const LoginForm = ({ history }) => {
   useEffect(() => {
     if (user) {
       history.push('/');
+      LocalStorage.set('user', user);
     }
   }, [history, user]);
 
