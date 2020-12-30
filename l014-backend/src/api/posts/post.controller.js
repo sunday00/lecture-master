@@ -1,6 +1,7 @@
 import Post from '../../models/post';
 import mongoose from 'mongoose';
 import Joi from '@hapi/joi';
+import sanitizeHtml from 'sanitize-html';
 
 const { ObjectId } = mongoose.Types;
 // export const checkObjectId = (ctx, next) => {
@@ -11,6 +12,36 @@ const { ObjectId } = mongoose.Types;
 //   }
 //   return next();
 // };
+
+const removeHtmlAndShorten = (body) => {
+  const filtered = sanitizeHtml(body, { allowedTags: [] });
+  return filtered.length < 200 ? filtered : `${filtered.slice(0, 200)}...`;
+};
+
+const sanitizeOption = {
+  allowedTags: [
+    'h1',
+    'h2',
+    'b',
+    'i',
+    'u',
+    's',
+    'p',
+    'ul',
+    'ol',
+    'li',
+    'blockquote',
+    'a',
+    'img',
+  ],
+  allowedAttributes: {
+    a: ['href', 'name', 'target'],
+    img: ['src'],
+    li: ['class'],
+  },
+  allowedSchemes: ['data', 'http'],
+};
+
 export const getPostById = async (ctx, next) => {
   const id = ctx.params.id;
   if (!ObjectId.isValid(id)) {
@@ -60,7 +91,7 @@ export const write = async (ctx) => {
   const { title, body, tags } = ctx.request.body;
   const post = new Post({
     title,
-    body,
+    body: sanitizeHtml(body, sanitizeOption),
     tags,
     user: ctx.state.user,
   });
@@ -101,11 +132,12 @@ export const list = async (ctx) => {
       // const post = p.toJSON();
       return {
         ...p,
-        body: p.body.length < 100 ? p.body : `${p.body.slice(0, 100)}...`,
+        // body: p.body.length < 100 ? p.body : `${p.body.slice(0, 100)}...`,
+        body: removeHtmlAndShorten(p.body),
       };
     });
   } catch (err) {
-    ctx.throw(500, e);
+    ctx.throw(500, err);
   }
 };
 
@@ -137,8 +169,13 @@ export const update = async (ctx) => {
     return;
   }
 
+  const nextData = { ...ctx.request.body };
+  if (nextData.body) {
+    nextData.body = sanitizeHtml(nextData.body, sanitizeOption);
+  }
+
   try {
-    const post = await Post.findByIdAndUpdate(ctx.params.id, ctx.request.body, {
+    const post = await Post.findByIdAndUpdate(ctx.params.id, nextData, {
       new: true,
     }).exec();
     console.log(post);
