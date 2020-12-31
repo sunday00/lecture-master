@@ -30,7 +30,7 @@ const PostContent = styled.div`
   color: ${palette.gray[8]};
 `;
 
-const PostViewer = ({ post, error, loading }) => {
+const PostViewer = ({ post, error, loading, actionButton }) => {
   if (error) {
     if (error.response && error.response.status === 404) {
       return (
@@ -53,6 +53,7 @@ const PostViewer = ({ post, error, loading }) => {
         <SubInfo username={user.username} publishedDate={publishedDate} />
         <Tags tags={tags} />
       </PostHead>
+      {actionButton}
       <PostContent dangerouslySetInnerHTML={{ __html: body }} />
     </PostViewerBlock>
   );
