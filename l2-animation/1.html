@@ -1,0 +1,52 @@
+<h1>basic animation</h1>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+<script src="/libs/arc.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+
+    let padding = 100;
+    let x = padding;
+    let y = padding;
+    let speed = 20;
+    let touch = 0;
+
+    function draw(){
+        ctx.clearRect(0,0,cvs1.width, cvs1.height)
+
+        ctx.beginPath();
+        ctx.arc(x,y,25,0,toRad(360));
+        ctx.fill();
+
+        if( x < cvs1.width - padding && touch === 0){
+            x += speed;
+        } else if ( y < cvs1.height - padding && (touch === 0 || touch === 1)){
+            touch = 1;
+            y += speed;
+        } else if ( x > padding && y >= cvs1.height - padding ){
+            touch = 2;
+            x -= speed;
+        } else if ( x <= padding && (touch === 2 || touch === 3) && y > padding){
+            touch = 3;
+            y -= speed;
+        } else {
+            touch = 0;
+        }
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+    
+    // canvas 애니메이션은 기본적으로 지우고 옮기고 그리고 의 반복이다.
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>

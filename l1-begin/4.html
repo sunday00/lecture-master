@@ -1,0 +1,39 @@
+<h1>draw basic shape</h1>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+<script src="/libs/arc.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+
+    // ctx.beginPath(400, 400)
+    ctx.arc(300, 200, 50, 0, toRad(360), true);
+          //중심 x, y, 반지름, 시작각, 끝각, 반시계방향?
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(700, 200, 50, 0, toRad(90), false);
+                        // 시작각은 오른쪽 90도 방향부터 시작해서 0도
+    ctx.stroke();
+    
+    ctx.beginPath();
+    ctx.moveTo(300, 500);
+    ctx.arc(300, 500, 50, toRad(30), toRad(90), false);
+    ctx.lineTo(300, 500);
+    ctx.fill();
+    // ctx.closePath();
+
+    ctx.arc(800, 500, 50, 0, toRad(360), false);
+    ctx.stroke();
+    
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>

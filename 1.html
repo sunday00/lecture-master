@@ -1,0 +1,25 @@
+<h1>SIZING</h1>
+
+<canvas class="cvs1" width="200" height="200">This browser can't support canvas tag.</canvas>
+<canvas class="cvs2" width="400" height="400" >This browser can't support canvas tag.</canvas>
+
+<script>
+
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx1 = cvs1.getContext('2d');
+
+    const cvs2 = document.querySelector('.cvs2');
+    const ctx2 = cvs2.getContext('2d');
+
+    ctx1.fillRect(0,0,100,100);
+    ctx2.fillRect(0,0,100,100);
+
+</script>
+
+<style>
+    canvas{
+        background-color: #eee;
+        width: 200px;
+        height: 200px;
+    }
+</style>

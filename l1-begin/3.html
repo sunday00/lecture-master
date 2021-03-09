@@ -1,0 +1,41 @@
+<h1>draw basic shape</h1>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+
+    ctx.beginPath();
+    ctx.moveTo(100, 100);
+    ctx.lineTo(300, 200);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(500, 100);
+    ctx.lineTo(700, 200);
+    ctx.lineTo(400, 300);
+    ctx.lineTo(500, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(800, 100);
+    ctx.lineTo(1100, 200);
+    ctx.lineTo(750, 300);
+    ctx.lineTo(800, 100);
+    ctx.fill();
+
+    ctx.closePath();
+
+    
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>

@@ -1,0 +1,32 @@
+<h1>draw basic shape</h1>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+
+    ctx.fillRect(0, 0, 100, 100);
+    // start x, y, width , height
+
+    ctx.fillStyle = 'tomato';
+    ctx.fillRect(25, 25, 100, 100);
+
+    ctx.fillStyle = 'rgba(13, 67, 145, 0.8)';
+    ctx.fillRect(50, 50, 100, 100);
+
+    ctx.clearRect(50, 50, 50, 50);
+
+    ctx.strokeRect(75,75,100,100);
+    
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>
