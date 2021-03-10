@@ -4,27 +4,10 @@
     not support
 </canvas>
 
-<canvas class="cvs2" width="1200" height="800">
-    not support
-</canvas>
 <script src="/libs/arc.js"></script>
 <script>
     const cvs1 = document.querySelector('.cvs1');
     const ctx = cvs1.getContext('2d');
-
-    // const imgEl = document.createElement('img');
-    const imgEl = new Image();
-    imgEl.src = '/rsc/php.png'
-
-    imgEl.addEventListener('load', (e) => {
-        // ctx.drawImage(imgEl, 50, 50);
-        //imgElement, offset x, y, size x, y
-
-        // ctx.drawImage(imgEl, 50, 50, 300, 140);
-
-        ctx.drawImage(imgEl, 50, 50, 300, 140, 50, 50, 300, 140);
-        //imgElement, crop x, y, w, h, offset x, t, w, h
-    });
 
     cvs1.addEventListener('click', (e) => {
         // const x = e.clientX;

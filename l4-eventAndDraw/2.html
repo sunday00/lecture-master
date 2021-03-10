@@ -1,0 +1,101 @@
+<h1>draw image via event</h1>
+
+<h2 class="mode">&#x1F589;</h2>
+<p><input type="color" class="color"></p>
+<p><button class="sticker"><img src="/rsc/php.png" alt="sticker" width="50px;"></button></p>
+
+<canvas class="cvs1" width="1200" height="800" tabindex='1'>
+    not support
+</canvas>
+
+<button class="save">save</button>
+
+<script src="/libs/arc.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    const modes = ['&#x1F589;', '&#x2710;']
+    let brush = 'circle';
+    let img;
+    let drawmode = true;
+    let size = 20;
+
+    document.querySelector('.color').addEventListener('change', (e) => {
+        ctx.fillStyle = e.target.value;
+        brush = 'brush';
+    })
+
+    document.querySelector('.sticker').addEventListener('click', (e) => {
+        brush = 'sticker';
+        img = new Image();
+        img.src = e.currentTarget.querySelector('img').src;
+    });
+
+    document.querySelector('.mode').addEventListener('click', (e) => {
+        brush = 'brush';
+    })
+
+    cvs1.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        drawmode = !drawmode;
+        document.querySelector('.mode').innerHTML = drawmode ? modes[0] : modes[1];
+    });
+
+    cvs1.addEventListener('keydown', (e) => {
+        if( e.key === '+' ) {
+            size += 2;
+        } else if (e.key === '-') {
+            size -= 2;
+        } else if (e.Key === 'Enter' ){
+            size = 20;
+        }
+    });
+
+    cvs1.addEventListener(('mousemove' || 'click'), (e) => {
+        if (!e.buttons && !e.button || e.buttons === 2) {
+            return;
+        }
+
+        const x = e.layerX;
+        const y = e.layerY;
+
+        
+
+        ctx.beginPath();
+        if(!drawmode){
+            ctx.globalCompositeOperation = 'destination-out';
+        } else {
+            ctx.globalCompositeOperation = 'source-over';
+        }
+
+        if ( brush === 'sticker' ){
+            ctx.drawImage(img, x*2, y*2, 
+                img.width * 0.3 * (size * 0.05), img.height * 0.3 * (size * 0.05));
+            return;
+        }
+
+        ctx.arc(  x*2,  y*2,  size, 0, toRad(360), false);
+        ctx.fill();
+    });
+
+    document.querySelector('.save').addEventListener('click', (e) => {
+        const url = cvs1.toDataURL('image/png');
+        let dataURL = url.replace(/^data:image\/[^;]*/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
+            // means 
+                // data:image -> data:application/octet-stream; +
+                // headers=Content-Disposition; attachment; filename=Canvas.png
+
+        const aTag = document.createElement('a');
+        aTag.download = 'from_canvas.png';
+        aTag.href = dataURL;
+        aTag.click();
+    });
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    } 
+</style>
