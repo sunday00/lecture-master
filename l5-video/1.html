@@ -1,0 +1,43 @@
+<h1>basic animation</h1>
+
+<video src="/rsc/bunny.mp4" autoplay muted loop></video>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+<script src="/libs/arc.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    const vdo = document.querySelector('video');
+
+    function render () {
+        ctx.drawImage(vdo, 0, 0, cvs1.width, cvs1.height);
+
+        ctx.font = '100px serif'
+        ctx.fillStyle = 'magenta';
+        ctx.fillText('subtitle??', 100, 200);
+
+        requestAnimationFrame(render);
+
+        //cf: ctx.getImageData(0,0,cvs1.width, cvs1.height)
+        // ctx.putImageData(imagedata, 0, 0);
+    }
+
+    vdo.addEventListener('canplaythrough', render);
+
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+
+    video {
+        position: absolute;
+        width: 0;
+        height: 0;
+    }
+</style>
