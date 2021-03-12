@@ -1,0 +1,44 @@
+<h1>rotate</h1>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+<script src="/libs/arc.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    let times = 0;
+    let size = 200;
+    let red = 255;
+    let green = 0;
+
+    function draw() {
+        // ctx.clearRect(0,0,cvs1.width, cvs1.height);
+        ctx.save();
+
+        ctx.setTransform(1,0,0,1,0,0);
+
+        ctx.translate(150, 150);
+        ctx.rotate(10 * times * Math.PI / 180);
+        ctx.translate(-150, -150);
+        times++;
+
+        ctx.strokeStyle = `rgba(${red - times/10}, ${green + times/2}, ${0}, ${1 - times / 1500})`;
+
+        ctx.strokeRect(50, 50, size + times, size + times);
+
+        ctx.restore();
+        
+        requestAnimationFrame(draw);    
+    }
+
+    draw();
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>

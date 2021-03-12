@@ -1,0 +1,36 @@
+<h1>move</h1>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+<script src="/libs/arc.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    let times = 0;
+
+    function draw() {
+        ctx.clearRect(0,0,cvs1.width, cvs1.height);
+        ctx.save();
+
+        ctx.translate(3*times, 3*times);
+        ctx.globalAlpha = 1 - 0.004 * times;
+        times += 1;
+        ctx.fillRect(50, 50, 200, 200);
+
+        ctx.restore();
+        ctx.fillRect(50,50,100,100);
+        
+        requestAnimationFrame(draw);    
+    }
+
+    draw();
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>

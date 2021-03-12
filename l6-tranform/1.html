@@ -1,0 +1,60 @@
+<h1>save and restore</h1>
+
+<canvas class="cvs1" width="1200" height="800">
+    not support
+</canvas>
+<script src="/libs/arc.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    
+    ctx.fillRect(100, 100, 200, 200);
+    ctx.fillStyle = '#fb8500';
+    ctx.fillRect(150, 150, 200, 200);
+
+    ctx.save();
+
+    ctx.fillStyle = '#023047';
+    ctx.beginPath();
+    ctx.arc(300, 300, 50, toRad(360), false);
+    ctx.fill();
+
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.arc(300, 300, 25, toRad(360), false);
+    ctx.fill();
+
+    //
+
+    ctx.fillStyle = '#8ecae6';
+    ctx.fillRect(500, 500, 300, 300);
+    ctx.save();
+
+    ctx.fillStyle = '#219ebc';
+    ctx.fillRect(550, 550, 200, 200);
+    ctx.save();
+
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = '#023047';
+    ctx.fillRect(580, 580, 140, 140);
+    
+    ctx.restore();
+
+    ctx.fillRect(620, 620, 60, 60);
+
+    ctx.restore();
+
+    ctx.fillRect(640, 640, 20, 20);
+
+
+
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>
