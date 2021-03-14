@@ -1,0 +1,29 @@
+<h1>interaction</h1>
+
+<canvas class="cvs1" width="1200" height="800" tabindex="1">
+    not support
+</canvas>
+
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    let size = 200;
+
+    ctx.fillStyle = 'purple';
+    ctx.fillRect(cvs1.width/2 - size/2, cvs1.height/2 - size/2 , 200, 200); 
+    
+    function clickHandler (e) {
+        // console.log(e.clientX, e.clientY);
+        console.log(e.layerX, e.layerY);
+    }
+
+    cvs1.addEventListener('click', clickHandler);
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>

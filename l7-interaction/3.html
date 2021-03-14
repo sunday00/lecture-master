@@ -1,0 +1,67 @@
+<h1>interaction</h1>
+
+<canvas class="cvs1" width="1200" height="800" tabindex="1">
+    not support
+</canvas>
+<script src="/libs/random.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    const boxes = [];
+    const mousePos = {x:0, y:0};
+
+    class Box {
+        index;
+        size = rand(100, 200);
+        r = rand(10, 255);
+        g = rand(10, 255);
+        b = rand(10, 255);
+        alpha = rand(1, 10)/10;
+        color = `rgba(${this.r},${this.g},${this.b}, ${this.alpha})`
+        offsetX = rand(0, cvs1.width - this.size);
+        offsetY = rand(0, cvs1.height - this.size);
+        
+        constructor(index, offsetX = this.offsetX, offsetY = this.offsetY, size=this.size){
+            this.index = index;
+            ctx.fillStyle = this.color;
+            ctx.fillRect(offsetX, offsetY, size, size);
+            ctx.save();
+            ctx.fillStyle = this.alpha > 0.5 && this.r+this.g+this.b < 380 ? 'white' : 'black';
+            ctx.font = 'normal 30px sans-serif';
+            ctx.fillText(this.index, offsetX+30, offsetY+60);
+            ctx.restore();
+        }
+    }
+
+    for( let i=0; i<10; i++ ){
+        boxes.push(new Box(i));
+    }
+
+    cvs1.addEventListener('click', e => {
+        mousePos.x = e.layerX*2;
+        mousePos.y = e.layerY*2;
+        let selected;
+
+        boxes.forEach((b, i) => {
+            if( 
+                b.offsetX <= mousePos.x && 
+                mousePos.x <= b.offsetX + b.size && 
+                b.offsetY <= mousePos.y && 
+                mousePos.y <= b.offsetY + b.size 
+            ){
+                selected = b;
+            }
+        });
+
+        console.log(selected.index);
+    });
+    
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>

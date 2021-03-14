@@ -1,0 +1,41 @@
+<h1>interaction</h1>
+
+<canvas class="cvs1" width="1200" height="800" tabindex="1">
+    not support
+</canvas>
+<script src="/libs/random.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+
+    function clickHandler (e) {
+        console.log(e.layerX, e.layerY);
+    }
+
+    cvs1.addEventListener('click', clickHandler);
+
+    class Box {
+        size = rand(10, 200);
+        color = `rgba(${rand(10, 255)},${rand(10, 255)},${rand(10, 255)}, ${rand(1, 10)/10})`
+        offsetX = rand(0, cvs1.width - this.size);
+        offsetY = rand(0, cvs1.height - this.size);
+        
+        constructor(offsetX = this.offsetX, offsetY = this.offsetY, size=this.size){
+            ctx.fillStyle = this.color;
+            ctx.fillRect(offsetX, offsetY, size, size);
+        }
+    }
+
+    const itv = setInterval(() => {
+        new Box();
+    }, 1);
+
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>
