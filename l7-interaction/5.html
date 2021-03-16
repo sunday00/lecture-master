@@ -1,0 +1,84 @@
+<h1>interaction</h1>
+
+<canvas class="cvs1" width="1200" height="800" tabindex="1">
+    not support
+</canvas>
+<script src="/libs/random.js"></script>
+<script src="/libs/components.js"></script>
+<script>
+    const cvs1 = document.querySelector('.cvs1');
+    const ctx = cvs1.getContext('2d');
+    const boxes = [];
+    let panel;
+    const mousePos = {x:0, y:0};
+
+    let isStop = false;
+
+    for( let i=0; i<10; i++ ){
+        boxes.push(new Box(i));
+    }
+
+    cvs1.addEventListener('click', e => {
+        mousePos.x = e.layerX*2;
+        mousePos.y = e.layerY*2;
+        let selected;
+
+        boxes.forEach((b, i) => {
+            if( 
+                b.offsetX <= mousePos.x && 
+                mousePos.x <= b.offsetX + b.size && 
+                b.offsetY <= mousePos.y && 
+                mousePos.y <= b.offsetY + b.size 
+            ){
+                selected = b;
+            }
+        });
+
+        if(selected){
+            console.log(selected.index);
+            panel = new Panel(selected.index);
+            isStop = true;
+        } else if( isStop ) {
+            panel = null; 
+            isStop = false;
+            rerender();
+        }
+        
+    });
+
+    function rerender () {
+        ctx.clearRect(0,0, cvs1.width, cvs1.height);
+
+        boxes.forEach((b, i) => {
+            b.offsetX += b.speedX * b.direcX;
+            b.offsetY += b.speedY * b.direcY;
+
+            if( b.offsetX + b.size >= cvs1.width || b.offsetX <= 0 ){
+                b.resetMoveX();
+            }
+
+            if( b.offsetY + b.size >= cvs1.height || b.offsetY <= 0 ){
+                b.resetMoveY();
+            }
+
+            b.draw();
+        });
+
+        panel && panel.draw();
+
+        if( !isStop ){
+            requestAnimationFrame(rerender);
+        }
+    }
+
+    rerender();
+    
+</script>
+
+<style>
+    .cvs1 {
+        background-color: #eee;
+        width: 600px;
+        height: 400px;
+    }
+</style>
