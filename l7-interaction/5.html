@@ -39,9 +39,9 @@
             panel = new Panel(selected.index);
             isStop = true;
         } else if( isStop ) {
+            panel.scale = 0;
             panel = null; 
             isStop = false;
-            rerender();
         }
         
     });
@@ -50,25 +50,28 @@
         ctx.clearRect(0,0, cvs1.width, cvs1.height);
 
         boxes.forEach((b, i) => {
-            b.offsetX += b.speedX * b.direcX;
-            b.offsetY += b.speedY * b.direcY;
+            if(!isStop){
+                b.offsetX += b.speedX * b.direcX;
+                b.offsetY += b.speedY * b.direcY;
 
-            if( b.offsetX + b.size >= cvs1.width || b.offsetX <= 0 ){
-                b.resetMoveX();
-            }
+                if( b.offsetX + b.size >= cvs1.width || b.offsetX <= 0 ){
+                    b.resetMoveX();
+                }
 
-            if( b.offsetY + b.size >= cvs1.height || b.offsetY <= 0 ){
-                b.resetMoveY();
+                if( b.offsetY + b.size >= cvs1.height || b.offsetY <= 0 ){
+                    b.resetMoveY();
+                }
             }
 
             b.draw();
         });
 
-        panel && panel.draw();
-
-        if( !isStop ){
-            requestAnimationFrame(rerender);
+        if( isStop ){
+            panel.scale = panel.scale < 0.995 ? panel.scale + (1 - panel.scale) * 0.1 : 1;
+            panel.draw();
         }
+
+        requestAnimationFrame(rerender);
     }
 
     rerender();
