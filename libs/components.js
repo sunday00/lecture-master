@@ -45,12 +45,13 @@ class Box {
 
 class Panel {
     index;
-    size = 300;
+    size = 500;
     // color = `#fff000`;
     color = 'rgba(255, 200, 0, 0.8)';
     offsetX = cvs1.width / 2;
     offsetY = cvs1.height / 2 ;
     scale = 0;
+    degree = 0;
 
     constructor(index, offsetX = this.offsetX, offsetY = this.offsetY, size=this.size){
         this.index = index;
@@ -64,6 +65,7 @@ class Panel {
 
         ctx.translate(this.offsetX, this.offsetY);
         ctx.scale(this.scale, this.scale);
+        ctx.rotate(toRad(this.degree));
         ctx.translate(-this.offsetX, -this.offsetY);
 
         ctx.fillStyle = this.color;

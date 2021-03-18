@@ -5,14 +5,17 @@
 </canvas>
 <script src="/libs/random.js"></script>
 <script src="/libs/components.js"></script>
+<script src="/libs/arc.js"></script>
 <script>
     const cvs1 = document.querySelector('.cvs1');
     const ctx = cvs1.getContext('2d');
     const boxes = [];
+    let selected;
     let panel;
-    const mousePos = {x:0, y:0};
+    let mousePos = {x:undefined, y:undefined};
 
     let isStop = false;
+    let reqAniId;
 
     for( let i=0; i<10; i++ ){
         boxes.push(new Box(i));
@@ -21,8 +24,7 @@
     cvs1.addEventListener('click', e => {
         mousePos.x = e.layerX*2;
         mousePos.y = e.layerY*2;
-        let selected;
-
+        
         boxes.forEach((b, i) => {
             if( 
                 b.offsetX <= mousePos.x && 
@@ -37,11 +39,15 @@
         if(selected){
             console.log(selected.index);
             panel = new Panel(selected.index);
+            if(isStop){
+                rerender();
+            }
             isStop = true;
         } else if( isStop ) {
             panel.scale = 0;
             panel = null; 
             isStop = false;
+            rerender();
         }
         
     });
@@ -68,10 +74,19 @@
 
         if( isStop ){
             panel.scale = panel.scale < 0.995 ? panel.scale + (1 - panel.scale) * 0.1 : 1;
+            panel.degree = panel.scale * 720;
+
             panel.draw();
         }
 
-        requestAnimationFrame(rerender);
+        reqAniId = requestAnimationFrame(rerender);
+
+        if( isStop && panel && panel.scale === 1){
+            mousePos = {x:undefined, y:undefined}
+            selected = null;
+
+            cancelAnimationFrame(reqAniId);
+        }
     }
 
     rerender();
