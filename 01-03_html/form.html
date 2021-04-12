@@ -37,6 +37,42 @@
     </tbody>
   </table>
 
+  <section class="inputs">
+    <form action="">
+      <input type="color">
+      <input type="range" min="1" max="1000" value="750">
+      <input type="number" step="7">
+      <input type="url" />
+      <input type="button" value="not">
+      <button type="button">NOT</button>
+      <input type="submit" value="sbm">
+      <button type="submit">SBM</button>
+    </form>
+  </section>
+
+  <script>
+    document.querySelector('.inputs [type="range"]').addEventListener('change', (e) => {
+      console.log(e.target.value);
+    });
+  </script>
+
+  <section class="styled">
+    <h1>Now Should Re Learn...</h1>
+    <article>
+      <p>Hello style...</p>
+    </article>
+  </section>
+
+  <style>
+    .styled h1 {
+      text-decoration: tomato underline wavy;
+    }
+
+    .styled p:first-child {
+      text-decoration: gold line-through;
+    }
+  </style>
+
 </body>
 
 </html>

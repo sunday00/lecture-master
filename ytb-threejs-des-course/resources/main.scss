@@ -1,0 +1,27 @@
+html,
+body,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+h1 {
+  position: absolute;
+  top: 45vh;
+  left: 10rem;
+  border: 3px solid;
+  padding: 1rem;
+  span {
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+  }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p id="result"></p>
+
+  <script>
+    const result = document.querySelector("#result");
+
+    let increase = Math.PI * 2 / 100;
+    let cur = 0;
+    setInterval(() => {
+      result.innerHTML = Math.sin(cur) / 2 + 0.5;
+      cur += increase;
+    }, 100);
+
+  </script>
+</body>
+
+</html>
