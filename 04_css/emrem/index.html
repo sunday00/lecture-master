@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>em/rem</title>
+  <style>
+    h2 {
+      font-size: 2em;
+    }
+
+    p {
+      font-size: 1rem;
+      /* font-size: 1em; */
+    }
+
+    article {
+      font-size: 20px;
+    }
+
+    article>ul>li:first-child * {
+      font-size: 1.5em;
+    }
+
+    article>ul>li:nth-child(2) * {
+      font-size: 0.5em;
+    }
+
+    article>ul>li:nth-child(3) * {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Lorem, ipsum dolor.</h1>
+
+  <section>
+    <article>
+      <h2>h2</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur commodi aliquam maiores atque porro eligendi
+        molestias blanditiis, quam quidem dignissimos vel voluptatum obcaecati doloribus, tempore at vero similique
+        dicta! Doloribus.</p>
+
+      <ul>
+        <li>js
+          <ul>
+            <li>node
+              <ul>
+                <li>npm</li>
+                <li>nvm</li>
+                <li>web-framework
+                  <ul>
+                    <li>express</li>
+                    <li>koa</li>
+                    <li>nest</li>
+                    <li>adonis</li>
+                    <li>restify</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>jQuery</li>
+            <li>vanilla</li>
+            <li>react</li>
+          </ul>
+        </li>
+        <li>php
+          <ul>
+            <li>code-igniter</li>
+            <li>phalcon</li>
+            <li>laravel</li>
+            <li>yii</li>
+            <li>symphon
+              <ul>
+                <li>dumper</li>
+                <li>composer</li>
+                <li>x-debug</li>
+                <li>phpunit</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>java
+          <ul>
+            <li>spring</li>
+            <li>spring-boot</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <script>
+    let size = 10;
+    let riseFonts = setInterval(() => {
+      document.querySelector('article').style.fontSize = size + 'px';
+      size++;
+
+      if (size > 50) clearInterval(riseFonts);
+    }, 200);
+
+  </script>
+</body>
+
+</html>
