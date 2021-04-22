@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .circle {
+      width: 10rem;
+      height: 10rem;
+      background-color: rgb(129, 58, 129);
+      /* transition: background-color 1s; */
+      transition: 1s 1s;
+    }
+
+    .circle:hover {
+      background-color: cadetblue;
+      border-radius: 50%;
+    }
+
+    section {
+      background-color: #151b29;
+    }
+
+    button {
+      background-color: #151b29;
+      color: #ffa260;
+      border: 2px solid;
+      padding: 1rem 2rem;
+      margin: 1rem;
+      outline: none;
+      transition: 100ms;
+    }
+
+    button:hover {
+      border-color: #f1ff5c;
+      color: white;
+      box-shadow: 0 0.5em 0.5em -0.4em #f1ff5c;
+      transform: translateY(-0.5em);
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translateY(0em);
+      transition: 20ms;
+    }
+
+    section:nth-child(3) {
+      background-color: wheat;
+    }
+
+    p input {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Transition</h1>
+  <section>
+    <div class="circle"></div>
+
+    <button>HOVER ME</button>
+  </section>
+
+  <section>
+    <p> popup/banner <input type="number"></p>
+    <p> contents <input type="number"></p>
+    <p> menu <input type="number"></p>
+    <p> privacy <input type="number"></p>
+    <p> func <input type="number"></p>
+    <p> design <input type="number"></p>
+    <p> etc <input type="number"></p>
+  </section>
+</body>
+
+</html>
