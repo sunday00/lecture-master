@@ -37,9 +37,11 @@ export class Dialog {
 
     this.centerPos = this.pos.clone().add(this.mousePos);
 
-    ctx.beginPath();
-    ctx.fillStyle = "#f4e55a";
-    ctx.fillRect(this.pos.x, this.pos.y, WIDTH, HEIGHT);
+    // ctx.beginPath();
+    // ctx.fillStyle = "#f4e55a";
+    // ctx.fillRect(this.pos.x, this.pos.y, WIDTH, HEIGHT);
+    this.swingDrag(ctx);
+    this.prevPos = this.pos.clone();
   }
 
   down(point) {
@@ -48,6 +50,12 @@ export class Dialog {
       this.startPos = this.pos.clone();
       this.downPos = point.clone();
       this.mousePos = point.clone().subtract(this.pos);
+
+      const xRatioValue = this.mousePos.x / WIDTH;
+      this.origin.x = WIDTH * xRatioValue;
+      this.origin.y = (HEIGHT * this.mousePos.y) / HEIGHT;
+
+      this.sideValue = xRatioValue - 0.5;
 
       return this;
     } else {
@@ -63,5 +71,27 @@ export class Dialog {
 
   up() {
     this.isDown = false;
+  }
+
+  swingDrag(ctx) {
+    const dx = this.pos.x - this.prevPos.x;
+    const speedX = Math.abs(dx) / FPS;
+    const speed = Math.min(Math.max(speedX, 0), 1);
+
+    let rotation = (MAX_ANGLE / 1) * speed;
+    rotation = rotation * (dx > 0 ? 1 : -1) - this.sideValue;
+
+    this.rotation += (rotation - this.rotation) * ROTATE_SPEED;
+
+    const tmpPos = this.pos.clone().add(this.origin);
+    ctx.save();
+
+    ctx.translate(tmpPos.x, tmpPos.y);
+    ctx.rotate((this.rotation * Math.PI) / 180);
+    ctx.beginPath();
+    ctx.fillStyle = `#f4e55a`;
+    ctx.fillRect(-this.origin.x, -this.origin.y, WIDTH, HEIGHT);
+
+    ctx.restore();
   }
 }

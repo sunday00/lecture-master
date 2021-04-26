@@ -11,7 +11,7 @@ class App {
     this.curItem = null;
 
     this.items = [];
-    this.total = 1;
+    this.total = 5;
 
     /**
      * FIXME: code here
