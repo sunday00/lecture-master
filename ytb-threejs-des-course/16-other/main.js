@@ -21,6 +21,8 @@ let mouse = {
 };
 let raycaster;
 
+let guiControls;
+
 init();
 
 function init() {
@@ -32,7 +34,7 @@ function init() {
   camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
   // camera.position.x = 700;
   // camera.position.y = 200;
-  camera.position.z = 2.5;
+  camera.position.z = 6;
 
   scene = new THREE.Scene();
 
@@ -44,7 +46,7 @@ function init() {
    * core shapes
    */
   // FIXME:: here is what I make...
-  geometry[0] = new THREE.PlaneGeometry(5, 5, 10, 10);
+  geometry[0] = new THREE.PlaneGeometry(24, 24, 27, 27);
 
   // material[0] = new THREE.MeshNormalMaterial();
   material[0] = new THREE.MeshPhongMaterial({
@@ -55,6 +57,10 @@ function init() {
   });
 
   mesh[0] = new THREE.Mesh(geometry[0], material[0]);
+
+  mesh[0].rotation.x -= 120;
+  mesh[0].rotation.y -= 120;
+
   mesh[0].castShadow = true;
 
   // const planePositionArray = mesh[0].geometry.attributes.position.array;
@@ -73,7 +79,7 @@ function init() {
   light[0] = new THREE.DirectionalLight(0xffffff, 1);
   light[1] = new THREE.PointLight(0xff0000, 10, 100);
 
-  light[0].position.set(0, 0, 1);
+  light[0].position.set(2, 2, 5);
   light[1].position.set(0, 0, -1);
 
   scene.add(light[0]);
@@ -98,15 +104,22 @@ function init() {
   controls = new OrbitControls(camera, renderer.domElement);
 
   // FIXME:
-  let guiControls = new (function () {
-    this.width = 5;
-    this.height = 5;
-    this.widthSeg = 10;
-    this.heightSeg = 10;
-  })();
-  let datGui = new dat.GUI();
+  guiControls = new (function () {
+    this.width = 24;
+    this.height = 24;
+    this.widthSeg = 27;
+    this.heightSeg = 27;
 
-  let datGui1 = datGui.addFolder("size");
+    this.r = 10;
+    this.g = 0;
+    this.b = 0;
+  })();
+  // TOGGLE: comment
+  // INFO: gui state
+  // let datGui = new dat.GUI();
+
+  // TOGGLE: comment
+  // let datGui1 = datGui.addFolder("size");
   function handleChangeSize(v) {
     mesh[0].geometry.dispose();
     mesh[0].geometry = geometry[0] = new THREE.PlaneGeometry(
@@ -116,13 +129,19 @@ function init() {
       guiControls.heightSeg
     );
     const planePositionArray = mesh[0].geometry.attributes.position.array;
-    for (let i = 0; i < planePositionArray.length; i += 3) {
-      const x = planePositionArray[i];
-      const y = planePositionArray[i + 1];
-      const z = planePositionArray[i + 2];
+    mesh[0].geometry.attributes.position.randomValue = [];
+    for (let i = 0; i < planePositionArray.length; i++) {
+      if (i % 3 === 0) {
+        const x = planePositionArray[i];
+        const y = planePositionArray[i + 1];
+        const z = planePositionArray[i + 2];
 
-      planePositionArray[i + 2] = z + Math.random();
+        planePositionArray[i + 2] = z + Math.random();
+      }
+      mesh[0].geometry.attributes.position.randomValue.push(Math.random());
     }
+
+    mesh[0].geometry.attributes.position.originalPosition = planePositionArray;
 
     const colors = [];
     for (let i = 0; i < mesh[0].geometry.attributes.position.count; i++) {
@@ -134,12 +153,19 @@ function init() {
       new THREE.BufferAttribute(new Float32Array(colors), 3)
     );
   }
-  datGui1.add(guiControls, "width", 1, 30).onChange(handleChangeSize);
-  datGui1.add(guiControls, "height", 1, 30).onChange(handleChangeSize);
-  datGui1.add(guiControls, "widthSeg", 1, 30).onChange(handleChangeSize);
-  datGui1.add(guiControls, "heightSeg", 1, 30).onChange(handleChangeSize);
+  // TOGGLE: comment
+  // datGui1.add(guiControls, "width", 1, 30).onChange(handleChangeSize);
+  // datGui1.add(guiControls, "height", 1, 30).onChange(handleChangeSize);
+  // datGui1.add(guiControls, "widthSeg", 1, 30).onChange(handleChangeSize);
+  // datGui1.add(guiControls, "heightSeg", 1, 30).onChange(handleChangeSize);
+  // datGui1.open();
 
-  datGui1.open();
+  // TOGGLE: comment
+  // let datGui2 = datGui.addFolder("color");
+  // datGui2.add(guiControls, "r", 0, 10);
+  // datGui2.add(guiControls, "g", 0, 10);
+  // datGui2.add(guiControls, "b", 0, 10);
+  // datGui2.open();
 
   handleChangeSize(null);
   scene.add(mesh[0]);
@@ -151,8 +177,18 @@ function init() {
 // FIXME:
 function animation(time) {
   renderer.render(scene, camera);
-
-  mesh[0].rotation.z += 0.01;
+  // if ((time * 1000) % 2 === 0) return;
+  // mesh[0].rotation.z += 0.01;
+  const planePosition = mesh[0].geometry.attributes.position;
+  for (let i = 0; i < planePosition.array.length; i++) {
+    planePosition.array[i] =
+      planePosition.originalPosition[i] +
+      Math.cos(time * 0.01 + planePosition.randomValue[i]) * 0.003;
+    planePosition.array[i + 1] =
+      planePosition.originalPosition[i + 1] +
+      Math.sin(time * 0.01 + planePosition.randomValue[i + 1]) * 0.003;
+  }
+  planePosition.needsUpdate = true;
 
   raycaster.setFromCamera(mouse, camera);
   const interSects = raycaster.intersectObject(mesh[0]);
@@ -160,23 +196,36 @@ function animation(time) {
   if (interSects.length > 0) {
     const { color } = interSects[0].object.geometry.attributes;
 
-    const r = 1;
-    const g = 0;
-    const b = 0;
+    const initialColor = {
+      r: 0.5,
+      g: 0.7,
+      b: 0.5,
+    };
 
-    color.setX(interSects[0].face.a, r);
-    color.setY(interSects[0].face.a, g);
-    color.setZ(interSects[0].face.a, b);
+    const hoverColor = {
+      r: guiControls?.r * 0.1,
+      g: guiControls?.g * 0.1,
+      b: guiControls?.b * 0.1,
+    };
+    gsap.to(hoverColor, {
+      ...initialColor,
+      duration: 1,
+      onUpdate: () => {
+        color.setX(interSects[0].face.a, hoverColor.r);
+        color.setY(interSects[0].face.a, hoverColor.g);
+        color.setZ(interSects[0].face.a, hoverColor.b);
 
-    color.setX(interSects[0].face.b, r);
-    color.setY(interSects[0].face.b, g);
-    color.setZ(interSects[0].face.b, b);
+        color.setX(interSects[0].face.b, hoverColor.r);
+        color.setY(interSects[0].face.b, hoverColor.g);
+        color.setZ(interSects[0].face.b, hoverColor.b);
 
-    color.setX(interSects[0].face.c, r);
-    color.setY(interSects[0].face.c, g);
-    color.setZ(interSects[0].face.c, b);
+        color.setX(interSects[0].face.c, hoverColor.r);
+        color.setY(interSects[0].face.c, hoverColor.g);
+        color.setZ(interSects[0].face.c, hoverColor.b);
 
-    color.needsUpdate = true;
+        color.needsUpdate = true;
+      },
+    });
   }
 }
 

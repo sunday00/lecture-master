@@ -7,12 +7,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>THREE BASIC</title>
   <link rel="stylesheet" href="/lib/dist/main.css">
+  <style>
+    .main {
+      position: absolute;
+      color: white;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main p {
+      font-size: 2rem;
+    }
+
+    button {
+      background-color: transparent;
+      border: 2px solid white;
+      outline: none;
+      padding: 1em 2em;
+      border-radius: 4px;
+      color: white;
+      box-shadow: 0 2px 3px yellow;
+      transition: * 1s;
+    }
+
+    button:active {
+      margin-top: 2px;
+      box-shadow: 0 0;
+    }
+  </style>
 </head>
 
 <body>
-
+  <section class="main">
+    <h1>Alive...</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quo!</p>
+    <button>About</button>
+  </section>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.5/dat.gui.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
   <script src="/lib/math.js"></script>
   <script type="module" src="/16-other/main.js"></script>
 </body>
