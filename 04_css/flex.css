@@ -29,3 +29,32 @@
   /* align-self: flex-start; */
   flex-grow: 1;
 }
+
+main,
+.main2 {
+  border: 1px solid gold;
+  height: 250px;
+  display: flex;
+}
+
+main section {
+  background-color: blueviolet;
+  border: 1px solid whitesmoke;
+  flex: 1 2 300px;
+}
+
+main section.maincontent {
+  background-color: rgb(43, 189, 226);
+  flex: 2 1 800px;
+}
+
+.main2 section {
+  background-color: blueviolet;
+  border: 1px solid whitesmoke;
+  flex: 1 2 300px;
+}
+
+.main2 section.maincontent {
+  background-color: rgb(43, 189, 226);
+  flex: 2 1 600px;
+}
