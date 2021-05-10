@@ -10,6 +10,17 @@ namespace App\Controller;
  */
 class BlogController extends AppController
 {
+
+    /**
+     * Special Home method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function home()
+    {
+        $this->viewBuilder()->setLayout('blog');
+    }
+
     /**
      * Index method
      *
