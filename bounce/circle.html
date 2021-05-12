@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>path</title>
+  <style>
+    svg {
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="viewBox">
+    viewBox :
+    <input type="number" class="viewB" id="0" value="0">
+    <input type="number" class="viewB" id="1" value="0">
+    <input type="number" class="viewB" id="2" value="100">
+    <input type="number" class="viewB" id="3" value="100">
+  </form>
+
+  <form id="svgControl">
+    cx: <input type="number" class="con" id="cx" value="50">
+    cy: <input type="number" class="con" id="cy" value="50">
+    r: <input type="number" class="con" id="r" value="25">
+  </form>
+
+  <svg width="100" height="100" viewBox="0 0 100 100">
+
+    <circle cx="50" cy="50" r="25" fill="red" />
+
+  </svg>
+
+  <script>
+    document.querySelectorAll('#svgControl input').forEach((i) => {
+      i.addEventListener('change', (e) => {
+        document.querySelector('svg circle')[e.target.id].baseVal.value
+          = e.target.value;
+      })
+    });
+
+    document.querySelectorAll('#viewBox input').forEach((i) => {
+      i.addEventListener('change', (e) => {
+        const vvv = document.querySelectorAll('.viewB');
+        const baseVal = document.querySelector('svg').viewBox.baseVal;
+        baseVal.x = vvv[0].value;
+        baseVal.y = vvv[1].value;
+        baseVal.width = vvv[2].value;
+        baseVal.height = vvv[3].value;
+      })
+    })
+  </script>
+</body>
+
+</html>

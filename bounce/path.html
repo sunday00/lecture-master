@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>path</title>
+</head>
+
+<body>
+  <svg width="300" height="300" viewBox="-150 -150 300 300">
+    <defs>
+      <path id="branch" d="
+        M    0    0 L      0 -140
+        M    0  -18 L    -20  -32
+        M    0  -18 L     20  -32
+        M    0  -40 L    -40  -54
+        M    0  -40 L     30  -54
+        M    0  -60 L    -50  -74
+        M    0  -60 L     20  -74
+        M    0  -80 L    -40  -94
+        M    0  -80 L     40 -104
+        M    0 -100 L    -50 -114
+        M    0 -100 L     40 -124
+        " stroke="#e5c39c" stroke-width="8" />
+      <!-- M은 절대좌표로 이동, m은 상대이동 -->
+      <!-- L은 마지막 동작지점에서 xy 방향으로 라인을 그린다.-->
+    </defs>
+
+    <use href="#branch" />
+    <use href="#branch" transform="rotate(60)" />
+    <use href="#branch" transform="rotate(-60)" />
+    <use href="#branch" transform="rotate(120)" />
+    <use href="#branch" transform="rotate(-120)" />
+    <use href="#branch" transform="rotate(180)" />
+  </svg>
+
+  <svg width="300" height="300" viewBox="-150 -150 300 300">
+    <defs>
+      <path id="st-line" d="
+        M 0 0 H  150
+        M 0 0 V  150
+        M 0 0 H -150
+        M 0 0 V -150
+      " stroke="#dd33ee" stroke-width="5" />
+    </defs>
+
+    <use href="#st-line" />
+    <use href="#st-line" transform="rotate(45)" />
+  </svg>
+
+  <br />
+
+  <svg width="150" height="150">
+    <path d="
+      M 30 30 H 120 
+      V 120 
+      H 30 
+      L 10 50
+    " fill="none" stroke="#dd33ee" stroke-width="5" />
+  </svg>
+  <svg width="150" height="150">
+    <path d="
+      M 30 30 H 120 
+      V 120 
+      H 30 
+      L 10 50
+      Z
+    " fill="none" stroke="#dd33ee" stroke-width="5" />
+  </svg>
+  <svg width="150" height="150">
+    <path d="
+      M 30 30 H 120 
+      V 120 
+      H 30 
+      L 10 50
+      Z
+    " stroke="#dd33ee" stroke-width="5" fill="blue" />
+  </svg>
+  <svg width="150" height="150">
+    <path d="
+      M 30 30 H 120 
+      V 120 
+      H 30 
+      L 10 50
+      Z
+    " stroke="#dd33ee" stroke-width="5" />
+  </svg>
+
+  <!-- Z는 자동으로 첫점을 향한 직선으로 해당 path를 닫음. -->
+  <!-- fill은 디폴트가 검정채우기. 따라서 안채우기가 디폴트가 아님. -->
+
+  <svg width="150" height="150">
+    <path d="
+      M 30 30 h 90 
+      v 90 
+      h -90 
+      l -20 -70
+      Z
+    " fill="none" stroke="#dd33ee" stroke-width="5" />
+  </svg>
+
+</body>
+
+</html>

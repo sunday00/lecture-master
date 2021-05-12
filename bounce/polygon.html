@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>path</title>
+  <style>
+    svg {
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="viewBox">
+    viewBox :
+    <input type="number" class="viewB" id="0" value="0">
+    <input type="number" class="viewB" id="1" value="0">
+    <input type="number" class="viewB" id="2" value="100">
+    <input type="number" class="viewB" id="3" value="100">
+  </form>
+
+  <form id="svgControl">
+    points
+    <input type="text" class="con" value="0,0">
+    <input type="text" class="con" value="0,120">
+    <input type="text" class="con" value="120,120">
+  </form>
+
+  <p>
+    <button id="subPol">-</button>
+    <button id="addPol">+</button>
+  </p>
+
+  <svg width="200" height="200" viewBox="0 0 200 200">
+
+    <polygon points="0,0 0,120 120,120" fill="tomato" />
+
+  </svg>
+
+  <script>
+    const handlePolygonChange = (e, idx) => {
+      const xy = e.target.value.split(',');
+
+      if (!document.querySelector('svg polygon').points[idx]) {
+        const point = document.querySelector('svg').createSVGPoint();
+        point.x = 70;
+        point.y = 70;
+        document.querySelector('svg polygon').points.appendItem(point);
+      }
+
+      document.querySelector('svg polygon').points[idx].x = xy[0];
+      document.querySelector('svg polygon').points[idx].y = xy[1];
+    }
+
+    document.querySelectorAll('#svgControl input').forEach((i, idx) => {
+      i.addEventListener('change', (e) => handlePolygonChange(e, idx))
+    });
+
+    document.querySelectorAll('#viewBox input').forEach((i) => {
+      i.addEventListener('change', (e) => {
+        const vvv = document.querySelectorAll('.viewB');
+        const baseVal = document.querySelector('svg').viewBox.baseVal;
+        baseVal.x = vvv[0].value;
+        baseVal.y = vvv[1].value;
+        baseVal.width = vvv[2].value;
+        baseVal.height = vvv[3].value;
+      })
+    })
+
+    document.querySelector('button#addPol').addEventListener('click', (e) => {
+      const el = document.createElement('input');
+      const len = document.querySelectorAll('#svgControl input').length;
+      el.type = 'text';
+      el.className = 'con';
+      el.value = '70,70';
+
+      document.querySelector('#svgControl').appendChild(el);
+
+      el.addEventListener('change', (e) => handlePolygonChange(e, len));
+    })
+  </script>
+</body>
+
+</html>

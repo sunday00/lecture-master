@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3dimension bezier</title>
+  <style>
+    svg {
+      border: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="300" height="300" viewBox="-150 -150 300 300">
+
+    <path stroke-width="3" stroke="forestgreen" fill="none"></path>
+
+    <circle r="6" fill="blue" draggable="true" />
+    <circle r="6" fill="red" draggable="true" />
+    <circle r="6" fill="red" draggable="true" />
+    <circle r="6" fill="blue" draggable="true" />
+    <circle r="6" fill="red" draggable="true" />
+    <circle r="6" fill="blue" draggable="true" />
+  </svg>
+
+  <script>
+    const svg = document.querySelector('svg');
+    const path = document.querySelector('svg path');
+    const points = [
+      { x: -140, y: 0 },
+      { x: -100, y: 110 },
+      { x: -50, y: 110 },
+      { x: 0, y: 0 },
+      { x: 100, y: -110 },
+      { x: 140, y: 0 },
+    ];
+    const circles = document.querySelectorAll('circle');
+
+    function getD() {
+      let d = "M ";
+      circles.forEach((c, i) => {
+        c.cx.baseVal.value = points[i].x
+        c.cy.baseVal.value = points[i].y
+
+        if (i === 0) {
+          d += points[i].x + " " + points[i].y;
+        } else if (i === 1) {
+          d += (" C " + points[i].x + " " + points[i].y);
+        } else if (i === 4) {
+          d += (" S " + points[i].x + " " + points[i].y);
+        } else {
+          d += (", " + points[i].x + " " + points[i].y);
+        }
+      });
+      return d;
+    }
+
+    function setD(d) {
+      path.setAttribute('d', d);
+    }
+    setD(getD());
+
+    function handleMD(e, i) {
+      e.currentTarget.classList.add('click');
+      e.currentTarget.dataset.order = i;
+    }
+
+    function handleMM(e) {
+      const clicked = document.querySelector('.click')
+      if (clicked) {
+        const order = clicked.dataset.order;
+        points[order].x = e.clientX - svg.viewBox.baseVal.width / 2;
+        points[order].y = e.clientY - svg.viewBox.baseVal.height / 2;
+
+        setD(getD());
+      }
+    }
+
+    function handleMU(e) {
+      const clicked = document.querySelector('.click')
+      if (clicked) {
+        clicked.classList.remove('click');
+        console.log(getD());
+      }
+    }
+
+    circles.forEach((c, i) => {
+      c.addEventListener('mousedown', (e) => handleMD(e, i));
+      // c.addEventListener('mousemove', handleMM);
+      svg.addEventListener('mousemove', handleMM);
+      // c.addEventListener('mouseup', handleMU);
+      svg.addEventListener('mouseup', handleMU);
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>polyline</title>
+  <style>
+    input[type="range"] {
+      -webkit-appearance: slider-vertical;
+      width: 5%;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="200" height="200" viewBox="-100 -100 200 200">
+
+    <defs>
+      <clipPath id="ball">
+        <circle cx="0" cy="20" r="70" />
+      </clipPath>
+    </defs>
+
+    <circle clip-path="url(#ball)" cx="0" cy="20" r="70" fill="#D1495B" />
+
+    <polyline clip-path="url(#ball)" points="-120 40 -80 0 -40 40 0 0 40 40 80 0 120 40" fill="none" stroke="#9C2D2A"
+      stroke-width="20" />
+
+  </svg>
+
+  <form id="control">
+    <input type="range" min="-120" max="120" value="-120" />
+    <input type="range" min="-120" max="120" value="40" />
+    <input type="range" min="-120" max="120" value="-80" />
+    <input type="range" min="-120" max="120" value="0" />
+    <input type="range" min="-120" max="120" value="-40" />
+    <input type="range" min="-120" max="120" value="40" />
+    <input type="range" min="-120" max="120" value="0" />
+    <input type="range" min="-120" max="120" value="0" />
+    <input type="range" min="-120" max="120" value="40" />
+    <input type="range" min="-120" max="120" value="40" />
+    <input type="range" min="-120" max="120" value="80" />
+    <input type="range" min="-120" max="120" value="0" />
+    <input type="range" min="-120" max="120" value="120" />
+    <input type="range" min="-120" max="120" value="40" />
+  </form>
+
+  <script>
+    const circle = document.querySelector('clipPath circle');
+    const speed = 5;
+
+    document.body.addEventListener('keydown', (e) => {
+      switch (e.key) {
+        case 'ArrowDown':
+          circle.cy.baseVal.value += speed
+          break;
+        case 'ArrowUp':
+          circle.cy.baseVal.value -= speed
+          break;
+        case 'ArrowLeft':
+          circle.cx.baseVal.value -= speed
+          break;
+        case 'ArrowRight':
+          circle.cx.baseVal.value += speed
+          break;
+      }
+    });
+
+    document.querySelectorAll('input[type="range"]').forEach(i => {
+      i.addEventListener('change', handlePolyline)
+    })
+
+    function handlePolyline(e) {
+      const is = document.querySelectorAll('input[type="range"]');
+      const polyline = document.querySelector('polyline');
+      // is.forEach(i => {})
+
+      is.forEach((i, idx) => {
+        if (idx % 2) {
+          polyline.points[Math.floor(idx / 2)].y = i.value
+        } else {
+          polyline.points[Math.floor(idx / 2)].x = i.value
+        }
+      })
+    }
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARC</title>
+  <style>
+    svg {
+      border: 1px solid;
+      vertical-align: top;
+      ;
+    }
+
+    .control {
+      display: inline-block;
+      width: calc(100% - 500px);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+
+    <svg width="400" height="400" viewBox="-200 -200 400 400">
+      <path fill="none" stroke-width="1" stroke="red" id="real" />
+      <path fill="none" stroke-width="1" stroke="gray" id="helper" />
+    </svg>
+    <div class="control">
+      <input type="hidden" name="mx" value="-100" />
+      <input type="hidden" name="my" value="-100" />
+
+      <input type="hidden" name="lx" value="100" />
+      <input type="hidden" name="ly" value="-100" />
+
+      <p>
+        타원X크기
+        <input type="range" min="0" max="200" value="200" />
+      </p>
+      <p>
+        타원y크기
+        <input type="range" min="0" max="200" value="200" />
+      </p>
+      <p>
+        회전각
+        <input type="range" min="-90" max="90" value="0" />
+      </p>
+      <p>
+        큰호?
+        <input type="range" min="0" max="1" value="0" />
+      </p>
+      <p>
+        방향
+        <input type="range" min="0" max="1" value="0" id="direction" />
+      </p>
+      <p>
+        끝점X
+        <input type="range" min="-200" max="200" value="100" />
+      </p>
+      <p>
+        끝점Y
+        <input type="range" min="-200" max="200" value="100" />
+      </p>
+    </div>
+
+    <svg width="325" height="325" xmlns="http://www.w3.org/2000/svg">
+      <path d="M80 80
+               A 45 45 0 1 0 125 125
+               L 125 80 Z" fill="green" />
+
+      <circle cx="80" cy="80" r="5" fill="red" />
+      <circle cx="125" cy="125" r="5" fill="blue" />
+      <circle cx="125" cy="80" r="5" fill="gold" />
+
+    </svg>
+
+    <a href="https://codepen.io/lingtalfi/pen/yaLWJG">https://codepen.io/lingtalfi/pen/yaLWJG</a>
+  </main>
+
+  <script>
+    let offset = { x: 0, y: 0 }
+    const controls = document.querySelectorAll('.control input[type="range"]');
+
+    function getOffset(ml) {
+      const x = document.querySelector(`.control input[name="${ml}x"]`).value;
+      const y = document.querySelector(`.control input[name="${ml}y"]`).value;
+      return `${ml.toUpperCase()} ${x} ${y}`;
+    }
+
+    function getD(isHelper = false) {
+      let d = "A";
+      controls.forEach((r, i) => {
+        const v = isHelper && i === 4 ? r.value ^ true : r.value;
+        d += " " + v;
+      });
+      return getOffset('m') + " " + d + " " + getOffset('l') + " Z";
+    }
+
+    function setD() {
+      document.querySelector('main svg path').setAttribute('d', getD());
+      document.querySelector('main svg path#helper').setAttribute('d', getD(true));
+    }
+
+    setD();
+
+    controls.forEach((c, i) => {
+      c.addEventListener('change', (e) => {
+        setD();
+      })
+    });
+
+
+    // const svg = document.querySelectorAll('svg');
+
+    // function getD() {
+    //   let d = "M ";
+    //   circles.forEach((c, i) => {
+    //     c.cx.baseVal.value = points[i].x
+    //     c.cy.baseVal.value = points[i].y
+
+    //     if (i === 0) {
+    //       d += points[i].x + " " + points[i].y;
+    //     } else if (i === 1) {
+    //       d += (" Q " + points[i].x + " " + points[i].y);
+    //     } else {
+    //       d += (", " + points[i].x + " " + points[i].y);
+    //     }
+    //   });
+    //   return d;
+    // }
+
+    // function setD(d) {
+    //   path.setAttribute('d', d);
+    // }
+    // setD(getD());
+
+    // function handleMD(e, i) {
+    //   e.currentTarget.classList.add('click');
+    //   e.currentTarget.dataset.order = i;
+    // }
+
+    // function handleMM(e) {
+    //   const clicked = document.querySelector('.click')
+    //   if (clicked) {
+    //     const order = clicked.dataset.order;
+    //     points[order].x = e.clientX - svg.viewBox.baseVal.width / 2;
+    //     points[order].y = e.clientY - svg.viewBox.baseVal.height / 2;
+
+    //     setD(getD());
+    //   }
+    // }
+
+    // function handleMU(e) {
+    //   const clicked = document.querySelector('.click')
+    //   if (clicked) {
+    //     clicked.classList.remove('click');
+    //     console.log(getD());
+    //   }
+    // }
+  </script>
+</body>
+
+</html>

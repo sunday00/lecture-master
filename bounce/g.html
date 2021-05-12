@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>group</title>
+  <style>
+    g.star {
+      animation: rolling 3s infinite;
+      animation-delay: 0;
+      animation-timing-function: linear;
+    }
+
+    @keyframes rolling {
+      0% {
+        transform: rotate(0);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="200" height="200" viewBox="-100 -100 200 200">
+    <g transform="translate(0 5)" class="star">
+      <g>
+        <polygon points="0,0 36,-50 0,-100" fill="#EDD887" />
+        <polygon points="0,0 -36,-50 0,-100" fill="#E2c39c" />
+      </g>
+      <g transform="rotate(72)">
+        <polygon points="0,0 36,-50 0,-100" fill="#EDD887" />
+        <polygon points="0,0 -36,-50 0,-100" fill="#E2c39c" />
+      </g>
+      <g transform="rotate(-72)">
+        <polygon points="0,0 36,-50 0,-100" fill="#EDD887" />
+        <polygon points="0,0 -36,-50 0,-100" fill="#E2c39c" />
+      </g>
+      <g transform="rotate(144)">
+        <polygon points="0,0 36,-50 0,-100" fill="#EDD887" />
+        <polygon points="0,0 -36,-50 0,-100" fill="#E2c39c" />
+      </g>
+      <g transform="rotate(-144)">
+        <polygon points="0,0 36,-50 0,-100" fill="#EDD887" />
+        <polygon points="0,0 -36,-50 0,-100" fill="#E2c39c" />
+      </g>
+    </g>
+  </svg>
+</body>
+
+</html>
