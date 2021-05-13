@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>prac</title>
+  <style>
+    main {
+      display: flex;
+    }
+
+    svg {
+      border: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio>
+
+      <defs>
+        <radialGradient id="snowball" cx="0.25" cy="0.25" r="1">
+          <stop offset="0%" stop-color="white" />
+          <stop offset="50%" stop-color="white" />
+          <stop offset="100%" stop-color="#bbb" />
+        </radialGradient>
+        <radialGradient id="eye" cx="0.35" cy="0.35" r="0.5">
+          <stop offset="10%" stop-color="white" />
+          <stop offset="50%" stop-color="#222" />
+          <stop offset="100%" stop-color="#000" />
+        </radialGradient>
+        <linearGradient id="arm" x1="0" x2="1" y1="1" y2="0">
+          <stop offset="30%" stop-color="black" />
+          <stop offset="70%" stop-color="brown" />
+          <stop offset="100%" stop-color="#5e0909" />
+        </linearGradient>
+        <g id="tree">
+          <polygon points="
+          0,-200
+          -50,-160
+          50,-160
+        " fill="green" />
+          <polygon points="
+          0,-180
+          -55,-100
+          53,-105
+        " fill="green" />
+          <polygon points="
+          0,-160
+          -58,-25
+          60,-20
+        " fill="green" />
+          <polygon points="
+          0,-100
+          -70,40
+          70,41
+        " fill="green" />
+          <line x1="0" y1="40" x2="0" y2="200" stroke-width="15" stroke="brown" />
+        </g>
+        <g id="snowman">
+          <circle cx="0" cy="55" r="80" fill="url(#snowball)" />
+          <circle cx="0" cy="-55" r="60" fill="url(#snowball)" />
+
+          <circle cx="-5" cy="-70" r="10" fill="url(#eye)" />
+          <circle cx="27" cy="-70" r="10" fill="url(#eye)" />
+
+          <polygon points="
+            11,-50
+            13,-35
+            70,-45
+          " fill="#ff5722" />
+
+          <path d="
+            M -50 10
+            L -100 -70
+            M -70 -20
+            L -110 -40
+          " stroke="url(#arm)" stroke-width="8" />
+        </g>
+      </defs>
+
+      <rect x="-250" y="-250" width="500" height="500" fill="skyblue" />
+      <circle cx="0" cy="450" r="450" fill="white" />
+      <use href="#tree" x="-200" y="-100" transform="scale(0.5)" />
+      <use href="#tree" x="-10" y="-40" transform="scale(0.7)" />
+      <use href="#tree" x="-190" y="-50" transform="scale(1, 1.2)" />
+      <use href="#tree" x="100" y="30" transform="scale(2)" />
+
+      <use href="#snowman" x="30" y="50" transform="scale(0.7)" />
+    </svg>
+
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio>
+      <defs>
+        <radialGradient id="shine1" cx="0.4" cy="0.4" r="0.6">
+          <stop offset="0%" stop-color="gold" />
+          <stop offset="50%" stop-color="orange" />
+          <stop offset="80%" stop-color="red" />
+        </radialGradient>
+      </defs>
+
+      <circle cx="0" cy="0" r="200" fill="url(#shine1)" />
+    </svg>
+
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio>
+      <path d="
+        M    0 -240
+        Q    5 -232 0 -224
+        Q  -12 -216 0 -208
+        Q   24 -200 0 -192
+        Q  -36 -184 0 -176
+        Q   48 -168 0 -160
+        Q  -60 -152 0 -144
+        Q   72 -136 0 -128
+        Q  -84 -120 0 -112
+        Q   90 -104 0  -96
+        Q -108  -88 0  -80
+        Q  120  -72 0  -64
+        Q -132  -56 0  -48
+        Q  144  -40 0  -32
+        Q -156  -24 0  -16
+        Q  178   -8 0    0
+        Q -190    8 0   16
+        L    0   60
+        M  -30   60
+        L   30   60
+        
+      " stroke="forestGreen" fill="none" stroke-width="8" />
+    </svg>
+  </main>
+
+  <main>
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio>
+      <circle cx="-160" cy="130" r="10" fill="tomato" />
+      <circle cx="160" cy="130" r="10" fill="tomato" />
+
+      <circle cx="-160" cy="90" r="10" fill="tomato" />
+      <circle cx="160" cy="90" r="10" fill="tomato" />
+
+      <circle cx="110" cy="-70" r="10" fill="tomato" />
+      <circle cx="-110" cy="-70" r="10" fill="tomato" />
+
+      <g stroke="#222" stroke-width="5">
+        <circle cx="0" cy="-160" r="20" fill="green" />
+        <circle cx="0" cy="155" r="40" fill="green" />
+        <path d="
+          M -160  130
+          L  160  130
+          L  160  90
+          Q  110  90  110  -70
+          C  90  -180  -90 -180  -110 -70
+          Q -110  90 -160  90
+          Z
+        " fill="gold" />
+      </g>
+
+      <circle cx="-110" cy="90" r="10" fill="cornflowerblue" />
+      <circle cx="110" cy="90" r="10" fill="cornflowerblue" />
+
+      <circle cx="90" cy="-180" r="10" fill="cornflowerblue" />
+      <circle cx="-90" cy="-180" r="10" fill="cornflowerblue" />
+
+    </svg>
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio>
+      <defs>
+        <radialGradient id="eye" cx="0.35" cy="0.35" r="0.5">
+          <stop offset="10%" stop-color="white" />
+          <stop offset="50%" stop-color="#222" />
+          <stop offset="100%" stop-color="#000" />
+        </radialGradient>
+        <path id="mus" d="
+          M 0 0
+          Q 30 -50 100 0
+        " stroke-width="3" stroke="#444" fill="none" />
+      </defs>
+      <g fill="orange">
+        <circle cx="-100" cy="-100" r="40" fill="#e5c39c" stroke="orange" stroke-width="20" />
+        <circle cx="100" cy="-100" r="40" fill="#e5c39c" stroke="orange" stroke-width="20" />
+
+        <rect x="-100" y="-100" width="200" height="220" rx="30" ry="60" />
+
+        <circle cx="-35" cy="-10" r="10" fill="url(#eye)" />
+        <circle cx="35" cy="-10" r="10" fill="url(#eye)" />
+
+        <line x1="0" y1="-100" x2="0" y2="-30" stroke-width="15" stroke="brown" />
+        <line x1="-50" y1="-80" x2="50" y2="-80" stroke-width="15" stroke="brown" />
+        <line x1="-40" y1="-50" x2="40" y2="-50" stroke-width="15" stroke="brown" />
+
+        <ellipse cx="-20" cy="50" rx="30" ry="20" fill="#eee" />
+        <ellipse cx="20" cy="50" rx="30" ry="20" fill="#eee" />
+        <path d="
+          M -20   20
+          L  20   20
+          C  15   50  -15  50  -20  20
+          Z
+        " fill="#222" />
+
+        <!-- <use href="#mus" x="30" y="50" />
+        <use href="#mus" x="30" y="55" transform="rotate(7) scale(1.2, 1)" />
+        <use href="#mus" x="35" y="60" transform="rotate(10)" />
+
+        <use href="#mus" x="30" y="50" transform="scale(-1, 1)" />
+        <use href="#mus" x="30" y="55" transform="rotate(-7) scale(-1.2, 1)" />
+        <use href="#mus" x="35" y="60" transform="rotate(-10) scale(-1, 1)" /> -->
+
+
+      </g>
+    </svg>
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio>
+      <line x1="-52" x2="-52" y1="-250" y2="250" fill="none" stroke="#eee" stroke-width="6" />
+      <line x1="-52" x2="-52" y1="-250" y2="250" fill="none" stroke="#eee" stroke-width="6" transform="rotate(10)" />
+
+      <ellipse cx="-50" cy="25" rx="80" ry="140" fill="none" stroke="#ddd" stroke-width="6" transform="rotate(10)" />
+      <circle cx="100" cy="0" r="140" fill="none" stroke="#ddd" stroke-width="6" />
+
+      <path d="
+      M   0  -100
+      A   80  140  10  1  1  0  100
+    " stroke="#eee" stroke-width="6" fill="none" />
+
+      <circle cx="0" cy="-100" r="10" />
+
+      <path d="
+        M   0  -100
+        A   80  140  10  0  1  0  100
+      " stroke="#B7113377" stroke-width="10" fill="none" />
+      <path d="
+        M   0  -100
+        A   80  140  10  1  1  0  100
+      " stroke="#2211bb77" stroke-width="10" fill="none" />
+      <path d="
+        M   0  -100
+        A   80  140  10  0  0  0  100
+      " stroke="#22cc1177" stroke-width="10" fill="none" />
+      <path d="
+        M   0  -100
+        A   80  140  10  1  0  0  100
+      " stroke="#22001177" stroke-width="10" fill="none" />
+    </svg>
+  </main>
+
+  <main>
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio class="kane">
+
+      <circle cx="5" cy="-80" r="60" fill="none" stroke-width="6" stroke="#ddd" />
+      <circle cx="-40" cy="-80" r="15" fill="none" stroke-width="6" stroke="#ddd" />
+      <circle cx="5" cy="-80" r="30" fill="none" stroke-width="6" stroke="#ddd" />
+      <circle cx="50" cy="120" r="15" fill="none" stroke-width="6" stroke="#ddd" />
+
+      <path d="
+          M 65 120
+          L 65 -80
+          A 60 60 0 0 0 -55 -80
+          A 15 15 0 0 0 -25 -80
+          A 30 30 0 0 1 35 -80
+          L 35 120
+          A 15 15 0 0 0 65 120
+        " stroke="#cd803d" stroke-width="5" fill="none" />
+
+      <circle cx="65" cy="120" r="5" fill="#CC0101aa" />
+      <circle cx="35" cy="120" r="5" fill="#CC0101aa" />
+      <circle cx="65" cy="-80" r="5" fill="#CC0101aa" />
+      <circle cx="-55" cy="-80" r="5" fill="#CC0101aa" />
+      <circle cx="-25" cy="-80" r="5" fill="#CC0101aa" />
+      <circle cx="35" cy="-80" r="5" fill="#CC0101aa" />
+
+    </svg>
+
+    <svg viewBox="-250 -250 500 500" preserveAspectRatio>
+      <defs>
+        <path id="text-arc" d="
+          M 0,170
+          A 170 170 0 1 1 1 170
+        " />
+      </defs>
+
+      <circle cx="0" cy="0" r="170" fill="none" stroke-width="6" stroke="#ddd" />
+
+      <!-- <use href="#text-arc" fill="none" stroke="#22001177" stroke-width="10" /> -->
+      <text font-size="2.2em" font-weight="bolder" font-family="Tahoma">
+        <textPath href="#text-arc">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ipsa. Rem ipsa velit nulla.
+        </textPath>
+      </text>
+
+      <circle cx="0" cy="170" r="5" fill="#CC0101aa" />
+    </svg>
+
+    <svg viewBox="-200 -200 400 400" fill="none">
+      <path stroke="#E0CEB9" stroke-width="4" d="
+        M -200  80 
+        L  -80  80 
+        Q   80  80  70  -10 
+        A   70  70   0    0   0 -70 -10 
+        Q  -80  80  80   80
+        L  200  80
+      " />
+
+      <g class="sleigh">
+        <circle r="10" fill="#AF6455" stroke-width="5" />
+      </g>
+    </svg>
+
+    <style>
+      .sleigh {
+        offset-path: path("M -200 70 L -90 70 Q 60 70 60 -10 A 50 50 0 0 0 -60 -10 Q -60 70 90 70 L 200 70"
+          );
+        animation: roller-coaster 6000ms infinite linear;
+      }
+
+      @keyframes roller-coaster {
+        0% {
+          offset-distance: 0%;
+        }
+
+        100% {
+          offset-distance: 100%;
+        }
+      }
+    </style>
+  </main>
+</body>
+
+
+</html>
