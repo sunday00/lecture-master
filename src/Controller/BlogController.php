@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Blog Controller
  *
@@ -11,6 +13,13 @@ namespace App\Controller;
 class BlogController extends AppController
 {
 
+    public function beforeFilter(EventInterface $e)
+    {
+        // debug($e); exit;
+        $this->viewBuilder()->setLayout('blog');
+        $this->set( 'active' , $this->request->getParam('action') );
+    }
+
     /**
      * Special Home method
      *
@@ -18,7 +27,33 @@ class BlogController extends AppController
      */
     public function home()
     {
-        $this->viewBuilder()->setLayout('blog');
+        // $this->viewBuilder()->setLayout('blog');
+        $this->loadModel('Articles');
+        $articles = $this->Articles->find('all')
+            ->order(['Articles.created_at desc'])
+            ->limit(3);
+
+        $this->set(compact('articles'));
+    }
+
+    /**
+     * Special about method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function about()
+    {
+        
+    }
+
+    /**
+     * Special contact method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function contact()
+    {
+        
     }
 
     /**

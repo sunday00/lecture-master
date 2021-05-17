@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+// use Cake\Event\EventInterface;
+
 /**
  * Products Controller
  *
@@ -11,6 +13,12 @@ namespace App\Controller;
  */
 class ProductsController extends AppController
 {
+    // public function beforeFilter(EventInterface $e)
+    // {
+    //     $this->viewBuilder()->setLayout('blog');
+    //     $this->set( 'active' , NULL );
+    // }
+
     /**
      * Index method
      *
