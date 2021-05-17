@@ -33,6 +33,41 @@
         transform: rotate(20deg);
       }
     }
+
+    .flake {
+      animation: snowing 5s infinite;
+    }
+
+    .flake.fast {
+      animation-duration: 3s;
+    }
+
+    .flake.slow {
+      animation-duration: 7s;
+    }
+
+    .flake.op7 {
+      opacity: 0.7;
+    }
+
+    .flake.big {
+      transform: scale(1.3);
+    }
+
+    @keyframes snowing {
+      form {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(600px);
+      }
+    }
+
+    main:nth-child(2) {
+      background-color: rgb(148, 74, 167);
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 120 120'><polygon fill='%23391941' points='120 120 60 120 90 90 120 60 120 0 120 0 60 60 0 0 0 60 30 90 60 120 120 120 '/></svg>");
+    }
   </style>
 </head>
 
@@ -99,6 +134,7 @@
             L -110 -40
           " stroke="url(#arm)" stroke-width="8" />
         </g>
+        <circle cx="0" cy="0" r="10" fill="white" id="snow" />
       </defs>
 
       <rect x="-250" y="-250" width="500" height="500" fill="skyblue" />
@@ -109,19 +145,53 @@
       <use href="#tree" x="100" y="30" transform="scale(2)" />
 
       <use href="#snowman" x="30" y="50" transform="scale(0.7)" />
+
+      <use href="#snow" x="-230" y="-260" class="flake" />
+      <use href="#snow" x="-210" y="-230" class="flake slow big" />
+      <use href="#snow" x="-200" y="-260" class="flake fast" />
+      <use href="#snow" x="-180" y="-240" class="flake op7" />
+      <use href="#snow" x="-100" y="-190" class="flake fast op7 big" />
+      <use href="#snow" x="-50" y="-270" class="flake slow" />
+      <use href="#snow" x="0" y="-200" class="flake slow big" />
+      <use href="#snow" x="40" y="-240" class="flake fast" />
+      <use href="#snow" x="60" y="-280" class="flake op7 big" />
+      <use href="#snow" x="180" y="-180" class="flake slow op7" />
+      <use href="#snow" x="215" y="-290" class="flake fast" />
     </svg>
 
     <svg viewBox="-250 -250 500 500" preserveAspectRatio>
-      <defs>
-        <radialGradient id="shine1" cx="0.4" cy="0.4" r="0.6">
-          <stop offset="0%" stop-color="gold" />
-          <stop offset="50%" stop-color="orange" />
-          <stop offset="80%" stop-color="red" />
-        </radialGradient>
-      </defs>
 
-      <circle cx="0" cy="0" r="200" fill="url(#shine1)" />
+      <rect x="-200" y="-200" width="400" height="400" fill="#cd803d" />
+      <circle r="150" stroke="#fcce7b" stroke-width="30" fill="white"></circle>
+      <circle r="110" stroke="#b6705f" stroke-width="15" fill="none" stroke-dasharray="28.7" stroke-dashoffset="12" />
+
+      <g stroke="#5f4c6c" stroke-linecap="round" id="watch-arms" stroke-width="15">
+        <!-- <line id="h" x1=0 x2=0 y1=0 y2="-70" /> -->
+        <line id="h" y2="-70" />
+        <!-- 0 은 생략되서 뜬금 y2부터... -->
+        <line id="m" y2="-100" />
+        <line id="s" y2="-100" stroke-width="3" stroke="tomato" />
+      </g>
+
     </svg>
+
+    <script>
+      const hArm = document.querySelector('#watch-arms #h');
+      const mArm = document.querySelector('#watch-arms #m');
+      const sArm = document.querySelector('#watch-arms #s');
+
+      setInterval(() => {
+        const date = new Date();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
+
+        sArm.setAttribute("transform", `rotate(${360 / 60 * s})`);
+        mArm.setAttribute("transform", `rotate(${360 / 60 * m})`);
+        hArm.setAttribute("transform", `rotate(${360 / 12 * (h % 12)})`);
+      }, 1000);
+
+    </script>
 
     <svg viewBox="-250 -250 500 500" preserveAspectRatio>
       <path d="

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>media</title>
+  <style>
+    @media (min-width: 800px) {
+      h1 {
+        color: magenta;
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        color: green;
+      }
+    }
+
+    @media (min-width: 400px) and (max-width: 800px) {
+      h1 {
+        background-color: gold;
+      }
+    }
+
+    body::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: #9c1759;
+      font-weight: bold;
+    }
+
+    @media(orientation:landscape) {
+      body::after {
+        content: "landscape";
+      }
+    }
+
+    @media(orientation:portrait) {
+      body::after {
+        content: "portrait";
+      }
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nav ul {
+      margin: 0;
+      flex: 1;
+      max-width: 50%;
+      background-color: deepskyblue;
+      padding-left: 0;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    nav li {
+      list-style: none;
+    }
+
+    nav li a {
+      color: white;
+    }
+
+    @media (max-width: 590px) {
+
+      nav,
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#home">Home</a>
+    <ul>
+      <li><a href="#doc">LearnMore</a></li>
+      <li><a href="#about">about</a></li>
+      <li><a href="#contant">contact</a></li>
+    </ul>
+    <a href="#signup">SignUp</a>
+  </nav>
+  <main class="container">
+    <h1>Hello CSS</h1>
+    <div>
+      <p>Width :</p>
+      <p id="width"></p>
+      <p>Height :</p>
+      <p id="height"></p>
+    </div>
+  </main>
+
+  <script>
+    document.querySelector('#width').innerHTML = window.innerWidth;
+    document.querySelector('#height').innerHTML = window.innerHeight;
+    window.addEventListener('resize', (e) => {
+      document.querySelector('#width').innerHTML = window.innerWidth;
+      document.querySelector('#height').innerHTML = window.innerHeight;
+    })
+  </script>
+</body>
+
+</html>
