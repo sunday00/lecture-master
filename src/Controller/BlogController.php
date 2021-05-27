@@ -15,6 +15,8 @@ class BlogController extends AppController
 
     public function beforeFilter(EventInterface $e)
     {
+        // $this->Auth->allow( '*' );
+        $this->loadModel('Articles');
         // debug($e); exit;
         $this->viewBuilder()->setLayout('blog');
         $this->set( 'active' , $this->request->getParam('action') );
@@ -28,12 +30,21 @@ class BlogController extends AppController
     public function home()
     {
         // $this->viewBuilder()->setLayout('blog');
-        $this->loadModel('Articles');
+        
         $articles = $this->Articles->find('all')
             ->order(['Articles.created_at desc'])
             ->limit(3);
 
-        $this->set(compact('articles'));
+        // $this->set(compact('articles'));
+        $this->set('articles', $this->paginate($articles, [
+            'limit' => '3',
+        ]));
+
+        $this->set('recent', $this->Articles->find('list')->limit(5));
+        // $this->set('recent', $this->Articles->find('list', [
+        //     'keyField' => 'title',
+        //     'valueField' => 'created_at'
+        // ])->limit(5));
     }
 
     /**
@@ -77,7 +88,7 @@ class BlogController extends AppController
      */
     public function view($id = null)
     {
-        $blog = $this->Blog->get($id, [
+        $blog = $this->Articles->get($id, [
             'contain' => [],
         ]);
 

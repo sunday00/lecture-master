@@ -37,5 +37,12 @@ class AppView extends View
      */
     public function initialize(): void
     {
+        $this->loadHelper('Form', ['templates' => 'input-bootstrap']);
+        $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
+    }
+
+    public function csrf (): string
+    {
+        return "<input type=\"hidden\" name=\"csrf_token\" value=\"".$this->request->getAttribute('csrfToken')."\" />";
     }
 }
