@@ -15,11 +15,13 @@ class BlogController extends AppController
 
     public function beforeFilter(EventInterface $e)
     {
-        // $this->Auth->allow( '*' );
+        // $this->Authentication->allowUnauthenticated(get_class_methods($this));
+        $this->Authorization->skipAuthorization();
+
         $this->loadModel('Articles');
-        // debug($e); exit;
         $this->viewBuilder()->setLayout('blog');
         $this->set( 'active' , $this->request->getParam('action') );
+
     }
 
     /**

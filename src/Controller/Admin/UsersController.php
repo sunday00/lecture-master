@@ -15,8 +15,8 @@ class UsersController extends AppController
 {
     public function beforeFilter(EventInterface $e)
     {
-        $this->loadComponent('Auth');
-        $this->Auth->allow(['login']);
+        // $this->Auth->allow(['login']);
+        $this->Authentication->allowUnauthenticated(['login']);
 
         $this->loadModel('Users');
         $this->viewBuilder()->setLayout('blog');
@@ -29,18 +29,32 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $users = $this->paginate($this->Users);
     }
 
     public function login()
     {
+        $this->Authorization->skipAuthorization();
+
         if($this->request->is('post')){
-            $user = $this->Auth->identify();
-            dd($user);
-            if($user){
-                $this->Auth->setUser($user);
+            // $user = $this->Auth->identify();
+            $result = $this->Authentication->getResult();
+            if($result->isValid()){
+                // dd($this->Authentication->getIdentity());
+                return $this->redirect($this->Authentication->getLoginRedirect());
             }
+
+            $this->Flash->error("Incorrect username or password");
         }
+    }
+
+    public function logout()
+    {
+        $this->Authorization->skipAuthorization();
+        // $this->Auth->logout();
+        $this->Authentication->logout();
+        return $this->redirect('/');
     }
 
     /**

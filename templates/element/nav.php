@@ -25,6 +25,20 @@
                   'Admin/Users::index'
                 ) ?>">Admin</a>
             </li>
+            
+            <?php if($user): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= $this->Url->buildFromPath(
+                  'Admin/Users::logout'
+                ) ?>">logout</a>
+            </li>
+            <?php else : ?>
+                <li class="nav-item">
+                <a class="nav-link" href="<?= $this->Url->buildFromPath(
+                  'Admin/Users::login'
+                ) ?>">login</a>
+            </li>
+            <?php endif ?>
         </ul>
     </div>
 
