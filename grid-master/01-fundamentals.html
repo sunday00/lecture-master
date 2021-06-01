@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grid-01-fundamentals</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style lang="">
+    .container {
+      display: grid;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      gap: 20px 30px;
+      width: 100%;
+    }
+
+    .container1 {
+      grid-template-columns: 100px 200px auto 50px;
+    }
+
+    .container2 {
+      grid-template-columns: repeat(6, 75px);
+    }
+
+    .container3 {
+      grid-template-columns: 40px 60px 80px 100px;
+    }
+
+    .container4 {
+      /* grid-template-rows: 40px 60px 80px 100px; */
+      /* grid-template-rows: repeat(6, 150px); */
+      grid-template-columns: 40px 60px 80px 100px;
+      grid-template-rows: 40px 80px 40px;
+    }
+
+    .container .item {}
+  </style>
+</head>
+
+<body>
+  <div class="container container1">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+  </div>
+
+  <hr />
+
+  <div class="container container2">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+  </div>
+
+  <hr />
+
+  <div class="container container3">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+  </div>
+
+  <hr />
+
+  <div class="container container4">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+  </div>
+</body>
+
+</html>

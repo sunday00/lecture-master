@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>001-rotate-around.html</title>
+  <style>
+    #center,
+    #moon {
+      display: inline-block;
+      position: absolute;
+      border: 1px solid;
+      border-radius: 50%;
+    }
+
+    #center {
+      background-color: hotpink;
+      width: 100px;
+      height: 100px;
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%, -50%);
+    }
+
+    #moon {
+      background-color: gold;
+      width: 30px;
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="center"></div>
+  <div id="moon"></div>
+
+  <script>
+    const center = document.querySelector('#center');
+    const moon = document.querySelector('#moon');
+    let curDeg = 0;
+    const distance = 300;
+
+    const centerCenter = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    }
+
+    function toRad(d) {
+      return d * Math.PI / 180;
+    }
+
+    function setNewOffset() {
+      moon.style.left = centerCenter.x + Math.cos(toRad(curDeg)) * distance + 'px';
+      moon.style.top = centerCenter.y + Math.sin(toRad(curDeg)) * distance + 'px';
+
+      // 회전물체 offset 
+      // 중심 + cos은 x, sin은 y. 인자는 현재 중심에서 오른쪽으로 뻗은 수평선 기준 각도. 
+      // 각도는 radian 기준이므로 degree 단위로 변환 필요.
+      // 이렇게 하면, 중심에서 출발하여 아래쪽/오른쪽 대각선 방향 1 기준선으로 
+      // x 비율, y 비율이 나옴
+      // 이때 거리를 곱.
+
+      curDeg--;
+      requestAnimationFrame(setNewOffset);
+    }
+
+    setNewOffset();
+  </script>
+</body>
+
+</html>

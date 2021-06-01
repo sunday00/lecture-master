@@ -1,0 +1,15 @@
+{
+  "name": "grid-master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 7777"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.26.14"
+  }
+}
