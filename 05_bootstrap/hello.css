@@ -1,0 +1,7 @@
+#toggle-btn{
+  background-color: gray;
+}
+
+#toggle-btn.active{
+  background-color: green;
+}
