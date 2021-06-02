@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-// use Cake\Event\EventInterface;
+use Cake\Event\EventInterface;
 
 /**
  * Products Controller
@@ -19,6 +19,14 @@ class ProductsController extends AppController
     //     $this->set( 'active' , NULL );
     // }
 
+    public function beforeFilter(EventInterface $e)
+    {
+        // $this->Authentication->allowUnauthenticated(get_class_methods($this));
+        $this->Authorization->skipAuthorization();
+        $this->set( 'active' , $this->request->getParam('action') );
+
+    }
+
     /**
      * Index method
      *
@@ -29,7 +37,19 @@ class ProductsController extends AppController
         $this->paginate = [
             'contain' => ['Categories'],
         ];
-        $products = $this->paginate($this->Products);
+
+        $key = $this->request->getQuery('key');
+        if($key){
+            $q = $this->Products->find('all')
+                ->where(['OR' => [
+                    'Products.name like' => '%'.$key.'%',
+                    'Products.manufacturer like' => '%'.$key.'%',
+                    'Categories.name like' => '%'.$key.'%',
+                ]]);
+        } else {
+            $q = $this->Products;
+        }
+        $products = $this->paginate($q);
 
         $this->set(compact('products'));
     }
