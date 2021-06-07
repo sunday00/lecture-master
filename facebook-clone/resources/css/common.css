@@ -243,7 +243,9 @@
   --dataviz-supplementary-4: rgb(50,52,54); }
 
 body {
-  font-family: 'Ubuntu', sans-serif; }
+  font-family: 'Ubuntu', sans-serif;
+  background-color: var(--fds-gray-10);
+  color: var(--fds-black); }
 
 .profile-img {
   display: inline-block;
@@ -389,3 +391,47 @@ body {
             #header .inner .right .bell .notice ul li .time {
               color: var(--fds-gray-45);
               margin-top: 10px; }
+
+#wrapper {
+  width: 1012px;
+  margin: 0 auto;
+  padding-right: 205px;
+  position: relative;
+  top: 52px; }
+  #wrapper .inner {
+    width: 100%;
+    position: relative; }
+    #wrapper .inner .left-box {
+      position: fixed;
+      top: 52px;
+      left: 300px;
+      width: 180px;
+      height: 500px;
+      font-size: 1.05rem; }
+
+#wrapper .inner .left-box .my-name {
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-bottom: 15px; }
+  #wrapper .inner .left-box .my-name > a {
+    display: flex;
+    align-items: center; }
+    #wrapper .inner .left-box .my-name > a:hover .icon--more, #wrapper .inner .left-box .my-name > a.active .icon--more {
+      display: inline-block; }
+
+#wrapper .inner .left-box .list > li {
+  padding: 5px 10px;
+  margin-bottom: 2px;
+  border: 1px solid transparent; }
+  #wrapper .inner .left-box .list > li:hover, #wrapper .inner .left-box .list > li.active {
+    border-color: #dddfe2;
+    background-color: var(--fds-gray-00); }
+    #wrapper .inner .left-box .list > li:hover .icon--more, #wrapper .inner .left-box .list > li.active .icon--more {
+      display: inline-block; }
+  #wrapper .inner .left-box .list > li a {
+    display: flex;
+    align-items: center; }
+
+#wrapper .inner .left-box .icon--more {
+  margin-left: auto;
+  display: none; }

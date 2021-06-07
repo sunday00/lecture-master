@@ -248,6 +248,8 @@
 body{
     // font-family: 'Nanum Gothic', sans-serif;
     font-family: 'Ubuntu', sans-serif;
+    background-color: var(--fds-gray-10);
+    color: var(--fds-black);
 }
 
 .profile-img{
@@ -455,5 +457,69 @@ body{
             }
 
         }
+    }
+}
+
+#wrapper{
+    width: 1012px;
+    margin: 0 auto;
+    padding-right: 205px;
+    position: relative;
+    top: 52px;
+
+    .inner {
+        width: 100%;
+        position: relative;
+
+        .left-box {
+            position: fixed;
+            top: 52px;
+            left: 300px;
+            width: 180px;
+            height: 500px;
+            font-size: 1.05rem;
+        }
+    }
+}
+
+#wrapper .inner .left-box{
+    .my-name{
+        padding: 5px 10px;
+        border-radius: 3px;
+        margin-bottom: 15px;
+
+        & > a {
+            display: flex;
+            align-items: center;
+
+            &:hover .icon--more, &.active .icon--more{
+                display: inline-block;
+            }
+        }
+    }
+
+    .list > li {
+        padding: 5px 10px;
+        margin-bottom: 2px;
+        border: 1px solid transparent;
+
+        &:hover, &.active{
+            border-color: #dddfe2;
+            background-color: var(--fds-gray-00);
+
+            .icon--more{
+                display: inline-block;
+            }
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .icon--more {
+        margin-left: auto;
+        display: none;
     }
 }
