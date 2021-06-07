@@ -2,6 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Ubuntu:wght@300;400;700&display=swap');
 
+$basePadding: 0.5rem 1rem;
+$baseFontSize: 1.2rem;
+
 :root {
     --fds-black: #000000;
     --fds-black-alpha-05: rgba(0, 0, 0, 0.05);
@@ -530,7 +533,7 @@ body{
     }
 }
 
-#wrapper .inner .middle-box{
+#wrapper .inner .middle-box .create-box{
     background-color: #fff;
     margin-bottom: 10px;
     border: 1px solid var(--fds-gray-20);
@@ -538,10 +541,10 @@ body{
 
     .title {
         color: var(--fds-gray-90);
-        font-size: 1.2rem;
+        font-size: $baseFontSize;
         font-weight: bold;
-        line-height: 1.2rem;
-        padding: 8px 5px;
+        line-height: $baseFontSize;
+        padding: $basePadding;
         background-color: var(--fds-gray-20);
         border-bottom: 1px solid var(--fds-gray-30);
         border-radius: 2px 2px 0 0;
@@ -551,8 +554,8 @@ body{
         display: flex;
         align-items: center;
         color: var(--fds-black-alpha-60);
-        font-size: 1.12rem;
-        padding: 10px;
+        font-size: $baseFontSize;
+        padding: $basePadding;
         margin-bottom: 10px;
         border-bottom: 1px solid var(--fds-gray-30);
 
@@ -569,7 +572,7 @@ body{
             height: 24px;
             width: 90%;
             resize: none;
-            font-size: 1.1rem;
+            font-size: $baseFontSize;
             outline: none;
         }
     }
@@ -577,10 +580,10 @@ body{
     .text-field-wrap .middle{}
 
     .text-field-wrap .bottom {
-        font-size: 1.2rem;
+        font-size: $baseFontSize;
         font-weight: bold;
         color: var(--fds-gray-70);
-        padding: 10px;
+        padding: $basePadding;
 
         #photo-id {
             display: none;
@@ -610,7 +613,7 @@ body{
     .text-field-wrap .submit{
         border-top: 1px solid var(--fds-gray-30);
         text-align: center;
-        padding: 5px 10px;
+        padding: $basePadding;
         display: none;
 
         input{
@@ -625,7 +628,194 @@ body{
             border: none;
 
             &:disabled{
-                background-color: var(--fds-blue-40);
+                background-color: var(--fds-blue-30);
+            }
+        }
+    }
+}
+
+#wrapper .inner .middle-box .contents{
+    background-color: #fff;
+    margin-bottom: 10px;
+    border: 1px solid var(--fds-gray-30);
+    border-radius: 3px;
+    color: var(--fds-gray-70);
+    font-size: $baseFontSize;
+    font-weight: bold;
+
+    header {
+        position: relative;
+        padding: $basePadding;
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+
+            .name {
+                color: var(--fds-blue-70);
+                font-size: 1.4rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .time{
+                font-size: 0.8rem;
+                color: var(--fds-gray-80);
+            }
+
+            .profile-img {
+                width: 2.2rem;
+                height: 2.2rem;
+            }
+
+            .more {
+                margin-left: auto;
+                cursor: pointer;
+                padding: 0.8rem 0;
+                position: relative;
+
+                .hidden-menu {
+                    position: absolute;
+                    right: 2rem;
+                    top: 2rem;
+                    width: 130px;
+                    border-radius: 3px;
+                    border: 1px solid var(--fds-gray-20);
+                    display: none;
+
+                    &.active {
+                        display: block;
+                        box-shadow: 2px 2px 5px var(--fds-gray-30);
+                    }
+
+                    li {
+                        padding: $basePadding;
+                        background-color: #fff;
+                        text-align: center;
+                        border-bottom: 1px solid var(--fds-gray-10);
+
+                        &:hover{
+                            background-color: var(--fds-gray-10);
+                        }
+
+                        & * {
+                            background: transparent;
+                            border: none;
+                            outline: none;
+                            font-size: 1rem;
+                            line-height: 1rem;
+                            font-weight: bolder;
+                            cursor: pointer;
+                            color: var(--fds-gray-70);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .main-article {
+        padding: $basePadding;
+        color: var(--fds-gray-90);
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        font-weight: normal;
+    }
+
+    .img-section {
+        overflow: hidden;
+        box-sizing: border-box;
+        border: 1px solid var(--fds-gray-10);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .ajax-section {
+        padding: $basePadding;
+        display: flex;
+        justify-content: space-between;   
+    }
+
+    .btn-section {
+        display: flex;
+        height: 2.5rem;
+        border-top: 1px solid var(--fds-gray-10);
+        border-bottom: 1px solid var(--fds-gray-10);
+        margin: 0 0.8rem;
+
+        & > div {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+                background-color: var(--fds-gray-10);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .comment-section {
+        padding: $basePadding;
+
+        .id {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+
+            .text-container{
+                display: flex;
+                align-items: center;
+            }
+
+            .name {
+                color: var(--fds-blue-70);
+                margin: auto 0.5rem;
+            }
+
+            .text-field {
+                display: flex;
+                padding: 10px;
+                background-color: var(--fds-gray-05);
+                border-radius: 30px;
+                font-weight: 300;
+            }
+        }
+    }
+
+    .comment-input {
+        display: flex;
+        padding: $basePadding;
+        align-items: center;
+
+        .input-container {
+            width: 100%;
+            padding: 7px 0;
+            background-color: var(--fds-gray-05);
+            border: 1px solid var(--fds-gray-30);
+            border-radius: 30px;
+            position: relative;
+
+            input {
+                width: 85%;
+                height: 100%;
+                line-height: 100%;
+                background-color: transparent;
+                border: none;
+                outline: none;
+                margin-left: 0.8rem;
+            }
+
+            button {
+                background-color: transparent;
+                border: none;
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
             }
         }
     }
