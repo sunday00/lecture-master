@@ -573,4 +573,60 @@ body{
             outline: none;
         }
     }
+
+    .text-field-wrap .middle{}
+
+    .text-field-wrap .bottom {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--fds-gray-70);
+        padding: 10px;
+
+        #photo-id {
+            display: none;
+        }
+
+        .import-btn{
+            border-radius: 30px;
+            background-color: var(--fds-gray-30);
+            color: var(--fds-white);
+            padding: 5px 10px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            #photo-label{
+                display: flex;
+                align-items: center;
+            }
+
+            &:hover{
+                background-color: var(--fds-gray-45);
+            }
+        }
+    }
+
+    .text-field-wrap .submit{
+        border-top: 1px solid var(--fds-gray-30);
+        text-align: center;
+        padding: 5px 10px;
+        display: none;
+
+        input{
+            width: 100%;
+            height: 1.5rem;
+            border-radius: 3px;
+            background-color: var(--fds-blue-70);
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            border: none;
+
+            &:disabled{
+                background-color: var(--fds-blue-40);
+            }
+        }
+    }
 }

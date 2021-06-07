@@ -473,3 +473,41 @@ body {
       resize: none;
       font-size: 1.1rem;
       outline: none; }
+  #wrapper .inner .middle-box .text-field-wrap .bottom {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--fds-gray-70);
+    padding: 10px; }
+    #wrapper .inner .middle-box .text-field-wrap .bottom #photo-id {
+      display: none; }
+    #wrapper .inner .middle-box .text-field-wrap .bottom .import-btn {
+      border-radius: 30px;
+      background-color: var(--fds-gray-30);
+      color: var(--fds-white);
+      padding: 5px 10px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer; }
+      #wrapper .inner .middle-box .text-field-wrap .bottom .import-btn #photo-label {
+        display: flex;
+        align-items: center; }
+      #wrapper .inner .middle-box .text-field-wrap .bottom .import-btn:hover {
+        background-color: var(--fds-gray-45); }
+  #wrapper .inner .middle-box .text-field-wrap .submit {
+    border-top: 1px solid var(--fds-gray-30);
+    text-align: center;
+    padding: 5px 10px;
+    display: none; }
+    #wrapper .inner .middle-box .text-field-wrap .submit input {
+      width: 100%;
+      height: 1.5rem;
+      border-radius: 3px;
+      background-color: var(--fds-blue-70);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      border: none; }
+      #wrapper .inner .middle-box .text-field-wrap .submit input:disabled {
+        background-color: var(--fds-blue-40); }

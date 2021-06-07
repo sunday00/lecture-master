@@ -145,10 +145,19 @@
                                     </p>
                                 </header>
                                 <div class="middle">
-                                    
+                                    <canvas id="imageCanvas" width="0" height="0"></canvas>
                                 </div>
-                                <footer class="bottom">
-
+                                <div class="bottom">
+                                    <input type="file" name="photo" id="photo-id" required />
+                                    <div class="import-btn">
+                                        <label for="photo-id" id="photo-label">
+                                            <i class="icon icon--picture"></i>
+                                            <span>picture/movie</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <footer class="submit">
+                                    <input type="submit" value="POST" id="submit-btn" disabled />
                                 </footer>
                             </form>
                         </div>
