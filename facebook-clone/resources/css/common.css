@@ -404,19 +404,19 @@ body {
     #wrapper .inner .left-box {
       position: fixed;
       top: 52px;
-      left: 190px;
+      left: 160px;
       width: 180px;
       height: 500px;
       font-size: 1.05rem; }
     #wrapper .inner .middle-box {
       max-width: 500px;
       position: relative;
-      left: 280px; }
+      left: 250px; }
     #wrapper .inner .right-box {
       position: fixed;
       width: 308px;
       background-color: #fff;
-      right: 220px;
+      right: 250px;
       top: 52px;
       border-radius: 3px;
       padding-bottom: 20px; }
@@ -676,3 +676,31 @@ body {
     color: var(--fds-gray-45);
     font-size: 1.1rem;
     font-weight: 300; }
+
+#side-box {
+  width: 190px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 52px;
+  border-left: 1px solid var(--fds-gray-30); }
+  #side-box ul {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto; }
+    #side-box ul li {
+      display: flex;
+      padding: 0.5rem 1rem;
+      align-items: center; }
+      #side-box ul li:hover {
+        background-color: var(--fds-gray-25);
+        box-shadow: 1px 0 0 var(--fds-gray-10) inset; }
+      #side-box ul li .profile-img {
+        width: 1.3rem;
+        height: 1.3rem; }
+      #side-box ul li .light {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--fds-green-55);
+        margin-left: auto; }
