@@ -398,6 +398,10 @@ body{
                     position: relative;
                 }
 
+                &.active .notice {
+                    display: block;
+                }
+
                 .notice {
                     width: 430px;
                     background-color: #fff;
@@ -479,7 +483,7 @@ body{
         .left-box {
             position: fixed;
             top: $mainHeaderHeight;
-            left: 160px;
+            // left: 160px;
             width: 180px;
             height: 500px;
             font-size: 1.05rem;
@@ -488,14 +492,12 @@ body{
         .middle-box {
             max-width: 500px;
             position: relative;
-            left: 250px;
         }
 
         .right-box {
             position: fixed;
-            width: 308px;
+            width: 258px;
             background-color: #fff;
-            right: 250px;
             top: $mainHeaderHeight;
             border-radius: 3px;
             padding-bottom: 20px;
@@ -906,6 +908,48 @@ body{
                 margin-left: auto;
                 
             }
+        }
+    }
+}
+
+@media screen and (max-width: 1240px) {
+    #wrapper{
+        padding-right: 0;
+        width: 90%;
+        margin: 0 auto;
+
+        #contents-container {
+            position: static;
+            left: 0;
+            margin: 0 auto;
+        }
+    }
+
+    #wrapper .left-box, #wrapper .right-box, #side-box{
+        display: none;
+    }
+
+    #header .inner {
+        padding-right: 0;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 800px ){
+    #header .inner .left {
+        display: none;
+    }
+
+    #header .inner .right {
+        width: 100%;
+        justify-content: space-between;
+
+        .my-name {
+            margin-left: 0;
+        }
+
+        & > div::after {
+            display: none;
         }
     }
 }

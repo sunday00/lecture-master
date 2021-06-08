@@ -349,6 +349,8 @@ body {
         z-index: 100; }
       #header .inner .right .bell .icon--bell-black {
         position: relative; }
+      #header .inner .right .bell.active .notice {
+        display: block; }
       #header .inner .right .bell .notice {
         width: 430px;
         background-color: #fff;
@@ -404,19 +406,16 @@ body {
     #wrapper .inner .left-box {
       position: fixed;
       top: 52px;
-      left: 160px;
       width: 180px;
       height: 500px;
       font-size: 1.05rem; }
     #wrapper .inner .middle-box {
       max-width: 500px;
-      position: relative;
-      left: 250px; }
+      position: relative; }
     #wrapper .inner .right-box {
       position: fixed;
-      width: 308px;
+      width: 258px;
       background-color: #fff;
-      right: 250px;
       top: 52px;
       border-radius: 3px;
       padding-bottom: 20px; }
@@ -704,3 +703,29 @@ body {
         border-radius: 50%;
         background-color: var(--fds-green-55);
         margin-left: auto; }
+
+@media screen and (max-width: 1240px) {
+  #wrapper {
+    padding-right: 0;
+    width: 90%;
+    margin: 0 auto; }
+    #wrapper #contents-container {
+      position: static;
+      left: 0;
+      margin: 0 auto; }
+  #wrapper .left-box, #wrapper .right-box, #side-box {
+    display: none; }
+  #header .inner {
+    padding-right: 0;
+    width: 90%; } }
+
+@media screen and (max-width: 800px) {
+  #header .inner .left {
+    display: none; }
+  #header .inner .right {
+    width: 100%;
+    justify-content: space-between; }
+    #header .inner .right .my-name {
+      margin-left: 0; }
+    #header .inner .right > div::after {
+      display: none; } }
