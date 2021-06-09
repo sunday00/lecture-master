@@ -1,0 +1,42 @@
+@import url("./reset.css");
+.container {
+  display: flex; }
+
+.container:nth-of-type(2) {
+  display: inline-flex; }
+
+.container:nth-of-type(3) {
+  flex-wrap: no-wrap;
+  width: 200px; }
+
+.container:nth-of-type(4) {
+  flex-wrap: wrap;
+  width: 200px; }
+
+.container:nth-of-type(5) {
+  flex-wrap: wrap;
+  position: relative;
+  align-items: stretch;
+  height: 500px; }
+  .container:nth-of-type(5) .item {
+    width: calc(100% / 3); }
+
+.container:nth-of-type(6) {
+  flex-wrap: wrap;
+  position: relative;
+  align-content: space-between;
+  height: 500px; }
+  .container:nth-of-type(6) .item {
+    width: calc(100% / 3); }
+
+.container:nth-of-type(7) .item {
+  flex-basis: 100px; }
+
+.container:nth-of-type(8) .item {
+  flex-grow: 1; }
+
+.container:nth-of-type(9) .item {
+  flex-grow: 1; }
+
+.container:nth-of-type(9) .item:nth-child(2) {
+  flex-grow: 2; }
