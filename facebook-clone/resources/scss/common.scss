@@ -796,6 +796,14 @@ body{
                 border-radius: 30px;
                 font-weight: 300;
             }
+
+            .delete {
+                margin-left: auto;
+                cursor: pointer;
+                background-color: transparent;
+                border: none;
+                outline: none;
+            }
         }
     }
 

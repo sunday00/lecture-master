@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    //METHOD: like button
+    // METHOD: like button
     if (t.dataset.name === "like") {
       let active;
 
@@ -61,31 +61,107 @@ window.addEventListener("DOMContentLoaded", () => {
         active = false;
       }
 
-      // axios
-      //   .post("/data/like.json", {
-      //     dataType: "application/json",
-      //     id: t.getAttribute("data-name"),
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //   });
+      function increaseLikeCount(data) {
+        let count = active ? data.data.count : 1;
+        document.querySelector(".ajax-section .like .like-count").textContent =
+          count;
+      }
 
       axios
-        .get("/data/like.json")
+        .post("/data/like.json", {
+          dataType: "application/json",
+          id: t.getAttribute("data-name"),
+        })
         .then(({ data }) => {
-          let count = active ? data.data.count : 1;
-          document.querySelector(
-            ".ajax-section .like .like-count"
-          ).textContent = count;
+          increaseLikeCount(data);
         })
         .catch((err) => {
-          alert("logged please");
-          location.href = "http://grayfield.net";
+          //INFO: no server and dev,
+          //DEV: run on dev browser-sync, not working with post method,
+          // so, using get
+          axios
+            .get("/data/like.json")
+            .then(({ data }) => {
+              increaseLikeCount(data);
+            })
+            .catch((err) => {
+              alert("logged please");
+              location.href = "http://grayfield.net";
+            });
         });
-
-      // METHOD: more button
-    } else if (t.dataset.name === "more") {
+    }
+    // METHOD: more button
+    else if (t.dataset.name === "more") {
       t.querySelector(".hidden-menu").classList.toggle("active");
+    }
+    // METHOD: send reply comment
+    else if (t.dataset.name === "send") {
+      function addComment(data) {
+        const cmt = t.closest(".input-container").querySelector("input");
+        data = data.replace("{%COMMENT%}", cmt.value);
+
+        document
+          .querySelector(".comment-section")
+          .insertAdjacentHTML("beforeend", data);
+
+        cmt.value = "";
+      }
+
+      axios
+        .post("/templates/comment.html", {
+          dataType: "text/html",
+          id: t.getAttribute("data-name"),
+        })
+        .then(({ data }) => {
+          addComment(data);
+        })
+        .catch((err) => {
+          //INFO: no server and dev,
+          //DEV: run on dev browser-sync, not working with post method,
+          // so, using get
+          axios
+            .get("/templates/comment.html")
+            .then(({ data }) => {
+              addComment(data);
+            })
+            .catch((err) => {
+              alert("logged please");
+              location.href = "http://grayfield.net";
+            });
+        });
+    }
+    // METHOD: delete comment
+    else if (t.dataset.name === "delete") {
+      let really = confirm("sure?", "y", "n");
+
+      function deleteComment(data) {
+        t.closest(".id").remove();
+      }
+
+      if (really) {
+        axios
+          .post("/data/comment.json", {
+            dataType: "application/json",
+            id: t.getAttribute("data-name"),
+          })
+          .then(({ data }) => {
+            deleteComment(data);
+          })
+          .catch((err) => {
+            //INFO: no server and dev,
+            //DEV: run on dev browser-sync, not working with post method,
+            // so, using get
+            axios
+              .get("/data/comment.json")
+              .then(({ data }) => {
+                deleteComment(data);
+              })
+              .catch((err) => {
+                alert("logged please");
+                location.href = "http://grayfield.net";
+              });
+          });
+      }
     }
   }
 

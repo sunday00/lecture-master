@@ -623,6 +623,12 @@ body {
         background-color: var(--fds-gray-05);
         border-radius: 30px;
         font-weight: 300; }
+      #wrapper .inner .middle-box .contents .comment-section .id .delete {
+        margin-left: auto;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        outline: none; }
   #wrapper .inner .middle-box .contents .comment-input {
     display: flex;
     padding: 0.5rem 1rem;
