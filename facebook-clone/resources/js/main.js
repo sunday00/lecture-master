@@ -20,9 +20,16 @@ for (let i = 0; i < commentLengths; i++) {
   commentContainer.append(cm);
 }
 
+document
+  .querySelector(".middle-box")
+  .append(document.querySelector(".contents").cloneNode(true));
+
+//////
+
 window.addEventListener("DOMContentLoaded", () => {
   //INFO: init.
   resizeHandler();
+  document.querySelector("#page").value = 1;
 
   // FUNC: notification
   const bell = document.querySelector(".bell");
@@ -171,12 +178,31 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 //FUNC: scroll event
-function scrollFunc() {
-  let bodyH = document.body.scrollHeight;
-  let currentY = window.pageYOffset;
+let currentY = window.pageYOffset;
 
-  if (bodyH <= currentY + window.innerHeight) {
-    // TODO: load ajax
+function addPost(page) {
+  if (page > 5) return;
+
+  axios.get("/templates/content.html").then((res) => {
+    document
+      .querySelector(".middle-box")
+      .insertAdjacentHTML("beforeEnd", res.data);
+  });
+}
+
+function scrollFunc(e) {
+  if (currentY > window.pageYOffset) return;
+
+  let bodyH = document.body.scrollHeight;
+  currentY = window.pageYOffset;
+
+  if (bodyH <= currentY + window.innerHeight + 50) {
+    const page = document.querySelector("#page");
+    let pageVal = parseInt(page.value);
+
+    page.value = pageVal + 1;
+
+    addPost(page.value);
   }
 }
 
