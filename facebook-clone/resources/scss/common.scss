@@ -591,7 +591,11 @@ body{
         }
     }
 
-    .text-field-wrap .middle{}
+    .text-field-wrap .middle{
+        #imageCanvas {
+            padding: $basePadding;
+        }
+    }
 
     .text-field-wrap .bottom {
         font-size: $baseFontSize;
@@ -628,7 +632,7 @@ body{
         border-top: 1px solid var(--fds-gray-30);
         text-align: center;
         padding: $basePadding;
-        display: none;
+        // display: none;
 
         input{
             width: 100%;
@@ -642,6 +646,7 @@ body{
             border: none;
 
             &:disabled{
+                display: none;
                 background-color: var(--fds-blue-30);
             }
         }

@@ -30,6 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
   //INFO: init.
   resizeHandler();
   document.querySelector("#page").value = 1;
+  document.querySelector(".create-box .submit input").disabled = true;
 
   // FUNC: notification
   const bell = document.querySelector(".bell");
