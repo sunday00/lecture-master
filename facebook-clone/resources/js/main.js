@@ -203,7 +203,7 @@ function scrollFunc(e) {
 
     page.value = pageVal + 1;
 
-    addPost(page.value);
+    // addPost(page.value);
   }
 }
 

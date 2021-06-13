@@ -1,0 +1,29 @@
+.container {
+    display: grid;
+    grid-template-rows: 42px auto;
+    grid-template-columns: 1fr 180px 500px 308px 1fr 205px;
+    grid-template-areas: 
+        ". header header header . ."
+        ".   body   body   body . aside"
+    ;
+    gap: 10px;
+
+    #header {
+        grid-area: header;
+    }
+
+    #wrapper {
+        grid-area: body;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding-right: 0;
+        margin: 0 0;
+    }
+
+    #side-box {
+        grid-area: aside;
+    }
+
+}
+
