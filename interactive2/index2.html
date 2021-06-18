@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas></canvas>
+
+  <script>
+    let cvs = document.querySelector('canvas');
+    let ctx = cvs.getContext('2d');
+
+    var img = document.createElement("img");
+    img.onload = function () {
+      // draw();
+      // draw2();
+      draw3();
+    }
+    img.src = "http://images4.fanpop.com/image/photos/23400000/water-water-23444632-2048-1277.jpg";
+
+
+    function draw() {
+
+      ctx.save();
+      ctx.beginPath();
+
+      // put text on canvas
+      ctx.font = "72pt Verdana";
+      ctx.fillText("XBOX", 10, 100);
+      ctx.fill();
+
+
+      // use compositing to draw the background image
+      // only where the text has been drawn
+      ctx.beginPath();
+      ctx.globalCompositeOperation = "source-in";
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, cvs.width, cvs.height);
+      ctx.restore();
+
+    }
+
+    function draw2() {
+      ctx.fillStyle = "#F00";
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+
+    function draw3() {
+      var text = "NATURE";
+      ctx.globalCompositeOperation = "xor";
+
+      ctx.font = "200px 'League Spartan'";
+      ctx.textAlign = "center";
+      ctx.fillText(text, cvs.width / 2, cvs.height / 1.1);
+
+      // ctx.fillStyle = "#000";
+      // ctx.fillRect(0, 0, cvs.width, cvs.height);
+    }
+
+  </script>
+</body>
+
+</html>

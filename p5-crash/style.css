@@ -1,0 +1,15 @@
+html, body, canvas {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+
+div{
+  overflow:auto;
+}
+
+div h1 {
+  color:cornflowerblue;
+}

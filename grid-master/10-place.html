@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GRID-PRAC</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .banana {
+      grid-column: span 2;
+      background-color: var(--kiwi);
+
+      /* grid-column-start: 2;
+      grid-column-end: 5; */
+
+      grid-column: 2 / 5;
+      /* 2부터 5까지 */
+      grid-row: 7 / 9;
+      /* 7부터 9까지 */
+    }
+
+    .choco {
+      grid-column: 2 / span 2;
+      /* 2부터 2칸차지까지 */
+      grid-row: span 3 / 6;
+      /* 3칸짜리 끝에꺼 6까지. 다시 말하면 뒤에서 6부터 3칸차지*/
+    }
+
+    .item49 {
+      grid-column: span 2;
+    }
+
+    .item50 {
+      grid-column: 1 / -1;
+      /* 
+        -1 is meaning full.
+        row is also works when add grid-template-rows to parent,
+        but it's not predictable easily...
+      */
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+    <div class="item item4 banana">🍌</div>
+    <div class="item item5">5</div>
+    <div class="item item6">6</div>
+    <div class="item item7">7</div>
+    <div class="item item8">8</div>
+    <div class="item item9">9</div>
+    <div class="item item10">10</div>
+    <div class="item item11">11</div>
+    <div class="item item12">12</div>
+    <div class="item item13">13</div>
+    <div class="item item14">14</div>
+    <div class="item item15">15</div>
+    <div class="item item16 choco">🍫</div>
+    <div class="item item17">17</div>
+    <div class="item item18">18</div>
+    <div class="item item19">19</div>
+    <div class="item item20">20</div>
+    <div class="item item21">21</div>
+    <div class="item item22">22</div>
+    <div class="item item23">23</div>
+    <div class="item item24">24</div>
+    <div class="item item25">25</div>
+    <div class="item item26">26</div>
+    <div class="item item27">27</div>
+    <div class="item item28">28</div>
+    <div class="item item29">29</div>
+    <div class="item item30">30</div>
+    <div class="item item31">31</div>
+    <div class="item item32">32</div>
+    <div class="item item33">33</div>
+    <div class="item item34">34</div>
+    <div class="item item35">35</div>
+    <div class="item item36">36</div>
+    <div class="item item37">37</div>
+    <div class="item item38">38</div>
+    <div class="item item39">39</div>
+    <div class="item item40">40</div>
+    <div class="item item41">41</div>
+    <div class="item item42">42</div>
+    <div class="item item43">43</div>
+    <div class="item item44">44</div>
+    <div class="item item45">45</div>
+    <div class="item item46">46</div>
+    <div class="item item47">47</div>
+    <div class="item item48">48</div>
+    <div class="item item49">49</div>
+    <div class="item item50">50</div>
+  </main>
+</body>
+
+</html>

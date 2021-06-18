@@ -1,0 +1,32 @@
+@import '/interactive2/res/css/reset.css';
+
+@font-face {
+  font-family: Righteous;
+  src: url('/interactive2/res/Righteous-Regular.ttf');
+}
+
+body {
+  background: #000;
+}
+
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh
+}
+
+#video {
+  transform: scale(1);
+}
