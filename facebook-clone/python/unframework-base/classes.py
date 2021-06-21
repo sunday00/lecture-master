@@ -46,3 +46,31 @@ print(c1)
 
 print(Car.getManufactor())
 
+u.br()
+
+class HybridCar(Car):
+    battery = 1000
+    batDistance = 300
+
+h1 = HybridCar('sonata')
+print(h1.names)
+
+u.br()
+
+class Fruit :
+    color = 'none'
+
+class Potato (Fruit): 
+    color = 'brown'
+
+class Tomato (Fruit):
+    color = 'red'
+
+class Pomato (Potato, Tomato):
+    pass
+
+pomato = Pomato()
+
+print( pomato.color )
+print( Pomato.mro() )
+
