@@ -39,5 +39,5 @@ class ProductsSeed extends AbstractSeed
         }
 
         $table->insert($data)->save();
-    }
+    } 
 }

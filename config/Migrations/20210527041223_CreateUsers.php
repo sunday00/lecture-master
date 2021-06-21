@@ -23,17 +23,21 @@ class CreateUsers extends AbstractMigration
             'limit' => 150,
             'null'  => false
         ]);
+        $table->addColumn('image', 'string', [
+            'limit' => 255,
+            'null'  => true
+        ]);
         $table->addColumn('password', 'string', [
             'limit' => 255,
             'null'  => false
         ]);
         $table->addColumn('created_at', 'datetime', [
-            'default' => null,
-            'null'  => false
+            'default' => 'CURRENT_TIMESTAMP',
+            'null'  => true
         ]);
         $table->addColumn('modified_at', 'datetime', [
-            'default' => null,
-            'null' => false,
+            'default' => 'CURRENT_TIMESTAMP',
+            'null' => true,
         ]);
         $table->create();
     }

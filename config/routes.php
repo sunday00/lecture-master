@@ -92,6 +92,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
 $routes->prefix('admin', function (RouteBuilder $builder) {
 
     $builder->connect('/', ['controller' => 'Users', 'action' => 'index']);
+    $builder->connect('/user/add', ['controller' => 'Users', 'action' => 'add']);
 
     $builder->fallbacks(DashedRoute::class);
 });
