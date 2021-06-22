@@ -9,8 +9,8 @@ function X(cvs, o = {}) {
     text: o.letter,
   };
   this.keyframes = [
-    { v: [1, 2], l: [] },
-    { v: [2, 0.5], l: [] },
+    { v: [1, 2], l: [1, 2] },
+    { v: [2, 0.5], l: [2, 6] },
   ];
 
   this.ctx = this.cvs.getContext("2d");
@@ -60,20 +60,34 @@ function X(cvs, o = {}) {
   };
 
   this.render = () => {
-    this.ctx.globalCompositeOperation = "source-out";
-    this.ctx.font = `${this.height}px 'Righteous'`;
-    this.ctx.textAlign = "center";
-    this.ctx.fillText(this.letter.text, this.width / 2, this.height * 0.7);
-    this.ctx.fillStyle = "#000";
-    this.ctx.fillRect(0, 0, this.width, this.height);
+    this.ctx.clearRect(0, 0, this.width, this.height);
 
     let videoScale;
 
     if (this.keyframes[this.scene - 1]) {
       videoScale = this.calcAnimationValue(this.keyframes[this.scene - 1].v);
+      letterScale = this.calcAnimationValue(this.keyframes[this.scene - 1].l);
     }
 
     this.video.style.transform = `scale(${videoScale})`;
+
+    this.ctx.save();
+    this.ctx.globalCompositeOperation = "source-out";
+    // this.ctx.globalCompositeOperation = "source-in";
+    let fontSize = this.height * letterScale;
+    this.ctx.font = `${fontSize}px 'Righteous'`;
+    // this.ctx.font = `${this.width * 6}px 'Righteous'`;
+    this.ctx.textAlign = "center";
+    this.ctx.fillText(this.letter.text, this.width / 2, this.height * 0.8);
+    // this.ctx.strokeText(this.letter.text, this.width / 2, this.height * 0.7);
+    this.ctx.fillStyle = "#000";
+    this.ctx.fillRect(
+      -this.width / 2,
+      -this.height / 2,
+      this.width * 2,
+      this.height * 2
+    );
+    this.ctx.restore();
   };
 
   this.calcAnimationValue = (v) => {
@@ -91,6 +105,26 @@ window.addEventListener("load", () => {
 
   window.addEventListener("resize", x.resizeHandler);
   window.addEventListener("scroll", x.scrollHandler);
+
+  // let font = 8;
+  // function draw() {
+  //   font = font + 30;
+  //   x.ctx.globalCompositeOperation = "source-in";
+  // x.ctx.font = `15000px sans-serif`;
+  // x.ctx.fillText("hhh", 250, 2000);
+  //   x.ctx.beginPath();
+  //   x.ctx.fillStyle = "#000";
+  //   x.ctx.fillRect(
+  //     x.width / 2,
+  //     x.height * 0.8,
+  //     x.width * font,
+  //     x.height * font
+  //   );
+
+  //   requestAnimationFrame(draw);
+  // }
+
+  // draw();
 });
 
 // let font = new FontFace(
