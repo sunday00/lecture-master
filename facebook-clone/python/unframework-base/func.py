@@ -54,7 +54,37 @@ print( st[0] )
 
 def recursion (n) :
     print(n)
+    if n > 300:
+        return
     recursion(n + 1)
 
 recursion(1)
+
+def any_howMany_args( *args ) -> list:
+    l = []
+    for a in args:
+        l.append(type(a))
+    return l
+
+print( any_howMany_args(10, True, None, ex, 'asd') )
+
+def any_howMany_args2( n:int, *args ) -> list:
+    l = []
+    i = 0
+    for a in args:
+        i+=1
+        if i > n:
+            break
+        l.append(type(a))
+    return l
+
+print( any_howMany_args2(3, True, None, ex, 'asd') )
+
+def any_howMany_args3( n:int, **args ) -> list:
+    l = [n]
+    for k, v in args.items():
+        l.append({k:v})
+    return l
+
+print( any_howMany_args3( 3, name="sunday", age="35" ) )
 
