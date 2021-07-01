@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    svg {
+      position: absolute;
+      animation: spin 5s linear infinite;
+    }
+
+    svg:nth-child(2n-1) {
+      animation: spin 5s linear reverse infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0);
+      }
+
+      100% {
+        transform: rotate(720deg);
+      }
+    }
+
+    h1 {
+      position: absolute;
+      top: 45%;
+      left: 61%;
+      color: #009988;
+      z-index: 90;
+      text-shadow: 1px 1px 2px gold;
+    }
+  </style>
+</head>
+
+<body>
+  <svg viewBox="0 0 600 600" width="100%">
+    <defs>
+      <g id="dec" fill="#fff">
+        <path d="M300,300 Q450,150 600,300 Q450,250 300,300" />
+      </g>
+    </defs>
+    <circle cx="50%" cy="50%" r="50%" fill="hotpink"></circle>
+  </svg>
+
+  <h1>AWESOME!</h1>
+
+  <script>
+    for (let i = 0; i < 360; i += 30) {
+      const u = document.createElementNS("http://www.w3.org/2000/svg", "use");
+      u.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#dec");
+      u.setAttribute("transform", `rotate(${i}, 300, 300)`);
+      document.querySelector('svg').appendChild(u);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      const c = document.querySelector('svg').cloneNode(true);
+      c.setAttribute('width', (8 - i) * 20 + '%');
+      document.body.appendChild(c);
+
+    }
+  </script>
+</body>
+
+</html>
