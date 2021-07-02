@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function solution(s) {
+      // let n = s;
+      // for (let i = 0; i < n.length - 1; i++) {
+      //   if (n[i] === n[i + 1]) {
+      //     n = n.replace(`${n[i]}${n[i]}`, '');
+      //     i = 0;
+      //   }
+      // }
+
+      // return n[0] === n[1] ? 1 : 0;
+
+      let stack = [];
+      let ss = s.split("");
+
+      for (let i = 0; i < s.length; i++) {
+        const c = ss.pop();
+        if (stack[stack.length - 1] === c) {
+          stack.pop();
+        } else {
+          stack.push(c);
+        }
+      }
+      return stack.length === 0 ? 1 : 0;
+    }
+
+    console.log(solution('baabaa'));
+  </script>
+</body>
+
+</html>

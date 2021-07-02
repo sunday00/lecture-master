@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function solution(record) {
+      let log = [];
+      let people = {};
+      let tmpNamed = {};
+
+      while (record.length) {
+        let l = record.pop();
+        let sl = l.split(" ");
+
+        let name = people[sl[1]];
+
+        if (!name && sl[2]) {
+          name = sl[2];
+          people[sl[1]] = sl[2];
+        } else if (!name && !sl[2]) {
+          tmpNamed[sl[1]] = log.length;
+          name = sl[1];
+          people[sl[1]] = sl[1];
+        } else if (name === sl[1]) {
+          log[tmpNamed[sl[1]]] = log[tmpNamed[sl[1]]].replace(sl[1], sl[2]);
+          name = sl[2];
+          people[sl[1]] = sl[2];
+        }
+
+        if (sl[0] === 'Enter') log.push(name + '님이 들어왔습니다.');
+        else if (sl[0] === 'Leave') log.push(name + '님이 나갔습니다.');
+      }
+
+      return log.reverse();
+    }
+
+    console.log(solution([
+      "Enter uid1234 Muzi",
+      "Enter uid4567 Prodo",
+      "Leave uid1234",
+      "Enter uid1234 Prodo",
+      "Change uid4567 Ryan",
+      "Leave uid4567",
+      "Leave uid1234",
+      "Enter uid8888 Mario",
+      "Enter uid9999 Ryan",
+      "Enter uid2222 Muzi",
+      "Leave uid8888",
+      "Leave uid9999",
+      "Change uid2222 Muzi",
+      "Change uid2222 Muzi",
+      "Leave uid2222",
+      "Enter uid2222 Muzi",
+      "Change uid2222 Muzi",
+      "Change uid2222 Muzi",
+      "Change uid2222 Muzi",
+    ]));
+  </script>
+</body>
+
+</html>

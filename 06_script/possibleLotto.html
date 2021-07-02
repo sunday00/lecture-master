@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function solution(lottos, win_nums) {
+      let equalLen = 0;
+      let zeroLen = 0;
+
+      lottos.forEach(n => {
+        if (n === 0) {
+          zeroLen++;
+          return;
+        }
+        if (win_nums.indexOf(n) > -1) equalLen++;
+      });
+
+      let best = 7 - (equalLen + zeroLen);
+      let worst = 7 - (equalLen);
+      return [best === 7 ? 6 : best, worst === 7 ? 6 : worst];
+    }
+
+    let result = solution([1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12]);
+    console.log(result);
+  </script>
+</body>
+
+</html>

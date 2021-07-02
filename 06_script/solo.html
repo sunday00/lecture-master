@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    function solution(nums) {
+      let result = 0;
+      let isSo = false;
+      let sum = 0;
+      for (let x = 0; x < nums.length; x++) {
+        for (let y = x + 1; y < nums.length; y++) {
+          for (let z = y + 1; z < nums.length; z++) {
+            sum = nums[x] + nums[y] + nums[z];
+            for (let i = 2; i < Math.floor(sum / 2); i++) {
+              if (sum % i === 0) {
+                isSo = false;
+                break;
+              }
+              isSo = true;
+            }
+
+            if (isSo) result++;
+            isSo = false;
+          }
+        }
+      }
+
+      return result;
+    }
+
+    let result = solution([1, 2, 3, 4]);
+    console.log(result);
+
+  </script>
+</body>
+
+</html>

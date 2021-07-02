@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function solution(n) {
+
+      if (n < 3) return n;
+
+      let keepDivide = true;
+
+      let t = n;
+      let r = [];
+
+      while (keepDivide) {
+        r.unshift(t % 3);
+        t = Math.floor(t / 3);
+
+        if (t < 3) {
+          r.unshift(t);
+          keepDivide = false;
+        }
+      }
+
+      console.log(r)
+
+      let sum = 0;
+      r.forEach((x, i) => {
+        sum += x * (3 ** i)
+      })
+
+      return sum;
+    }
+
+    console.log(solution(2));
+  </script>
+</body>
+
+</html>

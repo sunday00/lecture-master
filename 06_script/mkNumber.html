@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function solution(numbers, target) {
+      let cnt = 0;
+
+      function calc(current, i, op) {
+        if (op === '+') {
+          current += numbers[i];
+        } else {
+          current -= numbers[i];
+        }
+
+        if (i === numbers.length - 1) {
+          if (current === target) cnt++;
+          return;
+        }
+
+        calc(current, i + 1, '+');
+        calc(current, i + 1, '-');
+      }
+
+      calc(0, 0, '+');
+      calc(0, 0, '-');
+
+      return cnt;
+    }
+
+    console.log(solution([1, 1, 1, 1, 1], 3));
+  </script>
+</body>
+
+</html>

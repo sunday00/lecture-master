@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p></p>
+
+  <p class="p2"></p>
+
+  <script>
+    function solution(absolutes, signs) {
+      let sum = 0;
+      absolutes.map((a, i) => {
+        sum += signs[i] ? a : -1 * a;
+      })
+
+      return sum;
+    }
+    let result = solution([4, 7, 12], [true, false, true]);
+    document.querySelector('p').innerHTML = result;
+
+    function solution2(nId) {
+      let reg = /[~!@#$%^&*()=+\[\{\]\}:?,<>\/]+/g;
+      let isSpecial = reg.test(nId);
+      let indexDot = nId.indexOf('.');
+      let isDoubleDot = nId.indexOf('..');
+      if (3 <= nId.length && nId.length <= 15
+        && !isSpecial
+        && indexDot !== 0 && indexDot !== nId.length - 1
+        && isDoubleDot > 0) {
+        return nId;
+      } else {
+        let s = nId
+          .toLowerCase()
+          .replace(reg, '')
+          .replace(/(\.)\1+/g, '.')
+          .replace(/(^\.)|(\.$)/g, '');
+
+        if (s === '') s = 'a';
+
+        s = s.slice(0, 15)
+          .replace(/(\.$)/g, '');
+        return s.padEnd(3, s[s.length - 1]);
+      }
+    }
+    let result2 = solution2('=.=');
+    document.querySelector('.p2').innerHTML = result2;
+
+    // 7 12 16 24 26
+
+  </script>
+</body>
+
+</html>
