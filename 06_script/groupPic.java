@@ -47,7 +47,7 @@ public class Solution {
                 
                 if( resultBool ) cnt++;
                 
-                return;
+                return; 
             }
             
             permutation(remains, currentState, currentIdx+1);
