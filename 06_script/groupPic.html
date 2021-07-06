@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
   <meta charset="UTF-8">
@@ -51,3 +52,40 @@
 </body>
 
 </html>
+=======
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(data) {
+        // const members = ["A", "C", "F", "J", "M", "N", "R", "T"];
+        const members = ["A", "C", "F", "J"];
+
+        let middleResult = [];
+        function makeTest(remains, currentIdx) {
+          for (let i = 0; i < remains.length; i++) {
+            let copied = Array.from(remains);
+            middleResult[currentIdx] = copied[i];
+            copied.splice(i, 1);
+
+            if (copied.length > 0) {
+              makeTest(copied, currentIdx + 1);
+            }
+          }
+          if (currentIdx === members.length - 1) {
+            console.log(middleResult);
+          }
+        }
+
+        makeTest(members, 0);
+      }
+
+      console.log(solution(["N~F=0", "R~T>2"]));
+    </script>
+  </body>
+</html>
+>>>>>>> 26adcc4519083afebbcb7f34948471dcd5a8adbf
