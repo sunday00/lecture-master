@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    const myHashMap = new Map();
+
+    const funcEvenVoid = () => { }
+
+    myHashMap.set(funcEvenVoid, 'value!!')
+
+    console.log(myHashMap.get(funcEvenVoid))
+
+    const arr1 = [1, 2, 3];
+    myHashMap.set(arr1, { a: 'val', b: 'val2' })
+
+    console.log(myHashMap.get(arr1))
+
+    console.log(myHashMap.size)
+
+    for (let [k, v] of myHashMap) {
+      console.log(k, v);
+    }
+
+  </script>
+</body>
+
+</html>

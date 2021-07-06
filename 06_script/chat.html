@@ -11,34 +11,51 @@
 <body>
   <script>
     function solution(record) {
-      let log = [];
-      let people = {};
-      let tmpNamed = {};
+      // let log = [];
+      // let people = {};
+      // let tmpNamed = {};
 
-      while (record.length) {
-        let l = record.pop();
-        let sl = l.split(" ");
+      // while (record.length) {
+      //   let l = record.pop();
+      //   let sl = l.split(" ");
 
-        let name = people[sl[1]];
+      //   let name = people[sl[1]];
 
-        if (!name && sl[2]) {
-          name = sl[2];
-          people[sl[1]] = sl[2];
-        } else if (!name && !sl[2]) {
-          tmpNamed[sl[1]] = log.length;
-          name = sl[1];
-          people[sl[1]] = sl[1];
-        } else if (name === sl[1]) {
-          log[tmpNamed[sl[1]]] = log[tmpNamed[sl[1]]].replace(sl[1], sl[2]);
-          name = sl[2];
-          people[sl[1]] = sl[2];
-        }
+      //   if (!name && sl[2]) {
+      //     name = sl[2];
+      //     people[sl[1]] = sl[2];
+      //   } else if (!name && !sl[2]) {
+      //     tmpNamed[sl[1]] = log.length;
+      //     name = sl[1];
+      //     people[sl[1]] = sl[1];
+      //   } else if (name === sl[1]) {
+      //     log[tmpNamed[sl[1]]] = log[tmpNamed[sl[1]]].replace(sl[1], sl[2]);
+      //     name = sl[2];
+      //     people[sl[1]] = sl[2];
+      //   }
 
-        if (sl[0] === 'Enter') log.push(name + '님이 들어왔습니다.');
-        else if (sl[0] === 'Leave') log.push(name + '님이 나갔습니다.');
+      //   if (sl[0] === 'Enter') log.push(name + '님이 들어왔습니다.');
+      //   else if (sl[0] === 'Leave') log.push(name + '님이 나갔습니다.');
+      // }
+
+      // return log.reverse();
+
+      const logs = [];
+      const users = new Map();
+
+      for (let i = 0; i < record.length; i++) {
+        const r = record[i].split(" ");
+        if (r[2]) users.set(r[1], r[2]);
       }
 
-      return log.reverse();
+      for (let i = 0; i < record.length; i++) {
+        const r = record[i].split(" ");
+        if (r[0] === 'Enter') logs.push(`${users.get(r[1])}님이 들어왔습니다.`);
+        else if (r[0] === 'Leave') logs.push(`${users.get(r[1])}님이 나갔습니다.`);
+      }
+
+      return (logs)
+
     }
 
     console.log(solution([

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function solution(data) {
+      const members = [
+        'A',
+        'C',
+        'F',
+        'J',
+        'M',
+        'N',
+        'R',
+        'T',
+      ];
+
+      function rec(test, remains) {
+
+        console.log(test);
+        test[0] = remains.shift();
+
+        if (test.length > 8) {
+          //
+
+          //
+
+
+          return;
+        }
+
+        rec(test, remains);
+
+      }
+
+      rec([], [...members]);
+
+
+
+    }
+
+    console.log(solution(["N~F=0", "R~T>2"]))
+  </script>
+</body>
+
+</html>
