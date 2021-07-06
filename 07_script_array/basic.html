@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    let AAA = [];
+    axios.get('https://my-json-server.typicode.com/sunday00/placeholders/metaVariables').then((res) => {
+      AAA = res.data.map(d => d.value);
+    }).then(() => {
+      let result = AAA.push('some new val');
+      console.log(result);
+
+      console.log(AAA);
+
+      console.log(AAA.includes('foo'));
+
+
+    });
+
+  </script>
+</body>
+
+</html>

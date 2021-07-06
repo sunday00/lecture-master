@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      display: grid;
+      height: 100%;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .contents {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contents span {
+      display: block;
+      font-size: 4rem;
+    }
+
+    main div {
+      transition: background-color 100ms;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <div></div>
+    <div class="contents">
+      <span id="result"></span>
+    </div>
+    <div></div>
+
+    <div></div>
+    <div></div>
+    <div></div>
+  </main>
+
+  <script>
+    let result = document.querySelector('#result');
+    let divs = document.querySelectorAll('main div');
+    let bool = true;
+
+    function getColor() {
+      return Math.floor(Math.random() * 256);
+    }
+    function getOpacity() {
+      return Math.floor(Math.random() * 11) / 10;
+    }
+
+    setInterval(() => {
+      bool = !bool;
+      result.innerHTML = bool;
+
+      divs.forEach(d => {
+        d.style.backgroundColor = `rgba( ${getColor()}, ${getColor()}, ${getColor()}, ${getOpacity()} )`;
+      });
+    }, 200);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "07_script_array",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "browser-sync": "^2.27.4"
+  }
+}
