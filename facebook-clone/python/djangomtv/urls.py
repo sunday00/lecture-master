@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import index, formex
+from main.views import index, formex, resBody, jsonBody
 from sub1.views import subIndex
 
 urlpatterns = [
@@ -23,6 +23,8 @@ urlpatterns = [
 
     path('', index),
     path('formex/', formex),
+    path('resBody/', resBody),
+    path('jsonBody/', jsonBody),
 
     path('aa/', subIndex),
 ]
