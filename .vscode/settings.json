@@ -1,0 +1,8 @@
+{
+  "cSpell.words": ["crossorigin", "formex"],
+  "python.analysis.extraPaths": [
+    "facebook-clone/python",
+    "facebook-clone/python/django-crash",
+    "facebook-clone/python/django-crash/lib/python3.9/site-packages"
+  ]
+}

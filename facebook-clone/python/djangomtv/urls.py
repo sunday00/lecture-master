@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import index
+from main.views import index, formex
 from sub1.views import subIndex
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', index),
+    path('formex/', formex),
+
     path('aa/', subIndex),
 ]
