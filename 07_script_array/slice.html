@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slice</title>
+</head>
+
+<body>
+  <script>
+    let colors = ['red', 'green', 'blue', 'yellow',];
+
+    console.log(colors)
+
+    let n = colors.splice(1, 2, 'hotpink');
+
+    console.log(n, colors);
+
+    let nnn = [7, 43, 76, 1, 65, -2, -34, 0.3, 100, 4, 231, 876, 31, 35, 55, -78];
+
+    nnn.sort((a, b) => a - b);
+
+    console.log(nnn);
+
+    console.log([] == [])
+
+    console.log([1, 2, 3][0] === [1, 2, 3][0])
+
+    let = nnn;
+
+    console.log(nnn)
+
+    let myTag = function (strings, a, b, c) {
+      console.log(strings);
+      console.log(a, b, c);
+    }
+    let html = 5;
+    let css = 3;
+    let js = 'es10';
+    let string = myTag`HTML${html}, CSS${css}, JavaScript ${js}`;
+
+  </script>
+</body>
+
+</html>
