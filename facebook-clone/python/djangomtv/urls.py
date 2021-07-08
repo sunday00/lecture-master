@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main.views import index, formex, resBody, jsonBody
-from sub1.views import subIndex
+from sub1.views import globalTemplate, subIndex
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,5 @@ urlpatterns = [
     path('jsonBody/', jsonBody),
 
     path('aa/', subIndex),
+    path('aa/global-template', globalTemplate),
 ]
