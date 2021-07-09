@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>for of</title>
+  <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css">
+  <link rel="stylesheet" href="p5/libraries/style.css" />
+  <style>
+    main .main ul {
+      padding: 0;
+    }
+
+    main .main ul li {
+      background-color: #dededede;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      list-style: none;
+      border-radius: 0.5rem;
+      box-shadow: 0.2rem 0.2rem 0.3rem #ababab;
+      transition: transform 100ms;
+    }
+
+    main .main ul li:hover {
+      /* transform-style: preserve-3d; */
+      transform: perspective(512px) rotateY(10deg);
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header"></header>
+  <main class="container">
+    <h1>Hello for of</h1>
+    <section class="main row">
+      <aside class="col"></aside>
+      <section class="col-10">
+        <!-- <div id="canvasArea"></div> -->
+        <ul></ul>
+      </section>
+      <aside class="col"></aside>
+    </section>
+  </main>
+</body>
+<footer id="footer"></footer>
+
+<!-- <script src="p5/libraries/p5.js"></script>
+<script src="p5/looper/sketch.js"></script> -->
+
+<script>
+
+  let ul = document.querySelector('main .main ul');
+
+  let fruits = [
+    'apple', 'banana', 'cherry',
+    'durian', 'egg', 'friedChicken',
+    'grape', 'hotdog',
+  ];
+
+  let colors = [
+    'red', 'yellow', 'darkred',
+    'magenta', 'white', 'brown',
+    'purple', 'sandybrown'
+  ];
+
+  let fruitColors = new Map();
+
+  for (let fruit of fruits) {
+    fruitColors.set(fruit, colors[fruits.indexOf(fruit)]);
+  }
+
+  for (let fruit of fruitColors) {
+    console.log(`%c${fruit[0]}`, `color:${fruit[1]};background-color:pink;padding:4px`);
+    const li = document.createElement('li');
+    li.textContent = fruit[0];
+    li.style.color = fruit[1];
+    ul.appendChild(li);
+  }
+
+  const frameworks = {
+    laravel: 'php',
+    cake: 'php',
+    vue: 'js',
+    react: 'js',
+    spring: 'java',
+    koa: 'node',
+    express: 'node',
+    flask: 'py',
+    tailwind: 'css'
+  }
+
+  for (let k in frameworks) {
+    console.log(`%c${k} - ${frameworks[k]}`, `color:#fff;background-color:cornflowerblue;padding:4px`);
+  }
+
+
+
+</script>
+
+</html>
