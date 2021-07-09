@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
-    "browser-sync": "^2.27.4"
+    "browser-sync": "^2.27.4",
+    "wingcss": "^1.0.0-beta"
   }
 }
