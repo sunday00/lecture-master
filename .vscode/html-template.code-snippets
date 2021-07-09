@@ -15,6 +15,23 @@
   // 	],
   // 	"description": "Log output to console"
   // }
+  "block template": {
+    "scope": "html",
+    "prefix": "block",
+    "body": [
+      "{% block $1 %}",
+      "{% endblock $1 %}"
+    ],
+    "description": "block template for django template extends."
+  },
+  "extends template": {
+    "scope": "html",
+    "prefix": "extends",
+    "body": [
+      "{% extends '$1' %}",
+    ],
+    "description": "extends template for django template extends."
+  },
   "csrf template": {
     "scope": "html",
     "prefix": "csrf",

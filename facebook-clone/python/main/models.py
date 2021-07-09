@@ -8,3 +8,5 @@ class Article(models.Model):
   likeCnt = PositiveIntegerField()
   viewCnt = PositiveIntegerField()
 
+  def __str__(self):
+    return self.title

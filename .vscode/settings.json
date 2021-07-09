@@ -3,6 +3,26 @@
   "python.analysis.extraPaths": [
     "facebook-clone/python",
     "facebook-clone/python/django-crash",
-    "facebook-clone/python/django-crash/lib/python3.9/site-packages"
-  ]
+    "facebook-clone/python/django-crash/lib/python3.9/site-packages",
+  ],
+  "python.autoComplete.extraPaths": [
+    "facebook-clone/python",
+    "facebook-clone/python/django-crash",
+    "facebook-clone/python/django-crash/lib/python3.9/site-packages",
+  ],
+  "files.associations": {
+    "**/*.html": "html",
+    "**/templates/*.html": "django-html",
+    "**/templates/**/*.html": "django-html",
+    "**/templates/**/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+  },
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "unibeautify.enabled": true,
+  "[django-html]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
+  }
 }
