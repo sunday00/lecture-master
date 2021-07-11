@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <h1>dig template2</h1>
+{% endblock title %}
+
+{% block contents %}
+  {% lorem %}
+
+  <hr/>
+
+  {% lorem 2 w %}
+
+  <hr/>
+
+  {% lorem 3 p %}
+
+  <hr/>
+
+  {% lorem 3 w random %}
+
+{% endblock contents %}

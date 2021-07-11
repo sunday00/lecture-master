@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["crossorigin", "formex"],
+  "cSpell.words": [
+    "crossorigin",
+    "endcomment",
+    "endwith",
+    "forloop",
+    "formex",
+    "revcounter"
+  ],
   "python.analysis.extraPaths": [
     "facebook-clone/python",
     "facebook-clone/python/django-crash",

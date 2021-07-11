@@ -16,7 +16,7 @@
   // 	"description": "Log output to console"
   // }
   "block template": {
-    "scope": "html",
+    "scope": "django-html",
     "prefix": "block",
     "body": [
       "{% block $1 %}",
@@ -25,7 +25,7 @@
     "description": "block template for django template extends."
   },
   "extends template": {
-    "scope": "html",
+    "scope": "django-html",
     "prefix": "extends",
     "body": [
       "{% extends '$1' %}",
@@ -33,15 +33,35 @@
     "description": "extends template for django template extends."
   },
   "csrf template": {
-    "scope": "html",
+    "scope": "django-html",
     "prefix": "csrf",
     "body": ["{% csrf_token %}"],
     "description": "csrf token hidden form field for django template."
   },
   "static template": {
-    "scope": "html",
+    "scope": "django-html",
     "prefix": "static",
     "body": ["{% load static %}"],
     "description": "static file load relative path for django template."
+  },
+  "foreach":{
+    "scope": "django-html",
+    "prefix": ["foreach", "forin", "loop"],
+    "body": [
+      "{% for $1 in $2 %}",
+      "\t$3",
+      "{% endfor $2 %}"
+    ],
+    "description": "loop for each for django templates."
+  },
+  "condition":{
+    "scope": "django-html",
+    "prefix": ["if", "cond"],
+    "body": [
+      "{% if $1 %}",
+      "\t$2",
+      "{% endif %}"
+    ],
+    "description": "conditionnal contenxt for django templates."
   }
 }

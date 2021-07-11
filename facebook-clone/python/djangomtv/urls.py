@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import index, formex, resBody, jsonBody
+from main.views import index, formex, resBody, jsonBody, digTemplate, digTemplate2
 from sub1.views import globalTemplate, subIndex
 
 urlpatterns = [
@@ -28,4 +28,7 @@ urlpatterns = [
 
     path('aa/', subIndex),
     path('aa/global-template', globalTemplate),
+
+    path('dig-template', digTemplate),
+    path('dig-template2', digTemplate2),
 ]

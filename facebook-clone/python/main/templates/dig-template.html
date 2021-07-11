@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <h1>dig template</h1>
+{% endblock title %}
+
+{% block contents %}
+  <p>{{ val }}</p>
+  <p>{{ val.0 }}</p>
+
+  <hr/>
+
+  <p>{{ person.name }}</p>
+
+  <hr/>
+
+  
+  <ul>
+    {% for article in articles %}
+      <li>
+        <span>
+          {% comment %} [{{ forloop.counter }}] {% endcomment %}
+          {% comment %} [{{ forloop.counter0 }}] {% endcomment %}
+          [{{ forloop.revcounter }}]
+        </span>
+        <span>
+          {% comment %} {{ article.title }} {% endcomment %}
+          {% comment %} {{ article.title|length }} {% endcomment %}
+          {% comment %} {{ article.title|lower }} {% endcomment %}
+          {% comment %} {{ article.title|add:"HO" }} {% endcomment %}
+          {{ article.title|truncatechars:45 }}
+        </span>
+        {% with manyLike=30 %}
+        {% if article.likeCnt > manyLike %}
+          <span style="color:tomato;font-weight:bold;">
+            👍{{ article.likeCnt }} HOT
+          </span>
+        {% else %}
+          <span>👍{{ article.likeCnt }}</span>  
+        {% endif %}
+        {% endwith manyLike %}
+      </li>
+    {% endfor articles %}
+  </ul>
+
+
+{% endblock contents %}

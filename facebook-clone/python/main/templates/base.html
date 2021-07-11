@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>django-crash</title>
-    {% block commonStyle %}{% endblock commonStyle %}
+    <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+    {% block pageStyle %}{% endblock pageStyle %}
   </head>
 
   <body>
     {% block header %}{% endblock header %}
-    <main>
+    <main class='container'>
       {% block title %}{% endblock title %}
       {% block contents %}{% endblock contents %}
     </main>

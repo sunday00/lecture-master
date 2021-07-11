@@ -2,6 +2,8 @@ from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from djangomtv.utils import console
 
+from .models import Article
+
 # Create your views here.
 
 
@@ -22,3 +24,19 @@ def resBody(req):
 
 def jsonBody(req):
     return JsonResponse({"apple": "red", "banana":"yellow"})
+
+def digTemplate(req):
+    articles = Article.objects.all()
+
+    return render(req, 'dig-template.html', {
+        'val': [100, 200, 300],
+        'person' : {'name': 'sunday', 'score': 10},
+        'articles': articles
+    })
+
+def digTemplate2(req):
+    articles = Article.objects.all()
+
+    return render(req, 'dig-template2.html', {
+        'articles': articles
+    })
