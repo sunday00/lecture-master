@@ -1,6 +1,8 @@
 {
   "name": "p5",
   "projects": [
-    "looper"
+    "looper",
+    "todo",
+    "todo"
   ]
 }

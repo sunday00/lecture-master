@@ -1,0 +1,14 @@
+fieldset{
+  position: relative;
+}
+
+fieldset input {
+  position: relative;
+  box-sizing: border-box;
+}
+
+fieldset button {
+  width: 100%;
+
+}
+
