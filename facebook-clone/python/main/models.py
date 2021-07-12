@@ -9,4 +9,4 @@ class Article(models.Model):
   viewCnt = PositiveIntegerField()
 
   def __str__(self):
-    return self.title
+    return f'idL{self.id},title:{self.title}, likeCnt:{self.likeCnt}, viewCnt:{self.viewCnt}'
