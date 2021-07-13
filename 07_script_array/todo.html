@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>todo</title>
+  <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css">
+  <link rel="stylesheet" href="p5/libraries/style.css" />
+  <style>
+    .col.upd div {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>TODO</h1>
+    <div id="canvasArea"></div>
+    <section class="row">
+
+      <fieldset class="col cre">
+        <legend>cre</legend>
+        <input type="text" name="cre" />
+      </fieldset>
+
+      <fieldset class="col upd">
+        <legend>upd</legend>
+        <div>
+          <input type="number" name="idx" />
+          <input type="text" name="upd" />
+        </div>
+      </fieldset>
+
+      <fieldset class="col del">
+        <legend>del</legend>
+        <input type="number" name="del" />
+      </fieldset>
+
+      <fieldset class="col quit">
+        <legend>quit</legend>
+        <button>quit</button>
+      </fieldset>
+
+    </section>
+  </main>
+</body>
+
+<script src="p5/libraries/p5.js"></script>
+<script src="p5/todo/sketch.js"></script>
+
+</html>
