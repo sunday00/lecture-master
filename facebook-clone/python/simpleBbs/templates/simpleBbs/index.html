@@ -1,0 +1,49 @@
+<!-- unibeautify:disable  -->
+{% extends app_name|add:'/base.html' %}
+<!-- unibeautify:enable -->
+
+{% block pageStyle %}
+  <style>
+    ul li {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      margin-bottom: 1em;
+    }
+
+    .img {
+      width: 200px;
+      background-color: #3246;
+      padding: 10px;
+    }
+
+    img {
+      width: 100%;
+    }
+  </style>
+{% endblock pageStyle %}
+
+{% block title %}
+  <h1>Blog</h1>
+{% endblock title %}
+
+{% block contents %}
+  <ul>
+    {% for blog in blogs %}
+      <li>
+        <span>
+          <a href="{% url 'simpleBbs:read' pk=blog.id %}">
+            {{blog.title}}
+          </a>
+        </span>
+        <span>{{blog.contents}}</span>
+        <span class="img">
+          {% if blog.img %}
+            <img src="{{blog.img.url}}" alt="img">
+          {% else %}
+            no image
+          {% endif %}
+        </span>
+      </li>
+    {% endfor blogs %}
+  </ul>
+{% endblock contents %}

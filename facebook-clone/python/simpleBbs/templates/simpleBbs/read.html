@@ -1,0 +1,27 @@
+<!-- unibeautify:disable  -->
+{% extends app_name|add:'/base.html' %}
+<!-- unibeautify:enable -->
+
+{% block pageStyle %}
+  <style>
+    img {
+      max-width: 100%;
+    }
+  </style>
+{% endblock pageStyle %}
+
+{% block title %}
+  <h1>Blog - read</h1>
+{% endblock title %}
+
+{% block contents %}
+  <h3>{{blog.title}}</h3>
+
+  <p>{{blog.contents}}</p>
+
+  <div>
+    {% if blog.img %}
+      <img src="{{blog.img.url}}" alt="img">
+    {% endif %}
+  </div>
+{% endblock contents %}

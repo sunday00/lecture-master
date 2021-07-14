@@ -5,7 +5,8 @@
     "endwith",
     "forloop",
     "formex",
-    "revcounter"
+    "revcounter",
+    "unibeautify"
   ],
   "python.analysis.extraPaths": [
     "facebook-clone/python",
