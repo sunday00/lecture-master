@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css">
+  <style>
+    body {
+      font-size: 2rem;
+    }
+
+    .contents p {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      place-items: center;
+    }
+
+    .contents p span {
+      text-align: center;
+      transition: all 300ms;
+    }
+
+    .contents p span.selected {
+      font-size: 1.5em;
+      font-weight: bolder;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>function</h1>
+    <section class="contents"></section>
+  </main>
+</body>
+
+<script>
+  let p = document.createElement('p');
+  let cnt = 204;
+
+  function greet(str, numTimes) {
+    let spans = [];
+    for (let i = 0; i < numTimes; i++) {
+      let span = document.createElement('span');
+      span.textContent = str;
+
+      spans.push(span);
+      p.appendChild(span);
+    }
+    return spans;
+  }
+
+  let spans = greet('HO', cnt);
+
+  document.querySelector('section').appendChild(p);
+
+  let interV = setInterval(() => {
+    document.querySelectorAll('.selected').forEach((s) => {
+      s.classList.remove('selected');
+      s.style.color = "black";
+    });
+
+    document.querySelectorAll('main section p span').forEach((s) => {
+      if (Math.floor(Math.random() * 20) === 1) {
+        s.classList.add('selected');
+        s.style.color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+      }
+    });
+  }, 1000);
+</script>
+
+</html>
