@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cbv</title>
+    <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+    <style>
+      ul li {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        margin-bottom: 1em;
+      }
+
+      .img {
+        width: 200px;
+        background-color: #3246;
+        padding: 10px;
+      }
+
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="container">
+      <h1>CBV: class based view</h1>
+      <ul>
+        {% for blog in blog_list %}
+          <li>
+            <span>
+              <a href="{% url 'simpleBbs:read' pk=blog.id %}">
+                {{blog.title}}
+              </a>
+            </span>
+            <span>{{blog.contents}}</span>
+            <span class="img">
+              {% if blog.img %}
+                <img src="{{blog.img.url}}" alt="img">
+              {% else %}
+                no image
+              {% endif %}
+            </span>
+          </li>
+        {% endfor blogs %}
+      </ul>
+    </main>
+  </body>
+
+</html>

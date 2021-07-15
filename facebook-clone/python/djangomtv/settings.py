@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'main',
     'sub1',
     'simpleBbs',
+    'cbv',
     'django_seed',
     'django.contrib.admin',
     'django.contrib.auth',

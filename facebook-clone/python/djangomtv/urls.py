@@ -20,6 +20,7 @@ from django.urls import path, include
 # from main.views import index, formex, resBody, jsonBody, digTemplate, digTemplate2
 from main.views import index, formex, resBody, jsonBody
 from sub1.views import globalTemplate, subIndex
+from cbv.views import CbvList, CbvRead
 
 urlpatterns = [
     path('', index),
@@ -33,7 +34,9 @@ urlpatterns = [
     path('dig-template/', include('main.urls')),
     # path('dig-template2', digTemplate2),
 
-    path('simple-bbs/', include('simpleBbs.urls'))
+    path('simple-bbs/', include('simpleBbs.urls')),
+    path('cvb-bbs/', CbvList.as_view()),
+    path('cvb-bbs/<int:pk>/', CbvRead.as_view())
 ]
 
 # urlpatterns += path('admin/', admin.site.urls),
