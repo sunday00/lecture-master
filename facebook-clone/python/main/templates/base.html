@@ -11,7 +11,17 @@
   </head>
 
   <body>
-    {% block header %}{% endblock header %}
+    <header>
+      {% if user.is_authenticated %}
+        <span>
+          <a href="/auth/profile/{{ user.id }}">{{ user }}</a>
+        </span>
+        <a href="/auth/logout">Logout</a>
+      {% else %}
+        <a href="/auth/sign-up">sign-up</a>
+        <a href="/auth/login">login</a>
+      {% endif %}
+    </header>
     <main class='container'>
       {% block title %}{% endblock title %}
       {% block contents %}{% endblock contents %}

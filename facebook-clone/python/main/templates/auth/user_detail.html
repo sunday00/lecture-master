@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <h1>ME?</h1>
+{% endblock title %}
+
+{% block contents %}
+  <p>{{user.id}}</p>
+  <p>{{user.username}}</p>
+  <p>{{user.email}}</p>
+  <p>{{user.is_staff}}</p>
+{% endblock contents %}

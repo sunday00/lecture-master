@@ -33,6 +33,7 @@ urlpatterns = [
 
     path('dig-template/', include('main.urls')),
     # path('dig-template2', digTemplate2),
+    path('auth/', include('main.urls')),
 
     path('simple-bbs/', include('simpleBbs.urls')),
     path('cvb-bbs/', CbvList.as_view()),
