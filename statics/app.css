@@ -1,0 +1,18 @@
+input{
+  box-sizing: border-box;
+}
+
+.grid-row{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, auto));
+  gap: 3em;
+}
+
+.grid-row.phone{
+  grid-template-columns: 8fr 1fr 8fr 1fr 8fr;
+  gap: 0;
+}
+
+.danger{
+  background-color: rgb(230, 38, 38);
+}

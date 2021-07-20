@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "symfony/var-dumper": "^5.3"
+    },
+    "require": {
+        "fakerphp/faker": "^1.15"
+    }
+}
