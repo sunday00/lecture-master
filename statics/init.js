@@ -57,7 +57,10 @@ $(document).ready( function () {
     "Please check your input."
   );
   $('form').validate({
-    errorPlacement: (e, el) => {},
+    errorPlacement: (err, el) => {
+      el.siblings('.err-msg').append(err);
+    },
+    // errorLabelContainer: '.err-msg',
     rules: {
       fname: {
         required: true
@@ -69,7 +72,16 @@ $(document).ready( function () {
         required: true,
         regex: /\d{2,3}-\d{3,4}-\d{4}$/,
       },
-    }
+    },
+    messages: {
+      fname: 'required',
+      lname: 'required',
+      phone: {
+        required: 'required',
+        regex: jQuery.validator.format('keep format')
+      },
+    },
+    errorClass: 'is-invalid text-danger'
   })
 
 } );
