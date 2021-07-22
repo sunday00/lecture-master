@@ -1,14 +1,21 @@
 :root{
-  --text-normal: #333;
+  --color-normal: #333;
+  --color-error: red;
 
   --text-normal-size: 18px;
 }
 
 body{
-  color: var(--text-normal);
+  color: var(--color-normal);
   font-size: var(--text-normal-size);
 }
 
 nav ul li {
   list-style-type: none;
+}
+
+input.error, input.error:focus{
+  border: 2px solid var(--color-error);
+  border-color: var(--color-error);
+  box-shadow: 0em 0em 0.25em var(--color-error);
 }

@@ -49,4 +49,27 @@ $(document).ready( function () {
     }}
   );
 
+  $.validator.addMethod(
+    "regex",
+    function (value, element, regexp) {
+        return this.optional(element) || regexp.test(value);
+    },
+    "Please check your input."
+  );
+  $('form').validate({
+    errorPlacement: (e, el) => {},
+    rules: {
+      fname: {
+        required: true
+      },
+      lname: {
+        required: true
+      },
+      phone: {
+        required: true,
+        regex: /\d{2,3}-\d{3,4}-\d{4}$/,
+      },
+    }
+  })
+
 } );
