@@ -1,4 +1,5 @@
 $(document).ready( function () {
+  
   $('.datatable').DataTable({
     ajax: '/includes/route.php?mode=list',
     columns: [
@@ -29,4 +30,23 @@ $(document).ready( function () {
       { targets: [4], orderable: false },
     ],
   });
+
+  // $('#phone').mask('000-000-0000', {
+  //   onInvalid: (cep, e, field, options) => {
+  //     var masks = ['000-000-0000', '000-0000-0000'];
+  //     console.log(cep.length, e);
+  //     var mask = (cep.length===13 && e) ? masks[1] : masks[0];
+  //     $('#phone').mask(mask, options);
+  //   }
+  // });
+
+  
+  $('#phone').mask('00D-000D-0000', {
+    translation: {
+      'D': {
+        pattern: /[0-9\s]/, optional: true
+      }
+    }}
+  );
+
 } );

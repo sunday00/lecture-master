@@ -2,8 +2,7 @@
 include("includes/commons.php");
 
 if( isset($_POST['submit']) ):
-  $phone = $_POST['phone1'].'-'. $_POST['phone2'].'-'. $_POST['phone3'];
-  $id = insert($_POST['fname'], $_POST['lname'], $phone);
+  $id = insert($_POST['fname'], $_POST['lname'], $_POST['phone']);
   header("Location: /update.php?id={$id}");
 endif;
 

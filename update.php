@@ -3,15 +3,10 @@ include("includes/commons.php");
 
 if( isset($_GET['id']) ):
   $employ = selectOne($_GET['id']);
-  $phone = explode('-', $employ['phone']);
-  $employ['phone1'] = $phone[0];
-  $employ['phone2'] = $phone[1];
-  $employ['phone3'] = $phone[2];
 endif;
 
 if( isset($_POST['submit']) ):
-  $phone = $_POST['phone1'].'-'. $_POST['phone2'].'-'. $_POST['phone3'];
-  $rows = update(intval($_GET['id']), $_POST['fname'], $_POST['lname'], $phone);
+  $rows = update(intval($_GET['id']), $_POST['fname'], $_POST['lname'], $_POST['phone']);
   header("Location: /update.php?id={$_GET['id']}");
 endif;
 
