@@ -1,6 +1,5 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
-include('includes/functions.php');
+include("includes/commons.php");
 
 if( isset($_GET['id']) ):
   $employ = selectOne($_GET['id']);
@@ -13,7 +12,7 @@ endif;
 if( isset($_POST['submit']) ):
   $phone = $_POST['phone1'].'-'. $_POST['phone2'].'-'. $_POST['phone3'];
   $rows = update(intval($_GET['id']), $_POST['fname'], $_POST['lname'], $phone);
-  header("Location: http://localhost:9080/update.php?id={$_GET['id']}");
+  header("Location: /update.php?id={$_GET['id']}");
 endif;
 
 ?>
@@ -25,51 +24,23 @@ endif;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PHP with swagger crash</title>
-  <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
-  <link rel="stylesheet" href="./statics/app.css" />
+  <?php include(__DOCUMENT_ROOT__.'/themes/styles.php'); ?>
 </head>
 <body>
+  <header class="fluid-container">
+  <?php include(__DOCUMENT_ROOT__.'/themes/header.php'); ?>
+  </header>
   <main class="container">
-    <h1>UPDATE</h1>
+    <h2 class="my-5">UPDATE</h2>
 
     <?php if ($employ) : ?>
-    <form action="" method="POST">
-      <input type="hidden" name="id" value="<?=$employ['id']?>">
-        <div class="form-field">
-          <label for="fname">first name</label>
-          <input type="text" name="fname" id="fname" required value="<?=$employ['fname']?>" />
-        </div>
-        <div class="form-field">
-          <label for="lname">last name</label>
-          <input type="text" name="lname" id="lname" required value="<?=$employ['lname']?>" />
-        </div>
-        <div class="form-field">
-          <label for="phone1">phone number</label>
-          <div class="phone grid-row"> 
-            <input type="text" name="phone1" id="phone1" minlength="2" maxlength="4" required value="<?=$employ['phone1']?>" />
-            <span class="center">-</span>
-            <input type="text" name="phone2" id="phone2" minlength="3" maxlength="4" required value="<?=$employ['phone2']?>" />
-            <span class="center">-</span>
-            <input type="text" name="phone3" id="phone3" minlength="4" maxlength="4" required value="<?=$employ['phone3']?>" />
-          </div>
-        </div>
-        <div class="row">
-          <button type="submit" class="full col" name="submit">SUBMIT</button>
-        </div>
-    </form>
-
-    <form action="/delete.php" method="POST">
-      <input type="hidden" name="id" value="<?=$employ['id']?>">
-      <div class="row">
-          <button type="submit" class="full col danger" name="delete">DELETE</button>
-        </div>
-    </form>
-
+      <?php include_once('includes/employ_form.php'); ?>
     <?php else : ?>
       <p>This is not Normal access.</p>
       <?php header('HTTP/1.0 400 Bad Request'); ?>
     <?php endif ?>
   </main>
 </body>
+<?php include(__DOCUMENT_ROOT__.'/themes/scripts.php'); ?>
 
 </html>

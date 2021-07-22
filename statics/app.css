@@ -1,18 +1,14 @@
-input{
-  box-sizing: border-box;
+:root{
+  --text-normal: #333;
+
+  --text-normal-size: 18px;
 }
 
-.grid-row{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20%, auto));
-  gap: 3em;
+body{
+  color: var(--text-normal);
+  font-size: var(--text-normal-size);
 }
 
-.grid-row.phone{
-  grid-template-columns: 8fr 1fr 8fr 1fr 8fr;
-  gap: 0;
-}
-
-.danger{
-  background-color: rgb(230, 38, 38);
+nav ul li {
+  list-style-type: none;
 }

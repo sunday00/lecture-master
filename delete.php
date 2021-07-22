@@ -1,12 +1,11 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
-include('includes/functions.php');
+include("includes/commons.php");
 
 if( isset($_POST['id']) ):
   $id = $_POST['id'];
   $rows = delete($id);
-  header("Location: http://localhost:9080");
+  header("Location: /");
 else :
   header('HTTP/1.0 400 Bad Request');
 endif;
@@ -19,15 +18,17 @@ endif;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PHP with swagger crash</title>
-  <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
-  <link rel="stylesheet" href="./statics/app.css" />
+  <?php include(__DOCUMENT_ROOT__.'/themes/styles.php'); ?>
 </head>
 <body>
+  <header class="fluid-container">
+  <?php include(__DOCUMENT_ROOT__.'/themes/header.php'); ?>
+  </header>
   <main class="container">
-    <h1>UPDATE</h1>
+    <h2 class="my-5">DELETE</h2>
     <?php if( !$id ) : ?>
     <p>This is not Normal access.</p>
-    <a href="#back" id="back">GO BACK</a>
+    <a href="#back" id="back" class="btn btn-outline-primary">GO BACK</a>
     <script>
       document.querySelector('#back').addEventListener('click', (e) => {
         e.preventDefault();
@@ -37,5 +38,6 @@ endif;
     <?php endif ?>
   </main>
 </body>
+<?php include(__DOCUMENT_ROOT__.'/themes/scripts.php'); ?>
 
 </html>

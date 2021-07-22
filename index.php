@@ -1,8 +1,6 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
-include('includes/functions.php');
 
-define('__DOCUMENT_ROOT__', $_SERVER['DOCUMENT_ROOT']);
+include("includes/commons.php");
 
 ?>
 
@@ -16,14 +14,26 @@ define('__DOCUMENT_ROOT__', $_SERVER['DOCUMENT_ROOT']);
   <?php include(__DOCUMENT_ROOT__.'/themes/styles.php'); ?>
 </head>
 <body>
+  <header class="fluid-container">
+    <?php include(__DOCUMENT_ROOT__.'/themes/header.php'); ?>
+  </header>
   <main class="container">
-    <h1><em class="fas fa-check-circle"></em> CRUD</h1>
-
-    <?php
-      formatcode(selectAll());
-      formatcode(selectOne(10));
-    ?>
+    <h2 class="my-5">DASH BOARD</h2>
+    <table class="table datatable table-sm table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone</th>
+          <th>Manage</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    
   </main>
 </body>
+<?php include(__DOCUMENT_ROOT__.'/themes/scripts.php'); ?>
 
 </html>
