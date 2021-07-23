@@ -5,7 +5,7 @@
   <div class="col-md-8">
     <ul class="list-unstyled d-flex justify-content-end gap-3">
       <li>
-        <a href="/insert.php" class="btn btn-outline-primary">
+        <a href="/insert" class="btn btn-outline-primary">
           <em class="fas fa-plus-circle"></em>
         </a>
       </li>
@@ -17,10 +17,15 @@
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="gnb">
+            <?php if($_SESSION['auth']) : ?>
             <li><a class="dropdown-item" href="#">info</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">logout</a></li>
+            <?php else : ?>
+            <li><a class="dropdown-item" href="/login">login</a></li>
+            <li><a class="dropdown-item" href="/signup">signup</a></li>
+            <?php endif ?>
           </ul>
         </div>
       </li>

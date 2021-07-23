@@ -1,7 +1,5 @@
 <?php
 
-include("includes/commons.php");
-
 if( isset($_POST['id']) ):
   $id = $_POST['id'];
   $rows = delete($id);

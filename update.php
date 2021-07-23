@@ -1,5 +1,4 @@
 <?php
-include("includes/commons.php");
 
 if( isset($_GET['id']) ):
   $employ = selectOne($_GET['id']);
@@ -7,7 +6,7 @@ endif;
 
 if( isset($_POST['submit']) ):
   $rows = update(intval($_GET['id']), $_POST['fname'], $_POST['lname'], $_POST['phone']);
-  header("Location: /update.php?id={$_GET['id']}");
+  header("Location: /update?id={$_GET['id']}");
   exit;
 endif;
 

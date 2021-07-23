@@ -14,9 +14,9 @@ $(document).ready( function () {
             <td class="text-right">
               <div class="row">
                 <form class="col">
-                  <a href="/update.php?id=${id}" class="w-100 btn btn-primary fas fa-wrench" title="modify employee's information."></a>
+                  <a href="/update?id=${id}" class="w-100 btn btn-primary fas fa-wrench" title="modify employee's information."></a>
                 </form>
-                <form action="/delete.php" method="POST" class="col" onsubmit="return confirm('permanently delete?')">
+                <form action="/delete" method="POST" class="col" onsubmit="return confirm('permanently delete?')">
                   <input type="hidden" name="id" value="${id}" />
                   <button type="submit" class="w-100 btn btn-danger fas fa-trash" title="get rid of employee ${id} information."></button>
                 </form>

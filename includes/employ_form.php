@@ -32,7 +32,7 @@
 </form>
 
 <?php if ($employ): ?>
-<form action="/delete.php" method="POST" class="d-grid gap-2 mt-2"  onsubmit="return confirm('permanently delete?')">
+<form action="/delete" method="POST" class="d-grid gap-2 mt-2"  onsubmit="return confirm('permanently delete?')">
   <input type="hidden" name="id" value="<?=$employ['id']?>">
   <button type="submit" class="btn btn-danger" name="delete">DELETE</button>
 </form>

@@ -1,10 +1,9 @@
 <?php
-include("includes/commons.php");
 
 if( isset($_POST['submit']) ):
   $id = insert($_POST['fname'], $_POST['lname'], $_POST['phone']);
   if($id){
-    header("Location: /update.php?id={$id}");
+    header("Location: /update?id={$id}");
   } else {
     header("Location: /");
   }
