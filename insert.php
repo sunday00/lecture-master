@@ -3,7 +3,12 @@ include("includes/commons.php");
 
 if( isset($_POST['submit']) ):
   $id = insert($_POST['fname'], $_POST['lname'], $_POST['phone']);
-  header("Location: /update.php?id={$id}");
+  if($id){
+    header("Location: /update.php?id={$id}");
+  } else {
+    header("Location: /");
+  }
+  exit;
 endif;
 
 ?>

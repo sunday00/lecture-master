@@ -1,6 +1,8 @@
 <?php
 
-include_once('db.php');
+require_once('db.php');
+
+session_start();
 
 /**
  * array format
@@ -23,7 +25,10 @@ function selectAll()
   $stmt->execute();
   $result = $stmt->get_result();
   if( $result->num_rows === 0 ){
-    echo "no rows";
+    $_SESSION['flash'] = [
+      'type'  => 'danger',
+      'msg'   => 'There\'s no data yet!'
+    ];
   }
 
   $data = [];
@@ -42,7 +47,7 @@ function selectOne(int $id = null)
   $stmt->execute();
   $result = $stmt->get_result();
   if( $result->num_rows === 0 ){
-    echo "no rows";
+    // echo "no rows";
   }
   $data = $result->fetch_assoc();
   $stmt->close();
@@ -58,6 +63,19 @@ function insert(string $fname=null, string $lname=null, string $phone=null)
   $stmt->bind_param('sss', $fname, $lname, $phone);
   $stmt->execute();
   $stmt->close();
+
+  if( !$mysqli->insert_id ){
+    $_SESSION['flash'] = [
+      'type'  => 'danger',
+      'msg'   => 'Something is wrong...'
+    ];
+  } else {
+    $_SESSION['flash'] = [
+      'type'  => 'success',
+      'msg'   => "Added {$mysqli->insert_id}"
+    ];
+  }
+
   return $mysqli->insert_id;
 }
 
@@ -72,6 +90,19 @@ function update(int $id, string $fname=null, string $lname=null, string $phone=n
   $stmt->bind_param('sssi', $fname, $lname, $phone, $id);
   $stmt->execute();
   $affected_rows = $mysqli->affected_rows;
+
+  if( $affected_rows === 0 ){
+    $_SESSION['flash'] = [
+      'type'  => 'danger',
+      'msg'   => 'Nothing is changed.'
+    ];
+  } else {
+    $_SESSION['flash'] = [
+      'type'  => 'success',
+      'msg'   => 'updated.'
+    ];
+  }
+
   $stmt->close();
   return $affected_rows;
 }
@@ -83,6 +114,19 @@ function delete(int $id)
   $stmt->bind_param('i', $id);
   $stmt->execute();
   $affected_rows = $mysqli->affected_rows;
+
+  if( $affected_rows === 0 ){
+    $_SESSION['flash'] = [
+      'type'  => 'danger',
+      'msg'   => 'Nothing is changed.'
+    ];
+  } else {
+    $_SESSION['flash'] = [
+      'type'  => 'success',
+      'msg'   => "deleted {$affected_rows}"
+    ];
+  }
+
   $stmt->close();
   return $affected_rows;
 }

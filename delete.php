@@ -6,6 +6,7 @@ if( isset($_POST['id']) ):
   $id = $_POST['id'];
   $rows = delete($id);
   header("Location: /");
+  exit;
 else :
   header('HTTP/1.0 400 Bad Request');
 endif;

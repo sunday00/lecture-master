@@ -14,3 +14,7 @@ nav ul li {
   list-style-type: none;
 }
 
+.dataTables_filter {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -8,6 +8,7 @@ endif;
 if( isset($_POST['submit']) ):
   $rows = update(intval($_GET['id']), $_POST['fname'], $_POST['lname'], $_POST['phone']);
   header("Location: /update.php?id={$_GET['id']}");
+  exit;
 endif;
 
 ?>
