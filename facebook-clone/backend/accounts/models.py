@@ -14,7 +14,7 @@ def user_path(instance, filename: str):
   ext = filename.split('.')[-1]
   return 'accounts/{}/{}.{}'.format(instance.user.username, pid, ext)
 
-class Proflie(models.Model):
+class Profile(models.Model):
   GENDER_C = (
     ('not picked', 'not picked'),
     ('female', 'female'),

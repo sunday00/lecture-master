@@ -12,11 +12,17 @@
     "facebook-clone/python",
     "facebook-clone/python/django-crash",
     "facebook-clone/python/django-crash/lib/python3.9/site-packages",
+    "facebook-clone/backend",
+    "facebook-clone/backend/facebook",
+    "facebook-clone/backend/facebook/lib/python3.9/site-packages",
   ],
   "python.autoComplete.extraPaths": [
     "facebook-clone/python",
     "facebook-clone/python/django-crash",
     "facebook-clone/python/django-crash/lib/python3.9/site-packages",
+    "facebook-clone/backend",
+    "facebook-clone/backend/facebook",
+    "facebook-clone/backend/facebook/lib/python3.9/site-packages",
   ],
   "files.associations": {
     "**/*.html": "html",

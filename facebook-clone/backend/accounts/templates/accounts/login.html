@@ -1,9 +1,44 @@
 {% extends 'layout.html' %}
+{% load static %}
 
-{% block head %}{% endblock head %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock head %}
 
 {% block contents %}
-  login
+  <section id="container">
+
+    <div id="login_section">
+      <h1 class="logo">
+        <a href="#" class="icon--main-logo"></a>FACEBOOK</h1>
+      <form action="{% url 'accounts:login' %}" method="POST">
+        {% csrf_token %}
+        <div class="id_section">
+          <div>
+            <label for="{{ form.username.id_for_label }}">ID</label>
+          </div>
+          <div>
+            <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}">
+          </div>
+        </div>
+
+        <div class="pw_section">
+          <div>
+            <label for="{{ form.password.id_for_label }}">PASSWORD</label>
+          </div>
+          <div><input type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}"></div>
+        </div>
+
+        <input type="submit" value="SIGN IN" id="submitBtn">
+
+        <div class="signup">
+          <a href="{% url 'accounts:signUp' %}">JOIN US!</a>
+        </div>
+
+      </form>
+    </div>
+
+  </section>
 {% endblock contents %}
 
 {% block js %}{% endblock js %}

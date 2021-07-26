@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Proflie
+from .models import Profile
 
 # Register your models here.
-@admin.register(Proflie)
+@admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
   list_display = ['id', 'nick', 'user']
   list_display_links = ['id', 'nick', 'user']
