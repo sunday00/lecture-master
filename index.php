@@ -36,11 +36,12 @@ include("includes/commons.php");
   </main>
 </body>
 <?php include(__DOCUMENT_ROOT__.'/themes/scripts.php'); ?>
-
+</html>
 <?php else : ?>
+
 <?php
-  if( is_file( './'.$_SERVER['PHP_SELF'].'.php' ) ){
-    include_once('./'.$_SERVER['PHP_SELF'].'.php');
+  if( is_file( '.'.$_SERVER['PHP_SELF'].'.php' ) ){
+    include_once('.'.$_SERVER['PHP_SELF'].'.php');
   } else {
     header('HTTP/1.0 404 Not Found');
 ?>
@@ -76,5 +77,3 @@ include("includes/commons.php");
   }
 ?>
 <?php endif ?>
-
-</html>

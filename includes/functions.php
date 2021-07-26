@@ -130,3 +130,110 @@ function delete(int $id)
   $stmt->close();
   return $affected_rows;
 }
+
+function signup(string $nick, string $password, string $phone, int $level = 1){
+  global $mysqli;
+  $stmt = $mysqli->prepare("SELECT id FROM employees 
+    WHERE phone = ?");
+
+  $stmt->bind_param('s', $phone);
+  $stmt->execute();
+  $employees = $stmt->get_result();
+
+  if($employees->num_rows === 0){
+    $_SESSION['flash'] = [
+      'type'  => 'danger',
+      'msg'   => 'You should registered as employee first. Contact Administrator.'
+    ];
+    return null;
+  }
+
+  $employeeRow = $employees->fetch_assoc();
+
+  $stmt = $mysqli->prepare("INSERT INTO users (
+    nick, password, active, level, employee_id
+  ) VALUES (
+    ?, ?, 1, ?, ?
+  )");
+  $stmt->bind_param('ssss', 
+    $nick,
+    password_hash($password, PASSWORD_BCRYPT, [
+      'salt' => '!!Th!s!$$@|t~',
+      'cost' => 5
+    ]),
+    $level,
+    $employeeRow['id']
+  );
+  $stmt->execute();
+
+  $_SESSION['flash'] = [
+    'type'  => 'success',
+    'msg'   => 'SIGNED'
+  ];
+
+  return $mysqli->insert_id;
+}
+
+function login (string $nick, string $password)
+{
+  global $mysqli;
+  $stmt = $mysqli->prepare("SELECT u.*, e.* FROM users u
+    LEFT JOIN employees e
+    ON u.employee_id = e.id
+    WHERE nick = ? AND active = 1");
+
+  $stmt->bind_param('s', $nick);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $data;
+
+  $row = $result->fetch_assoc();
+  if($result->num_rows === 0 || !password_verify($password, $row['password']) ){
+    $_SESSION['flash'] = [
+      'type'  => 'danger',
+      'msg'   => 'Not valid user. Sign up or Contact Administrator.'
+    ];
+  } else {
+    $data = $row;
+    unset($data['password']);
+    unset($data['phone']);
+    $_SESSION['user']['id'] = $row['id'];
+    $_SESSION['user']['nick'] = $row['nick'];
+    $_SESSION['user']['fname'] = $row['fname'];
+    $_SESSION['user']['lname'] = $row['lname'];
+    $_SESSION['user']['level'] = $row['level'];
+    $_SESSION['flash'] = [
+      'type'  => 'success',
+      'msg'   => "Hello, {$nick}?"
+    ];
+  }
+
+  $stmt->close();
+
+  return $data;
+}
+
+function logout()
+{
+  if( $_POST['id'] ){
+    $_SESSION['flash'] = [
+      'type'  => 'success',
+      'msg'   => "Bye, {$_SESSION['user']['nick']}~!"
+    ];
+    unset($_SESSION['user']);
+    return 'success';
+  }
+}
+
+function permission(array $whitelist, string $php_self){
+  $is_permitted = in_array($php_self, $whitelist) || isset($_SESSION['user']['id']);
+
+  if( !$is_permitted ){
+    $_SESSION['flash'] = [
+      'type'  => 'danger',
+      'msg'   => "You need to logged in"
+    ];
+    header('Location: /login');
+    exit();
+  }
+}

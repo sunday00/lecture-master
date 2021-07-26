@@ -1,12 +1,12 @@
 <form action="" method="POST">
-  <?php if ($employ): ?>
+  <?php if (isset($employ)): ?>
     <input type="hidden" name="id" value="<?=$employ['id']?>">
   <?php endif ?>
     <div class="form-field form-floating mt-2">
       <input class="form-control" id="fname"
         type="text" name="fname" 
         placeholder="John"
-        value="<?=$employ['fname']?>" />
+        value="<?=@$employ['fname']?>" />
       <label class="form-label" for="fname">first name</label>
       <p class="err-msg"></p>
     </div>
@@ -14,7 +14,7 @@
       <input class="form-control" id="lname"
         type="text" name="lname" 
         placeholder="Doh"
-        value="<?=$employ['lname']?>" />
+        value="<?=@$employ['lname']?>" />
       <label class="form-label" for="lname">last name</label>
       <p class="err-msg"></p>
     </div>
@@ -22,7 +22,7 @@
       <input class="form-control" id="phone"
         type="text" name="phone" 
         placeholder="010-0000-1111"
-        value="<?=$employ['phone']?>" />
+        value="<?=@$employ['phone']?>" />
       <label class="form-label" for="phone">phone</label>
       <p class="err-msg"></p>
     </div>
@@ -31,9 +31,9 @@
     </div>
 </form>
 
-<?php if ($employ): ?>
+<?php if (isset($employ)): ?>
 <form action="/delete" method="POST" class="d-grid gap-2 mt-2"  onsubmit="return confirm('permanently delete?')">
-  <input type="hidden" name="id" value="<?=$employ['id']?>">
+  <input type="hidden" name="id" value="<?=@$employ['id']?>">
   <button type="submit" class="btn btn-danger" name="delete">DELETE</button>
 </form>
 <?php endif ?>

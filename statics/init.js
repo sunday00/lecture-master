@@ -1,7 +1,7 @@
 $(document).ready( function () {
   
   $('.datatable').DataTable({
-    ajax: '/includes/route.php?mode=list',
+    ajax: '/api/route?mode=list',
     columns: [
       { data: 'id' },
       { data: 'fname' },
@@ -62,6 +62,9 @@ $(document).ready( function () {
     },
     // errorLabelContainer: '.err-msg',
     rules: {
+      nick: {
+        required: true
+      },
       fname: {
         required: true
       },
@@ -72,14 +75,31 @@ $(document).ready( function () {
         required: true,
         regex: /\d{2,3}-\d{3,4}-\d{4}$/,
       },
+      password: {
+        required: true,
+        minlength : 4,
+      },
+      password_confirm: {
+        required: true,
+        equalTo : "#password"
+      }
     },
     messages: {
+      nick: 'required',
       fname: 'required',
       lname: 'required',
       phone: {
         required: 'required',
         regex: jQuery.validator.format('keep format')
       },
+      password: {
+        required: 'required',
+        minlength: 'should over 4 letters',
+      },
+      password_confirm: {
+        required: 'required',
+        regex: 'not match the password'
+      }
     },
     errorClass: 'is-invalid text-danger'
   })

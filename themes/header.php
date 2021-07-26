@@ -17,11 +17,17 @@
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="gnb">
-            <?php if($_SESSION['auth']) : ?>
-            <li><a class="dropdown-item" href="#">info</a></li>
+            <?php if( isset($_SESSION['user'])) : ?>
+            <li><a class="dropdown-item" href="/user-info">info</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">logout</a></li>
+            <li>
+              <!-- <a class="dropdown-item" href="/log-out">logout</a> -->
+              <form action="/logout" method="POST">
+                <input type="hidden" name="id" value="<?=$_SESSION['user']['id']?>">
+                <input type="submit" value="logout" class="dropdown-item" />
+              </form>
+            </li>
             <?php else : ?>
             <li><a class="dropdown-item" href="/login">login</a></li>
             <li><a class="dropdown-item" href="/signup">signup</a></li>

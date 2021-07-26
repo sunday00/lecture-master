@@ -1,8 +1,8 @@
 <?php
 
 if( isset($_POST['submit']) ):
-  $id = login($_POST['nick'], $_POST['password']);
-  if($id) header("Location: /");
+  $id = signup($_POST['nick'], $_POST['password'], $_POST['phone']);
+  header("Location: /");
   exit;
 endif;
 
@@ -22,7 +22,7 @@ endif;
   <?php include(__DOCUMENT_ROOT__.'/themes/header.php'); ?>
   </header>
   <main class="container">
-    <h2 class="my-5">LOGIN</h2>
+    <h2 class="my-5">SIGNUP</h2>
 
     <?php include_once('includes/auth_form.php'); ?>
 

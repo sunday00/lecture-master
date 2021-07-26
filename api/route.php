@@ -1,7 +1,5 @@
 <?php 
 
-include_once("./commons.php");
-
 if( $_GET['mode'] === 'list') {
   $employees = selectAll();
   $result = [
