@@ -704,6 +704,10 @@ body {
     align-items: center;
 }
 
+#header .inner .right .my_name span {
+    vertical-align: middle;
+}
+
 #header .inner .right > div:after {
     content: '';
     width: 1px;

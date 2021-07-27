@@ -7,6 +7,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{% static 'imgs/favicon.png' %}">
+
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <title>facebook-clone</title>
@@ -14,8 +17,113 @@
   </head>
 
   <body>
-    {% block contents %}{% endblock contents %}
-    {% block js %}{% endblock js %}
+    <section id="container">
+      <header id="header">
+        <div class="inner">
+          <div class="left">
+            <h1 class="icon icon--facebook-white">
+              <a href="/"></a>
+            </h1>
+            <div class="search-container">
+              <form action="" method="GET">
+                {% csrf_token %}
+                <label for="search"></label>
+                <input type="text" id="search" placeholder="search..."/>
+                <button type="submit">
+                  <span class="icon--search-black"></span></button>
+              </form>
+            </div>
+          </div>
+          <div class="right">
+            {% if user_profile %}
+              <div>
+                <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+              </div>
+              <div class="my_name">
+                <a href="/profile/{{ user_profile.nick }}">
+                  <span class="profile_img">
+                    <img src="{{ user_profile.picture.url }}" alt="profile">
+                  </span>
+                  <span>
+                    {{ user_profile.nick }}
+                  </span>
+                </a>
+              </div>
+            {% else %}
+              <div>
+                <a href="{% url 'accounts:login' %}">LOGIN</a>
+              </div>
+              <div class="my_name">
+                <span class="profile_img">
+                  <img src="{% static 'imgs/profile/noun_User.png' %}" alt="profile">
+                </span>
+              </div>
+            {% endif %}
+
+            <div class="home">
+              <a href="/">home</a>
+            </div>
+
+            {% if user_profile %}
+              <div class="people">
+                <a href="save.html">
+                  <span class="icon icon--people-black"></span>
+                </a>
+              </div>
+
+              <div class="bell">
+                <a href="#">
+                  <span class="icon icon--bell-black"></span>
+                </a>
+                <div class="notice">
+                  <div class="icon--arrow-top"></div>
+                  <h3>notice</h3>
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <div class="profile-img">
+                          <img src="/resources/imgs/profile/bear.png" alt="profile">
+                        </div>
+                        <div>
+                          <div>
+                            <span class="name">kindBear</span>
+                            <span>leaved a message</span>
+                          </div>
+                          <div class="time">1 hour</div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="messenger">
+                <a href="messenger.html">
+                  <span class="icon icon--messenger--black"></span>
+                </a>
+              </div>
+
+              <div class="chart">
+                <a href="#">
+                  <span class="icon icon--chart--black"></span>
+                </a>
+              </div>
+            {% endif %}
+
+            <div class="question">
+              <a href="http://grayfield.net">
+                <span class="icon icon--question-black"></span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </header>
+
+      {% block contents %}{% endblock contents %}
+
+      {% block js %}{% endblock js %}
+    </section>
   </body>
 
 </html>
