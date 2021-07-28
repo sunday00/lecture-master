@@ -6,8 +6,6 @@ window.addEventListener('DOMContentLoaded',function(){
 
 
     (function(){
-
-
         const feed = document.querySelector('#contents_container');
         const commentField = document.querySelector('#comment_container');
         const leftBox = document.querySelector('.left_box');
@@ -27,19 +25,21 @@ window.addEventListener('DOMContentLoaded',function(){
 
 
 
+        if( document.querySelector('.right a').textContent !== 'LOGIN' ){
+            leftBox.style.right = `${innerWidth*0.5 + 430}px`;
+            rightBox.style.left = `${innerWidth*0.5 + 90}px`;
+        }
 
-
-        leftBox.style.right = `${innerWidth*0.5 + 430}px`;
-        rightBox.style.left = `${innerWidth*0.5 + 90}px`;
 
 
 
 
 
         function resizeFunc(){
-
-            leftBox.style.right = `${innerWidth*0.5 + 430}px`;
-            rightBox.style.left = `${innerWidth*0.5+ 90}px`;
+            if( document.querySelector('.right a').textContent !== 'LOGIN' ){
+                leftBox.style.right = `${innerWidth*0.5 + 430}px`;
+                rightBox.style.left = `${innerWidth*0.5+ 90}px`;
+            }
         }
 
 
@@ -283,28 +283,32 @@ window.addEventListener('DOMContentLoaded',function(){
 
         });
 
-        // chart_btn.addEventListener('click',chartFunc);
-        bell.addEventListener('click',noticeFunc);
-        feed.addEventListener('click',delegation);
+        if( document.querySelector('.right a').textContent !== 'LOGIN' ){
 
+            // chart_btn.addEventListener('click',chartFunc);
+            bell.addEventListener('click',noticeFunc);
+            feed.addEventListener('click',delegation);
+            
+        }
 
         window.addEventListener('scroll',scrollFunc);
         window.addEventListener('resize',resizeFunc);
 
         document.body.addEventListener('click',(e)=>{
-            textField.style.height = '24px';
+            if( document.querySelector('.right a').textContent !== 'LOGIN' ){
 
-            submit.parentNode.style.display = 'none';
-            submit.disabled = true;
+                textField.style.height = '24px';
+                
+                submit.parentNode.style.display = 'none';
+                submit.disabled = true;
+                
+                more.classList.remove('active');
+                
+                noticeBoard.style.display = 'none';
+                bell.classList.remove('on');
 
-            more.classList.remove('active');
-
-            noticeBoard.style.display = 'none';
-            bell.classList.remove('on');
-
+            }
         });
-
-
 
     })();
 

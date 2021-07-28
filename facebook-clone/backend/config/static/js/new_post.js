@@ -11,10 +11,12 @@ window.addEventListener('DOMContentLoaded',function () {
 
     // Show image
 
+    if( document.querySelector('.right a').textContent !== 'LOGIN' ){
 
-    let canvas = document.getElementById('imageCanvas');
-    let ctx = canvas.getContext('2d');
-
+        let canvas = document.getElementById('imageCanvas');
+        let ctx = canvas.getContext('2d');
+        
+    }
 
     let reader = new FileReader();
 
@@ -43,8 +45,9 @@ window.addEventListener('DOMContentLoaded',function () {
         reader.readAsDataURL(e.target.files[0]);
     }
 
+    if( document.querySelector('.right a').textContent !== 'LOGIN' ){
+        fileInput.addEventListener('change', handleImage, false);
+    }
 
-
-    fileInput.addEventListener('change', handleImage, false);
 
 });
