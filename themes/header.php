@@ -11,10 +11,17 @@
       </li>
       <li>
         <div class="dropdown">
+          <?php if( isset($_SESSION['user'])) : ?>
+          <a class="btn btn-info text-white" href="#" 
+            role="button" id="gnb" data-bs-toggle="dropdown" aria-expanded="false">
+            <em><?=$_SESSION['user']['nick']?></em>
+          </a>
+          <?php else : ?>
           <a class="btn btn-secondary" href="#" 
             role="button" id="gnb" data-bs-toggle="dropdown" aria-expanded="false">
             <em class="fas fa-user"></em>
           </a>
+          <?php endif ?>
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="gnb">
             <?php if( isset($_SESSION['user'])) : ?>

@@ -177,7 +177,11 @@ function signup(string $nick, string $password, string $phone, int $level = 1){
 function login (string $nick, string $password)
 {
   global $mysqli;
-  $stmt = $mysqli->prepare("SELECT u.*, e.* FROM users u
+  $stmt = $mysqli->prepare("SELECT 
+      u.id as id, u.nick, u.password, 
+      u.active, u.level, u.employee_id,
+      e.fname, e.lname, e.phone
+    FROM users u
     LEFT JOIN employees e
     ON u.employee_id = e.id
     WHERE nick = ? AND active = 1");
@@ -197,6 +201,7 @@ function login (string $nick, string $password)
     $data = $row;
     unset($data['password']);
     unset($data['phone']);
+
     $_SESSION['user']['id'] = $row['id'];
     $_SESSION['user']['nick'] = $row['nick'];
     $_SESSION['user']['fname'] = $row['fname'];
@@ -236,4 +241,25 @@ function permission(array $whitelist, string $php_self){
     header('Location: /login');
     exit();
   }
+}
+
+function selectOneUserById(int $id)
+{
+  global $mysqli;
+
+  $stmt = $mysqli->prepare("SELECT u.*, e.* FROM users u
+    LEFT JOIN employees e
+    ON u.employee_id = e.id
+    WHERE u.id = ? AND active = 1");
+
+  $stmt->bind_param('i', $id);
+  
+  $stmt->execute();
+  $result = $stmt->get_result();
+  if( $result->num_rows === 0 ){
+    // echo "no rows";
+  }
+  $data = $result->fetch_assoc();
+  $stmt->close();
+  return $data;
 }
