@@ -22,14 +22,5 @@ $uris = explode('/', getenv('REQUEST_URI'));
 array_shift($uris);
 $_REQUEST['followUris'] = array_slice($uris, 3);
 
-$uris[2] = preg_replace_callback('/(-.|^.)/', function($match){
-  return str_starts_with($match[0], '-') ? str_replace('-', '', ucfirst($match[0][1])) : ucfirst($match[0]);
-}, $uris[2], PREG_OFFSET_CAPTURE );
+$router = new Libs\Router($uris);
 
-switch ($uris[0]) {
-  case 'api':
-    $className = "Api\\{$uris[1]}\\".$uris[2];
-    $app = new $className;
-    return $app->run();
-  break;
-}

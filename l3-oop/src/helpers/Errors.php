@@ -9,12 +9,10 @@ class Errors
     echo json_encode([
       'result'  => false,
       'code'    => 404,
-      'msg'     => 'Not Found',
+      'data'     => 'Not Found',
     ]);
     header('HTTP/1.0 404 Not Found');
+    exit;
   }
-
-  
-
   
 }

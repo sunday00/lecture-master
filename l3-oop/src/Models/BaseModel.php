@@ -5,7 +5,7 @@ namespace Models;
 use Configs\DB;
 use mysqli;
 
-class BaseModel
+class BaseModel implements Model
 {
   protected mysqli $db;
 

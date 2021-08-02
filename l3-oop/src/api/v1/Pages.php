@@ -3,34 +3,26 @@
 namespace Api\v1;
 
 use Models\Page as model;
-use Helpers\Request;
-use Helpers\Errors;
+use Helpers\Response;
 
-class Pages
+class Pages extends BaseController
 {
-  private model $model ;
-  private Request $req;
-
-  public function run() : int
+  public function run(string $act, array|null $params = null): string
   {
-    $this->model = new model();    
-    $this->req = new Request();
-
-    if( $this->req->get('method') == 'POST' && count($this->req->get('followUris')) == 0){
-      $this->index();
-      return 1;
-    }
-
-    Errors::raiseJson404();
-    return 0;
+    return parent::__init('pages', new model(), $act, $params);
   }
 
-  private function index() : int
+  public function index() : string
   {
     $options = (object) [
       'order' => 'orderId ASC'
     ];
-    echo json_encode( $this->model->selectAll($options) );
-    return 1;
+
+    return Response::raiseJson200($this->model->selectAll($options));
+  }
+
+  public function read(array $params) : string
+  {
+    return Response::raiseJson200($this->model->selectOne($params['slug']));
   }
 }

@@ -3,10 +3,11 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "Api\\v1\\": "src/api/v1",
-            "Configs\\": "configs",
-            "Helpers\\": "src/helpers",
-            "Models\\": "src/models"
+            "Api\\v1\\": "src/api/v1/",
+            "Configs\\": "configs/",
+            "Helpers\\": "src/helpers/",
+            "Models\\": "src/models/",
+            "Libs\\": "src/libs/"
         }
     },
     "authors": [
