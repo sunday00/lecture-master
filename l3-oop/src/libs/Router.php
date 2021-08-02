@@ -2,7 +2,6 @@
 
 namespace Libs;
 
-use Exception;
 use Helpers\Errors;
 use Helpers\Request;
 
@@ -41,6 +40,8 @@ class Router
     $httpMethod = $this->req->get('method');
     $routes = include_once(__DIR__ . '/../routes.php');
    
+    if( !isset($routes[$controller]) ) return Errors::raiseJson404();
+
     $action = current(array_filter($routes[$controller], function($r, $k) use ($httpMethod) {
       if( $r[1] != '/' && !$this->action && $r[0] == $httpMethod){
         $this->params_k = [];
