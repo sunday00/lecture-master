@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='Post',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('photo', imagekit.models.fields.ProcessedImageField(upload_to=post.models.photo_path)),
+                ('photo', imagekit.models.fields.ProcessedImageField(blank=True, null=True, upload_to=post.models.photo_path)),
                 ('content', models.CharField(help_text='max 140 letters', max_length=140)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),

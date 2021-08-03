@@ -312,7 +312,8 @@
 .contents .hidden_menu > li:hover{
     background: #ddd;
 }
-.contents .hidden_menu > li > *{
+.contents .hidden_menu > li > *,
+.contents .hidden_menu > li form> *{
     background: transparent;
     border: none;
     font-size: 12px;
@@ -357,7 +358,7 @@
     margin:0 10px;
 }
 
-.contents .btn_container .like-btn.active  span{
+.contents .btn_container .like-btn.active  i{
     background: url('../imgs/bg05.png') no-repeat 0 -422px;
 }
 

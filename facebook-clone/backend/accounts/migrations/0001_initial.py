@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nick', models.CharField(max_length=30, unique=True, verbose_name='nick')),
-                ('picture', imagekit.models.fields.ProcessedImageField(blank=True, upload_to=accounts.models.user_path)),
+                ('picture', imagekit.models.fields.ProcessedImageField(blank=True, null=True, upload_to=accounts.models.user_path)),
                 ('about', models.CharField(blank=True, max_length=300)),
                 ('gender', models.CharField(choices=[('not picked', 'not picked'), ('female', 'female'), ('male', 'male')], default='N', max_length=10, verbose_name='gender')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

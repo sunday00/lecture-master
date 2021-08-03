@@ -24,6 +24,7 @@ class Profile(models.Model):
   user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=CASCADE)
   nick = models.CharField('nick', max_length=30, unique=True)
   picture = ProcessedImageField(
+      null=True,
       upload_to=user_path,
       processors=[ResizeToFill(150, 150)],
       format='JPEG',

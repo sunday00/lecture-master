@@ -229,7 +229,7 @@ window.addEventListener('DOMContentLoaded',function(){
                 success: addMorePostAjax,
                 error:function(request,status,error){
                     alert('문제가 발생했습니다.');
-                    window.location.replace('https://www.naver.com');
+                    // window.location.replace('https://www.naver.com');
 
                 }
 
