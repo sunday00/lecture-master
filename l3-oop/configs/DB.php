@@ -2,18 +2,22 @@
 
 namespace Configs;
 
-use mysqli;
+use PDO;
 
 class DB
 {
-  private mysqli $conn;
+  private PDO $conn;
   public function __construct() {
-    $this->conn = new mysqli(
-      $_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASS'], $_ENV['DB_NAME'], $_ENV['DB_PORT']
-    );
+      $this->conn = new PDO(
+        "mysql:host={$_ENV['DB_HOST']};
+        port={$_ENV['DB_PORT']};
+        dbname={$_ENV['DB_NAME']}",
+        $_ENV['DB_USER'],
+        $_ENV['DB_PASS']
+      );
   }
 
-  public function conn() : mysqli
+  public function conn() : PDO
   {
     return $this->conn;
   }

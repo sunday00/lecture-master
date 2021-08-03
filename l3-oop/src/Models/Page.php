@@ -3,6 +3,7 @@
 namespace Models;
 
 use Models\BaseModel;
+use PDO;
 
 class Page extends BaseModel
 {
@@ -13,14 +14,13 @@ class Page extends BaseModel
     $order = isset($option->order) ? $option->order : "id DESC";
     $stmt = $this->db->prepare("SELECT * FROM {$this->tableName} ORDER BY {$order}");
     $stmt->execute();
-    $result = $stmt->get_result();
 
-    if( $result->num_rows == 0 ){
+    if( $stmt->rowCount() == 0 ){
       return [0=>'no result'];
     }
 
     $pages = [];
-    while( $r = $result->fetch_assoc() ){
+    while( $r = $stmt->fetch(PDO::FETCH_ASSOC) ){
       $pages[] = $r;
     }
 
@@ -32,18 +32,17 @@ class Page extends BaseModel
     if( $slug == 'home' ){
       $stmt = $this->db->prepare("SELECT * FROM {$this->tableName} WHERE slug is null");
     } else {
-      $stmt = $this->db->prepare("SELECT * FROM {$this->tableName} WHERE slug = ?");
-      $stmt->bind_param('s', $slug);
+      $stmt = $this->db->prepare("SELECT * FROM {$this->tableName} WHERE slug = :slug");
+      $stmt->bindParam(':slug', $slug);
     }
     $stmt->execute();
-    $result = $stmt->get_result();
 
-    if( $result->num_rows == 0 ){
+    if( $stmt->rowCount() == 0 ){
       return [0=>'no result'];
     }
 
     $page;
-    while( $r = $result->fetch_assoc() ){
+    while( $r = $stmt->fetch(PDO::FETCH_ASSOC) ){
       $page = $r;
     }
 

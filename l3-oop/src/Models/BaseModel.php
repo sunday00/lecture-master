@@ -3,11 +3,11 @@
 namespace Models;
 
 use Configs\DB;
-use mysqli;
+use PDO;
 
 class BaseModel implements Model
 {
-  protected mysqli $db;
+  protected PDO $db;
 
   public function __construct() {
     $this->db = (new DB())->conn();
