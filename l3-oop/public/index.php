@@ -8,6 +8,9 @@ header("Access-Control-Allow-Origin: http://localhost:8088");
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Max-Age: 86400');
 
+define('__DOCUMENT_ROOT__', $_SERVER['DOCUMENT_ROOT']);
+define('__SERVER_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/../..');
+
 require __DIR__.'/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/..');
 $dotenv->safeLoad();

@@ -32,6 +32,13 @@ class Router
         $app = new $className;
         echo $app->run($this->action, $this->params);
       break;
+      case 'dev':
+        $className = "Dev\\{$version}\\".$controller;
+        $action = $this->action;
+       
+        $app = new $className;
+        $app->$action($this->params);
+      break;
     }
   }
 

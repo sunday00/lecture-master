@@ -7,7 +7,8 @@
             "Configs\\": "configs/",
             "Helpers\\": "src/helpers/",
             "Models\\": "src/models/",
-            "Libs\\": "src/libs/"
+            "Libs\\": "src/libs/",
+            "Dev\\": "src/dev/"
         }
     },
     "authors": [
@@ -20,6 +21,8 @@
         "symfony/var-dumper": "^5.3"
     },
     "require": {
-        "vlucas/phpdotenv": "^5.3"
+        "vlucas/phpdotenv": "^5.3",
+        "jzonta/faker-restaurant": "^2.0",
+        "fakerphp/faker": "^1.15"
     }
 }
