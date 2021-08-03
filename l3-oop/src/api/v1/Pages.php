@@ -25,4 +25,19 @@ class Pages extends BaseController
   {
     return Response::raiseJson200($this->model->selectOne($params['slug']));
   }
+
+  public function create() : string
+  {
+    return Response::raiseJson200($this->model->create($this->req->get('input')));
+  }
+
+  public function update(array $params) : string
+  {
+    return Response::raiseJson200($this->model->update($params['slug'], $this->req->get('input')));
+  }
+
+  public function delete(array $params) : string
+  {
+    return Response::raiseJson200($this->model->delete($params['slug']));
+  }
 }

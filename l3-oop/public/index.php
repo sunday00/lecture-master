@@ -23,6 +23,14 @@ foreach( $_ENV as $k => $env ){
 
 $uris = explode('/', getenv('REQUEST_URI'));
 array_shift($uris);
+
+if($_SERVER["CONTENT_TYPE"] == "application/json"){
+  $reqData = json_decode(file_get_contents('php://input'));
+} else {
+  $reqData = file_get_contents('php://input');
+}
+
+$_REQUEST['input'] = $reqData;
 $_REQUEST['followUris'] = array_slice($uris, 3);
 
 $router = new Libs\Router($uris);
