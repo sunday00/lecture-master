@@ -4,24 +4,30 @@ namespace Api\v1;
 
 use Models\DevLang as model;
 use Helpers\Request;
+use Helpers\Response;
 
-class DevLang
+/**
+ * @OA\Schema(
+ *    schema="devLang",
+ *    description="A list of languages for test"
+ * )
+ */
+class DevLang extends BaseController
 {
-  private model $model ;
-  private Request $req;
-
-  public function run() : void
+  public function run(string $act, array|null $params = null): string
   {
-    $this->model = new model();    
-    $this->req = new Request();
-
-    if( $this->req->get('method') == 'GET' && count($this->req->get('followUris')) == 0){
-      $this->index();
-    }
+    return parent::__init('devLang', new model(), $act, $params);
   }
 
-  private function index()
+  /**
+   * @OA\Get(
+   *     path="/api/v1/dev-lang",
+   *     tags={"devLang"},
+   *     @OA\Response(response="200", description="list of pages")
+   * )
+   */
+  public function index()
   {
-    echo json_encode( $this->model->selectAll() );
+    return Response::raiseJson200($this->model->selectAll());
   }
 }

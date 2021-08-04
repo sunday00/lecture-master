@@ -10,6 +10,15 @@ $routes = [
     'list'    => ['GET'  , '/',  'index'],
   ],
 
+  'DevLang' => [
+    'list'    => ['GET', '/', 'index'],
+  ],
+
+  'Doc' => [
+    'json' => ['GET', '/json', 'json'],
+    'ui' => ['GET', '/ui', 'ui'],
+  ],
+
   'FruitSeeder' => [
     'generate' => ['GET', '/generate/:cnt', 'generate'],
   ],

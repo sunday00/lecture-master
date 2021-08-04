@@ -30,6 +30,7 @@ class Router
       case 'api':
         $className = "Api\\{$version}\\".$controller;
         $app = new $className;
+
         echo $app->run($this->action, $this->params);
       break;
       case 'dev':

@@ -3,6 +3,7 @@
 namespace Models;
 
 use Models\BaseModel;
+use PDO;
 
 class DevLang extends BaseModel
 {
@@ -13,14 +14,13 @@ class DevLang extends BaseModel
     $order = isset($option->order) ? $option->order : "id DESC";
     $stmt = $this->db->prepare("SELECT * FROM {$this->tableName} ORDER BY {$order}");
     $stmt->execute();
-    $result = $stmt->get_result();
-
-    if( $result->num_rows == 0 ){
-      return ['no result'];
+    
+    if( $stmt->rowCount() == 0 ){
+      return [0=>'no result'];
     }
 
     $langs = [];
-    while( $r = $result->fetch_assoc() ){
+    while( $r = $stmt->fetch(PDO::FETCH_ASSOC) ){
       $langs[] = $r;
     }
 

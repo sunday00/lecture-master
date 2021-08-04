@@ -4,7 +4,16 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 mysqli_report(MYSQLI_REPORT_ALL & ~MYSQLI_REPORT_INDEX);
 
-header("Access-Control-Allow-Origin: http://localhost:8088");
+if (isset($_SERVER['HTTP_ORIGIN'])){
+  switch($_SERVER['HTTP_ORIGIN']){
+    case 'http://localhost:8088':
+      header('Access-Control-Allow-Origin: http://localhost:8088');
+    break;
+    case 'https://validator.swagger.io':
+      header('Access-Control-Allow-Origin: https://validator.swagger.io');
+    break;
+  }
+}
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Max-Age: 86400');
 

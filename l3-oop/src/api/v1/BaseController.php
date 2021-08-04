@@ -6,6 +6,9 @@ use Models\Model;
 use Helpers\Request;
 use Helpers\Errors;
 
+/**
+ * @OA\Info(title="php api and swagger examples", version="1.0")
+ */
 class BaseController
 {
   protected string $controller;
