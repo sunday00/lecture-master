@@ -131,7 +131,7 @@
               <div class="ajax-section ajax_field">
                 <div class="like">
                   <span>LIKE</span>
-                  <span class="like_count" id="like-count-{{ post.id }}">1</span>
+                  <span class="like_count" id="like-count-{{ post.id }}">{{ post.like_count }}</span>
                 </div>
                 <div class="comment">
                   <span>comment</span>
@@ -140,7 +140,7 @@
               </div>
 
               <div class="btn-section btn_container">
-                <div class="like-btn active" data-name="like" name="{{ post.id }}">
+                <div class="like-btn {% if user in post.like_user_set.all %} active {% endif %}" data-name="like" name="{{ post.id }}">
                   <i class="icon icon--like-line"></i>
                   <span>LIKE</span>
                 </div>
@@ -181,8 +181,9 @@
                     <img src="{{ user_profile.picture.url }}" alt="{{ user_profile.nick }} profile">
                   </div>
                   <div class="input_container">
-                    {% comment %} <label for="comment37"></label>
-                    <input type="text" id="comment37" placeholder="leave your comment..."/> {% endcomment %}
+                    {% comment %} TODO:: this is not completed {% endcomment %}
+                    {% comment %} <label for="comment37"></label>{% endcomment %}
+                    <input type="text" id="comment37" placeholder="leave your comment..."/> 
                     {{ comment_form }}
                     <button class="send">
                       <span class="icon--send" name="{{ post.id }}" data-name="comment"></span>
@@ -195,7 +196,9 @@
             </article>
           {% endfor %}
 
-          <div id="post_list_ajax"></div>
+          <div id="post_list_ajax">
+            {% include "post/script_ajax.html" %}
+          </div>
           
         </div>
       </section>

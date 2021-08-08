@@ -44,119 +44,120 @@ window.addEventListener('DOMContentLoaded',function(){
 
 
 
-        function delegation(e){
-            let elem = e.target;
-            e.stopPropagation();
+        // function delegation(e){
+        //     let elem = e.target;
+        //     e.stopPropagation();
 
-            console.log(elem);
+        //     console.log(elem);
 
-            while (!elem.getAttribute('data-name')) {
-                elem = elem.parentNode;
+        //     while (!elem.getAttribute('data-name')) {
+        //         elem = elem.parentNode;
 
-                if (elem.nodeName === 'BODY') {
-                    elem = null;
-                    return;
-                }
-            }
+        //         if (elem.nodeName === 'BODY') {
+        //             elem = null;
+        //             return;
+        //         }
+        //     }
 
-            if (elem.matches('[data-name="like"]')) {
+        //     if (elem.matches('[data-name="like"]')) {
 
-                console.log('좋아요!');
-                let pk = elem.getAttribute('name');
-                elem.classList.toggle('active');
+        //         console.log('좋아요!');
+        //         let pk = elem.getAttribute('name');
+        //         elem.classList.toggle('active');
 
-                $.ajax({
-                    type:'POST',
-                    url:'data/like.json',
-                    data:{pk},
-                    dataType:'json',
-                    success: function(response){
+        //         $.ajax({
+        //             type:'POST',
+        //             url:'data/like.json',
+        //             data:{pk},
+        //             dataType:'json',
+        //             success: function(response){
 
-                        let likeCount = document.querySelector('#like-count-37');
-                        likeCount.innerHTML =  response.like_count ;
+        //                 let likeCount = document.querySelector(`#like-count-37${pk}`);
+        //                 likeCount.innerHTML =  response.like_count ;
 
-                    },
-                    error:function(request,status,error){
-                        alert('로그인이 필요합니다.');
-                        window.location.replace('https://www.naver.com');
-                    }
+        //             },
+        //             error:function(request,status,error){
+        //                 alert('로그인이 필요합니다.');
+        //                 window.location.replace('https://www.naver.com');
+        //             }
 
-                })
-
-
-
-
-            }else if (elem.matches('[data-name="delete"]')) {
-
-                if(confirm('정말 삭제할거야?') === true){
-
-                    $.ajax({
-                        type:'POST',
-                        url:'data/delete.json',
-                        data:{
-                            'pk':37,
-                        },
-                        dataType:'json',
-                        success:function(response){
-                            if(response.status){
-                                let comt = document.querySelector('.comment-37');
-                                comt.remove();
-                            }
-                        },
-                        error:function(request,status,error){
-                            alert('문제가 발생했습니다.');
-
-                        }
-                    });
-                }
-
-
-            }else if (elem.matches('[data-name="send"]')) {
-                let content =  txt.value;
-                $.ajax({
-
-                    type:'POST',
-                    url:'data/comment.html',
-                    data:{
-                        'pk' : 37,
-                        'content':content,
-                    },
-                    dataType:'html',
-                    success:function(data){
-                        document.querySelector('.comment_container').insertAdjacentHTML('beforeend',data);
-                    },
-                    error:function(request,status,error){
-                        alert('문제가 발생했습니다.');
-
-                    }
-                });
-
-                txt.value = '';
-
-
-            }else if (elem.matches('[data-name="more"]')) {
-
-                elem.classList.toggle('active');
+        //         })
 
 
 
 
+        //     }else if (elem.matches('[data-name="delete"]')) {
 
-            }else if (elem.matches('[data-name="add"]')) {
+        //         if(confirm('정말 삭제할거야?') === true){
+        //             let pk = elem.getAttribute('name');
+        //             $.ajax({
+        //                 type:'POST',
+        //                 url:'data/delete.json',
+        //                 data:{
+        //                     'pk':pk,
+        //                 },
+        //                 dataType:'json',
+        //                 success:function(response){
+        //                     if(response.status){
+        //                         let comt = document.querySelector(`.comment-${pk}`);
+        //                         comt.remove();
+        //                     }
+        //                 },
+        //                 error:function(request,status,error){
+        //                     alert('문제가 발생했습니다.');
+
+        //                 }
+        //             });
+        //         }
 
 
-                console.log('ddd');
-                submit.disabled = false;
-                submit.parentNode.style.display = 'block';
-                textField.style.height = '100px';
+        //     }else if (elem.matches('[data-name="send"]')) {
+        //         let content =  txt.value;
+        //         let pk = elem.getAttribute('name');
+        //         $.ajax({
+
+        //             type:'POST',
+        //             url:'data/comment.html',
+        //             data:{
+        //                 'pk' : pk,
+        //                 'content':content,
+        //             },
+        //             dataType:'html',
+        //             success:function(data){
+        //                 document.querySelector('.comment_container').insertAdjacentHTML('beforeend',data);
+        //             },
+        //             error:function(request,status,error){
+        //                 alert('문제가 발생했습니다.');
+
+        //             }
+        //         });
+
+        //         txt.value = '';
 
 
-            }else{
+        //     }else if (elem.matches('[data-name="more"]')) {
 
-            }
+        //         elem.classList.toggle('active');
 
 
-        }
+
+
+
+        //     }else if (elem.matches('[data-name="add"]')) {
+
+
+        //         console.log('ddd');
+        //         submit.disabled = false;
+        //         submit.parentNode.style.display = 'block';
+        //         textField.style.height = '100px';
+
+
+        //     }else{
+
+        //     }
+
+
+        // }
 
 
 
@@ -201,7 +202,7 @@ window.addEventListener('DOMContentLoaded',function(){
 
                 console.log(page);
 
-                callMorePostAjax(page);
+                // callMorePostAjax(page);
 
                 if( page > 5){
                     return;
@@ -213,81 +214,81 @@ window.addEventListener('DOMContentLoaded',function(){
 
         }
 
-        function callMorePostAjax(page){
+        // function callMorePostAjax(page){
 
-            if( page > 5){
-                return;
-            }
+        //     if( page > 5){
+        //         return;
+        //     }
 
-            $.ajax({
-                type:'POST',
-                url:'data/post.html',
-                data:{
-                    'page':page,
-                },
-                dataType:'html',
-                success: addMorePostAjax,
-                error:function(request,status,error){
-                    alert('문제가 발생했습니다.');
-                    // window.location.replace('https://www.naver.com');
+        //     $.ajax({
+        //         type:'POST',
+        //         url:'data/post.html',
+        //         data:{
+        //             'page':page,
+        //         },
+        //         dataType:'html',
+        //         success: addMorePostAjax,
+        //         error:function(request,status,error){
+        //             alert('문제가 발생했습니다.');
+        //             // window.location.replace('https://www.naver.com');
 
-                }
+        //         }
 
-            })
-        }
+        //     })
+        // }
 
-        function addMorePostAjax(data){
+        // function addMorePostAjax(data){
 
-            feed.insertAdjacentHTML('beforeend',data);
+        //     feed.insertAdjacentHTML('beforeend',data);
 
-        }
+        // }
 
-        const txt = document.querySelector('#comment37');
-
-
-
-        txt.addEventListener('keypress',function(e){
-            console.log(e.code);
-            let content =  txt.value;
-            console.log(content);
-
-            if(e.code === 'Enter') {
-
-                if(content.length > 140){
-                    alert('댓글은 최대 140자 입력 가능합니다. 현재 글자수 : ' + content.length);
-                    return;
-                }
+        // const txt = document.querySelector('#comment37');
 
 
-                $.ajax({
 
-                    type:'POST',
-                    url:'data/comment.html',
-                    data:{
-                        'pk' : 37,
-                        'content':content,
-                    },
-                    dataType:'html',
-                    success:function(data){
-                        document.querySelector('.comment_container').insertAdjacentHTML('beforeend',data);
-                    },
-                    error:function(request,status,error){
-                        alert('문제가 발생했습니다.');
+        // txt.addEventListener('keypress',function(e){
+        //     console.log(e.code);
+        //     let content =  txt.value;
+        //     console.log(content);
 
-                    }
-                });
+        //     if(e.code === 'Enter') {
 
-                txt.value = '';
-            }
+        //         if(content.length > 140){
+        //             alert('댓글은 최대 140자 입력 가능합니다. 현재 글자수 : ' + content.length);
+        //             return;
+        //         }
 
 
-        });
+        //         $.ajax({
+
+        //             type:'POST',
+        //             url:'data/comment.html',
+        //             data:{
+        //                 'pk' : 37,
+        //                 'content':content,
+        //             },
+        //             dataType:'html',
+        //             success:function(data){
+        //                 document.querySelector('.comment_container').insertAdjacentHTML('beforeend',data);
+        //             },
+        //             error:function(request,status,error){
+        //                 alert('문제가 발생했습니다.');
+
+        //             }
+        //         });
+
+        //         txt.value = '';
+        //     }
+
+
+        // });
 
         if( document.querySelector('.right a').textContent !== 'LOGIN' ){
 
             // chart_btn.addEventListener('click',chartFunc);
             bell.addEventListener('click',noticeFunc);
-            feed.addEventListener('click',delegation);
+            // feed.addEventListener('click',delegation);
             
         }
 
