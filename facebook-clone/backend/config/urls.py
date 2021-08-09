@@ -10,6 +10,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('post/', include('post.urls', namespace='post')),
+
+    path('bookmark_friends/', include('bookmark_friends.urls', namespace='bookmark_friends')),
 ]
 
 

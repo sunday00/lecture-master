@@ -31,6 +31,21 @@
           console.log(err);
         });
       }
+
+      if (elem.matches('[data-name="bookmark"]')) {
+        let pk = elem.getAttribute('name');
+
+        $.post(`{% url 'post:post_bookmark' %}`, 
+          {
+            pk: pk,
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+          }
+        ).then(res => {
+          elem.firstElementChild.textContent = res.is_bookmarked === 'Y' ? 'saved' : 'save';
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }
 
   delegation.addEventListener('click', delegationFunc);

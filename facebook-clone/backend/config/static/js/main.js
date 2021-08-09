@@ -1,7 +1,3 @@
-
-
-
-
 window.addEventListener('DOMContentLoaded',function(){
 
 
@@ -23,17 +19,10 @@ window.addEventListener('DOMContentLoaded',function(){
         const more  = document.querySelector( ".contents .more" );
         // const send  = document.querySelector( ".send" );
 
-
-
         if( document.querySelector('.right a').textContent !== 'LOGIN' ){
             leftBox.style.right = `${innerWidth*0.5 + 430}px`;
             rightBox.style.left = `${innerWidth*0.5 + 90}px`;
         }
-
-
-
-
-
 
         function resizeFunc(){
             if( document.querySelector('.right a').textContent !== 'LOGIN' ){
@@ -42,130 +31,86 @@ window.addEventListener('DOMContentLoaded',function(){
             }
         }
 
+        function delegation(e){
+            let elem = e.target;
+            e.stopPropagation();
+
+            while (!elem.getAttribute('data-name')) {
+                elem = elem.parentNode;
+
+                if (elem.nodeName === 'BODY') {
+                    elem = null;
+                    return;
+                }
+            }
+
+            if (elem.matches('[data-name="delete"]')) {
+
+                if(confirm('정말 삭제할거야?') === true){
+                    let pk = elem.getAttribute('name');
+                    $.ajax({
+                        type:'POST',
+                        url:'data/delete.json',
+                        data:{
+                            'pk':pk,
+                        },
+                        dataType:'json',
+                        success:function(response){
+                            if(response.status){
+                                let comt = document.querySelector(`.comment-${pk}`);
+                                comt.remove();
+                            }
+                        },
+                        error:function(request,status,error){
+                            alert('문제가 발생했습니다.');
+
+                        }
+                    });
+                }
+
+            } else if (elem.matches('[data-name="send"]')) {
+                let content =  txt.value;
+                let pk = elem.getAttribute('name');
+                $.ajax({
+
+                    type:'POST',
+                    url:'data/comment.html',
+                    data:{
+                        'pk' : pk,
+                        'content':content,
+                    },
+                    dataType:'html',
+                    success:function(data){
+                        document.querySelector('.comment_container').insertAdjacentHTML('beforeend',data);
+                    },
+                    error:function(request,status,error){
+                        alert('문제가 발생했습니다.');
+
+                    }
+                });
+
+                txt.value = '';
 
 
-        // function delegation(e){
-        //     let elem = e.target;
-        //     e.stopPropagation();
+            }else if (elem.matches('[data-name="more"]')) {
 
-        //     console.log(elem);
+                elem.classList.toggle('active');
 
-        //     while (!elem.getAttribute('data-name')) {
-        //         elem = elem.parentNode;
-
-        //         if (elem.nodeName === 'BODY') {
-        //             elem = null;
-        //             return;
-        //         }
-        //     }
-
-        //     if (elem.matches('[data-name="like"]')) {
-
-        //         console.log('좋아요!');
-        //         let pk = elem.getAttribute('name');
-        //         elem.classList.toggle('active');
-
-        //         $.ajax({
-        //             type:'POST',
-        //             url:'data/like.json',
-        //             data:{pk},
-        //             dataType:'json',
-        //             success: function(response){
-
-        //                 let likeCount = document.querySelector(`#like-count-37${pk}`);
-        //                 likeCount.innerHTML =  response.like_count ;
-
-        //             },
-        //             error:function(request,status,error){
-        //                 alert('로그인이 필요합니다.');
-        //                 window.location.replace('https://www.naver.com');
-        //             }
-
-        //         })
+            }else if (elem.matches('[data-name="add"]')) {
 
 
+                console.log('ddd');
+                submit.disabled = false;
+                submit.parentNode.style.display = 'block';
+                textField.style.height = '100px';
 
 
-        //     }else if (elem.matches('[data-name="delete"]')) {
+            }else{
 
-        //         if(confirm('정말 삭제할거야?') === true){
-        //             let pk = elem.getAttribute('name');
-        //             $.ajax({
-        //                 type:'POST',
-        //                 url:'data/delete.json',
-        //                 data:{
-        //                     'pk':pk,
-        //                 },
-        //                 dataType:'json',
-        //                 success:function(response){
-        //                     if(response.status){
-        //                         let comt = document.querySelector(`.comment-${pk}`);
-        //                         comt.remove();
-        //                     }
-        //                 },
-        //                 error:function(request,status,error){
-        //                     alert('문제가 발생했습니다.');
-
-        //                 }
-        //             });
-        //         }
+            }
 
 
-        //     }else if (elem.matches('[data-name="send"]')) {
-        //         let content =  txt.value;
-        //         let pk = elem.getAttribute('name');
-        //         $.ajax({
-
-        //             type:'POST',
-        //             url:'data/comment.html',
-        //             data:{
-        //                 'pk' : pk,
-        //                 'content':content,
-        //             },
-        //             dataType:'html',
-        //             success:function(data){
-        //                 document.querySelector('.comment_container').insertAdjacentHTML('beforeend',data);
-        //             },
-        //             error:function(request,status,error){
-        //                 alert('문제가 발생했습니다.');
-
-        //             }
-        //         });
-
-        //         txt.value = '';
-
-
-        //     }else if (elem.matches('[data-name="more"]')) {
-
-        //         elem.classList.toggle('active');
-
-
-
-
-
-        //     }else if (elem.matches('[data-name="add"]')) {
-
-
-        //         console.log('ddd');
-        //         submit.disabled = false;
-        //         submit.parentNode.style.display = 'block';
-        //         textField.style.height = '100px';
-
-
-        //     }else{
-
-        //     }
-
-
-        // }
-
-
-
-
-
-
-
-
+        }
 
         function noticeFunc(e){
             e.stopPropagation();
@@ -288,7 +233,7 @@ window.addEventListener('DOMContentLoaded',function(){
 
             // chart_btn.addEventListener('click',chartFunc);
             bell.addEventListener('click',noticeFunc);
-            // feed.addEventListener('click',delegation);
+            feed.addEventListener('click',delegation);
             
         }
 

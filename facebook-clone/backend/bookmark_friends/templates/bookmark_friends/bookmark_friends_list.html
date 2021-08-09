@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/save.css' %}">
+{% endblock head %}
+
+{% block contents %}
+  <section id="wrapper">
+    <div class="inner">
+      {% if user_profile %}
+        <aside class="left_box">
+          <div class="my_name">
+            <a href="#">
+              <div class="profile_img">
+                <img src="{{ user_profile.picture.url }}" alt="profile">
+              </div>
+              <span class="name">{{ user_profile.nick }}</span>
+              <span class="icon icon--more"></span>
+            </a>
+          </div>
+          <ul class="list">
+            <li class="">
+              <a href="{% url 'post:post_list' %}">
+                <span class="icon icon--news"></span>
+                <span>NewsFeed</span>
+                <span class="icon icon--more"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="icon icon--messenger"></span>
+                <span>Messenger</span>
+                <span class="icon icon--more"></span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}">
+                <span class="icon icon--save"></span>
+                <span>Save</span>
+                <span class="icon icon--more"></span>
+              </a>
+            </li>
+          </ul>
+        </aside>
+      {% endif %}
+
+      <section class="middle_box" id="contents_container">
+        <div id="save">
+          {% for post in post_list %}
+            {% for bookmark_user in post.bookmark_user_set.all %}
+              {% if user == bookmark_user.profile.user %}
+                <article class="contents">
+                  <div class="thumbnail">
+                    <img src="{{ post.photo.url }}" alt=""/>
+                  </div>
+                  <div>
+                    <h1 class="heading">wrote by
+                      {{ post.author.username }}</h1>
+                    <p class="description">
+                      {{ post.content }}
+                    </p>
+                  </div>
+                </article>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  {% if user_profile %}
+    <aside id="side_box">
+      <ul>
+        <li>
+          <div class="profile_img">
+            <img src="{% static 'imgs/profile/noun_User.png' %}" alt="profile">
+          </div>
+          <span class="name">monday</span>
+          <span class="light"></span>
+        </li>
+      </ul>
+    </aside>
+  {% endif %}
+{% endblock contents %}
+
+{% block js %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/save.js' %}"></script>
+{% endblock js %}

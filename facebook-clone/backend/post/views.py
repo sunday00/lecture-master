@@ -49,7 +49,7 @@ def post_bookmark (req):
     message = 'cancel bookmark'
     is_bookmarked = 'N'
   else:
-    message = 'like'
+    message = 'bookmarked'
     is_bookmarked = 'Y'
 
   ctx = {'is_bookmarked': is_bookmarked, 'message': message}
