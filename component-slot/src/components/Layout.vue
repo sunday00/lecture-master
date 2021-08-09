@@ -6,6 +6,11 @@
     <main>
       <slot />
     </main>
+    <aside>
+      <slot name="aside">
+        aside fall back
+      </slot>
+    </aside>
     <footer>
       <slot name="footer" />
     </footer>

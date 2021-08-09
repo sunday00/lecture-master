@@ -42,7 +42,23 @@
           Slot PRESS
         </SlotStyleButton>
       </div>
+      <div>
+        <div>
+          <RandomUser 
+            :additional-info="user => user.phone" 
+          >
+            <template #loading>
+              <AppSpinner />
+            </template>
+          </RandomUser>
+        </div>
+      </div>
     </template>
+
+    <template #aside>
+      aside IS HERE
+    </template>
+
     <template #footer>
       FOOTER IS HERE
     </template>
@@ -53,6 +69,8 @@
 import PropStyleButton from './components/PropStyleButton.vue';
 import SlotStyleButton from './components/SlotStyleButton.vue';
 import NoodleIcon from './components/NoodleIcon';
+import AppSpinner from './components/AppSpinner';
+import RandomUser from './components/RandomUser';
 
 import Layout from './components/Layout';
 
@@ -60,7 +78,14 @@ export default {
   name: 'App',
   components: {
     PropStyleButton, SlotStyleButton, NoodleIcon,
-    Layout,
+    Layout, 
+
+    AppSpinner, RandomUser, 
+
+
+  },
+  methos: {
+    
   }
 }
 </script>
