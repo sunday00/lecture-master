@@ -1,0 +1,43 @@
+<template>
+  <button>
+    <HeartIcon v-if="showIcon" />
+    {{ text }}
+  </button>
+</template>
+
+<script>
+import HeartIcon from './HeartIcon';
+
+export default {
+  components: {
+    HeartIcon
+  },
+  props: {
+    text:{
+      type: String,
+      default: ""
+    },
+    showIcon:{
+      type: Boolean,
+      default: true,
+      required: true
+    },
+  },
+}
+</script>
+
+<style scoped>
+  button {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #41b883;
+    border-radius: 0.25rem;
+    line-height: 1.5;
+    margin: 10px;
+  }
+</style>

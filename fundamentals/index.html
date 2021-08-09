@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue3-Fundamental</title>
+    <link rel="stylesheet" href="static/css/main.css" />
+  </head>
+
+  <body>
+    <main id="shopping-list">
+      <header class="header">
+        <h1>{{ header }}</h1>
+        <button v-if="!editing" class="btn btn-primary" @click="doEdit(true)">
+          add item
+        </button>
+        <button v-else class="btn btn-cancel" @click="doEdit(false)">
+          cancel
+        </button>
+      </header>
+
+      <a :href="newItem">Dynamic Link</a>
+
+      <strong>Priority</strong>
+      <label>
+        <input type="radio" v-model="newItemPriority" value="high" />
+        <span>HIGH</span>
+      </label>
+      <label>
+        <input type="radio" v-model="newItemPriority" value="low" />
+        <span>LOW</span>
+      </label>
+
+      <p>
+        <label>
+          need invitation :
+          <input type="checkbox" v-model="needInvitation" />
+        </label>
+      </p>
+
+      <div>
+        <label
+          ><input
+            v-model="iceCreamFlavors"
+            type="checkbox"
+            value="vanilla"
+          />Vanilla</label
+        >
+        <label
+          ><input
+            v-model="iceCreamFlavors"
+            type="checkbox"
+            value="chocolate"
+          />Chocolate</label
+        >
+        <label
+          ><input
+            v-model="iceCreamFlavors"
+            type="checkbox"
+            value="strawberry"
+          />Strawberry</label
+        >
+        <label
+          ><input
+            v-model="iceCreamFlavors"
+            type="checkbox"
+            value="blueberry"
+          />Blueberry</label
+        >
+        <label
+          ><input
+            v-model="iceCreamFlavors"
+            type="checkbox"
+            value="peanut-butter"
+          />Peanut-butter</label
+        >
+        <label
+          ><input
+            v-model="iceCreamFlavors"
+            type="checkbox"
+            value="cookie"
+          />Cookie</label
+        >
+        <label
+          ><input
+            v-model="iceCreamFlavors"
+            type="checkbox"
+            value="mint"
+          />Mint</label
+        >
+      </div>
+
+      <div
+        v-if="editing"
+        class="add-item-form"
+        style="width: 100%; text-align: center; display: block"
+      >
+        <form @submit.prevent="addItem" :disabled="newItem.length === 0">
+          <input
+            type="text"
+            v-model.lazy="newItem"
+            name="newItem"
+            @keyup.esc="clearInput"
+          />
+          {{ countInput }} / 200
+          <select v-model="newItemPriority" name="">
+            <option value="high">high</option>
+            <option value="low">low</option>
+          </select>
+          <button class="btn btn-primary" :disabled="newItem.length < 1">
+            save
+          </button>
+        </form>
+      </div>
+
+      <p>
+        <!-- prettier-ignore -->
+        {{ newItem }} | {{ newItemPriority }} | {{ needInvitation ? "private party" : "public party" }}
+      </p>
+
+      <ul>
+        <li
+          v-for="(item, idx) in reversedItems"
+          :key="item.id"
+          :class="{strikeout: item.purchased, priority: item.highPriority}"
+          @click="togglePurchased(item)"
+        >
+          {{idx}} {{ item.label }}
+        </li>
+      </ul>
+      <ul>
+        <li v-if="items.length === 0">No items...</li>
+        <!-- prettier-ignore -->
+        <li
+          v-for="(item, idx) in items"
+          :key="idx"
+          :class="[item.purchased ? 'underlined' : '',
+            item.highPriority ? 'priority' : '']"
+        >
+          {{idx}} {{ item.label }}
+        </li>
+      </ul>
+    </main>
+    <script src="https://unpkg.com/vue@3.1.5"></script>
+
+    <script>
+      let app = Vue.createApp({
+        data() {
+          return {
+            header: 'Vue is ready to party',
+            editing: false,
+            newItem: '',
+            newItemPriority: 'low',
+            needInvitation: true,
+            iceCreamFlavors: [],
+            items: [
+              {
+                id: 1,
+                label: '10 party hats',
+                purchased: false,
+                highPriority: true,
+              },
+              {
+                id: 2,
+                label: '2 board games',
+                purchased: true,
+                highPriority: true,
+              },
+              {
+                id: 3,
+                label: '20 cups',
+                purchased: false,
+                highPriority: false,
+              },
+            ],
+          };
+        },
+        methods: {
+          addItem(e) {
+            this.items.push({
+              id: Math.max(...this.items.map((i) => i.id)) + 1,
+              label: this.newItem,
+              highPriority: this.newItemPriority === 'high',
+            });
+            this.newItem = '';
+          },
+          clearInput(e) {
+            e.currentTarget.value = '';
+            console.log('clear!');
+          },
+          doEdit(nowEdit) {
+            this.editing = nowEdit;
+          },
+          togglePurchased(item) {
+            item.purchased = !item.purchased;
+          },
+        },
+        computed: {
+          countInput() {
+            return this.newItem.length;
+          },
+          reversedItems() {
+            return [...this.items].reverse();
+          },
+        },
+      }).mount('#shopping-list');
+    </script>
+  </body>
+</html>
