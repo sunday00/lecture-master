@@ -100,7 +100,25 @@
                       <i class="icon icon--more"></i>
                       <ul class="hidden_menu">
                         <li>
-                          <button>add friend</button>
+                          {% if post.author in my_friend_user_list %}
+                            <button>unfollow</button>
+                          {% elif post.author in my_friend_request_user_list %}
+                            <button 
+                              class="friend_request"
+                              data-name="friend_request"
+                              name="{{ post.author.profile.id }}"
+                            >
+                              cancel requesting
+                            </button>
+                          {% else %}
+                            <button 
+                              class="friend_request"
+                              data-name="friend_request"
+                              name="{{ post.author.profile.id }}"
+                            >
+                              add friend
+                            </button>
+                          {% endif %}
                         </li>
                         <li class="bookmark" data-name="bookmark" name="{{ post.id }}">
                           {% if user in post.bookmark_user_set.all %}

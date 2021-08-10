@@ -33,3 +33,28 @@ class Profile(models.Model):
   about = models.CharField(max_length=300, blank=True)
   gender = models.CharField('gender', max_length=10, choices=GENDER_C, default='N')
 
+class Friend(models.Model):
+  current_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='friends', blank=True, on_delete=models.CASCADE)
+  
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, on_delete=models.CASCADE)
+  # room = models.ForeignKey(Room, blank=True, on_delete=models.SET_NULL, null=True)
+
+  created_at = models.DateField(auto_now_add=True)
+
+  def __str__(self):
+    return self.user.username
+
+class FriendRequest(models.Model):
+  from_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='friends_requests', on_delete=models.CASCADE)
+  to_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='requested_friend_requests', on_delete=models.CASCADE)
+
+  created_at = models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+    return f"{self.from_user} -> {self.to_user}"
+
+  class Meta:
+    unique_together = (
+      ('from_user', 'to_user')
+    )
+

@@ -11,13 +11,33 @@ def post_list(req):
 
   if req.user.is_authenticated:
     username = req.user
+    
+    friends = username.friends.all()
+    request_friends = username.friends_requests
+
     user = get_object_or_404(get_user_model(), username=username)
     user_profile = user.profile
+   
+    friend_list = user.friends.all()
+    my_friend_user_list = list(map(lambda friend: friend.user, friend_list))
+    
+    friend_request_list = user.friends_requests.all()
+    my_friend_request_user_list = list(map(lambda friend_request: friend_request.to_user, friend_request_list))
+
   else: 
     user_profile = None
+    friends = []
+    request_friends = []
+    my_friend_user_list = []
+    my_friend_request_user_list = []
+
   return render(req, 'post/post_list.html', {
       'user_profile' : user_profile,
-      'posts': post_list
+      'posts': post_list,
+      'friends': friends,
+      'request_friends': request_friends,
+      'my_friend_user_list': my_friend_user_list,
+      'my_friend_request_user_list': my_friend_request_user_list,
     })
 
 @login_required
