@@ -46,6 +46,38 @@
           console.log(err);
         });
       }
+
+      if (elem.matches('[data-name="friend_request"]')) {
+        let pk = elem.getAttribute('name');
+
+        $.post(`{% url 'accounts:create_friend_request' %}`, 
+          {
+            pk: pk,
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+          }
+        ).then(res => {
+          elem.dataset.name = 'cancel_add_friend';
+          elem.textContent = 'cancel requesting';
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+
+      if (elem.matches('[data-name="cancel_add_friend"]')) {
+        let to_user = elem.getAttribute('name');
+
+        $.post(`{% url 'accounts:cancel_add_friend' %}`, 
+          {
+            to_user: to_user,
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+          }
+        ).then(res => {
+          elem.dataset.name = 'friend_request';
+          elem.textContent = 'add friend';
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }
 
   delegation.addEventListener('click', delegationFunc);

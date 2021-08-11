@@ -105,8 +105,8 @@
                           {% elif post.author in my_friend_request_user_list %}
                             <button 
                               class="friend_request"
-                              data-name="friend_request"
-                              name="{{ post.author.profile.id }}"
+                              data-name="cancel_add_friend"
+                              name="{{ post.author.profile.user.id }}"
                             >
                               cancel requesting
                             </button>
@@ -114,7 +114,7 @@
                             <button 
                               class="friend_request"
                               data-name="friend_request"
-                              name="{{ post.author.profile.id }}"
+                              name="{{ post.author.profile.user.id }}"
                             >
                               add friend
                             </button>

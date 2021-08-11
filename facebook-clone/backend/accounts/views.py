@@ -49,9 +49,23 @@ def create_friend_request(req):
   user_id = req.POST.get('pk', None)
   user = req.user
   target_user = get_object_or_404(get_user_model(), pk=user_id)
-
+  
   try:
-    user.friend_requests.create(from_user=user, to_user=target_user)
+    user.friends_requests.create(from_user=user, to_user=target_user)
+    ctx = {'result' : 'success', }
+  except Exception as ex:
+    print('err : ', ex)
+    ctx = {'result' : 'error', }
+
+  return JsonResponse(ctx)
+
+def cancel_add_friend(req):
+  friend_request_id = req.POST.get('to_user', None)
+  user = req.user
+  friend_request = FriendRequest.objects.get(to_user=friend_request_id, from_user=user.id)
+  
+  try:
+    friend_request.delete()
     ctx = {'result' : 'success', }
   except Exception as ex:
     print('err : ', ex)
