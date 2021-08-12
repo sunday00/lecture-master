@@ -9,6 +9,8 @@ urlpatterns = [
     path('logout/', logOut, name='logout'),
 
     path('create_friend_request/', create_friend_request, name='create_friend_request'),
+    path('deny_friend_request/', deny_friend_request, name='deny_friend_request'),
     path('cancel_add_friend/', cancel_add_friend, name='cancel_add_friend'),
     path('accept_friend_request/', accept_friend_request, name='accept_friend_request'),
+    path('unfollow_friend/', unfollow_friend, name='unfollow_friend'),
 ]

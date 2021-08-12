@@ -12,6 +12,11 @@ def bookmark_friends_list(req):
     username = req.user
     user = get_object_or_404(get_user_model(), username=username)
     user_profile = user.profile
+
+    friends_requests = user.requested_friend_requests.all()
+    myFriend_requests = user.friends_requests.all()
+    friends = username.friends.all()
+
   else: 
     user_profile = None
 
@@ -19,5 +24,8 @@ def bookmark_friends_list(req):
 
   return render(req, 'bookmark_friends/bookmark_friends_list.html', {
       'user_profile' : user_profile,
-      'post_list': post_list
+      'post_list': post_list,
+      'friends_requests': friends_requests,
+      'myFriend_requests': myFriend_requests,
+      'friends': friends,
     })

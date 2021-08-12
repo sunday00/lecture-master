@@ -28,14 +28,14 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#friends">
                 <span class="icon icon--messenger"></span>
                 <span>Messenger</span>
                 <span class="icon icon--more"></span>
               </a>
             </li>
             <li>
-              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}">
+              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#bookmark">
                 <span class="icon icon--save"></span>
                 <span>Save</span>
                 <span class="icon icon--more"></span>
@@ -249,13 +249,15 @@
   {% if user_profile %}
     <aside id="side_box">
       <ul>
-        <li>
-          <div class="profile_img">
-            <img src="{% static 'imgs/profile/noun_User.png' %}" alt="profile">
-          </div>
-          <span class="name">monday</span>
-          <span class="light"></span>
-        </li>
+        {% for friend in friends %}
+          <li>
+            <div class="profile_img">
+              <img src="{{ friend.user.profile.picture.url }}" alt="{{ friend.user.profile.nick }}">
+            </div>
+            <span class="name">{{ friend.user.profile.nick }}</span>
+            <span class="light"></span>
+          </li>
+        {% endfor %}
       </ul>
     </aside>
   {% endif %}

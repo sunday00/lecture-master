@@ -73,6 +73,19 @@ def cancel_add_friend(req):
 
   return JsonResponse(ctx)
 
+def deny_friend_request(req):
+  friend_request_id = req.POST.get('pk', None)
+  friend_request = FriendRequest.objects.get(pk=friend_request_id)
+  
+  try:
+    friend_request.delete()
+    ctx = {'result' : 'success', }
+  except Exception as ex:
+    print('err : ', ex)
+    ctx = {'result' : 'error', }
+
+  return JsonResponse(ctx)
+
 def accept_friend_request(req):
   friend_request_id = req.POST.get('pk', None)
   friend_request = FriendRequest.objects.get(pk=friend_request_id)
@@ -96,3 +109,19 @@ def accept_friend_request(req):
     ctx = {'result' : 'error', }
 
   return JsonResponse(ctx)
+
+def unfollow_friend(req):
+  friend_id = req.POST.get('friend_id', None)
+  user = req.user
+  friend = Friend.objects.get(user_id=friend_id, current_user_id=user.id)
+  my_relation = Friend.objects.get(user_id=user.id, current_user_id=friend_id)
+  
+  try:
+    friend.delete()
+    my_relation.delete()
+    ctx = {'result' : 'success', }
+  except Exception as ex:
+    print('err : ', ex)
+    ctx = {'result' : 'error', }
+
+  return JsonResponse(ctx)  

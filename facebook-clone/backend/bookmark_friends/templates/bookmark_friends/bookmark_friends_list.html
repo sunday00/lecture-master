@@ -27,15 +27,15 @@
                 <span class="icon icon--more"></span>
               </a>
             </li>
-            <li>
-              <a href="#">
+            <li class="friend-li">
+              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#friends" data-current="friends">
                 <span class="icon icon--messenger"></span>
                 <span>Messenger</span>
                 <span class="icon icon--more"></span>
               </a>
             </li>
-            <li class="active">
-              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}">
+            <li class="bookmark-li active">
+              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#bookmark" data-current="bookmark">
                 <span class="icon icon--save"></span>
                 <span>Save</span>
                 <span class="icon icon--more"></span>
@@ -66,6 +66,57 @@
             {% endfor %}
           {% endfor %}
         </div>
+
+        <div id="friends" class="hidden">
+          <input type="hidden" name="ajax_accept" value="{% url 'accounts:accept_friend_request' %}">
+          <input type="hidden" name="ajax_deny" value="{% url 'accounts:deny_friend_request' %}">
+          <input type="hidden" name="ajax_cancel" value="{% url 'accounts:cancel_add_friend' %}">
+          <input type="hidden" name="ajax_unfollow" value="{% url 'accounts:unfollow_friend' %}">
+          {% csrf_token %}
+          {% for friend_request in myFriend_requests %}
+            <article class="contents">
+              <div class="thumbnail">
+                <img src="{{ friend_request.to_user.profile.picture.url }}" alt="{{ friend_request.to_user.profile.nick }}">
+              </div>
+              <div class="right_contents">
+                <h1 class="heading">Waiting for accepting request to [
+                  {{ friend_request.to_user.username }}
+                  ]</h1>
+                <div class="btn_container">
+                  <button class="cancel" data-name="friend_cancel" data-to_user="{{ friend_request.to_user.id }}">cancel</button>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+          {% for friend_request in friends_requests %}
+            <article class="contents">
+              <div class="thumbnail">
+                <img src="{{ friend_request.from_user.profile.picture.url }}" alt="{{ friend_request.from_user.profile.nick }}">
+              </div>
+              <div class="right_contents">
+                <h1 class="heading">{{ friend_request.from_user.username }}
+                  requests friend</h1>
+                <div class="btn_container">
+                  <button class="agree" data-name="friend_accept" data-req-id="{{ friend_request.id }}">AGREE</button>
+                  <button class="deny" data-name="friend_deny" data-req-id="{{ friend_request.id }}">DENY</button>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+          {% for friend in friends %}
+            <article class="contents">
+              <div class="thumbnail">
+                <img src="{{ friend.user.profile.picture.url }}" alt="{{ friend.user.profile.nick }}">
+              </div>
+              <div class="right_contents">
+                <h1 class="heading">{{ friend.user.profile.nick }}</h1>
+                <div class="btn_container">
+                  <button class="unfollow" data-name="friend_unfollow" data-friend="{{ friend.user.id }}">unfollow</button>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
       </section>
 
     </div>
@@ -74,13 +125,15 @@
   {% if user_profile %}
     <aside id="side_box">
       <ul>
-        <li>
-          <div class="profile_img">
-            <img src="{% static 'imgs/profile/noun_User.png' %}" alt="profile">
-          </div>
-          <span class="name">monday</span>
-          <span class="light"></span>
-        </li>
+        {% for friend in friends %}
+          <li>
+            <div class="profile_img">
+              <img src="{{ friend.user.profile.picture.url }}" alt="{{ friend.user.profile.nick }}">
+            </div>
+            <span class="name">{{ friend.user.profile.nick }}</span>
+            <span class="light"></span>
+          </li>
+        {% endfor %}
       </ul>
     </aside>
   {% endif %}
