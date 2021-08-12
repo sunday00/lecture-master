@@ -8,5 +8,15 @@ module.exports = {
   rules: {
     // override/add rules settings here, such as:
     // 'vue/no-unused-vars': 'error'
+    "vue/max-attributes-per-line": [ 1, {
+      "singleline": {
+        "max": 3,
+        "allowFirstLine": true
+      },      
+      "multiline": {
+        "max": 3,
+        "allowFirstLine": true
+      }
+    }]
   }
 }

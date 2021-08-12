@@ -5,29 +5,42 @@
     <h2>users</h2>
   </slot>
   <section>
-    <ul 
-      v-if="state === 'loaded'"
-      class="userlist" 
+    <slot v-if="data" name="userlist" :list="data.results" 
+          :remove="remove"
     >
-      <li
-        v-for="item in data.results" 
-        :key="item.email"
+      <ul 
+        v-if="state === 'loaded'"
+        class="userlist" 
       >
-        <div>
-          <img
-            width="48"
-            height="48"
-            :src="item.picture.large" 
-            :alt="item.name.first + ' ' + item.name.last"
+        <li
+          v-for="item in data.results" 
+          :key="item.email"
+        >
+          <slot
+            name="listitem" 
+            :user="item"
+            :remove="remove"
           >
-        </div>
-        <div>
-          <div>{{ item.name.first }}</div>
-          <slot />
-          <div>{{ additionalInfo(item) }}</div>
-        </div>
-      </li>
-    </ul>
+            <div>
+              <img
+                width="48"
+                height="48"
+                :src="item.picture.large" 
+                :alt="item.name.first + ' ' + item.name.last"
+              >
+            </div>
+            <div>
+              <div>{{ item.name.first }}</div>
+              <slot
+                name="additionalInfo" 
+                :item="item" 
+              />
+              <!-- <div>{{ additionalInfo(item) }}</div> -->
+            </div>
+          </slot>
+        </li>
+      </ul>
+    </slot>
     <slot 
       v-if="state === 'loading'"
       name="loading"
@@ -77,17 +90,25 @@ export default {
         this.data = undefined;
 
         try{
-          const response = await fetch('https://randomuser.me/api/?results=5');
-          const json = await response.json();
-          this.state = 'loaded';
-          this.data = json;
-          return response;
+          setTimeout(async () => {
+            const response = await fetch('https://randomuser.me/api/?results=5');
+            const json = await response.json();
+            this.state = 'loaded';
+            this.data = json;
+            return response;
+          }, 1000);
         } catch (err){
           this.state = 'failed';
           this.error = err;
           return err;
         }
-      }
+      },
+
+      remove(u){
+        console.log(u);
+        this.data.results = this.data.results.filter((r) => r.email !== u.email);
+      },
+
     },
 }
 </script>
