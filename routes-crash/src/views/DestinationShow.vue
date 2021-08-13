@@ -7,6 +7,7 @@
     </div>
   </section>
   <DestinationExperience v-if="destination" :destination="destination" />
+  <router-view :key="$route.path"></router-view>
 </template>
 
 <script>

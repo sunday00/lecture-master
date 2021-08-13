@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="experience">
     <h1>{{ experience.name }}</h1>
     <img :src="`/images/${experience.image}`" :alt="experience.name" />
     <p>{{ experience.description }}</p>
@@ -20,10 +20,10 @@ export default {
   },
   computed: {
     destination(){
-
+      return sourceData.destinations.find(d => d.id === this.id)
     },
     experience(){
-      
+      return this.destination.experiences.find(e => e.slug === this.experienceSlug)
     }
   }
 }
