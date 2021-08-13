@@ -1,21 +1,23 @@
 <template>
   <section v-if="destination">
     <h2>{{ destination.name }}</h2>
+    <GoBack />
     <div class="destination-details">
       <img :src="`/images/${destination.image}`" :alt="destination.name" />
       <p>{{ destination.description }}</p>
     </div>
+    <DestinationExperience v-if="destination" :destination="destination" />
+    <router-view :key="$route.path"></router-view>
   </section>
-  <DestinationExperience v-if="destination" :destination="destination" />
-  <router-view :key="$route.path"></router-view>
 </template>
 
 <script>
 import DestinationExperience from '@/components/DestinationExperience.vue'
+import GoBack from '@/components/Goback.vue'
 
 export default {
   components:{
-    DestinationExperience,
+    DestinationExperience, GoBack,
   },
   props:{
     id: {
