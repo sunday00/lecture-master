@@ -145,11 +145,13 @@
                 {{ post.content }}
               </figure>
 
+              {% if post.photo %}
               <div class="img_section">
                 <a href="#">
                   <img src="{{ post.photo.url }}" alt="{{ post.photo }}"/>
                 </a>
               </div>
+              {% endif %}
 
               <div class="ajax-section ajax_field">
                 <div class="like">

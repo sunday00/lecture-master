@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.conf import settings
 from imagekit.models import ProcessedImageField
@@ -89,3 +90,13 @@ class Comment(models.Model):
   
   def __str__ (self):
     return self.content
+
+class PostChoiceField(forms.ModelChoiceField):
+  def label_from_instance(self, obj):
+      return obj.id
+
+class CommentAdminForm(forms.ModelForm):
+  post = PostChoiceField(queryset=Post.objects.all())
+  class Meta:
+    model = Post
+    fields = '__all__'
