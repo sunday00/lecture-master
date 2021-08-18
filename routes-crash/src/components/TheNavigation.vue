@@ -11,6 +11,8 @@
         {{ destination.name }}
         
       </router-link>
+
+      <router-link :to="{name: 'protected'}">dashboard</router-link>
   </div>
 </template>
 

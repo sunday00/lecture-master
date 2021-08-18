@@ -7,6 +7,21 @@ const routes = [
   {path: '/about', name:'About', component: () => import('@/views/About.vue')},
 
   {
+    path:'/protected',
+    name: 'protected',
+    component: () => import('@/views/Protected.vue'),
+    meta: {
+      requiresAuth: true
+    },
+  },
+
+  {
+    path:'/login',
+    name: 'login',
+    component: () => import('@/views/Login.vue'),
+  },
+
+  {
     path: '/destination/:id/:slug', 
     name:'destination.show', 
     component: () => import('@/views/DestinationShow.vue'),
@@ -43,7 +58,20 @@ const router = createRouter({
   history: createWebHistory(),
   linkActiveClass: 'router-link-active vue-school-active-link active',
 
-  routes
+  routes,
+
+  scrollBehavior (to, from, savedPosition){
+    // return savedPosition || {top: 0}
+    return savedPosition || new Promise(resolve => {
+      setTimeout(() => resolve({top:0, behavior: 'smooth'}), 300)
+    }) 
+  },
+})
+
+router.beforeEach((to, from) => {
+  if( to.meta.requiresAuth && !window.user){
+    return {name: 'login'}
+  }
 })
 
 export default router
