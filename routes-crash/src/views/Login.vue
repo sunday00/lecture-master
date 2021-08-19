@@ -23,9 +23,13 @@ export default {
   },
   methods:{
     login(){
-      console.log('logged')
+      // this is placeholder. should be api logged.
       window.user = this.username
-      this.$router.push({name:'protected'})
+      //
+
+      const redirectPath = this.$route.query.redirect || '/protected'
+
+      this.$router.push(redirectPath)
     }
   }
 }

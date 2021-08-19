@@ -4,7 +4,12 @@
 
     now {{ username }} is logged.
 
-    <button @click="logout">Logout</button>
+    <p class="btns">
+      <a @click="logout" class="btn">Logout</a>
+      <router-link :to="{name: 'invoices'}">
+        <botton class="btn">Invoices</botton>
+      </router-link>
+    </p>
   </div>
 </template>
 
@@ -24,3 +29,8 @@ export default {
 }
 </script>
 
+<style lang="scss">
+  .btn{
+    margin-right: 1rem;
+  }
+</style>
