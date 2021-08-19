@@ -7,7 +7,7 @@
     <p class="btns">
       <a @click="logout" class="btn">Logout</a>
       <router-link :to="{name: 'invoices'}">
-        <botton class="btn">Invoices</botton>
+        <button class="btn">Invoices</button>
       </router-link>
     </p>
   </div>

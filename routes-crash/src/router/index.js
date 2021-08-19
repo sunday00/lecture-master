@@ -30,6 +30,12 @@ const routes = [
   },
 
   {
+    path:'/login2',
+    name: 'login2',
+    component: () => import('@/views/Login2.vue'),
+  },
+
+  {
     path: '/destination/:id/:slug', 
     name:'destination.show', 
     component: () => import('@/views/DestinationShow.vue'),
@@ -78,7 +84,7 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   if( to.meta.requiresAuth && !window.user){
-    return {name: 'login', query: {redirect: to.fullPath}}
+    return {name: 'login2', query: {redirect: to.fullPath}}
   }
 })
 
