@@ -12,7 +12,8 @@
         
       </router-link>
 
-      <router-link :to="{name: 'protected'}">dashboard</router-link>
+      <AppLink :to="{name: 'protected'}">dashboard</AppLink>
+      <AppLink to="http://grayfield.net">GF</AppLink>
   </div>
 </template>
 
