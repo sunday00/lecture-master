@@ -13,6 +13,9 @@
       </li>
     </ul>
     <p>{{ $filters.currency(total) }}</p>
+
+    <button v-if="products.length" @click="$store.dispatch('checkout')">checkout</button>
+    <p v-if="$store.state.checkoutStatus">{{ $store.state.checkoutStatus }}</p>
   </div>
 </template>
 

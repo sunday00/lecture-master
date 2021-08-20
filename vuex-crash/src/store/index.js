@@ -6,6 +6,7 @@ export default createStore({
     return {
       products: [],
       cart: [],
+      checkoutStatus: null,
     }
   },
 
@@ -57,6 +58,18 @@ export default createStore({
 
       ctx.commit('decrementProductFromInventory', product)
     },
+
+    checkout({state, commit}){
+      shop.buyProducts(
+        state.cart, () => {
+          commit('emptyCart')
+          commit('setCheckoutStatus', 'success')
+        },
+        () => {
+          commit('setCheckoutStatus', 'fail')
+        }
+      )
+    },
   },
 
   mutations: {
@@ -75,6 +88,14 @@ export default createStore({
     },
     decrementProductFromInventory(state, product){
       product.inventory--
+    },
+
+    setCheckoutStatus(state, status){
+      state.checkoutStatus = status
+    },
+
+    emptyCart(state){
+      state.cart = []
     },
   }
 })
