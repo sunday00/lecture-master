@@ -31,6 +31,9 @@ export default createStore({
       return getters.cartProducts.reduce((t, p) => t + p.price * p.quantity, 0)
     },
 
+    isProductInStock () {
+      return (product) => product.inventory > 0
+    },
 
   },
 
@@ -46,17 +49,17 @@ export default createStore({
       })
     },
 
-    addProductToCart(ctx, product){
-      if( product.inventory > 0 ){
-        const cartItem = ctx.state.cart.find(item => item.id === product.id)
+    addProductToCart({getters, state, commit}, product){
+      if( getters.isProductInStock(product) ){
+        const cartItem = state.cart.find(item => item.id === product.id)
         if( !cartItem ){
-          ctx.commit('pushProductToCart', product.id)
+          commit('pushProductToCart', product.id)
         } else {
-          ctx.commit('incrementCartQuantity', cartItem)
+          commit('incrementCartQuantity', cartItem)
         }
       }
 
-      ctx.commit('decrementProductFromInventory', product)
+      commit('decrementProductFromInventory', product)
     },
 
     checkout({state, commit}){

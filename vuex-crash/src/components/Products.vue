@@ -10,7 +10,7 @@
         - {{ $filters.currency(product.price) }} 
         - {{ product.inventory }}
 
-        <button @click="addProductToCart(product)">
+        <button @click="addProductToCart(product)" :disabled="!isProductInStock(product)">
           <font-awesome-icon icon="cart-plus" />
         </button>
       </li>
@@ -33,8 +33,13 @@ export default {
   computed: {
     products(){
       // return store.state.products
-      return this.$store.getters.availableProducts
-    }
+      // return this.$store.getters.availableProducts
+      return this.$store.state.products
+    },
+
+    isProductInStock(){
+      return this.$store.getters.isProductInStock
+    },
   },
   created(){
     this.loading = true
@@ -46,3 +51,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  button[disabled]{
+    background-color: #eee;
+  }
+</style>
