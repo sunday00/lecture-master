@@ -103,28 +103,20 @@
                           {% if post.author in my_friend_user_list %}
                             <button>unfollow</button>
                           {% elif post.author in my_friend_request_user_list %}
-                            <button 
-                              class="friend_request"
-                              data-name="cancel_add_friend"
-                              name="{{ post.author.profile.user.id }}"
-                            >
+                            <button class="friend_request" data-name="cancel_add_friend" name="{{ post.author.profile.user.id }}">
                               cancel requesting
                             </button>
                           {% else %}
-                            <button 
-                              class="friend_request"
-                              data-name="friend_request"
-                              name="{{ post.author.profile.user.id }}"
-                            >
+                            <button class="friend_request" data-name="friend_request" name="{{ post.author.profile.user.id }}">
                               add friend
                             </button>
                           {% endif %}
                         </li>
                         <li class="bookmark" data-name="bookmark" name="{{ post.id }}">
                           {% if user in post.bookmark_user_set.all %}
-                          <span>saved</span>
+                            <span>saved</span>
                           {% else %}
-                          <span>save</span>
+                            <span>save</span>
                           {% endif %}
                         </li>
                         <li>
@@ -146,11 +138,11 @@
               </figure>
 
               {% if post.photo %}
-              <div class="img_section">
-                <a href="#">
-                  <img src="{{ post.photo.url }}" alt="{{ post.photo }}"/>
-                </a>
-              </div>
+                <div class="img_section">
+                  <a href="#">
+                    <img src="{{ post.photo.url }}" alt="{{ post.photo }}"/>
+                  </a>
+                </div>
               {% endif %}
 
               <div class="ajax-section ajax_field">
@@ -160,7 +152,9 @@
                 </div>
                 <div class="comment">
                   <span>comment</span>
-                  <span class="comment_count" id="comment-count-{{ post.id }}">1</span>
+                  <span class="comment_count" id="comment-count-{{ post.id }}">
+                    {{ post.comment_set.count }}
+                  </span>
                 </div>
               </div>
 
@@ -177,25 +171,28 @@
 
               <div class="comment_section comment_container">
                 <div class="comment" id="comment-list-ajax-post{{ post.id }}">
-
-                  <div class="comment-detail" id="comment{{ comment.id }}">
-                    <div class="id">
-                      <div class="profile_img">
-                        <img src="{% static 'imgs/profile/bong.jpg' %}" alt="tiger profile"/>
-                      </div>
-                      <div class="comment-field">
-                        <div class="text-container">
-                          <span class="name">
-                            <a href="#">John</a>
-                          </span>
-                          <p class="text_field">Wow~ pretty pretty~.</p>
+                  {% for comment in post.comment_set.all %}
+                    <div class="comment-detail" id="comment{{ comment.id }}">
+                      <div class="id">
+                        <div class="profile_img">
+                          <img src="{{ comment.author.profile.picture.url }}" alt="{{ comment.author.profile.nick }}"/>
                         </div>
+                        <div class="comment-field">
+                          <div class="text-container">
+                            <span class="name">
+                              <a href="/profile/{{ comment.author.profile.nick }}">{{ comment.author.profile.nick }}</a>
+                            </span>
+                            <p class="text_field">{{ comment.content }}</p>
+                          </div>
+                        </div>
+                        <div class="time">{{ comment.created_at|timesince }}
+                          ago</div>
+                        {% if comment.author == user %}
+                          <input type="button" class="delete" data-name="comment_delete" value="X" name="{{ comment.id }}"/>
+                        {% endif %}
                       </div>
-                      <div class="time">2 minute</div>
-                      <input type="button" class="delete" data-name="comment_delete" value="X" name="{{ comment.id }}"/>
                     </div>
-                  </div>
-
+                  {% endfor %}
                 </div>
               </div>
 
@@ -206,9 +203,6 @@
                     <img src="{{ user_profile.picture.url }}" alt="{{ user_profile.nick }} profile">
                   </div>
                   <div class="input_container">
-                    {% comment %} TODO:: this is not completed {% endcomment %}
-                    {% comment %} <label for="comment37"></label>{% endcomment %}
-                    <input type="text" id="comment37" placeholder="leave your comment..."/> 
                     {{ comment_form }}
                     <button class="send">
                       <span class="icon--send" name="{{ post.id }}" data-name="comment"></span>
@@ -217,14 +211,14 @@
                 {% endif %}
 
               </div>
-              
+
             </article>
           {% endfor %}
 
           <div id="post_list_ajax">
             {% include "post/script_ajax.html" %}
           </div>
-          
+
         </div>
       </section>
 

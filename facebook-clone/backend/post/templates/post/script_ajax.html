@@ -78,6 +78,49 @@
           console.log(err);
         });
       }
+
+      if (elem.matches('[data-name="comment"]')) {
+        let to_user = elem.getAttribute('name');
+
+        const content = elem.parentNode.parentNode.querySelector('input');
+
+        if( content.value.length == 0 || content.value.length > 40 ) {
+          return ;
+        }
+
+        $.post(`{% url 'post:comment_new' %}`, 
+          {
+            pk: elem.getAttribute('name'),
+            content: content.value,
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+          }
+        ).then(res => {
+          const template = `
+            <div class="comment-detail" id="comment${ res.comment.id }">
+              <div class="id">
+                <div class="profile_img">
+                  <img src="{{ user_profile.picture.url }}" alt="{{ user_profile.picture.url }}"/>
+                </div>
+                <div class="comment-field">
+                  <div class="text-container">
+                    <span class="name">
+                      <a href="/profile/{{ user_profile.nick }}">{{ user_profile.nick }}</a>
+                    </span>
+                    <p class="text_field">${ res.comment.content }</p>
+                  </div>
+                </div>
+                <div class="time">few seconds ago</div>
+                  <input type="button" class="delete" data-name="comment_delete" value="X" name="${ res.comment.id }"/>
+              </div>
+            </div>
+          `;
+          document.querySelector(`#comment-list-ajax-post${res.post}`).insertAdjacentHTML('beforeend', template);
+          document.querySelector(`#comment-count-${res.post}`).textContent = ' ' + document.querySelector(`#comment-count-${res.post}`).textContent -0 + 1 + ' '
+          content.value = '';
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }
 
   delegation.addEventListener('click', delegationFunc);
