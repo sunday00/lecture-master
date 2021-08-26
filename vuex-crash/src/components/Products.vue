@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   data(){
     return {
@@ -26,25 +27,41 @@ export default {
     }
   },
   methods:{
-    addProductToCart(product){
-      this.$store.dispatch('addProductToCart', product)
-    },
+    // addProductToCart(product){
+    //   this.$store.dispatch('addProductToCart', product)
+    // },
+    ...mapActions({
+      addProductToCart: 'addProductToCart',
+      fetchProducts: 'fetchProducts',
+    })
   },
   computed: {
-    products(){
-      // return store.state.products
-      // return this.$store.getters.availableProducts
-      return this.$store.state.products
-    },
+    ...mapState({
+      // products: 'products',
+      products: state => state.products.items,
+      firstProduct : state => state.products[0],
+    }),
 
-    isProductInStock(){
-      return this.$store.getters.isProductInStock
-    },
+    ...mapGetters({
+      isProductInStock: 'isProductInStock'
+    })
   },
+  // {
+  //   products(){
+  //     // return store.state.products
+  //     // return this.$store.getters.availableProducts
+  //     return this.$store.state.products
+  //   },
+
+  //   isProductInStock(){
+  //     return this.$store.getters.isProductInStock
+  //   },
+  // },
   created(){
     this.loading = true
     // store.dispatch('fetchProducts', 'toys')
-    this.$store.dispatch('fetchProducts')
+    // this.$store.dispatch('fetchProducts')
+    this.fetchProducts()
       .then(() => {
         this.loading = false
       })
