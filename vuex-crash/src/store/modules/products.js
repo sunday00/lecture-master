@@ -1,6 +1,8 @@
 import shop from '@/api/shop'
 
 export default {
+  namespaced: true,
+  
   state: {
     items: [],
   },
@@ -28,6 +30,7 @@ export default {
   
   actions: {
     fetchProducts({commit}){
+      console.log('modules/products/fetchProducts');
       // ajax call
       return new Promise((resolve) => {
         shop.getProducts(products => {

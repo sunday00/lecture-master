@@ -30,10 +30,13 @@ export default {
     // addProductToCart(product){
     //   this.$store.dispatch('addProductToCart', product)
     // },
-    ...mapActions({
-      addProductToCart: 'addProductToCart',
+    ...mapActions('products', {
       fetchProducts: 'fetchProducts',
-    })
+    }),
+
+    ...mapActions('cart', {
+      addProductToCart: 'addProductToCart',
+    }),
   },
   computed: {
     ...mapState({
@@ -42,7 +45,7 @@ export default {
       firstProduct : state => state.products[0],
     }),
 
-    ...mapGetters({
+    ...mapGetters('products', {
       isProductInStock: 'isProductInStock'
     })
   },

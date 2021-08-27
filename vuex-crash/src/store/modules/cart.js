@@ -1,6 +1,8 @@
 import shop from '@/api/shop'
 
 export default {
+  namespaced: true,
+  
   state:{ 
     items: [],
     checkoutStatus: null,
@@ -45,8 +47,8 @@ export default {
   },
 
   actions: {
-    addProductToCart({getters, state, commit}, product){
-      if( getters.isProductInStock(product) ){
+    addProductToCart({state, commit, rootGetters}, product){
+      if( rootGetters['products/isProductInStock'](product) ){
         const cartItem = state.items.find(item => item.id === product.id)
         if( !cartItem ){
           commit('pushProductToCart', product.id)
@@ -55,7 +57,10 @@ export default {
         }
       }
   
-      commit('decrementProductFromInventory', product)
+      commit('products/decrementProductFromInventory', product, {root: true})
+      // root true means commit path start base.
+      // without root true, vuex looking for    cart/products/.....
+      // with root true,                        products/....
     },
   
     checkout({state, commit}){
@@ -68,6 +73,10 @@ export default {
           commit('setCheckoutStatus', 'fail')
         }
       )
+    },
+
+    fetchProducts(){
+      console.log('modules/cart/fetchProducts');
     },
   },
 }

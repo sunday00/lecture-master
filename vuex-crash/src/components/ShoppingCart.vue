@@ -31,17 +31,17 @@ export default {
     // total(){
     //   return this.$store.getters.cartTotal
     // },
-    ...mapState({
+    ...mapState('cart', {
       checkoutStatus: 'checkoutStatus'
     }),
 
-    ...mapGetters({
+    ...mapGetters('cart',{
       products: 'cartProducts',
       total: 'cartTotal',
     })
   },
   methods: {
-    ...mapActions(['checkout']),
+    ...mapActions('cart', ['checkout']),
   },
 }
 </script>
