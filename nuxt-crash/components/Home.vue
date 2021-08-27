@@ -1,0 +1,32 @@
+<template>
+  <section
+    class="dt w-100 tc bg-dark-gray white cover"
+    style="background:url(http://mrmrs.github.io/photos/u/009.jpg) no-repeat center;"
+  >
+    <div class="dtc v-mid">
+      <header class="white-70">
+        <h2 class="f6 fw1 ttu tracked mb2 lh-title">
+          HELLO WORLD
+        </h2>
+        <h3 class="f6 fw1 lh-title">
+          NUXT VUE TACHYONS
+        </h3>
+      </header>
+      <h1 class="f1 f-headline-l fw1 i white-60">
+        APPPP
+      </h1>
+      <blockquote class="ph0 mh0 measure f4 lh-copy center">
+        <p class="fw1 white-70">
+          NOW LEARNING...
+        </p>
+        <cite class="f6 ttu tracked fs-normal">sunday00</cite>
+      </blockquote>
+    </div>
+  </section>
+</template>
+
+<style lang="scss">
+  .cover {
+    height: calc(100vh - 8rem);
+  }
+</style>
