@@ -121,6 +121,18 @@
           console.log(err);
         });
       }
+
+      if (elem.matches('[data-name="comment_delete"]')){
+        $.post(`{% url 'post:comment_delete' %}`, {
+          pk: elem.getAttribute('name'),
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+        }).then(res => {
+          elem.closest('.comment-detail').remove();
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+
     }
 
   delegation.addEventListener('click', delegationFunc);
