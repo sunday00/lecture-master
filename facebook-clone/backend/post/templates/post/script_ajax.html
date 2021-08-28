@@ -128,6 +128,7 @@
           csrfmiddlewaretoken: '{{ csrf_token }}',
         }).then(res => {
           elem.closest('.comment-detail').remove();
+          document.querySelector(`#comment-count-${res.post}`).textContent = ' ' + document.querySelector(`#comment-count-${res.post}`).textContent - 1 + ' ';
         }).catch(err => {
           console.log(err);
         });

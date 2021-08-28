@@ -117,6 +117,7 @@ def comment_delete(req):
   pk = req.POST.get('pk')
   comment = get_object_or_404(Comment, pk=pk)
   if req.method == 'POST' and req.user == comment.author:
+    post = comment.post_id
     comment.delete()
     message = f'success deleted {pk}'
     status = '1'
@@ -125,5 +126,5 @@ def comment_delete(req):
     status = '0'
   
   return JsonResponse({
-    'message' : message, 'status': status
+    'message' : message, 'status': status, 'post' : post
   })
