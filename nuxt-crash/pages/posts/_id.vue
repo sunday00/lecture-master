@@ -28,6 +28,17 @@ export default {
       id: this.$route.params.id,
     }
   },
+  head () {
+    return {
+      title: 'page..📖' + this.post.title,
+      meta: [
+        { name: 'twitter: title', content: this.post.title },
+        { name: 'twitter: description', content: this.post.content },
+        { name: 'twitter: image', content: 'https://imgur.com/yOVvbrS' },
+        { name: 'twitter: card', content: 'summary_large_image' },
+      ],
+    }
+  },
   computed: {
     post () {
       return this.$store.state.posts.all.find(post => post.id === this.id)

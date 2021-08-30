@@ -37,6 +37,17 @@
 
 <script>
 export default {
+  head () {
+    return {
+      title: 'Home..👍',
+      meta: [
+        { name: 'twitter: title', content: 'vue-nuxt' },
+        { name: 'twitter: description', content: 'vue-nuxt-example' },
+        { name: 'twitter: image', content: 'https://imgur.com/yOVvbrS' },
+        { name: 'twitter: card', content: 'summary_large_image' },
+      ],
+    }
+  },
   computed: {
     posts () {
       return this.$store.state.posts.all
