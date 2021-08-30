@@ -15,9 +15,12 @@
       </svg>
     </nuxt-link>
     <div class="flex-grow pa3 flex items-center">
-      <a class="f6 link dib white dim mr3 mr4-ns" href="/posts/balut">
+      <nuxt-link
+        class="f6 link dib white dim mr3 mr4-ns"
+        :to="{name: 'posts-id', params:{id:'balut'}}"
+      >
         Post
-      </a>
+      </nuxt-link>
       <a class="f6 link dib white dim mr3 mr4-ns" href="#0">Sign In</a>
       <a class="f6 dib white bg-animate hover-bg-white hover-black no-underline pv2 ph4 br-pill ba b--white-20" href="#0">Sign Up</a>
     </div>

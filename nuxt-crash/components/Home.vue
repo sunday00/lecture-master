@@ -21,9 +21,29 @@
         </p>
         <cite class="f6 ttu tracked fs-normal">sunday00</cite>
       </blockquote>
+      <div class="links">
+        <nuxt-link
+          v-for="post in posts"
+          :key="post.id"
+          :to="{name: 'posts-id', params:{id: post.id}}"
+          class="no-underline near-white bg-animate bg-near-black hover-bg-gray hover-near-black inline-flex items-center ma2 tc br2 pa2"
+        >
+          {{ post.title }}
+        </nuxt-link>
+      </div>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    posts () {
+      return this.$store.state.posts.all
+    },
+  },
+}
+</script>
 
 <style lang="scss">
   .cover {
