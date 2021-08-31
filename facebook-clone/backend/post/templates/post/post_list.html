@@ -51,21 +51,22 @@
           <article class="create_box">
             <h2 class="title">Create some articles</h2>
             <div class="text_field">
-              <form action="" method="POST">
+              <form action="" method="POST" id="form_new_post">
                 <input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="{{csrf_token}}">
                 <header class="top">
                   <div class="profile_img">
                     <img src="{{ user_profile.picture.url }}" alt="profile">
                   </div>
                   <p>
-                    <textarea name="content" id="text_field" cols="50" rows="5" data-name="add" placeholder="What do you think?"></textarea>
+                    {{ post_form.content }}
                   </p>
                 </header>
+
                 <div class="middle">
                   <canvas id="imageCanvas" width="0" height="0"></canvas>
                 </div>
                 <div class="bottom">
-                  <input type="file" name="photo" id="id_photo" required="required" accept="image/*"/>
+                  {{ post_form.photo }}
                   <div class="import-btn">
                     <label for="id_photo" id="photo_label">
                       <i class="icon icon--picture"></i>
@@ -74,7 +75,7 @@
                   </div>
                 </div>
                 <footer class="submit">
-                  <input type="submit" value="POST" id="submitBtn" disabled="disabled"/>
+                  <input type="submit" value="POST" id="submitBtn" disabled="disabled" data-name="send"/>
                 </footer>
               </form>
             </div>

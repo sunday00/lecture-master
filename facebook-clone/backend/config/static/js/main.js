@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded',function(){
 
-
     (function(){
         const feed = document.querySelector('#contents_container');
         const commentField = document.querySelector('#comment_container');
@@ -44,72 +43,15 @@ window.addEventListener('DOMContentLoaded',function(){
                 }
             }
 
-            if (elem.matches('[data-name="delete"]')) {
-
-                if(confirm('정말 삭제할거야?') === true){
-                    let pk = elem.getAttribute('name');
-                    $.ajax({
-                        type:'POST',
-                        url:'data/delete.json',
-                        data:{
-                            'pk':pk,
-                        },
-                        dataType:'json',
-                        success:function(response){
-                            if(response.status){
-                                let comt = document.querySelector(`.comment-${pk}`);
-                                comt.remove();
-                            }
-                        },
-                        error:function(request,status,error){
-                            alert('문제가 발생했습니다.');
-
-                        }
-                    });
-                }
-
-            } else if (elem.matches('[data-name="send"]')) {
-                let content =  txt.value;
-                let pk = elem.getAttribute('name');
-                $.ajax({
-
-                    type:'POST',
-                    url:'data/comment.html',
-                    data:{
-                        'pk' : pk,
-                        'content':content,
-                    },
-                    dataType:'html',
-                    success:function(data){
-                        document.querySelector('.comment_container').insertAdjacentHTML('beforeend',data);
-                    },
-                    error:function(request,status,error){
-                        alert('문제가 발생했습니다.');
-
-                    }
-                });
-
-                txt.value = '';
-
-
-            }else if (elem.matches('[data-name="more"]')) {
-
+            if (elem.matches('[data-name="more"]')) {
                 elem.classList.toggle('active');
-
             }else if (elem.matches('[data-name="add"]')) {
-
-
-                console.log('ddd');
                 submit.disabled = false;
                 submit.parentNode.style.display = 'block';
                 textField.style.height = '100px';
-
-
             }else{
 
             }
-
-
         }
 
         function noticeFunc(e){

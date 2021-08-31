@@ -3,6 +3,7 @@
   (function () {
     const delegation = document.querySelector('#contents_container');
     const textField = document.querySelector('#text_field');
+    let canvas = document.querySelector('#imageCanvas');
 
     function delegationFunc(e) {
       let elem = e.target;
@@ -134,6 +135,23 @@
         });
       }
 
+      if (elem.matches('[data-name="send"]')) {
+        e.preventDefault();
+
+        const form = document.querySelector('#form_new_post');
+        const post_data = new FormData(form);
+
+        $.post({
+          url: `{% url 'post:post_new' %}`,
+          data: post_data,
+          processData: false,
+          contentType: false,
+        }).then(res => {
+          location.reload();
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }
 
   delegation.addEventListener('click', delegationFunc);

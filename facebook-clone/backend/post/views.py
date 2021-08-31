@@ -13,6 +13,7 @@ def post_list(req):
   post_list = Post.objects.all()
 
   comment_form = CommentForm(auto_id=False)
+  post_form = PostForm(auto_id=False)
 
   if req.user.is_authenticated:
     username = req.user
@@ -47,6 +48,7 @@ def post_list(req):
       'my_friend_user_list': my_friend_user_list,
       'my_friend_request_user_list': my_friend_request_user_list,
       'comment_form': comment_form,
+      'post_form': post_form,
     })
 
 @login_required
@@ -128,3 +130,20 @@ def comment_delete(req):
   return JsonResponse({
     'message' : message, 'status': status, 'post' : post
   })
+
+@login_required
+def post_new(req):
+  if req.method == 'POST':
+    form = PostForm(req.POST, req.FILES)
+    if form.is_valid():
+      post = form.save(commit = False)
+      post.author = req.user
+      post.save()
+      post.tag_save()
+      result = form.save()
+      ctx = {'success': 1, 'id': result.id}
+    else :
+      ctx = {'success': 0, 'message': 'fail'}  
+  else :
+    ctx = {'success': 0, 'status_code': 404, 'message': 'Not Found'}
+  return JsonResponse(ctx)

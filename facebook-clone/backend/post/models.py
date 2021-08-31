@@ -16,6 +16,12 @@ def photo_path(instance, filename):
   ext = filename.split('.')[-1]
   return '{}/{}/{}.{}'.format(strftime('post/%Y/%m/%d/'), instance.author.username, pid, ext)
 
+class Tag(models.Model):
+  name = models.CharField(max_length=140, unique=True)
+
+  def __str__(self):
+    return self.name
+
 class Post(models.Model):
   author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   photo = ProcessedImageField(
@@ -39,6 +45,8 @@ class Post(models.Model):
       through='Bookmark'
     )    
 
+  tag_set = models.ManyToManyField('Tag', blank=True)
+
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
 
@@ -47,6 +55,15 @@ class Post(models.Model):
 
   def __str__(self):
     return self.content
+
+  def tag_save(self):
+    tags = re.findall(r'#(\w+)\b', self.content)
+    if not tags:
+      return
+
+    for t in tags:
+      tag, tag_created = Tag.objects.get_or_create(name = t)
+      self.tag_set.add(tag)
 
   @property
   def like_count(self):
@@ -100,3 +117,4 @@ class CommentAdminForm(forms.ModelForm):
   class Meta:
     model = Post
     fields = '__all__'
+

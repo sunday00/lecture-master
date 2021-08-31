@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Bookmark, Comment, CommentAdminForm, Like, Post
+from .models import *
 
 class LikeInline(admin.TabularInline):
   model = Like
@@ -36,3 +36,8 @@ class CommentAdmin(admin.ModelAdmin):
   list_display = ['id', 'post', 'content', 'author', 'created_at']
   list_display_links = ['id', 'post', 'content']
   form = CommentAdminForm
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+  list_display = ['name']
+  list_display_links = ['name']

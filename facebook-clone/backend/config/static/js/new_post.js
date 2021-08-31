@@ -1,9 +1,6 @@
-
-
 window.addEventListener('DOMContentLoaded',function () {
-
-
-
+    let canvas = document.querySelector('#imageCanvas');
+    let ctx = canvas.getContext('2d');
     const createBox = document.querySelector('.create_box');
     const textField = document.querySelector('#text_field');
     const fileInput  = document.querySelector( "#id_photo" );
