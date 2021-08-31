@@ -1,3 +1,3 @@
 <?php
 
-echo "HOME !!";
+echo "HOME !!!";
