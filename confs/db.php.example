@@ -1,0 +1,12 @@
+<?php
+
+return [
+  'driver' => 'mysql',
+  'host' => '127.0.0.1',
+  'database' => '     YOUR DB NAME    ',
+  'username' => '  YOUR USER NAME  ',
+  'password' => '  YOUR DB PASSWORD  ',
+  'charset' => 'utf8',
+  'collation' => 'utf8_unicode_ci',
+  'prefix' => '',
+];
