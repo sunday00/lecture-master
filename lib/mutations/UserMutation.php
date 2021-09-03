@@ -9,21 +9,14 @@ use Lib\types\UserType;
 
 class UserMutation
 {
-  public function __construct() {
-    $this->type = (new UserType)->get();
-  }
-
   public function getMutation($types, $param = null)
   {
-    return new ObjectType([
-      'name'  => 'Mutation',
-      'fields' => []
-        + $this->getAdd($types['user'])
-        // + $this->getAdd(),
-        // + $this->getAdd(),
-        // + $this->getAdd(),
-        ,
-    ]);
+    return $this->getAdd($types['user'])
+        // + $this->getAdd()
+        // + $this->getAdd()
+    ;   // + $this->getAdd()
+        
+    ;
   }
 
   private function getAdd($type)

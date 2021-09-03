@@ -3,28 +3,22 @@
 namespace Lib\queries;
 
 use App\Models\User;
-use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
 class UserQuery
 {
-  private $type;
+  public $name = 'user';
 
-  public function getQuery ($types, $param = null)
+  public function getQuery ($types)
   {
-    return new ObjectType([
-      'name'    => 'Query',
-      'fields'  => [
-        'user'    => [
-          'type'  =>  $types['user'],
-          'args'  =>  [
-            'id'  =>  Type::nonNull(Type::int()),
-          ],
-          'resolve' => function($root, $args){
-            return User::find($args['id'])->toArray();
-          }
-        ]
-      ]
-    ]);
+    return [
+      'type'  =>  $types['user'],
+      'args'  =>  [
+        'id'  =>  Type::nonNull(Type::int()),
+      ],
+      'resolve' => function($root, $args){
+        return User::find($args['id'])->toArray();
+      }
+    ];
   }
 }

@@ -10,13 +10,7 @@ use Lib\types\AddressType;
 
 class UserType
 {
-  private $addressType;
-
-  public function __construct() {
-    $this->addressType = new AddressType;
-  }
-
-  public function get()
+  public static function get($addressType)
   {
     return new ObjectType([
       'name'        => 'User',
@@ -27,12 +21,8 @@ class UserType
         'last_name'   => Type::string(),
         'email'       => Type::string(),
         'addresses'   => [
-          'type'    => Type::listOf($this->addressType->get()),
+          'type'    => Type::listOf($addressType),
           'resolve' => function($root, $args){
-            // $userId = $root['id'];
-            // return User::where('id', $userId)
-            //   ->with(['addresses'])->first()
-            //   ->addresses->toArray();
             return Address::where('user_id', $root['id'])->get()->toArray();
           }
         ]

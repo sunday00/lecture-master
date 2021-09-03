@@ -15,6 +15,7 @@
     "require": {
         "symfony/var-dumper": "^5.3",
         "webonyx/graphql-php": "^14.9",
-        "illuminate/database": "^8.58"
+        "illuminate/database": "^8.58",
+        "haydenpierce/class-finder": "^0.4.3"
     }
 }

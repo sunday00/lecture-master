@@ -9,5 +9,8 @@ class BaseController {
   
   public function __construct() {
     $this->Graphql = new Graphql;
+    $this->Graphql->setQuery();
+    $this->Graphql->setMutation();
+    $this->Graphql->boot();
   }
 }

@@ -7,7 +7,7 @@ use GraphQL\Type\Definition\Type;
 
 class AddressType
 {
-  public function get()
+  public static function get()
   {
     return new ObjectType([
       'name'        => 'Address',
