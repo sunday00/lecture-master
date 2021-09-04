@@ -5,12 +5,23 @@ from django.core import serializers
 from django.forms.models import model_to_dict
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from .models import *
 from .forms import *
 
 # Create your views here.
-def post_list(req):
-  post_list = Post.objects.all()
+def post_list(req, tag=None):
+  tag_all = Tag.objects.annotate(num_post=Count('post')).order_by('-num_post')
+
+  if tag:
+    post_list = Post.objects.filter(tag_set__name__iexact = tag)
+  else :
+    post_list = Post.objects.all()
+
+  if req.method == 'POST':
+    tag = req.POST.get('tag')
+    tag_clean = ''.join(e for e in tag if e.isalnum())
+    return redirect('post:post_search', tag_clean)
 
   comment_form = CommentForm(auto_id=False)
   post_form = PostForm(auto_id=False)
@@ -41,6 +52,8 @@ def post_list(req):
     comments = []
 
   return render(req, 'post/post_list.html', {
+      'tag' : tag,
+      'tag_all': tag_all,
       'user_profile' : user_profile,
       'posts': post_list,
       'friends': friends,

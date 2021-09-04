@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% load static %}
+{% load post_extras %}
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -135,7 +136,8 @@
               </header>
 
               <figure class="main_article">
-                {{ post.content }}
+                {% comment %} {{ post.content }} {% endcomment %}
+                {{ post|add_link|safe|linebreaksbr }}
               </figure>
 
               {% if post.photo %}
