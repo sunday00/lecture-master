@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core import serializers
 from django.forms.models import model_to_dict
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from .models import *
@@ -160,3 +161,46 @@ def post_new(req):
   else :
     ctx = {'success': 0, 'status_code': 404, 'message': 'Not Found'}
   return JsonResponse(ctx)
+
+@login_required
+def post_edit(req, pk):
+  post = get_object_or_404(Post, pk=pk)
+
+  if req.user.is_authenticated:
+    username = req.user
+    user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
+
+  else: 
+    user_profile = None
+
+  if post.author != req.user:
+    messages.Warning(req, 'Bad Request')
+    return redirect('post:post_list')
+  if req.method == 'POST':
+    form = PostForm(req.POST, req.FILES, instance=post)
+    if form.is_valid():
+      post = form.save()
+      post.tag_set.clear()
+      post.tag_save()
+      messages.success(req, 'done')
+      return redirect('post:post_list')
+  else:
+    form = PostForm(instance=post)
+  return render(req, 'post/post_edit.html', {
+    'user_profile' : user_profile,
+    'post': post,
+    'form': form
+  })
+
+@login_required
+# def post_delete(req, pk):
+def post_delete(req):
+  post = get_object_or_404(Post, pk=req.POST.get('pk'))
+  if post.author != req.user or req.method == 'GET':
+    messages.Warning(req, 'Bad Request')
+    return redirect('post:post_list')
+  if req.method == 'POST':
+    post.delete()
+    messages.success(req, 'done')
+    return redirect('post:post_list')

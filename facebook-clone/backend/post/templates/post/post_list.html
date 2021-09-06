@@ -101,6 +101,7 @@
                     <div class="more" data-name="more">
                       <i class="icon icon--more"></i>
                       <ul class="hidden_menu">
+                        {% if post.author.profile.nick != user_profile.nick %}
                         <li>
                           {% if post.author in my_friend_user_list %}
                             <button>unfollow</button>
@@ -114,6 +115,7 @@
                             </button>
                           {% endif %}
                         </li>
+                        {% endif %}
                         <li class="bookmark" data-name="bookmark" name="{{ post.id }}">
                           {% if user in post.bookmark_user_set.all %}
                             <span>saved</span>
@@ -121,14 +123,16 @@
                             <span>save</span>
                           {% endif %}
                         </li>
+                        {% if post.author.profile.nick == user_profile.nick %}
                         <li>
-                          <a href="/edit.html">edit</a>
+                          <a href="{% url 'post:post_edit' pk=post.id %}">edit</a>
                         </li>
                         <li>
-                          <form action="">
-                            <input type="button" value="delete"/>
+                          <form action="{% url 'post:post_delete' %}" method="POST">
+                            <input type="button" value="delete" data-name="post_delete" data-id="{{ post.id }}" />
                           </form>
                         </li>
+                        {% endif %}
                       </ul>
                     </div>
                   </div>

@@ -152,6 +152,17 @@
           console.log(err);
         });
       }
+
+      if( elem.matches('[data-name="post_delete"]') ){
+        $.post(`{% url 'post:post_delete' %}`, {
+          pk: elem.dataset.id,
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+        }).then(res => {
+          elem.closest('article.contents').remove();
+        }).catch(err => {
+          console.log(err);
+        });
+      }
     }
 
   delegation.addEventListener('click', delegationFunc);

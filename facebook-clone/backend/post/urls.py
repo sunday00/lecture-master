@@ -14,6 +14,6 @@ urlpatterns = [
     path('comment/delete', comment_delete, name='comment_delete'),
 
     path('new', post_new, name='post_new'),
-    # path('edit/<int:pk>', post_edit, name='post_edit'),
-    # path('delete/<int:pk>', post_delete, name='post_delete'),
+    path('edit/<int:pk>', post_edit, name='post_edit'),
+    path('delete', post_delete, name='post_delete'),
 ]

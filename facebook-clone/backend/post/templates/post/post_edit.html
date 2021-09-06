@@ -1,0 +1,54 @@
+{% extends 'post/layout.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+{% endblock head %}
+
+{% block contents %}
+  <main id="edit_container">
+    <div class="post_form_container">
+      <form action="" class="post_form" method="POST" enctype="multipart/form-data">
+        <header class="title">EDIT POST</header>
+
+        <section class="preview">
+          <div class="upload">
+            <div class="post_btn">
+              {% if post %}
+                <p>
+                  <img id="img_id" src="{{ post.photo.url }}" alt="{{ post.id }} file" style="width: 300px; height:300ox; object-fit: cover;"/>
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" class="submit_btn" value="update">
+      </form>
+    </div>
+  </main>
+{% endblock contents %}
+
+{% block js %}
+  <script>
+    //document.querySelector('#photo-clear_id').remove();
+    //document.querySelector('label[for="photo-clear_id"]').remove();
+
+    document
+      .querySelector('#id_photo')
+      .addEventListener('change', (e) => {
+        let reader = new FileReader();
+        if (e.target.files && e.target.files[0]) {
+          reader.onload = (evt) => {
+            document
+              .querySelector('#img_id')
+              .setAttribute('src', evt.target.result);
+          }
+        }
+        reader.readAsDataURL(e.target.files[0]);
+      });
+  </script>
+{% endblock js %}
