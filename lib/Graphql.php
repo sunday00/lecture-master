@@ -7,7 +7,7 @@ use GraphQL\GraphQL as GraphQLGraphQL;
 use GraphQL\Type\Schema;
 use GraphQL\Type\Definition\ObjectType;
 
-use HaydenPierce\ClassFinder\ClassFinder;
+// use HaydenPierce\ClassFinder\ClassFinder;
 
 use Lib\types\UserType;
 use Lib\types\AddressType;
@@ -27,7 +27,14 @@ class Graphql
 
 
     $queries = [];
-    foreach( ClassFinder::getClassesInNamespace('Lib\\queries') as $qc ) {
+    // foreach( ClassFinder::getClassesInNamespace('Lib\\queries') as $qc ) {
+    foreach( scandir($_SERVER['DOCUMENT_ROOT'].'/../lib/queries') as $qc ) {
+      if ($qc == '.' || $qc == '..') {
+        continue;
+      }
+      $qc = str_replace('.php', '', $qc);
+      $qc = '\\Lib\\queries\\'.$qc;
+
       $qcInstance = new ($qc);
       $queries[$qcInstance->name] = $qcInstance->getQuery($this->types);
     }
@@ -43,7 +50,14 @@ class Graphql
 
 
     $mutations = [];
-    foreach( ClassFinder::getClassesInNamespace('Lib\\mutations') as $mc ) {
+    // foreach( ClassFinder::getClassesInNamespace('Lib\\mutations') as $mc ) {
+    foreach( scandir($_SERVER['DOCUMENT_ROOT'].'/../lib/mutations') as $mc ) {
+      if ($mc == '.' || $mc == '..') {
+        continue;
+      }
+      $mc = str_replace('.php', '', $mc);
+      $mc = '\\Lib\\mutations\\'.$mc;
+
       $mcInstance = new ($mc);
       $mutations += $mcInstance->getMutation($this->types);
     }
