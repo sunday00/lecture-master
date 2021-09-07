@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
 from django.core import serializers
 from django.forms.models import model_to_dict
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -19,7 +20,7 @@ def post_list(req, tag=None):
   else :
     post_list = Post.objects.all()
 
-  if req.method == 'POST':
+  if req.method == 'POST' and req.POST.get('tag') != None:
     tag = req.POST.get('tag')
     tag_clean = ''.join(e for e in tag if e.isalnum())
     return redirect('post:post_search', tag_clean)
@@ -51,6 +52,23 @@ def post_list(req, tag=None):
     my_friend_user_list = []
     my_friend_request_user_list = []
     comments = []
+
+  paginator = Paginator(post_list, 4)
+  page_num = req.POST.get('page')
+
+  try:
+    post_list = paginator.page(page_num)
+  except PageNotAnInteger:
+    post_list = paginator.page(1)
+  except EmptyPage:
+    post_list = []
+  
+  if req.is_ajax():
+    return render(req, 'post/post_list_ajax.html', {
+      'posts': post_list,
+      'user_profile' : user_profile,
+      'comment_form': comment_form
+    })
 
   return render(req, 'post/post_list.html', {
       'tag' : tag,

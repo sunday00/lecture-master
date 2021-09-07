@@ -1,0 +1,140 @@
+{% load static %}
+{% load post_extras %}
+
+{% for post in posts %}
+  <article class="contents">
+    <header>
+      {% if user_profile %}
+        <div class="profile_container">
+          <div class="profile_img">
+            <img src="{{ post.author.profile.picture.url }}" alt="profile">
+          </div>
+          <div>
+            <div class="name">
+              <a href="{{ post.author.profile.nick }}">{{ post.author.profile.nick }}</a>
+            </div>
+            <div class="time">{{ post.created_at|timesince }}</div>
+          </div>
+          <div class="more" data-name="more">
+            <i class="icon icon--more"></i>
+            <ul class="hidden_menu">
+              {% if post.author.profile.nick != user_profile.nick %}
+              <li>
+                {% if post.author in my_friend_user_list %}
+                  <button>unfollow</button>
+                {% elif post.author in my_friend_request_user_list %}
+                  <button class="friend_request" data-name="cancel_add_friend" name="{{ post.author.profile.user.id }}">
+                    cancel requesting
+                  </button>
+                {% else %}
+                  <button class="friend_request" data-name="friend_request" name="{{ post.author.profile.user.id }}">
+                    add friend
+                  </button>
+                {% endif %}
+              </li>
+              {% endif %}
+              <li class="bookmark" data-name="bookmark" name="{{ post.id }}">
+                {% if user in post.bookmark_user_set.all %}
+                  <span>saved</span>
+                {% else %}
+                  <span>save</span>
+                {% endif %}
+              </li>
+              {% if post.author.profile.nick == user_profile.nick %}
+              <li>
+                <a href="{% url 'post:post_edit' pk=post.id %}">edit</a>
+              </li>
+              <li>
+                <form action="{% url 'post:post_delete' %}" method="POST">
+                  <input type="button" value="delete" data-name="post_delete" data-id="{{ post.id }}" />
+                </form>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+    </header>
+
+    <figure class="main_article">
+      {% comment %} {{ post.content }} {% endcomment %}
+      {{ post|add_link|safe|linebreaksbr }}
+    </figure>
+
+    {% if post.photo %}
+      <div class="img_section">
+        <a href="#">
+          <img src="{{ post.photo.url }}" alt="{{ post.photo }}"/>
+        </a>
+      </div>
+    {% endif %}
+
+    <div class="ajax-section ajax_field">
+      <div class="like">
+        <span>LIKE</span>
+        <span class="like_count" id="like-count-{{ post.id }}">{{ post.like_count }}</span>
+      </div>
+      <div class="comment">
+        <span>comment</span>
+        <span class="comment_count" id="comment-count-{{ post.id }}">
+          {{ post.comment_set.count }}
+        </span>
+      </div>
+    </div>
+
+    <div class="btn-section btn_container">
+      <div class="like-btn {% if user in post.like_user_set.all %} active {% endif %}" data-name="like" name="{{ post.id }}">
+        <i class="icon icon--like-line"></i>
+        <span>LIKE</span>
+      </div>
+      <div class="comment-btn active" data-name="comment" name="{{ post.id }}">
+        <i class="icon icon--comment-line"></i>
+        <span>COMMENT</span>
+      </div>
+    </div>
+
+    <div class="comment_section comment_container">
+      <div class="comment" id="comment-list-ajax-post{{ post.id }}">
+        {% for comment in post.comment_set.all %}
+          <div class="comment-detail" id="comment{{ comment.id }}">
+            <div class="id">
+              <div class="profile_img">
+                <img src="{{ comment.author.profile.picture.url }}" alt="{{ comment.author.profile.nick }}"/>
+              </div>
+              <div class="comment-field">
+                <div class="text-container">
+                  <span class="name">
+                    <a href="/profile/{{ comment.author.profile.nick }}">{{ comment.author.profile.nick }}</a>
+                  </span>
+                  <p class="text_field">{{ comment.content }}</p>
+                </div>
+              </div>
+              <div class="time">{{ comment.created_at|timesince }}
+                ago</div>
+              {% if comment.author == user %}
+                <input type="button" class="delete" data-name="comment_delete" value="X" name="{{ comment.id }}"/>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="comment_input" id="add-comment-post{{post.id}}">
+
+      {% if user.is_authenticated %}
+        <div class="profile_img">
+          <img src="{{ user_profile.picture.url }}" alt="{{ user_profile.nick }} profile">
+        </div>
+        <div class="input_container">
+          {{ comment_form }}
+          <button class="send">
+            <span class="icon--send" name="{{ post.id }}" data-name="comment"></span>
+          </button>
+        </div>
+      {% endif %}
+
+    </div>
+
+  </article>
+{% endfor %}

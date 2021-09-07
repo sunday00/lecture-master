@@ -65,70 +65,48 @@ window.addEventListener('DOMContentLoaded',function(){
             }
         }
 
-
-
         function scrollFunc(e){
             // console.log(e);
             // console.log(pageYOffset);
 
-
             let scrollHeight = pageYOffset + window.innerHeight;
             let documentHeight = document.body.scrollHeight;
 
-            console.log('scrollHeight : ' + scrollHeight);
-            console.log('documentHeight : ' +documentHeight);
-
-
+            // console.log('scrollHeight : ' + scrollHeight);
+            // console.log('documentHeight : ' +documentHeight);
 
             if(scrollHeight >= documentHeight){
                 let pager = document.querySelector('#page');
                 let page = document.querySelector('#page').value;
 
-                pager.value = parseInt(page) + 1; // 증가 시킴
+                // pager.value = parseInt(page) + 1; // 증가 시킴
+                // console.log(page);
 
+                if (document.querySelector('#end_page').value < page + 1) return;
 
-                console.log(page);
-
-                // callMorePostAjax(page);
-
-                if( page > 5){
-                    return;
-                }
-
+                callMorePostAjax(parseInt(page) + 1);
             }
-
-
-
         }
 
-        // function callMorePostAjax(page){
+        function callMorePostAjax(page){
+            $.post('/post/', {
+                page,
+                csrfmiddlewaretoken: document.querySelector('#csrfmiddlewaretoken').value
+            }).then((res) => {
+                addMorePostAjax(res);
+            });
+        }
 
-        //     if( page > 5){
-        //         return;
-        //     }
+        function addMorePostAjax(data){
+            if( data.trim() ) {
+                let pager = document.querySelector('#page');
+                let page = document.querySelector('#page').value;
 
-        //     $.ajax({
-        //         type:'POST',
-        //         url:'data/post.html',
-        //         data:{
-        //             'page':page,
-        //         },
-        //         dataType:'html',
-        //         success: addMorePostAjax,
-        //         error:function(request,status,error){
-        //             alert('문제가 발생했습니다.');
-        //             // window.location.replace('https://www.naver.com');
-
-        //         }
-
-        //     })
-        // }
-
-        // function addMorePostAjax(data){
-
-        //     feed.insertAdjacentHTML('beforeend',data);
-
-        // }
+                pager.value = parseInt(page) + 1; // 증가 시킴
+                feed.insertAdjacentHTML('beforeend',data);
+            }
+            return;
+        }
 
         // const txt = document.querySelector('#comment37');
 
