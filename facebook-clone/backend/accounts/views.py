@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from .forms import SignUpForm, LoginForm
+from chat.models import *
 
 # Create your views here.
 def signUp(req):
@@ -93,8 +94,8 @@ def accept_friend_request(req):
   to_user = friend_request.to_user
 
   try:
-    # room_name = f"{from_user.username},{to_user.username}"
-    # room = Room.objects.create(room_name=room_name)
+    room_name = f"{from_user.username},{to_user.username}"
+    room = Room.objects.create(room_name=room_name)
     
     # Friend.objects.create(user=from_user, current_user=to_user, room=room)
     # Friend.objects.create(user=to_user, current_user=from_user, room=room)

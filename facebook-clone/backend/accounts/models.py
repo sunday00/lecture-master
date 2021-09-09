@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.db.models.deletion import CASCADE
+from chat.models import Room
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 import re
@@ -37,7 +38,7 @@ class Friend(models.Model):
   current_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='friends', blank=True, on_delete=models.CASCADE)
   
   user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, on_delete=models.CASCADE)
-  # room = models.ForeignKey(Room, blank=True, on_delete=models.SET_NULL, null=True)
+  room = models.ForeignKey(Room, blank=True, on_delete=models.SET_NULL, null=True)
 
   created_at = models.DateField(auto_now_add=True)
 
