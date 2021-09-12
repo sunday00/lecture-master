@@ -12,6 +12,8 @@ urlpatterns = [
     path('post/', include('post.urls', namespace='post')),
 
     path('bookmark_friends/', include('bookmark_friends.urls', namespace='bookmark_friends')),
+
+    path('chat/', include('chat.urls'), namespace="chat"),
 ]
 
 
