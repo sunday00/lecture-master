@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
+    "dev": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088",
+    "dev-w": "npx browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
   },
   "author": "",
   "license": "ISC",

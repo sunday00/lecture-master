@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css" />
+  </head>
+  <body>
+    <main>open console</main>
+  </body>
+  <script>
+    const movies = [
+      { title: "Old-boy", score: 10 },
+      { title: "Monster", score: 8 },
+      { title: "Parasite", score: 9 },
+      { title: "JSA", score: 8 },
+      { title: "Mogadishu", score: 8 },
+      { title: "Hostage", score: 6 },
+      { title: "Burning", score: 7 },
+    ];
+
+    movies.forEach((m) => {
+      console.log(`${m.title} - ${m.score}/10`);
+    });
+  </script>
+</html>

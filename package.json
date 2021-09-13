@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev-w": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
+  },
   "dependencies": {
     "browserfy": "^1.0.0",
     "node-sass": "^5.0.0",

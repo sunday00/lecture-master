@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>object</title>
+  <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css">
+  <style>
+    body {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>object</h1>
+    <section class="contents">
+      <picture>
+        <source srcset="./p5/libraries/fruits.avif" type="image/avif" />
+      </picture>
+
+
+    </section>
+  </main>
+</body>
+
+<script>
+  const calcShape = {
+    PI: Math.PI,
+    square(w, h = w) {
+      return w * h;
+    },
+    circle(r) {
+      return r ** 2 * this.PI;
+    },
+    triangle(w, h) {
+      return w * h / 2;
+    }
+  }
+
+  console.log(calcShape.triangle(10, 4));
+</script>
+
+</html>

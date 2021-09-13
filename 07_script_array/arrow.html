@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css" />
+  </head>
+  <body>
+    <main>open console</main>
+  </body>
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    const a = {
+      v: 1,
+      f: function () {
+        console.log(this);
+      },
+    };
+
+    const b = {
+      v: 1,
+      f: () => {
+        console.log(this);
+      },
+    };
+
+    const c = {
+      v: 1,
+      f: function () {
+        console.log(this);
+      }.bind(this),
+    };
+
+    a.f();
+    b.f();
+    c.f();
+
+    axios
+      .get("https://cdn.jsdelivr.net/gh/sunday00/placeholders@main/myjson.json")
+      .then((res) => {
+        const mvs = res.data.metaVariables;
+
+        console.log(mvs);
+        console.log(mvs.every((v) => v.value.length > 2));
+        console.log(mvs.every((v) => v.value.length > 4));
+        console.log(mvs.some((v) => v.value.length > 4));
+        console.log(mvs.some((v) => v.value.length > 40));
+      });
+  </script>
+</html>

@@ -1,0 +1,41 @@
+Arguments: 
+  /home/sunday00/.nvm/versions/node/v14.17.3/bin/node /usr/share/yarn/bin/yarn.js add browser-sync
+
+PATH: 
+  /home/sunday00/.vscode-server/bin/3866c3553be8b268c8a7f8c0482c0c0177aa8bfa/bin:/home/sunday00/.nvm/versions/node/v14.17.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/oraclexe/app/oracle/product/11.2.0/server/bin:/mnt/c/Python38/Scripts/:/mnt/c/Python38/:/mnt/c/product/11.2.0/dbhome_1/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/tools/php73:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/PuTTY/:/mnt/c/tools/php74:/mnt/c/Strawberry/c/bin:/mnt/c/Strawberry/perl/site/bin:/mnt/c/Strawberry/perl/bin:/mnt/c/Program Files (x86)/Graphviz2.38/bin:/mnt/c/Program Files (x86)/Graphviz2.38/bin/doc.exe:/mnt/c/ProgramData/ComposerSetup/bin:/mnt/c/Program Files/MongoDB/Server/4.2/bin:/mnt/c/tools/phalcon-devtools:/mnt/c/Program Files/Java/jdk1.8.0_261/bin:/mnt/d/sunday00/private/scripts:/mnt/d/sunday00/private/2020/flutter/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/PostgreSQL/13/bin:/mnt/c/Program Files/PostgreSQL/12/bin:/mnt/c/Go/bin:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Users/sunda/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/Program Files (x86)/Yarn/bin/:/mnt/c/Program Files/heroku/bin/:/mnt/c/Python38/Scripts/:/mnt/c/Python38/:/mnt/d/app/sunda/product/11.2.0/dbhome_1/bin:/mnt/c/product/11.2.0/dbhome_1/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/tools/php73:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/PuTTY/:/mnt/c/tools/php74:/mnt/c/Strawberry/c/bin:/mnt/c/Strawberry/perl/site/bin:/mnt/c/Strawberry/perl/bin:/mnt/c/Program Files (x86)/Graphviz2.38/bin:/mnt/c/Program Files (x86)/Graphviz2.38/bin/doc.exe:/mnt/c/ProgramData/ComposerSetup/bin:/mnt/c/Program Files/MongoDB/Server/4.2/bin:/mnt/c/tools/phalcon-devtools:/mnt/d/sunday00/private/scripts:/mnt/c/Program Files/Java/jdk1.8.0_261/bin:/mnt/c/Users/sunda/AppData/Local/Microsoft/WindowsApps:/mnt/c/tools/mysql/current/bin:/mnt/c/Users/sunda/AppData/Roaming/Composer/vendor/bin:/mnt/c/Users/sunda/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program:/mnt/d/sunday00/private/2020/flutter/bin:/mnt/c/Users/sunda/.dotnet/tools:/mnt/c/Users/sunda/go/bin:/mnt/c/U:/mnt/c/Users/sunda/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/Users/sunda/AppData/Local/Yarn/bin:/snap/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  14.17.3
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:69:26)
+
+npm manifest: 
+  {
+    "name": "07_script_array",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+    
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

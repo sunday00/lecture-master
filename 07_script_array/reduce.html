@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css" />
+  </head>
+  <body>
+    <main>open console</main>
+  </body>
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    axios
+      .get("https://cdn.jsdelivr.net/gh/sunday00/placeholders@main/myjson.json")
+      .then((res) => {
+        const mvs = res.data.metaVariables;
+        const td = res.data.traverDestination;
+
+        const numbers = [100, 1, 3, 5, 7];
+        numbers.reduce((acc, cur) => {
+          let a = acc - cur;
+          console.log(a);
+          return a; //return is going to acc
+        });
+
+        const max = numbers.reduce((acc, cur) => {
+          return acc > cur ? acc : cur;
+        });
+
+        const min = numbers.reduce((acc, cur) => {
+          return acc < cur ? acc : cur;
+        });
+
+        console.log(min, max);
+
+        console.log(res.data.traverDestination);
+
+        let longestDescriptedTravel = td.reduce((resultObject, cur) => {
+          return resultObject.description.length > cur.description.length
+            ? resultObject
+            : cur;
+        });
+
+        console.log(longestDescriptedTravel);
+
+        console.log(numbers.reduce((a, c) => a + c, 1000));
+      });
+  </script>
+</html>

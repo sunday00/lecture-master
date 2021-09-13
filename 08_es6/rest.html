@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    function ex() {
+      return arguments;
+    }
+
+    let args = ex(1, 2, 3, 4, "a", "b", "c", true);
+
+    function ex2(...nums) {
+      return nums;
+    }
+
+    let args2 = ex2(1, 2, 3, 4, "a", "b", "c", true);
+
+    let [num1, num2, num3, num4, ...elseAtt] = args2;
+
+    console.log(num1);
+
+    const Fruit = function (name, color, stock) {
+      this.name = name;
+      this.color = color;
+      this.stock = stock;
+    };
+
+    let fruit = new Fruit("apple", "red", 3);
+
+    let { name: f1_name, color: f1_color } = fruit;
+
+    console.log(f1_name, f1_color);
+  </script>
+</html>

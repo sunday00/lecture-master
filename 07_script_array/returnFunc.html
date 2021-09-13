@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>returnFunc</title>
+  <link rel="stylesheet" href="node_modules/wingcss/dist/wing.min.css">
+  <style>
+    body {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>returnFunc</h1>
+    <section class="contents"></section>
+  </main>
+</body>
+
+<script>
+  function makeFunction(arg) {
+    if (arg === 'sum') return function (n, m) { return n + m }
+    else return function (n, m) { return n - m }
+  }
+
+  function makeBetweenFunc(n, m) {
+    return function (x) {
+      return n <= x && x <= m;
+    }
+  }
+
+  const isChild = makeBetweenFunc(1, 18);
+  console.log(isChild(8));
+
+  const isAdult = makeBetweenFunc(19, 64);
+  console.log(isAdult(35));
+
+  const isSenior = makeBetweenFunc(65, Infinity);
+  console.log(isSenior(80));
+
+
+</script>
+
+</html>
