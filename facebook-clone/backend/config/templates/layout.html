@@ -66,7 +66,7 @@
 
             {% if user_profile %}
               <div class="people">
-                <a href="save.html">
+                <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#friends">
                   <span class="icon icon--people-black"></span>
                 </a>
               </div>
@@ -98,7 +98,7 @@
               </div>
 
               <div class="messenger">
-                <a href="messenger.html">
+                <a href="{% url 'chat:chat_list' %}">
                   <span class="icon icon--messenger--black"></span>
                 </a>
               </div>

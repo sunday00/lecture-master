@@ -20,6 +20,7 @@ def room(req, room_id):
   user_profile = user.profile
   friends = user.friends.all()
   room = Room.objects.get(pk=room_id)
+
   friends_user = room.users.all().exclude(pk=user.id).first()
 
   return render(req, 'chat/room.html', {

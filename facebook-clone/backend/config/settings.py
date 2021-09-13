@@ -144,7 +144,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": ["redis://sunday00:Zktm500CC!@127.0.0.1:6379/0"],
+            "hosts": ["redis://sunday00:Zktm500CC!@127.0.0.1:6379"],
         }
     }
 }

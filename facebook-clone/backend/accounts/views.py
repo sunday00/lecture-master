@@ -96,12 +96,13 @@ def accept_friend_request(req):
   try:
     room_name = f"{from_user.username},{to_user.username}"
     room = Room.objects.create(room_name=room_name)
-    
-    # Friend.objects.create(user=from_user, current_user=to_user, room=room)
-    # Friend.objects.create(user=to_user, current_user=from_user, room=room)
+    room.users.set([to_user, from_user])
+   
+    Friend.objects.create(user=from_user, current_user=to_user, room=room)
+    Friend.objects.create(user=to_user, current_user=from_user, room=room)
 
-    Friend.objects.create(user=from_user, current_user=to_user)
-    Friend.objects.create(user=to_user, current_user=from_user)
+    # Friend.objects.create(user=from_user, current_user=to_user)
+    # Friend.objects.create(user=to_user, current_user=from_user)
     friend_request.delete()
 
     ctx = {'result': 'success', }
