@@ -51,6 +51,21 @@ struct Rectangle {
     width: u16,
 }
 
+impl Rectangle {
+    fn square(size: u16) -> Rectangle {
+        Rectangle {
+            length: size,
+            width: size,
+        }
+    }
+    fn area(&self) -> u16 {
+        self.length * self.width
+    }
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.length > other.length && self.width > other.width
+    }
+}
+
 fn use_struct(length: &u16, width: &u16) {
     let length = length.clone();
     let width = width.clone();
@@ -59,13 +74,29 @@ fn use_struct(length: &u16, width: &u16) {
     // println!("Rectangle : {:?}", rect1);
     println!("Rectangle : {:#?}", rect1);
 
-    println!();
-    println!();
-    println!("The Area (struct mode): {} square pixels", area3(&rect1));
-    println!();
-    println!();
-}
+    let square1 = Rectangle::square(15);
+    println!("Rectangle : {:#?}", square1);
 
-fn area3(rectangle: &Rectangle) -> u16 {
-    rectangle.length * rectangle.width
+    let rect2 = Rectangle {
+        length: 4,
+        width: 4,
+    };
+    let rect3 = Rectangle {
+        length: 10,
+        width: 20,
+    };
+
+    println!();
+    println!();
+    println!("The Area (struct mode): {} square pixels", rect1.area());
+    println!(
+        "The Area (struct mode): can hold 2? : {}",
+        rect1.can_hold(&rect2)
+    );
+    println!(
+        "The Area (struct mode): can hold 3? : {}",
+        rect1.can_hold(&rect3)
+    );
+    println!();
+    println!();
 }
