@@ -14,6 +14,8 @@ urlpatterns = [
     path('bookmark_friends/', include('bookmark_friends.urls', namespace='bookmark_friends')),
 
     path('chat/', include('chat.urls', namespace="chat")),
+
+    path('jpt/', include('jpt.urls', namespace='jpt' )),
 ]
 
 
