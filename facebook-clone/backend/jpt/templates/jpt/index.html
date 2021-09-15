@@ -6,19 +6,200 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   </head>
 
   <body>
     <main class="container">
-      <h1>JUPYTER and Django</h1>
-      {% for i in cafe_list %}
-        <p>
-          <span>{{ i.name }}
-            {{ i.content }}</span>
-        </p>
-      {% endfor %}
+      <header class="row">
+        <section class="col-md-6">
+          <canvas id="my-chart-one"></canvas>
+        </section>
+        <section class="col-md-6">
+          <canvas id="my-chart-two"></canvas>
+        </section>
+
+        <hr/>
+
+        <section class="col-md-6">
+          <canvas id="my-chart-three"></canvas>
+        </section>
+        <section class="col-md-6">
+          <canvas id="my-chart-four"></canvas>
+        </section>
+      </header>
     </main>
   </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+  <script>
+    let myChartOne = document
+      .querySelector("#my-chart-one")
+      .getContext('2d');
+
+    let myChartTwo = document
+      .querySelector("#my-chart-two")
+      .getContext('2d');
+
+    let myChartThree = document
+      .querySelector("#my-chart-three")
+      .getContext('2d');
+
+    let myChartFour = document
+      .querySelector("#my-chart-four")
+      .getContext('2d');
+
+    let barChart = new Chart(myChartOne, {
+      type: 'bar',
+      data: {
+        labels: [
+          'academy', 'researcher', 'production', 'media-com', 'winiv'
+        ],
+        datasets: [
+          {
+            label: 'lab total earns',
+            data: [10, 100, 100, 200, 700]
+          }
+        ]
+      }
+    });
+
+    let barChart2 = new Chart(myChartTwo, {
+      type: 'bar',
+      data: {
+        labels: [
+          'academy', 'researcher', 'production', 'media-com', 'winiv'
+        ],
+        datasets: [
+          {
+            label: 'lab total earns',
+            data: [
+              130, 500, 200, 700, 520
+            ],
+            backgroundColor: [
+              'tomato', 'cornflowerblue', '#639', '992200', 'green'
+            ],
+            borderWidth: 2,
+            borderColor: '#000',
+            hoverBorderWidth: 5
+          }
+        ]
+      }
+    });
+
+    let barChart3 = new Chart(myChartThree, {
+      type: 'bar',
+      data: {
+        labels: [
+          'academy', 'researcher', 'production', 'media-com', 'winiv'
+        ],
+        datasets: [
+          {
+            label: 'lab total earns',
+            data: [
+              130, 500, 200, 700, 520
+            ],
+            backgroundColor: ['tomato'],
+            borderWidth: 2,
+            borderColor: '#000',
+            hoverBorderWidth: 5
+          }, {
+            label: 'lab last-total earns',
+            data: [
+              150, 400, 560, 780, 120
+            ],
+            backgroundColor: ['cornflowerblue'],
+            borderWidth: 2,
+            borderColor: '#000',
+            hoverBorderWidth: 5
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'EARNS',
+            color: '#555',
+            font: {
+              size: 30
+            }
+          },
+          legend: {
+            display: true,
+            position: 'bottom'
+          },
+          tooltip: {
+            enabled: false
+          },
+          layout: {
+            padding: {
+              top: 5
+            }
+          }
+        }
+      }
+    });
+
+    let barChart4 = new Chart(myChartFour, {
+      type: 'pie',
+      data: {
+        labels: [
+          'academy', 'researcher', 'production', 'media-com', 'winiv'
+        ],
+        datasets: [
+          {
+            label: 'lab total earns',
+            data: [
+              130, 500, 200, 700, 520
+            ],
+            backgroundColor: [
+              'tomato', 'cornflowerblue', '#639', '992200', 'green'
+            ],
+            borderWidth: 2,
+            borderColor: '#000',
+            hoverBorderWidth: 5
+          }, {
+            label: 'lab last-total earns',
+            data: [
+              150, 400, 560, 780, 120
+            ],
+            backgroundColor: [
+              'tomato', 'cornflowerblue', '#639', '992200', 'green'
+            ],
+            borderWidth: 2,
+            borderColor: '#000',
+            hoverBorderWidth: 5
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'EARNS',
+            color: '#555',
+            font: {
+              size: 30
+            }
+          },
+          legend: {
+            display: true,
+            position: 'bottom'
+          },
+          tooltip: {
+            enabled: true
+          },
+          layout: {
+            padding: {
+              top: 5
+            }
+          }
+        }
+      }
+    });
+  </script>
 
 </html>
