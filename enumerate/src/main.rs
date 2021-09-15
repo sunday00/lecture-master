@@ -3,6 +3,8 @@ mod sub1;
 mod sub2;
 mod sub3;
 mod sub4;
+mod sub5;
+mod sub6;
 
 fn env() -> u8 {
     let args: Vec<String> = env::args().collect();
@@ -19,5 +21,9 @@ fn main() {
         sub3::run();
     } else if env() == 4 {
         sub4::run();
+    } else if env() == 5 {
+        sub5::run();
+    } else if env() == 6 {
+        sub6::run();
     }
 }
