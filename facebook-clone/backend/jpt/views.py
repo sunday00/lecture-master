@@ -1,12 +1,20 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, render
+from django.db.models import Q
 
-from accounts.models import Profile
+from accounts.models import Profile, Friend
+from chat.models import Room
+from post.models import Bookmark, Comment, Like, Post, Tag
 from .models import Cafe
+
 from faker import Faker
 from faker.providers import lorem
 from spongebobcase import tospongebob
+import pandas as pd
+import numpy as np
+
 from random import *
+
 
 # Create your views here.
 def index (req):
@@ -25,6 +33,55 @@ def data (req):
 
   else: 
     user_profile = None
+
+  return render(req, 'jpt/data.html', {
+    'user_profile' : user_profile,
+  })
+
+def dataToFile(req):
+  if req.user.is_authenticated:
+    username = req.user
+    user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
+  
+  else: 
+    user_profile = None
+
+  targetData = [
+    Friend, Profile, Tag, Like, Post
+  ]
+  
+  with open("temp.text", 'w') as f:
+    for data in targetData:
+      allData = data.objects.all()[:10]
+      f.write(f'Count : {data.__name__} {allData.count()}\n')
+      for r in allData:
+        f.write(f'{r.id} : {r}\n')
+      f.write('-=-=-=-=-=-=-=-=-=-=\n\n\n')
+
+  return render(req, 'jpt/data.html', {
+    'user_profile' : user_profile,
+  })
+
+def dataToAnalyzeFile(req):
+  if req.user.is_authenticated:
+    username = req.user
+    user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
+  
+  else: 
+    user_profile = None
+
+  targetData = [
+    Friend, Profile, Tag, Like, Post
+  ]
+  
+  with open("temp.text", 'w') as f:
+    for data in targetData:
+      allData = pd.DataFrame( list( data.objects.all()[:10].all().values() ))
+      f.write(f'Count : {data.__name__}\n')
+      f.write(f'{allData}\n')
+      f.write('-=-=-=-=-=-=-=-=-=-=\n\n\n')
 
   return render(req, 'jpt/data.html', {
     'user_profile' : user_profile,
@@ -72,4 +129,110 @@ def dev_insert_friend_req (req):
   return render(req, 'dev/complete.html', {
     
   })
+
+def dev_insert_friend (req):
+  user_model = get_user_model()
+
+  for i in range(30):
+    user = user_model.objects.order_by("?").first()
+    user2 = user_model.objects.order_by("?").first()
+
+    while user2 and user.id == user2.id:
+      user2 = user_model.objects.order_by("?").first()
+
+    if Room.objects.filter( Q(room_name=user.username+","+user2.username) | Q(room_name=user2.username+","+user.username) ) :
+      continue
+
+    room = Room.objects.create(
+      room_name = user.username +","+ user2.username
+    )
+    room.users.set([user, user2])
+    
+    user.friends.create(current_user=user.id, user_id=user2.id, room_id=room.id)
   
+  return render(req, 'dev/complete.html', {
+    
+  })
+
+def dev_insert_post (req):
+  fake = Faker()
+  fake.add_provider(lorem)
+
+  user_model = get_user_model()
+
+  for i in range(30):
+    user = user_model.objects.order_by("?").first()
+
+    text = fake.text()
+    for y in range(randint(1, 10)):
+      text += "<br /> \n" + fake.text()
+
+    if randint(1, 10) % 3 == 0:
+      text += "<br /> \n"
+      text += "#" + fake.word()
+
+    post = Post.objects.create(
+      content=text,
+      author_id=user.id
+    )
+
+    post.tag_save()
+
+  return render(req, 'dev/complete.html', {
+    
+  })
+
+def dev_insert_comment (req):
+  fake = Faker()
+  fake.add_provider(lorem)
+
+  user_model = get_user_model()
+
+  for i in range(60):
+    post = Post.objects.order_by("?").first()
+    user = user_model.objects.order_by("?").first()
+
+    text = fake.sentence(nb_words=randint(1, 20))
+
+    Comment.objects.create(
+      author_id=user.id,
+      post_id=post.id,
+      content=text
+    )
+
+  return render(req, 'dev/complete.html', {
+    
+  })
+
+def dev_insert_like_and_bookmark (req):
+  user_model = get_user_model()
+
+  for i in range(30):
+    post = Post.objects.order_by("?").first()
+    user = user_model.objects.order_by("?").first()
+
+    Like.objects.create(
+      post_id=post.id,
+      user_id=user.id
+    )
+  
+  for i in range(30):
+    post = Post.objects.order_by("?").first()
+    user = user_model.objects.order_by("?").first()
+
+    Bookmark.objects.create(
+      post_id=post.id,
+      user_id=user.id
+    )
+
+  return render(req, 'dev/complete.html', {
+    
+  })
+
+
+
+
+
+
+
+

@@ -82,7 +82,7 @@ window.addEventListener('DOMContentLoaded',function(){
                 // pager.value = parseInt(page) + 1; // 증가 시킴
                 // console.log(page);
 
-                if (document.querySelector('#end_page').value < page + 1) return;
+                if (document.querySelector('#end_page').value < parseInt(page) + 1) return;
 
                 callMorePostAjax(parseInt(page) + 1);
             }

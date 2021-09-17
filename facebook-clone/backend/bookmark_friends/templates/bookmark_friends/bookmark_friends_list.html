@@ -52,7 +52,11 @@
               {% if user == bookmark_user.profile.user %}
                 <article class="contents">
                   <div class="thumbnail">
-                    <img src="{{ post.photo.url }}" alt=""/>
+                    {% if post.photo %}
+                      <img src="{{ post.photo.url }}" alt=""/>
+                    {% else %}
+                      <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image">
+                    {% endif %}
                   </div>
                   <div>
                     <h1 class="heading">wrote by

@@ -7,7 +7,11 @@
       {% if user_profile %}
         <div class="profile_container">
           <div class="profile_img">
-            <img src="{{ post.author.profile.picture.url }}" alt="profile">
+            {% if post.author.profile.picture %}
+              <img src="{{ post.author.profile.picture.url }}" alt="profile">
+            {% else %}              
+              <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image">
+            {% endif %}
           </div>
           <div>
             <div class="name">
@@ -99,7 +103,11 @@
           <div class="comment-detail" id="comment{{ comment.id }}">
             <div class="id">
               <div class="profile_img">
-                <img src="{{ comment.author.profile.picture.url }}" alt="{{ comment.author.profile.nick }}"/>
+                {% if comment.author.profile.picture %}
+                  <img src="{{ comment.author.profile.picture.url }}" alt="{{ comment.author.profile.nick }}"/>
+                {% else %}
+                  <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image">
+                {% endif %}
               </div>
               <div class="comment-field">
                 <div class="text-container">
