@@ -41,7 +41,11 @@
           {% if friend.room %}
             <li name="{{ friend.room.id }}">
               <a href="/chat/{{ friend.room.id }}/">
-                <div class="profile_img"><img src="{{ friend.user.profile.picture.url }}" alt=""></div>
+                {% if friend.user.profile.picture %}
+                  <div class="profile_img"><img src="{{ friend.user.profile.picture.url }}" alt=""></div>
+                {% else %}
+                  <div class="profile_img"><img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image"></div>
+                {% endif %}
                 <div>
                   <div class="name">{{ friend.user }}</div>
                   <div class="contents">새로운 facebook친구에게 인사해보세요.</div>

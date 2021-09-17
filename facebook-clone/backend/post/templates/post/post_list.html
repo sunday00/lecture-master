@@ -259,7 +259,11 @@
         {% for friend in friends %}
           <li>
             <div class="profile_img">
-              <img src="{{ friend.user.profile.picture.url }}" alt="{{ friend.user.profile.nick }}">
+              {% if friend.user.profile.picture %}
+                <img src="{{ friend.user.profile.picture.url }}" alt="{{ friend.user.profile.nick }}">
+              {% else %}
+                <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image">
+              {% endif %}
             </div>
             <span class="name">{{ friend.user.profile.nick }}</span>
             <span class="light"></span>

@@ -20,6 +20,10 @@ def bookmark_friends_list(req):
   else: 
     user_profile = None
 
+    friends_requests = []
+    myFriend_requests = []
+    friends = []
+
   post_list = Post.objects.all()
 
   return render(req, 'bookmark_friends/bookmark_friends_list.html', {

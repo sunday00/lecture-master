@@ -41,7 +41,13 @@
         {% for friend in friends %}
           <li name="{{ friend.room.id }}">
             <a href="/chat/{{ friend.room.id }}/">
-              <div class="profile_img"><img src="{{ friend.user.profile.picture.url }}" alt=""></div>
+              <div class="profile_img">
+                {% if friend.user.profile.picture %}
+                  <img src="{{ friend.user.profile.picture.url }}" alt="">
+                {% else %}
+                  <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image">
+                {% endif %}
+                </div>
               <div>
                 <div class="name">{{ friend.user }}</div>
                 <div class="contents">새로운 facebook친구에게 인사해보세요.</div>
@@ -55,9 +61,15 @@
     <section id="time_line">
       <header>
         <div>
-          <div class="profile_img"><img src="{{ friend_user.profile.picture.url }}" alt=""></div>
+          <div class="profile_img">
+            {% if friend_user.profile.picture %}
+              <img src="{{ friend_user.profile.picture.url }}" alt="">
+            {% else %}
+              <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image">
+            {% endif %}
+          </div>
           <div>
-            <div class="name">{{friend_user.profile.nickname}}</div>
+            <div class="name">{{friend_user.profile.nick}}</div>
             <div class="time">1시간</div>
           </div>
         </div>
