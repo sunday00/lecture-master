@@ -1,142 +1,157 @@
-{% extends 'layout.html' %}
-{% load static %}
-{% load post_extras %}
+<!-- prettier-ignore -->
+{% extends 'layout.html' %} 
+{% load static %} 
+{% load post_extras %} 
 
+{% comment %}
+<!-- prettier-ignore -->
+{% endcomment %}
 {% block head %}
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
-{% endblock head %}
-
-{% block contents %}
-  <section id="wrapper">
-    <div class="inner">
-      {% if user_profile %}
-        <aside class="left_box">
-          <div class="my_name">
-            <a href="#">
-              <div class="profile_img">
-                <img src="{{ user_profile.picture.url }}" alt="profile">
-              </div>
-              <span class="name">{{ user_profile.nick }}</span>
-              <span class="icon icon--more"></span>
-            </a>
+<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+{% endblock head %} {% block contents %}
+<section id="wrapper">
+  <div class="inner">
+    {% if user_profile %}
+    <aside class="left_box">
+      <div class="my_name">
+        <a href="#">
+          <div class="profile_img">
+            <img src="{{ user_profile.picture.url }}" alt="profile" />
           </div>
-          <ul class="list">
-            <li class="active">
-              <a href="{% url 'post:post_list' %}">
-                <span class="icon icon--news"></span>
-                <span>NewsFeed</span>
-                <span class="icon icon--more"></span>
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#friends">
-                <span class="icon icon--messenger"></span>
-                <span>Messenger</span>
-                <span class="icon icon--more"></span>
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#bookmark">
-                <span class="icon icon--save"></span>
-                <span>Save</span>
-                <span class="icon icon--more"></span>
-              </a>
-            </li>
-          </ul>
-        </aside>
-      {% endif %}
-
-      <section class="middle_box" id="contents_container">
-        <input type="hidden" name="page" id="page" value="1"/>
-        <input type="hidden" name="end_page" id="end_page" value="{{ posts.paginator.num_pages }}"/>
-        {% if user_profile %}
-          <article class="create_box">
-            <h2 class="title">Create some articles</h2>
-            <div class="text_field">
-              <form action="" method="POST" id="form_new_post">
-                <input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="{{csrf_token}}">
-                <header class="top">
-                  <div class="profile_img">
-                    <img src="{{ user_profile.picture.url }}" alt="profile">
-                  </div>
-                  <p>
-                    {{ post_form.content }}
-                  </p>
-                </header>
-
-                <div class="middle">
-                  <canvas id="imageCanvas" width="0" height="0"></canvas>
-                </div>
-                <div class="bottom">
-                  {{ post_form.photo }}
-                  <div class="import-btn">
-                    <label for="id_photo" id="photo_label">
-                      <i class="icon icon--picture"></i>
-                      <span>picture/movie</span>
-                    </label>
-                  </div>
-                </div>
-                <footer class="submit">
-                  <input type="submit" value="POST" id="submitBtn" disabled="disabled" data-name="send"/>
-                </footer>
-              </form>
-            </div>
-          </article>
-        {% endif %}
-
-        <div class="contents_wrapper contents">
-          {% comment %} <!-- prettier-ignore --> {% endcomment %}
-          {% include "post/post_list_ajax.html" with post_list=post_list %}
-          <div id="post_list_ajax">
-            {% include "post/script_ajax.html" %}
-          </div>
-
-        </div>
-      </section>
-
-      {% if user_profile %}
-        <section class="right_box">
-          <header class="title">Profile</header>
-          <div class="profile-content right_profile">
-            <div class="profile_img">
-              <img src="{{ user_profile.picture.url }}" alt="profile"/>
-            </div>
-            <div class="detail">
-              <p class="name">sunday00</p>
-              <p class="message">
-                <i class="icon icon--write-gray"></i>
-                <span>Message</span>
-              </p>
-            </div>
-          </div>
-        </section>
-      {% endif %}
-    </div>
-  </section>
-
-  {% if user_profile %}
-    <aside id="side_box">
-      <ul>
-        {% for friend in friends %}
-          <li>
-            <div class="profile_img">
-              {% if friend.user.profile.picture %}
-                <img src="{{ friend.user.profile.picture.url }}" alt="{{ friend.user.profile.nick }}">
-              {% else %}
-                <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image">
-              {% endif %}
-            </div>
-            <span class="name">{{ friend.user.profile.nick }}</span>
-            <span class="light"></span>
-          </li>
-        {% endfor %}
+          <span class="name">{{ user_profile.nick }}</span>
+          <span class="icon icon--more"></span>
+        </a>
+      </div>
+      <ul class="list">
+        <li class="active">
+          <a href="{% url 'post:post_list' %}">
+            <span class="icon icon--news"></span>
+            <span>NewsFeed</span>
+            <span class="icon icon--more"></span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#friends">
+            <span class="icon icon--messenger"></span>
+            <span>Messenger</span>
+            <span class="icon icon--more"></span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bookmark_friends:bookmark_friends_list' %}#bookmark">
+            <span class="icon icon--save"></span>
+            <span>Save</span>
+            <span class="icon icon--more"></span>
+          </a>
+        </li>
       </ul>
     </aside>
-  {% endif %}
-{% endblock contents %}
+    {% endif %}
 
-{% block js %}
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-  <script src="{% static 'js/new_post.js' %}"></script>
+    <section class="middle_box" id="contents_container">
+      <input type="hidden" name="page" id="page" value="1" />
+      <input
+        type="hidden"
+        name="end_page"
+        id="end_page"
+        value="{{ posts.paginator.num_pages }}"
+      />
+      <input
+        type="hidden"
+        id="csrfmiddlewaretoken"
+        name="csrfmiddlewaretoken"
+        value="{{csrf_token}}"
+      />
+      {% if user_profile %}
+      <article class="create_box">
+        <h2 class="title">Create some articles</h2>
+        <div class="text_field">
+          <form action="" method="POST" id="form_new_post">
+            <header class="top">
+              <div class="profile_img">
+                <img src="{{ user_profile.picture.url }}" alt="profile" />
+              </div>
+              <p>{{ post_form.content }}</p>
+            </header>
+
+            <div class="middle">
+              <canvas id="imageCanvas" width="0" height="0"></canvas>
+            </div>
+            <div class="bottom">
+              {{ post_form.photo }}
+              <div class="import-btn">
+                <label for="id_photo" id="photo_label">
+                  <i class="icon icon--picture"></i>
+                  <span>picture/movie</span>
+                </label>
+              </div>
+            </div>
+            <footer class="submit">
+              <input
+                type="submit"
+                value="POST"
+                id="submitBtn"
+                disabled="disabled"
+                data-name="send"
+              />
+            </footer>
+          </form>
+        </div>
+      </article>
+      {% endif %}
+
+      <div class="contents_wrapper contents">
+        {% comment %}
+        <!-- prettier-ignore -->
+        {% endcomment %}
+          {% include "post/post_list_ajax.html" with post_list=post_list %}
+        <div id="post_list_ajax">{% include "post/script_ajax.html" %}</div>
+      </div>
+    </section>
+
+    {% if user_profile %}
+    <section class="right_box">
+      <header class="title">Profile</header>
+      <div class="profile-content right_profile">
+        <div class="profile_img">
+          <img src="{{ user_profile.picture.url }}" alt="profile" />
+        </div>
+        <div class="detail">
+          <p class="name">sunday00</p>
+          <p class="message">
+            <i class="icon icon--write-gray"></i>
+            <span>Message</span>
+          </p>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  </div>
+</section>
+
+{% if user_profile %}
+<aside id="side_box">
+  <ul>
+    {% for friend in friends %}
+    <li>
+      <div class="profile_img">
+        {% if friend.user.profile.picture %}
+        <img
+          src="{{ friend.user.profile.picture.url }}"
+          alt="{{ friend.user.profile.nick }}"
+        />
+        {% else %}
+        <img src="{% static 'imgs/profile/noun_User.png' %}" alt="no image" />
+        {% endif %}
+      </div>
+      <span class="name">{{ friend.user.profile.nick }}</span>
+      <span class="light"></span>
+    </li>
+    {% endfor %}
+  </ul>
+</aside>
+{% endif %} {% endblock contents %} {% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/new_post.js' %}"></script>
 {% endblock js %}

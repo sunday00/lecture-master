@@ -1,50 +1,44 @@
-window.addEventListener('DOMContentLoaded',function () {
-    let canvas = document.querySelector('#imageCanvas');
-    let ctx = canvas.getContext('2d');
-    const createBox = document.querySelector('.create_box');
-    const textField = document.querySelector('#text_field');
-    const fileInput  = document.querySelector( "#id_photo" );
-    const submit  = document.querySelector( "#submitBtn" );
+window.addEventListener('DOMContentLoaded', function () {
+  let canvas = document.querySelector('#imageCanvas');
+  let ctx = canvas && canvas.getContext('2d');
+  const createBox = document.querySelector('.create_box');
+  const textField = document.querySelector('#text_field');
+  const fileInput = document.querySelector('#id_photo');
+  const submit = document.querySelector('#submitBtn');
 
-    // Show image
+  // Show image
 
-    if( document.querySelector('.right a').textContent !== 'LOGIN' ){
+  if (document.querySelector('.right a').textContent !== 'LOGIN') {
+    let canvas = document.getElementById('imageCanvas');
+    let ctx = canvas && canvas.getContext('2d');
+  }
 
-        let canvas = document.getElementById('imageCanvas');
-        let ctx = canvas.getContext('2d');
-        
-    }
+  let reader = new FileReader();
 
+  function handleImage(e) {
     let reader = new FileReader();
+    submit.disabled = false;
 
+    console.log(reader.readAsDataURL);
 
+    reader.onload = function (event) {
+      console.log(event);
 
-    function handleImage(e){
-        let reader = new FileReader();
-        submit.disabled = false;
+      let img = new Image();
 
-        console.log(reader.readAsDataURL);
+      img.onload = function () {
+        canvas.width = 100;
+        canvas.height = 100;
+        ctx.drawImage(img, 0, 0, 100, 100);
 
-        reader.onload = function(event){
-            console.log(event);
+        submit.parentNode.style.display = 'block';
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
 
-            let img = new Image();
-
-            img.onload = function(){
-                canvas.width = 100;
-                canvas.height = 100;
-                ctx.drawImage(img,0,0,100,100);
-
-                submit.parentNode.style.display = 'block';
-            };
-            img.src = event.target.result;
-        };
-        reader.readAsDataURL(e.target.files[0]);
-    }
-
-    if( document.querySelector('.right a').textContent !== 'LOGIN' ){
-        fileInput.addEventListener('change', handleImage, false);
-    }
-
-
+  if (document.querySelector('.right a').textContent !== 'LOGIN') {
+    fileInput.addEventListener('change', handleImage, false);
+  }
 });

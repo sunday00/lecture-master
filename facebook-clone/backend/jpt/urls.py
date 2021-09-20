@@ -9,6 +9,8 @@ urlpatterns = [
     path('data/file', dataToFile, name='dataToFile'),
 
     path('data/analyze/file', dataToAnalyzeFile, name='dataToAnalyzeFile'),
+    path('data/csv/file', dataToCsvFile, name='dataToCsvFile'),
+    path('data/friends', dataFriends, name='dataFriends'),
     
     path('dev/insert_user', dev_insert_user, name='insert_user'),
     path('dev/insert_friend', dev_insert_friend, name='dev_insert_friend'),

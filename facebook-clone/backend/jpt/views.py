@@ -29,13 +29,22 @@ def data (req):
     user = get_object_or_404(get_user_model(), username=username)
     user_profile = user.profile
    
-
-
   else: 
     user_profile = None
 
+  targetData = [
+    Friend, Profile, Tag, Like, Post
+  ]
+
+  listedDataDict = dict()
+
+  for data in targetData:
+    listedData = pd.DataFrame( list( data.objects.all().values() ))
+    listedDataDict[data.__name__ + 'List'] = listedData
+
   return render(req, 'jpt/data.html', {
     'user_profile' : user_profile,
+    'friendsDict' : dict(listedDataDict['FriendList']['created_at'].value_counts().sort_index())
   })
 
 def dataToFile(req):
@@ -86,6 +95,44 @@ def dataToAnalyzeFile(req):
   return render(req, 'jpt/data.html', {
     'user_profile' : user_profile,
   })
+
+def dataToCsvFile(req):
+  if req.user.is_authenticated:
+    username = req.user
+    user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
+  
+  else: 
+    user_profile = None
+
+  targetData = [
+    Friend, Profile, Tag, Like, Post
+  ]
+  
+  for data in targetData:
+    allData = pd.DataFrame( list( data.objects.all().values() ))
+    allData.to_csv( 'csv_' + data.__name__ + '_data.csv', mode='w' )
+
+  return render(req, 'jpt/data.html', {
+    'user_profile' : user_profile,
+  }) 
+
+def dataFriends(req):
+  if req.user.is_authenticated:
+    username = req.user
+    user = get_object_or_404(get_user_model(), username=username)
+    user_profile = user.profile
+  
+  else: 
+    user_profile = None
+  
+  friendsData = pd.DataFrame(list( Friend.objects.all().values() ))
+  friendsData.to_csv('friendsData.csv', mode='w')
+
+  return render(req, 'jpt/data.html', {
+    'user_profile' : user_profile,
+  })
+
 
 def dev_insert_user (req):
   fake = Faker()
