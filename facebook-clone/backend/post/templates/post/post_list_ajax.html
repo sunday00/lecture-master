@@ -107,16 +107,9 @@
     <div
       class="
         like-btn
-        {%
-        if
-        user
-        in
-        post.like_user_set.all
-        %}
+        {% if user in post.like_user_set.all %}
         active
-        {%
-        endif
-        %}
+        {% endif %}
       "
       data-name="like"
       name="{{ post.id }}"

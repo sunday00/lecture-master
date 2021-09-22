@@ -12,6 +12,8 @@ from faker.providers import lorem
 from spongebobcase import tospongebob
 import pandas as pd
 import numpy as np
+import json
+import datetime
 
 from random import *
 
@@ -42,9 +44,21 @@ def data (req):
     listedData = pd.DataFrame( list( data.objects.all().values() ))
     listedDataDict[data.__name__ + 'List'] = listedData
 
+  with open('joined_at.json', 'r', encoding='UTF-8') as json_file:
+    joined_at = json_file.read()
+    joined_data = json.loads(joined_at)
+    
+  joined_data[str(datetime.datetime.now().strftime('%Y-%m-%d'))] = str(listedData['id'].count())
+
+  with open('joined_at.json', 'w', encoding='UTF-8') as f:
+    json.dump(joined_data, f,  indent=2)
+
   return render(req, 'jpt/data.html', {
     'user_profile' : user_profile,
-    'friendsDict' : dict(listedDataDict['FriendList']['created_at'].value_counts().sort_index())
+    'friendsDict' : dict(listedDataDict['FriendList']['created_at'].value_counts().sort_index()),
+    'gendersDict' : dict(listedDataDict['ProfileList']['gender'].value_counts().sort_index()),
+    'postsDict'   : dict(listedDataDict['PostList']['created_at'].astype(str).str[:10].value_counts().sort_index()),
+    'joined_data': joined_data,
   })
 
 def dataToFile(req):
