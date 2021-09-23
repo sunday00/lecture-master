@@ -30,3 +30,8 @@ setting .vscode/setting.json
 
   ...
 ]
+
+jobs
+fg %1
+
+
