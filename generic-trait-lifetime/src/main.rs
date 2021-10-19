@@ -17,5 +17,11 @@ fn main(){
         modules::m1::run3();
     } else if env() == "4" {
         modules::m2::run4();
+    } else if env() == "5" {
+        modules::m3::run5();
+    } else if env() == "6" {
+        modules::m3::run6();
+    } else if env() == "7" {
+        modules::m3::run7();
     }
 }
