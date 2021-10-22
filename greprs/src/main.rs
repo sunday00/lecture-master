@@ -9,7 +9,7 @@ fn main () {
     let args: Vec<String> = env::args().collect();
     
     let config = Config::new(&args).unwrap_or_else(|err| {
-        println!("\n\nErr <parsing config>: {}\n\n", err);
+        eprintln!("Err <parsing config>: \x1b[38;5;9m{}\x1b[0m", err);
         process::exit(1);
     });
 
@@ -17,7 +17,7 @@ fn main () {
     println!("In file \x1b[38;5;14m{}\x1b[0m\n", config.filename);
 
     if let Err(e) = greprs::run(config) {
-        println!("Application err: {}", e);
+        eprintln!("Application err: {}", e);
         process::exit(1)
     }
 }
