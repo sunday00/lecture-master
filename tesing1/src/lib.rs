@@ -1,4 +1,10 @@
 pub mod rec;
+pub mod fun;
+
+#[allow(dead_code)]
+fn internal_test() -> u8 {
+    4
+}
 
 #[cfg(test)]
 mod tests {
@@ -50,6 +56,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn it_should_contains() {
         let name = "Jane";
         let result = greeting(&name);
@@ -60,6 +67,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = "even")]
+    #[ignore]
     fn it_should_panic() {
         intentional_panic(3)
     }
@@ -75,5 +83,24 @@ mod tests {
     fn test_stupid_fail() {
         let result = stupid10(8);
         assert_eq!(5, result)
+    }
+}
+
+#[cfg(test)]
+mod tests2 {
+    use super::fun;
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+    }
+
+    #[test]
+    fn internal() {
+        assert_eq!(4, fun::add_two(2));
+        // 메뉴얼에는 private 함수도 테스팅 된다고 되어 있지만, 실제론 안되는디?
+        assert_eq!(4, internal_test())
+        // 같은 파일 안에 있으면 되는듯?
     }
 }
