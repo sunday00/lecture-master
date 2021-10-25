@@ -115,6 +115,13 @@ pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<String
   results
 }
 
+pub mod scope;
+
+pub fn test (args: Vec<String>) {
+  scope::main(args);
+}
+
+
 #[cfg(test)]
 mod test {
   use super::*;
