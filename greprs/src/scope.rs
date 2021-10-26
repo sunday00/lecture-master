@@ -92,3 +92,68 @@ mod test {
     assert!(equal_to_x(y));
   }
 }
+
+/**
+ * 
+trait Iterator {
+  type Item;
+
+  fn next(&mut self) -> Option<Self::Item>;
+
+  // methods with default implementations elided
+}
+*
+*/
+
+pub fn main2 (_args: Vec<String>) {
+  let v1 = vec![1, 2, 3];
+
+  let v1_iter = v1.iter();
+
+  for val in v1_iter {
+    println!("{}", val);
+  }
+}
+
+#[cfg(test)]
+#[allow(unused_imports)]
+mod test2 {
+  use super::*;
+
+  #[test]
+  fn iterator_test () {
+    let v1 = vec![1, 2, 3];
+
+    let mut v1_iter = v1.iter();
+
+    assert_eq!(v1_iter.next(), Some(&1));
+    assert_eq!(v1_iter.next(), Some(&2));
+    assert_eq!(v1_iter.next(), Some(&3));
+    assert_eq!(v1_iter.next(), None);
+  }
+
+  #[test]
+  fn iterator_sum () {
+    let x = vec![1, 2, 3];
+    let x_iter = x.iter();
+    let total: i32 = x_iter.sum(); // x_iter consuming is done. no more left x_iter
+
+    // println!("{:?}", x_iter); // impossible. 
+
+    assert_eq!(total, 6);
+  }
+
+  #[test]
+  fn iterator_map () {
+    let v1 = vec![1, 2, 3];
+    // iterator1
+    
+    let v2: Vec<u8> = v1.iter().map( |x| x + 1 ).collect();
+    //iterator1 lazy, so call iter().
+      // mapping around calling next(), v1[n] + 1 will be done when ... 
+                              //| not this time. this returns new iterator. iterator2.
+                                                // of course, iterator2 is lazy, so calling is needed.
+
+    println!("{:?}", v2)
+  }
+}

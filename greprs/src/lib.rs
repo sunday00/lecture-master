@@ -116,9 +116,22 @@ pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<String
 }
 
 pub mod scope;
+pub mod iterator;
 
 pub fn test (args: Vec<String>) {
   scope::main(args);
+}
+
+pub fn test2 (args: Vec<String>) {
+  scope::main2(args);
+}
+
+pub fn test3 (args: Vec<String>) {
+  iterator::main(args);
+}
+
+pub fn test4 (args: Vec<String>) {
+  iterator::main2(args);
 }
 
 

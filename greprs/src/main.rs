@@ -12,7 +12,14 @@ fn main () {
         greprs::test(args);
         process::exit(0)
     } else if args[1] == "test=2" {
-      
+        greprs::test2(args);
+        process::exit(0)
+    } else if args[1] == "test=3" {
+        greprs::test3(args);
+        process::exit(0)
+    } else if args[1] == "test=4" {
+        greprs::test4(args);
+        process::exit(0)
     }
 
     let config = Config::new(&args).unwrap_or_else(|err| {
