@@ -120,7 +120,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<String> {
   contents.lines()
     .enumerate()
     .filter(|(_, line)| line.contains(query))
-    .map(|(i, line)| format!( "{} >>> {}", i, line.replace(query, &colored_query) ))
+    .map(|(i, line)| format!( "{} >>> {}", i + 1, line.replace(query, &colored_query) ))
     .collect()
 
 }
