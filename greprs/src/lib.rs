@@ -2,6 +2,8 @@ use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use regex::*;
+use std::env;
+use std::process;
 
 pub struct Config {
   pub query: String,
@@ -10,35 +12,58 @@ pub struct Config {
 }
 
 impl Config {
-  pub fn new(args: &[String]) -> Result<Config, &'static str> {
-      if args.len() < 3 {
-          return Err(
-              "
-              The number of arguments is not enough. Expecting string you're looking for and filename.
-              ex>>> cargo run ABCD filename.txt ;
-              "
-          )
-      }
+  pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
+    if args.len() < 3 {
+      return Err(
+        "
+        The number of arguments is not enough. Expecting string you're looking for and filename.
+        ex>>> cargo run ABCD filename.txt ;
+        "
+      )
+    }
+    
+    args.next();
 
-      let query = args[1].clone();
-      let filename = args[2].clone();
+    // let query = args[1].clone();
+    // let filename = args[2].clone();
+    let query = match args.next() {
+      Some(arg) => arg,
+      None => return Err("Please input query string"),
+    };
 
-      // let case_sensitive = std::env::var("CASE_SENSITIVE").is_err();
-      let mut case_sensitive: bool = true;
+    match query.as_str() {
+      "test=1" => {test1(args.collect()); process::exit(0)},
+      "test=2" => {test2(args.collect()); process::exit(0)},
+      "test=3" => {test3(args.collect()); process::exit(0)},
+      "test=4" => {test4(args.collect()); process::exit(0)},
+      _ => {},
+    }
 
-      if args.len() > 3 {
-        for i in 3..args.len() {
-          let splited: Vec<&str> = args[i].split("=").collect();
+    let filename = match args.next() {
+      Some(arg) => arg,
+      None => return Err("Please input filename"),
+    };
+
+    // let case_sensitive = std::env::var("CASE_SENSITIVE").is_err();
+    let mut case_sensitive: bool = true;
+
+    for _ in 0..args.len() {
+      match args.next() {
+        Some(arg) => {
+          let splited: Vec<&str> = arg.split("=").collect();
           match splited[0] {
             "--ignore-case" => {
               case_sensitive = splited[1] != "1";
             },
             _ => {}
           }
-        }
+        },
+
+        None => {}
       }
-  
-      Ok(Config { query, filename, case_sensitive })
+    }
+
+    Ok(Config { query, filename, case_sensitive })
   }    
 }
 
@@ -75,21 +100,35 @@ pub fn run (config: Config) -> Result<(), Box<dyn Error>> {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<String> {
-  let mut results = Vec::new();
+  // let mut results = Vec::new();
 
-  for (i, line) in contents.lines().enumerate() {
-    if line.contains(query){
-      let colored_query = format!(
-        "\x1b[38;5;10m{}\x1b[0m", query
-      );
+  // for (i, line) in contents.lines().enumerate() {
+  //   if line.contains(query){
+  //     let colored_query = format!(
+  //       "\x1b[38;5;10m{}\x1b[0m", query
+  //     );
     
-      let colored_line = format!( "{} >>> {}", i + 1, line.replace(query, &colored_query) );
+  //     let colored_line = format!( "{} >>> {}", i + 1, line.replace(query, &colored_query) );
 
-      results.push(colored_line);
-    }
-  }
+  //     results.push(colored_line);
+  //   }
+  // }
 
-  results
+  // let colored_query = format!("\x1b[38;5;10m{}\x1b[0m", query);
+  // contents.lines()
+  //   .enumerate()
+  //   .map(|(i, line)| format!( "{} >>> {}", i, line.replace(query, &colored_query) ))
+  //   .filter(|line| line.contains(query))
+  //   .collect()
+
+  let colored_query = format!("\x1b[38;5;10m{}\x1b[0m", query);
+  contents.lines()
+    .enumerate()
+    .filter(|(_, line)| line.contains(query))
+    .map(|(i, line)| format!( "{} >>> {}", i, line.replace(query, &colored_query) ))
+    .collect()
+
+  // results
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<String> {
@@ -118,7 +157,7 @@ pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<String
 pub mod scope;
 pub mod iterator;
 
-pub fn test (args: Vec<String>) {
+pub fn test1 (args: Vec<String>) {
   scope::main(args);
 }
 

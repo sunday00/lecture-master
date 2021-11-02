@@ -28,7 +28,7 @@ impl<T> Cacher<T> where T: Fn(u32) -> u32 {
 }
 
 pub fn main(args: Vec<String>) {
-  let simulated_user_specified_value = args[2].parse::<u32>().unwrap();
+  let simulated_user_specified_value = args[0].parse::<u32>().unwrap();
   let simulated_random_number = random();
 
   generate_workout (

@@ -6,23 +6,23 @@ use std::process;
 use greprs::Config;
 
 fn main () {
-    let args: Vec<String> = env::args().collect();
+    let args: env::Args = env::args();
     
-    if args[1] == "test=1" {
-        greprs::test(args);
-        process::exit(0)
-    } else if args[1] == "test=2" {
-        greprs::test2(args);
-        process::exit(0)
-    } else if args[1] == "test=3" {
-        greprs::test3(args);
-        process::exit(0)
-    } else if args[1] == "test=4" {
-        greprs::test4(args);
-        process::exit(0)
-    }
+    // if args[1] == "test=1" {
+    //     greprs::test(args);
+    //     process::exit(0)
+    // } else if args[1] == "test=2" {
+    //     greprs::test2(args);
+    //     process::exit(0)
+    // } else if args[1] == "test=3" {
+    //     greprs::test3(args);
+    //     process::exit(0)
+    // } else if args[1] == "test=4" {
+    //     greprs::test4(args);
+    //     process::exit(0)
+    // }
 
-    let config = Config::new(&args).unwrap_or_else(|err| {
+    let config = Config::new(args).unwrap_or_else(|err| {
         eprintln!("Err <parsing config>: \x1b[38;5;9m{}\x1b[0m", err);
         process::exit(1);
     });
