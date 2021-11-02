@@ -114,12 +114,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<String> {
   //   }
   // }
 
-  // let colored_query = format!("\x1b[38;5;10m{}\x1b[0m", query);
-  // contents.lines()
-  //   .enumerate()
-  //   .map(|(i, line)| format!( "{} >>> {}", i, line.replace(query, &colored_query) ))
-  //   .filter(|line| line.contains(query))
-  //   .collect()
+  // results
 
   let colored_query = format!("\x1b[38;5;10m{}\x1b[0m", query);
   contents.lines()
@@ -128,30 +123,40 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<String> {
     .map(|(i, line)| format!( "{} >>> {}", i, line.replace(query, &colored_query) ))
     .collect()
 
-  // results
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<String> {
-  let lo_query = query.to_lowercase();
-  let mut results = Vec::new();
+  // let lo_query = query.to_lowercase();
+  // let mut results = Vec::new();
 
-  for (i, line) in contents.lines().enumerate() {
-    if line.to_lowercase().contains(&lo_query){
+  // for (i, line) in contents.lines().enumerate() {
+  //   if line.to_lowercase().contains(&lo_query){
       
+  //     let pattern = format!("(?i){}", &lo_query);
+  //     let re = Regex::new(&pattern).unwrap();
+      
+  //     let colored_query = format!(
+  //       "\x1b[38;5;10m{}\x1b[0m", &query
+  //     );
+      
+  //     let colored_line = format!( "{} >>> {}", i + 1, re.replace_all(&line, &colored_query) );
+
+  //     results.push(colored_line);
+  //   }
+  // }
+  // results
+
+  let lo_query = query.to_lowercase();
+  let colored_query = format!("\x1b[38;5;10m{}\x1b[0m", &query);
+  contents.lines().enumerate()
+    .filter(|(_, line)| line.to_lowercase().contains(&lo_query) )
+    .map(|(i, line)| {
       let pattern = format!("(?i){}", &lo_query);
       let re = Regex::new(&pattern).unwrap();
-      
-      let colored_query = format!(
-        "\x1b[38;5;10m{}\x1b[0m", &query
-      );
-      
-      let colored_line = format!( "{} >>> {}", i + 1, re.replace_all(&line, &colored_query) );
 
-      results.push(colored_line);
-    }
-  }
-
-  results
+      format!( "{} >>> {}", i + 1, re.replace_all(&line, &colored_query) )
+    })
+    .collect()
 }
 
 pub mod scope;
