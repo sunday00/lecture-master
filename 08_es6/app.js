@@ -47,3 +47,17 @@ document.querySelector('h2').classList.add('purple')
 setInterval(() => {
   document.querySelector('h2').classList.toggle('purple')
 }, 500);
+
+let img = document.createElement('img')
+img.src = 'https://picsum.photos/800/300'
+document.body.appendChild(img)
+
+let subtitle = document.createElement('h2')
+subtitle.innerHTML = "ADORABLE CHICKEN"
+let title = document.querySelector('h1')
+title.insertAdjacentElement('afterend', subtitle)
+
+let h3 = document.createElement('h3')
+h3.innerHTML = "What?"
+subtitle.after(h3)
+
