@@ -41,3 +41,9 @@ console.log( window.getComputedStyle(document.body).fontSize )
 // style로 직접 지정한 게 없을때는 browser 기본값을 return.
 // dynamic 하게 옆에 글자높이랑 맞추고 싶은데, 옆에 dom은 style로 지정한게 없어 null 이 
 // 리턴되거나 할 때 이용하면 좋을 듯.
+
+document.querySelector('h2').setAttribute('class', 'border border-green')
+document.querySelector('h2').classList.add('purple')
+setInterval(() => {
+  document.querySelector('h2').classList.toggle('purple')
+}, 500);
