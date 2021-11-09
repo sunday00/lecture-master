@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev-w": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
+    "dev-w": "npx browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
   },
   "dependencies": {
     "browserfy": "^1.0.0",

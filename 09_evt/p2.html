@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+  <style>
+    button{ height: 80px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>this?</h1>
+
+    <button id="btn-01">click</button>
+    <button id="btn-02">click</button>
+    <button id="btn-03">click</button>
+    <button id="btn-04">click</button>
+    <button id="btn-05">click</button>
+    <button id="btn-06">click</button>
+    <button id="btn-07">click</button>
+    <button id="btn-08">click</button>
+    <button id="btn-09">click</button>
+    <button id="btn-10">click</button>
+    <button id="btn-11">click</button>
+    <button id="btn-12">click</button>
+    <button id="btn-13">click</button>
+    <button id="btn-14">click</button>
+    <button id="btn-15">click</button>
+    <button id="btn-16">click</button>
+    <button id="btn-17">click</button>
+    <button id="btn-18">click</button>
+    <button id="btn-19">click</button>
+    <button id="btn-20">click</button>
+
+    <input type="text" class="k" />
+  </div>
+</body>
+
+<script>
+  function btn_click_handler() {
+    console.log(this.dataset.color);
+    document.body.style.backgroundColor = this.dataset.color
+  }
+
+  document.querySelectorAll('button').forEach(btn => {
+    let r = Math.floor(Math.random() * 255)
+    let g = Math.floor(Math.random() * 255)
+    let b = Math.floor(Math.random() * 255)
+    let color = `rgb(${r},${g},${b})`
+
+    btn.dataset.color = color
+    btn.style.backgroundColor = color
+
+    btn.addEventListener('click', btn_click_handler)
+  });
+
+  document.querySelector('input.k').addEventListener('keydown', (e) => {
+    console.log('keydown')
+  })
+
+</script>
+
+</html>

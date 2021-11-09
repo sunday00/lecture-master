@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIVE</title>
+  <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+  <style>
+    body {
+      height: 100vh;
+      background-color: navy;
+      display: grid;
+      justify-content: center;
+      transition: background-color 1s;
+    }
+
+    .container {
+      position: relative;
+      display: block;
+      width: 300px;
+    }
+
+    canvas {
+      position: relative;
+      display: block;
+      margin: 5rem auto;
+      pointer-events: none;
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    a {
+      background-color: #fff;
+      padding: 1em;
+      text-decoration: none;
+      font-family: 'Nunito';
+      color: black;
+      font-weight: bold;
+      border-radius: .3em;
+      width: 30%;
+      display: inline-block;
+      transition: background-color .3s;
+    }
+
+    p{
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+  <section class="container">
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <div class="content">
+      <a href="#">upload</a>
+    </div>
+    <p></p>
+  </section>
+</body>
+
+<script src="https://unpkg.com/rive-js"></script>
+<script>
+  const btn       = document.querySelector('a');
+  const stateName = document.querySelector('p');
+
+  function uploading (){
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res('done')
+      }, 3000)
+    })
+  }
+
+  const r = new rive.Rive({
+    src: "./rocket.riv",
+    canvas: document.getElementById('canvas'),
+    autoplay: true,
+    stateMachines: 'State Machine 1',
+    fit: rive.Fit.cover,
+    inputs: [],
+    onLoad: ( _ ) => {
+      this.inputs = r.stateMachineInputs('State Machine 1')
+
+      btn.onclick = (e) => {
+        e.preventDefault();
+        this.inputs.find(i => i.name === 'Trigger 1').fire()
+      }
+    },
+    onStateChange: (e) => {
+      let state = e.data[0];
+      stateName.innerHTML = state;
+
+      if( state === '3' ){
+        btn.innerHTML = "UPLOADING...";
+        document.body.style.backgroundColor = 'rgb(100, 200, 255)'
+        uploading().then(res => {
+          if( res === 'done' ) {
+            this.inputs.find(i => i.name === 'Trigger 2').fire()
+            btn.innerHTML = "upload"
+            document.body.style.backgroundColor = 'navy'
+          }
+        })
+      }
+    },
+  });
+</script>
+</html>
