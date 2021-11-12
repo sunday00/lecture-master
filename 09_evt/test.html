@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="/nowhere">
+    <label for="item">Enter A Product</label>
+    <input type="text" id="product" name="product">
+    <label for="item">Enter A Quantity</label>
+    <input type="number" id="qty" name="qty">
+    <button>Submit</button>
+  </form>
+  <ul id="list"></ul>
+</body>
+
+<script>
+  const form = document.querySelector('form');
+  const list = document.querySelector('#list');
+  form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let p = document.querySelector('input#product')
+      let q = document.querySelector('input#qty')
+      let item = document.createElement('li')
+      item.innerHTML = q.value + " " + p.value
+      list.appendChild(item)
+      q.value = "";
+      p.value = "";
+  })
+</script>
+
+</html>
