@@ -7,11 +7,37 @@
   <title>Document</title>
 </head>
 <body>
-  <input type="text">
+  <form>
+    <input type="text">
+    <input type="submit" value="s">
+  </form>
+  <ul>
+    <li>already</li>
+  </ul>
 </body>
 <script>
   document.querySelector('input').addEventListener('input', (e) => {
     console.log(e.target.value);
+  })
+
+  document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let li = document.createElement('li')
+    let input = document.querySelector('input[type="text"]')
+    li.innerHTML = input.value;
+    document.querySelector('ul').appendChild(li)
+    input.value = "";
+  })
+
+  document.querySelectorAll('li').forEach(li => {
+    li.addEventListener('click', (e) => {
+      e.target.remove()
+    })
+  })
+
+  document.querySelector('ul').addEventListener('click', (e) => {
+    if( e.target.tagName == "LI") e.target.remove();
   })
 
 </script>
