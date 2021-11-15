@@ -39,5 +39,11 @@ pub fn main () {
         if env(2) == 0 || env(2) == 1 {
             concurrent::modules::m5::run();
         }
+    } else if env(1) == 6 { 
+        if env(2) == 0 || env(2) == 1 {
+            concurrent::modules::m6::run();
+        } else if env(2) == 2 {
+            concurrent::modules::m6::run2();
+        }
     }
 }
