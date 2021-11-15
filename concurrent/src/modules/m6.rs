@@ -37,3 +37,5 @@ pub fn run2 () {
 
   println!("Result : {}", *counter.lock().unwrap());
 }
+
+//PS:: https://doc.rust-lang.org/nomicon/send-and-sync.html
