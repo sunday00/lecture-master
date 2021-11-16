@@ -17,7 +17,7 @@ pub fn main () {
         if env(2) == 0 || env(2) == 1 {
             oop::modules::m1::run();
         } else if env(2) == 2 {
-            // oop::modules::m1::run2();
+            oop::modules::m1::run2();
         }
     }
 }
