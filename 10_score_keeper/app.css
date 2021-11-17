@@ -1,0 +1,7 @@
+h1 span.winner {
+  color: rgb(43, 153, 39);
+}
+
+h1 span.loser {
+  color: rgb(240, 72, 60);
+}

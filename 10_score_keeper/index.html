@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Score Keeper</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="columns mt-6">
+      <section class="column"></section>
+      <section class="card column is-half">
+        <header class="card-header">
+          <p class="card-header-title">The game score keeper</p>
+        </header>
+
+        <div class="card-image">
+          <video controls width="100%" muted autoplay>
+            <source src="https://www.kengy.go.kr/nuri/teachers/views/downloads/ad.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="card-content">
+          <h1 class="title is-1"><span id="p1-display">0</span> to <span id="p2-display">0</span></h1>
+
+          <p class="setting">
+            <span class="is-size-4">set score</span>
+            <input type="number" name="set-score" id="set-score" min="1" max="20" value="5" />
+          </p>
+        </div>
+
+        <footer  class="card-footer controls">
+          <button 
+            id="p1-button"
+            class="player-btn card-footer-item button is-primary" 
+            data-player="1">Player1 +1</button>
+          <button 
+            id="p2-button" 
+            class="player-btn card-footer-item button is-info" 
+            data-player="2">Player2 +1</button>
+          <button 
+            id="reset" 
+            class="card-footer-item button is-danger">Reset</button>
+        </footer>
+
+      </section>
+      <section class="column"></section>
+    </div>
+  </div>
+
+
+</body>
+
+<script src="app.js"></script>
+</html>
