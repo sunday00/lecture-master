@@ -61,3 +61,19 @@ changeBodyColor(colors[pointer], speed, () => {
     })
   })
 })
+
+
+function fakeReq (url) {
+  return new Promise((resolved, rejected) => {
+    const delay = Math.floor(Math.random() * 10000) + 500
+    setTimeout(() => {
+      if( delay > 5000 ) {
+        rejected('Connection Timeout')
+      } else {
+        resolved({data: {'title': 'apple', 'color': 'red', 'quantity': 100}})
+      }
+    }, delay);
+  })
+}
+
+
