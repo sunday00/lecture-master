@@ -65,7 +65,7 @@ changeBodyColor(colors[pointer], speed, () => {
 
 function fakeReq (url) {
   return new Promise((resolved, rejected) => {
-    const delay = Math.floor(Math.random() * 10000) + 500
+    const delay = Math.floor(Math.random() * 6000) + 500
     setTimeout(() => {
       if( delay > 5000 ) {
         rejected('Connection Timeout')
@@ -75,5 +75,11 @@ function fakeReq (url) {
     }, delay);
   })
 }
+
+fakeReq("abc")
+  .then(res => {
+      console.log( res.data ); 
+    })
+
 
 
