@@ -29,5 +29,11 @@ pub fn main () {
         } else if env(2) == 7 {
             higher::modules::m1::run7();
         }
-    } 
+    } else if env(1) == 2 {
+        if env(2) == 0 || env(2) == 1 {
+            higher::modules::m2::run();
+        } else if env(2) == 2 {
+            higher::modules::m2::run2();
+        }
+    }
 }

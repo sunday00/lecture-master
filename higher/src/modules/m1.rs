@@ -71,7 +71,7 @@ pub fn run5 () {
   let address = 0x012345usize;
   let r = address as *mut i8;
 
-  let slice = unsafe {
+  let _slice = unsafe {
     slice::from_raw_parts_mut(r, 10000)
   };
 }
