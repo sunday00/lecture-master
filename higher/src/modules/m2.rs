@@ -25,5 +25,5 @@ use super::sub_modules::m2r3;
 pub fn run3() {
   let num = 5;
 
-  let obj = Box::new( m2r3::Ball{diameter: &num} ) as Box<m2r3::Red>;
+  let _obj = Box::new( m2r3::Ball{diameter: &num} ) as Box<dyn m2r3::Red>;
 }

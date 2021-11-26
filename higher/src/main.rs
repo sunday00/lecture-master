@@ -35,5 +35,26 @@ pub fn main () {
         } else if env(2) == 2 {
             higher::modules::m2::run2();
         }
+    } else if env(1) == 3 {
+        if env(2) == 0 || env(2) == 1 {
+            higher::modules::m3::run();
+        } 
+        else if env(2) == 2 {
+            higher::modules::m3::run2();
+        }
+    } else if env(1) == 4 {
+        if env(2) == 0 || env(2) == 1 {
+            higher::modules::m4::run();
+        } 
+        else if env(2) == 2 {
+            higher::modules::m4::run2();
+        }
+    } else if env(1) == 5 {
+        if env(2) == 0 || env(2) == 1 {
+            higher::modules::m5::run();
+        } 
+        else if env(2) == 2 {
+            higher::modules::m5::run2();
+        }
     }
 }
