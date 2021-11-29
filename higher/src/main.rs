@@ -56,5 +56,21 @@ pub fn main () {
         else if env(2) == 2 {
             higher::modules::m5::run2();
         }
-    }
+    } else if env(1) == 6 {
+        if env(2) == 0 || env(2) == 1 {
+            higher::modules::m6::run();
+        } 
+        else if env(2) == 2 {
+            higher::modules::m6::run2();
+        }
+        else if env(2) == 3 {
+            higher::modules::m6::run3();
+        }
+        else if env(2) == 4 {
+            higher::modules::m6::run4();
+        }
+        else if env(2) == 5 {
+            higher::modules::m6::run5();
+        }
+    } 
 }

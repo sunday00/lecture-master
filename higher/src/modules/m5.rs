@@ -43,7 +43,7 @@ pub fn run2 () {
   struct Dog;
 
   impl Dog {
-    fn baby_name() -> String {
+    fn _baby_name() -> String {
       String::from("Spot")
     }
   }
