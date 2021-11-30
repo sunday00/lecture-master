@@ -107,9 +107,9 @@ pub fn run5() {
   use std::cmp::Ordering;
   use rand::Rng;
 
-  fn bar() -> ! {
-    println!()
-  }
+  // fn bar() -> ! {
+  //   println!()
+  // }
 
   let secret_number = rand::thread_rng().gen_range(1, 101);
   
