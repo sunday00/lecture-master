@@ -3,8 +3,16 @@
     "dev-w": "npx browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 8088"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "browserfy": "^1.0.0",
-    "node-sass": "^5.0.0",
+    "colors": "^1.4.0",
+    "cowsay": "^1.5.0",
+    "figlet": "^1.5.2",
+    "franc": "^6.0.0",
+    "give-me-a-joke": "^0.5.1",
+    "langs": "^2.0.0",
+    "node-sass": "^6.0.1",
     "three": "^0.127.0"
-  }
+  },
+  "type": "module"
 }
