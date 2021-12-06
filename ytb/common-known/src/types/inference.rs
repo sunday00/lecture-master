@@ -17,7 +17,7 @@ pub fn integer (arg: String) {
   println!("{},{},{},{}", small_number, small_number2, big_number, big_number2)
 }
 
-pub fn float (arg: String) {
+pub fn float (_arg: String) {
   let small_float: f64 = 8.;
 
   let small_float2: f32 = 7.;
