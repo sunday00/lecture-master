@@ -15,5 +15,7 @@ fn env(i: u8) -> String {
 fn main() {
     if env(1) == "types" {
         types::run(env(2), env(3));
+    } else if env(1) == "printing" {
+        printing::run(env(2), env(3));
     }
 }
