@@ -5,5 +5,7 @@ pub fn run(module: String, arg: String) {
     console::hi(arg);
   } else if module == "block-value" {
     console::block_value();
+  } else if module == "debug" {
+    console::debug();
   }
 }

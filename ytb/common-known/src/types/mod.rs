@@ -1,5 +1,6 @@
 pub mod index;
 pub mod inference;
+pub mod muta;
 
 pub fn run(module: String, arg: String) {
   if module == "pri" {
@@ -12,5 +13,7 @@ pub fn run(module: String, arg: String) {
     inference::integer(arg);
   } else if module == "float" {
     inference::float(arg);
+  } else if module == "mut" {
+    muta::mutable_comp_type();
   }
 }
