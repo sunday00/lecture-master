@@ -17,5 +17,7 @@ fn main() {
         types::run(env(2), env(3));
     } else if env(1) == "printing" {
         printing::run(env(2), env(3));
+    } else if env(1) == "memory" {
+        memory::run(env(2), env(3));
     }
 }
