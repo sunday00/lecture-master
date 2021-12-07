@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>....Subreddit....</title>
+  <style>
+    img{ width:80%; display: block; margin: auto auto; }
+  </style>
+</head>
+<body>
+  <section class="continer">
+    <h1>Subreddit</h1>
+    <h2><%= name %></h2>
+    <p><%= description %></p>
+    <div class="info">
+      <span><%= subscribers %> subscribing</span>
+    </div>
+
+    <hr>
+
+    <ul>
+      <% for (let post of posts){ %>
+        <li>
+          <article>
+            <h3><%= post.title %></h3>
+            <p><%= post.author %></p>
+            <% if (post.img) { %>
+              <img src="<%= post.img %>" alt="">
+            <% } %>
+          </article>
+        </li>
+      <% } %>
+    </ul>
+  </section>
+
+  <script>
+    setInterval(() => {
+      let title = document.title
+      let titleA = title.split("")
+      let head = titleA.shift()
+      document.title = titleA.join("") + head
+    }, 300)    
+  </script>
+</body>
+</html>
