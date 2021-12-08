@@ -16,5 +16,11 @@ pub fn run(module: String, arg: String) {
     more::byte();
   } else if module == "hex" {
     more::hex(arg);
+  } else if module == "p" {
+    more::pointer();
+  } else if module == "convert" {
+    more::convert(arg);
+  } else if module == "etc" {
+    more::etc();
   }
 } 

@@ -35,3 +35,25 @@ pub fn hex(s: String){
   let ca: Vec<char> = s.chars().collect();
   println!("{:X}", ca[0] as u32);
 }
+
+pub fn pointer () {
+  let n = 9;
+  let n_r = &n;
+
+  println!("{:p}", n_r)
+}
+
+pub fn convert(s: String){
+  let n: u32 = s.parse::<u32>().unwrap();
+  println!("2b {:b}", n);
+  println!("8o {:o}", n);
+  println!("16x {:X}", n);
+}
+
+pub fn etc(){
+  println!("ordering numbered {2}, {1}, {0}", 100, 200, 300 );
+  println!("named print {name}, {color}, {quantity}",
+     name = "apple", color = "red", quantity = 3 );
+  println!("{name:!<8.10}", name="ko");
+  println!("{name:!^8.10}", name="ko");
+}
