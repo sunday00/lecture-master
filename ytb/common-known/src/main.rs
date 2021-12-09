@@ -21,5 +21,9 @@ fn main() {
         memory::run(env(2), env(3));
     } else if env(1) == "string" {
         strings::run(env(2), env(3));
+    } else if env(1) == "variable" {
+        variable::run(env(2), env(3));
+    } else if env(1) == "functions" {
+        functions::run(env(2), env(3));
     }
 }
