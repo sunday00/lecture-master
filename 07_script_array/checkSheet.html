@@ -13,7 +13,8 @@
   <p id="next-ping"></p>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
-    let remainPing = 600;
+    let intervalTime = 600;
+    let remainPing = intervalTime;
     let AAA = [];
     let query = encodeURIComponent("SELECT A,B,C,D");
 
@@ -40,10 +41,10 @@
           data = data.replace('google.visualization.Query.setResponse(', '');
           data = data.replace('});', '}');
           data = JSON.parse(data);
-          remainPing = 600;
+          remainPing = intervalTime;
           return data;
         }).then((data) => {
-          let tasks = data.table.rows.filter(r => (r.c[3].v === null))
+          let tasks = data.table.rows.filter(r => (r.c[3].v === null && r.c[0].v !== ' '))
             .map(t => ({ date: t.c[0], upOrg: t.c[1], org: t.c[2], complete: t.c[3] }));
           return tasks;
         }).then(t => {
@@ -52,7 +53,7 @@
             console.log(t);
           }
         });
-      }, 600 * 1000);
+      }, intervalTime * 1000);
     }
   </script>
 </body>

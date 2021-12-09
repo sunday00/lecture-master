@@ -8,6 +8,8 @@ const datas = require('./data.json')
 
 // app.use(express.static('public'))
 app.use(express.static(path.join(__dirname, 'public')))
+  .use(express.urlencoded({ extended: true }))
+  .use (express.json())
 
 app.set('view engine', 'ejs')
   .set('views', path.join(__dirname, '/views'))
@@ -35,6 +37,14 @@ app.get('/cats', (req, res) => {
   res.render('cats', {
     cats: ['Blue','Monty','Rocket','Winston','Nya-on','ChamCi',]
   })
+})
+
+app.get('/form/test', (req, res) => {
+  res.render('form/test')
+})
+
+app.post('/form/tacos', (req, res) => {
+  res.send(req.body)
 })
 
 app.listen(port, () => {
