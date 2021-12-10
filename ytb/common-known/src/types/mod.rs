@@ -1,6 +1,7 @@
 pub mod index;
 pub mod inference;
 pub mod muta;
+pub mod copy;
 
 pub fn run(module: String, arg: String) {
   if module == "pri" {
@@ -15,5 +16,11 @@ pub fn run(module: String, arg: String) {
     inference::float(arg);
   } else if module == "mut" {
     muta::mutable_comp_type();
+  } else if module == "copy" {
+    copy::print_int();
+  } else if module == "clone" {
+    copy::clone();
+  } else if module == "lasting" {
+    copy::lasting();
   }
 }

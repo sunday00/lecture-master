@@ -4,3 +4,4 @@ pub mod memory;
 pub mod strings;
 pub mod variable;
 pub mod functions;
+pub mod collections;
