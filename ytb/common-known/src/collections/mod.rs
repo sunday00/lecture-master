@@ -1,5 +1,6 @@
 pub mod arr;
 pub mod vector;
+pub mod tuple;
 
 pub fn run(module: String, arg: String) {
   if module == "length" {
@@ -18,5 +19,7 @@ pub fn run(module: String, arg: String) {
     vector::capacity_large(arg);
   } else if module == "capacity-type" {
     vector::capacity_type(arg);
+  } else if module == "spread" {
+    tuple::spread(arg);
   };
 }
