@@ -29,5 +29,9 @@ fn main() {
         collections::run(env(2), env(3));
     } else if env(1) == "control" {
         control::run(env(2), env(3));
+    } else if env(1) == "struction" {
+        struction::run(env(2), env(3));
+    } else if env(1) == "enums" {
+        enums::run(env(2), env(3));
     }
 }

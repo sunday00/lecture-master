@@ -6,3 +6,5 @@ pub mod variable;
 pub mod functions;
 pub mod collections;
 pub mod control;
+pub mod struction;
+pub mod enums;
