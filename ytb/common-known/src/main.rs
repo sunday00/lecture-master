@@ -33,5 +33,7 @@ fn main() {
         struction::run(env(2), env(3));
     } else if env(1) == "enums" {
         enums::run(env(2), env(3));
-    }
+    } else if env(1) == "iter" {
+        iterable::run(env(2), env(3));
+    } 
 }
