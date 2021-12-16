@@ -4,6 +4,10 @@ const path = require('path')
 const swaggerJsdoc = require("swagger-jsdoc")
 const swaggerUi = require("swagger-ui-express")
 
+const {v4: uuid } = require('uuid')
+
+const  methodOverride = require('method-override')
+
 const app = express()
 const port = 8088
 
@@ -37,6 +41,9 @@ const specs = swaggerJsdoc(options);
 app.use(express.static(path.join(__dirname, 'public')))
   .use(express.urlencoded({ extended: true }))
   .use (express.json())
+  .use (methodOverride((req, res) => {
+    if ('_method' in req.body) return req.body._method
+  }))
   .use("/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(specs, { explorer: true })
@@ -44,6 +51,81 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.set('view engine', 'ejs')
   .set('views', path.join(__dirname, '/views'))
+
+let comments = [
+  {
+    id:uuid(),
+    username: 'Todd',
+    comment: 'lol that is so funny!'
+  },
+  {
+    id:uuid(),
+    username: 'Skyler',
+    comment: 'Yhe, I\'d like to go birdwatching with my dod'
+  },
+  {
+    id:uuid(),
+    username: 'Sk8erBoi',
+    comment: 'plz, delete your account Todd...'
+  },
+  {
+    id:uuid(),
+    username: 'onlysayswoof',
+    comment: 'woof woof woof!'
+  },
+]
+
+app.get('/comments', (req, res) => {
+  res.render('comments/index', {
+    comments
+  })
+})
+
+app.get('/comments/new', (req, res) => {
+  res.render('comments/form')
+})
+
+app.post('/comments', (req, res) => {
+  const { username, comment } = req.body
+  // comments.push({ id: comments[comments.length - 1].id + 1, username, comment })
+  comments.push({ id: uuid(), username, comment })
+  res.redirect('/comments')
+})
+
+app.get('/comments/:id', (req, res) => {
+  const {id} = req.params
+  // const comment = comments.find(c => c.id === parseInt(id))
+  const comment = comments.find(c => c.id === id)
+  res.render('comments/index', {
+    comments: comment ? [ comment ] : []
+  })
+})
+
+
+app.get('/comments/:id/edit', (req, res) => {
+  const {id} = req.params
+  // const comment = comments.find(c => c.id === parseInt(id))
+  const comment = comments.find(c => c.id === id)
+  res.render('comments/form', {
+    comment: comment ? comment : ''
+  })
+})
+
+app.patch('/comments/:id', (req, res) => {
+  const { id } = req.params
+  const comment = comments.find(c => c.id === id)
+  comment.comment = req.body.comment
+  comment.username = req.body.username
+
+  res.redirect(`/comments/${id}`)
+})
+
+app.delete('/comments/:id', (req, res) => {
+  const { id } = req.params
+  comments = comments.filter(c => c.id !== id)
+
+  res.redirect(`/comments/`)
+})
 
 app.get('/', (req, res) => {
   res.render('home')

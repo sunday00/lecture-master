@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>comment - new</title>
+  <style>
+    form{
+      width:500px;
+      margin: 1rem auto;
+    }
+    form textarea, input[type="text"] {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>comment</h1>
+
+    <form action="/comments<%= comment && '/'+comment.id %>" method="POST" enctype="application/x-www-form-urlencoded">
+      <input type="hidden" name="_method" value="PATCH">
+      <label for="comment">comment</label>
+      <textarea name="comment" id="comment" rows="15"><%= comment && comment.comment %></textarea>
+      <label for="username">username</label>
+      <input type="text" name="username" id="username" value="<%= comment && comment.username %>">
+      <input type="submit">
+    </form>
+  </section>
+
+  <a href="/comments">cancel</a>
+</body>
+</html>
