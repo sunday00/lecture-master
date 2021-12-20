@@ -67,10 +67,9 @@ pub fn partial_ord2(_:String){
 use std::str::FromStr;
 
 pub fn f2 (s: String) {
-  fn adding <T, U> (n: T, m: U) -> String 
+  fn adding <T> (n: T, m: T) -> String 
     where
       T: Display + FromStr,
-      U:Display + FromStr
   {
     let t = format!("{}", n);
     let u = format!("{}", m);
