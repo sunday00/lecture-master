@@ -2,6 +2,7 @@ pub mod flow;
 pub mod op1;
 pub mod op2;
 pub mod results1;
+pub mod question;
 
 pub fn run(module: String, arg: String) {
   let module: &str = &module.to_string();
@@ -21,6 +22,10 @@ pub fn run(module: String, arg: String) {
     "result2" => results1::result2(arg),
     "is_five" => results1::is_five(arg),
     
+    "q-parse" => question::parse(arg),
+    "q-parse-chain" => question::optional_chaining(arg),
+    "panic" => question::pan(arg),
+
     _ => flow::maybe(arg),
   }
 }
