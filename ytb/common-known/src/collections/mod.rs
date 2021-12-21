@@ -1,7 +1,9 @@
 pub mod arr;
 pub mod vector;
 pub mod tuple;
-pub mod hm;
+pub mod maps;
+pub mod sets;
+pub mod binheap;
 
 pub fn run(module: String, arg: String) {
   let module: &str = &module.to_string();
@@ -15,11 +17,14 @@ pub fn run(module: String, arg: String) {
     "capacity-large" =>  vector::capacity_large(arg),
     "capacity-type" => vector::capacity_type(arg),
     "spread" => tuple::spread(arg),
-    "noBtree" => hm::hm(arg),
-    "btree" => hm::btree(arg),
-    "k" => hm::k(arg),
-    "lotto" => hm::lotto(arg),
-    "library" => hm::library(arg),
+    "noBtree" => maps::hm(arg),
+    "btree" => maps::btree(arg),
+    "k" => maps::k(arg),
+    "lotto" => maps::lotto(arg),
+    "library" => maps::library(arg),
+    "vote" => maps::vote(arg),
+    "filter-unique" => sets::filter_unique(arg),
+    "reminder" => binheap::reminder(arg),
     _ => arr::length(arg),
   }
 }
