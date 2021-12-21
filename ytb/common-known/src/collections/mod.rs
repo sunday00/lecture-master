@@ -4,6 +4,7 @@ pub mod tuple;
 pub mod maps;
 pub mod sets;
 pub mod binheap;
+pub mod vecdeque;
 
 pub fn run(module: String, arg: String) {
   let module: &str = &module.to_string();
@@ -25,6 +26,9 @@ pub fn run(module: String, arg: String) {
     "vote" => maps::vote(arg),
     "filter-unique" => sets::filter_unique(arg),
     "reminder" => binheap::reminder(arg),
+    "important" => binheap::important(arg),
+    "remove" => vecdeque::remove(arg),
+    "todo" => vecdeque::todo(arg),
     _ => arr::length(arg),
   }
 }
