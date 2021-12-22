@@ -11,3 +11,4 @@ pub mod enums;
 pub mod iterable;
 pub mod refs;
 pub mod generics;
+pub mod traits;
