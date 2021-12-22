@@ -1,3 +1,6 @@
 python setup.py build_ext --inplace
 
 python run.py
+
+
+📓 or, other way: use pypy.
