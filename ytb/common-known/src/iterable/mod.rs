@@ -10,7 +10,10 @@ pub fn run(module: String, arg: String) {
     "range" => looping::rng(arg),
     "comb-v" => looping::comb_v(arg),
     "looping2" => iterator::looping(arg),
+    "call-next" => iterator::call_next(arg),
+    "library" => iterator::library(arg),
     _ => looping::what(arg),
   }
 }
+
 
