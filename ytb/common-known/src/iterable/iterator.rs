@@ -32,13 +32,13 @@ pub fn call_next(_: String){
 
 pub fn library(_: String) {
 
-  #[derive(Debug)]
+  #[derive(Debug, Clone)]
   struct Library {
     library_type: LibraryType,
     books: Vec<String>,
   }
 
-  #[derive(Debug)]
+  #[derive(Debug, Clone)]
   enum LibraryType {
     City,
     _Country,
@@ -57,6 +57,17 @@ pub fn library(_: String) {
     }
   }
 
+  impl Iterator for Library {
+    type Item = String;
+
+    fn next(&mut self) -> Option<String> {
+      match self.books.pop(){
+        Some(book) => Some(book + " is found!"),
+        None => None,
+      }
+    }
+  }
+
   let mut my_lib = Library::new();
   my_lib.add_book("tiger");
   my_lib.add_book("Spider Man");
@@ -65,7 +76,15 @@ pub fn library(_: String) {
   my_lib.add_book("HELLO");
   my_lib.add_book("吾輩は猫である");
 
-  println!("{:?}", my_lib)
+  println!("{:?}", my_lib);
+
+  // for i in my_lib.clone() {
+  //   println!("{}", i);
+  // }
+
+  for _ in my_lib.clone() {
+    println!("{:?}", my_lib.next());
+  }
 }
 
 pub fn impl_iter (_: String) {
