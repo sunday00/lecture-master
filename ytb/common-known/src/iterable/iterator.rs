@@ -58,9 +58,9 @@ pub fn library(_: String) {
   }
 
   impl Iterator for Library {
-    type Item = String;
+    type Item = String; //associated type
 
-    fn next(&mut self) -> Option<String> {
+    fn next(&mut self) -> Option<Self::Item> {
       match self.books.pop(){
         Some(book) => Some(book + " is found!"),
         None => None,

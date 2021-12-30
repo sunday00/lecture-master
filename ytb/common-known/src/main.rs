@@ -41,5 +41,7 @@ fn main() {
         generics::run(env(2), env(3));
     } else if env(1) == "traits" {
         traits::run(env(2), env(3));
+    } else if env(1) == "exercise" {
+        exercises::run(env(2), env(3));
     }
 }

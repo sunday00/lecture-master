@@ -12,3 +12,4 @@ pub mod iterable;
 pub mod refs;
 pub mod generics;
 pub mod traits;
+pub mod exercises;
