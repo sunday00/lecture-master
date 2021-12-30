@@ -12,6 +12,7 @@ pub fn run(module: String, arg: String) {
     "looping2" => iterator::looping(arg),
     "call-next" => iterator::call_next(arg),
     "library" => iterator::library(arg),
+    "impl"  => iterator::impl_iter(arg),
     _ => looping::what(arg),
   }
 }

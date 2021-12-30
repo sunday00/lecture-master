@@ -41,7 +41,7 @@ pub fn library(_: String) {
   #[derive(Debug)]
   enum LibraryType {
     City,
-    Country,
+    _Country,
   }
 
   impl Library {
@@ -61,8 +61,38 @@ pub fn library(_: String) {
   my_lib.add_book("tiger");
   my_lib.add_book("Spider Man");
   my_lib.add_book("Gun, Bacteria, Steal");
+  my_lib.add_book("솔아솔아 푸르른 솔아");
+  my_lib.add_book("HELLO");
+  my_lib.add_book("吾輩は猫である");
 
   println!("{:?}", my_lib)
 }
 
+pub fn impl_iter (_: String) {
+  struct Alternate {
+    state: u8
+  }
 
+  impl Iterator for Alternate {
+    type Item = u8;
+
+    fn next(&mut self) -> Option<u8> {
+      let v = self.state;
+      self.state = self.state + 1;
+
+      if v % 2 == 0 {
+        Some(v)
+      } else {
+        None
+      }
+    }
+  }
+
+  let mut s = Alternate{ state: 8 };
+  println!("{:?}", s.next());
+  println!("{:?}", s.next());
+  println!("{:?}", s.next());
+  println!("{:?}", s.next());
+  println!("{:?}", s.next());
+  println!("{:?}", s.next());
+}
