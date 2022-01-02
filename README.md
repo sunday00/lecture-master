@@ -102,4 +102,39 @@ nest g service [name] --no-spec
 - 강의에서는 delete 후 특별히 메시지를 넣지 않고 void 해버리는데, 
 - 프론트에서 처리하든 나중에 test를 하든 성공/실패 정도는 나와 주는게 좋을 거 같다.
 
+## pipe
+- Should Injectable decorated
+- 리퀘스트를 handler method (mainly controller) 전에 
+- validation, transformation 해 줄 수 있다.
+- PHP Laravel의 middleware, Nodejs Express에서 app.use(someMiddleWare), Spring에 인터셉터 같은 기능을 하는 것으로 보인다.
 
+### pipe 사용법
+- parameter level
+- handler level
+- global level
+
+#### parameter level
+- @Body('[name]', pipe) [name] ...
+- @Param('[name]', pipe) [name] ...
+- 파라미터 하나에 적용.
+
+#### handler pipe
+- @UsePipes(pipe)
+- 핸들러 (get, post, patch, delete...) 하나에 적용
+
+#### global pipe
+- main.ts 에 app.useGlobalPipes(GlobalPipes)를 적용
+- 어플리케이션 전체에 적용하게 된다.
+
+### 빌트인 pipes
+- ValidationPipe
+- ParseIntPipe
+- ParseBoolPipe
+- ParseArrayPipe
+- ParseUUIDPipe
+- DefaultValuePipe
+
+### pipe validation
+- https://github.com/typestack/class-validator#validation-decorators
+- yarn add class-validator class-transformer
+- 
