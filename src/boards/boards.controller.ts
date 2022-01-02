@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
+import { NotFoundInterceptor } from 'src/exceptions/NotFoundInterceptor';
 import { Board } from './boards.model';
 import { BoardsService } from './boards.service';
 import { CreateDto } from './dto/create.dto';
@@ -12,7 +20,13 @@ export class BoardsController {
     return this.boardService.getAll();
   }
 
-  @Post('/create')
+  @Get('/:id')
+  @UseInterceptors(new NotFoundInterceptor('project not found'))
+  getOneById(@Param('id') id: string): Board {
+    return this.boardService.getOneById(id);
+  }
+
+  @Post()
   create(@Body() CreateDto: CreateDto): Board {
     return this.boardService.create(CreateDto);
   }
