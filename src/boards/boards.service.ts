@@ -3,6 +3,7 @@ import { Board, BoardsStatus } from './boards.model';
 import { v1 as uuid } from 'uuid';
 import { CreateDto } from './dto/create.dto';
 import { NotFound } from 'src/exceptions/Notfound';
+import { Result } from 'src/results/Result';
 
 @Injectable()
 export class BoardsService {
@@ -31,5 +32,15 @@ export class BoardsService {
 
     this.boards.push(board);
     return board;
+  }
+
+  deleteOneById(id: string): Result {
+    const beforeLength = this.boards.length;
+    this.boards = this.boards.filter((b) => b.id !== id);
+
+    if (beforeLength - 1 !== this.boards.length)
+      return Result.FAIL("Can't Delete this one");
+
+    return Result.SUCCESS;
   }
 }

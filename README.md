@@ -94,4 +94,12 @@ nest g service [name] --no-spec
 - 유효성 체크, 타입으로 사용
 - service, controller 등 여러 곳에서 사용되는 경우 이 model 객체와 결합도가 높아질 수 있는데, 이것을 방지해 줄 수 있다.
 
+## @param
+- uri based param을 가져올 수 있다.
+
+## result type
+- Rust 에서 영감을 받아 한번 만들어 봤다.
+- 강의에서는 delete 후 특별히 메시지를 넣지 않고 void 해버리는데, 
+- 프론트에서 처리하든 나중에 test를 하든 성공/실패 정도는 나와 주는게 좋을 거 같다.
+
 
