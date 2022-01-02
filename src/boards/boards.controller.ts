@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   UseInterceptors,
 } from '@nestjs/common';
@@ -13,6 +14,7 @@ import { Board } from './boards.model';
 import { BoardsService } from './boards.service';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CreateDto } from './dto/create.dto';
+import { UpdateDto } from './dto/update.dto';
 
 @Controller('boards')
 export class BoardsController {
@@ -32,6 +34,11 @@ export class BoardsController {
   @Post()
   create(@Body() CreateDto: CreateDto): Board {
     return this.boardService.create(CreateDto);
+  }
+
+  @Patch('/:id')
+  updateOneById(@Param('id') id: string, @Body() UpdateDto: UpdateDto): Board {
+    return this.boardService.updateOneById(id, UpdateDto);
   }
 
   @Delete('/:id')

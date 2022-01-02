@@ -4,6 +4,7 @@ import { v1 as uuid } from 'uuid';
 import { CreateDto } from './dto/create.dto';
 import { NotFound } from 'src/exceptions/Notfound';
 import { Result } from 'src/results/Result';
+import { UpdateDto } from './dto/update.dto';
 
 @Injectable()
 export class BoardsService {
@@ -31,6 +32,16 @@ export class BoardsService {
     };
 
     this.boards.push(board);
+    return board;
+  }
+
+  updateOneById(id: string, dto: UpdateDto): Board {
+    const board = this.getOneById(id);
+
+    for (const k in dto) {
+      board[k] = dto[k] ?? board[k];
+    }
+
     return board;
   }
 
