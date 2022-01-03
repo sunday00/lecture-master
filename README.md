@@ -137,4 +137,7 @@ nest g service [name] --no-spec
 ### pipe validation
 - https://github.com/typestack/class-validator#validation-decorators
 - yarn add class-validator class-transformer
-- 
+
+
+
+https://youtu.be/3JminDpCJNE?t=7487

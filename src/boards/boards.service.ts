@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Board, BoardsStatus } from './boards.model';
 import { v1 as uuid } from 'uuid';
 import { CreateDto } from './dto/create.dto';
-import { NotFound } from 'src/exceptions/Notfound';
 import { Result } from 'src/results/Result';
 import { UpdateDto } from './dto/update.dto';
 
@@ -18,7 +17,7 @@ export class BoardsService {
   getOneById(id: string): Board {
     const board = this.boards.find((b) => b.id === id);
 
-    if (!board) throw new NotFound();
+    if (!board) throw new NotFoundException(`Can't find article ${id}`);
 
     return board;
   }
@@ -47,7 +46,10 @@ export class BoardsService {
 
   deleteOneById(id: string): Result {
     const beforeLength = this.boards.length;
-    this.boards = this.boards.filter((b) => b.id !== id);
+
+    const board = this.getOneById(id);
+
+    this.boards = this.boards.filter((b) => b !== board);
 
     if (beforeLength - 1 !== this.boards.length)
       return Result.FAIL("Can't Delete this one");

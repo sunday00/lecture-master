@@ -6,11 +6,9 @@ import {
   Param,
   Patch,
   Post,
-  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { NotFoundInterceptor } from 'src/exceptions/NotFoundInterceptor';
 import { Result } from 'src/results/Result';
 import { Board } from './boards.model';
 import { BoardsService } from './boards.service';
@@ -18,6 +16,7 @@ import { BoardsService } from './boards.service';
 import { CreateDto } from './dto/create.dto';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UpdateDto } from './dto/update.dto';
+import { BoardIdValidationPipe } from './pipes/board-id-validation.pipe';
 
 @Controller('boards')
 export class BoardsController {
@@ -29,7 +28,6 @@ export class BoardsController {
   }
 
   @Get('/:id')
-  @UseInterceptors(new NotFoundInterceptor('project not found'))
   getOneById(@Param('id') id: string): Board {
     return this.boardService.getOneById(id);
   }
@@ -42,7 +40,10 @@ export class BoardsController {
 
   @Patch('/:id')
   @UsePipes(ValidationPipe)
-  updateOneById(@Param('id') id: string, @Body() UpdateDto: UpdateDto): Board {
+  updateOneById(
+    @Param('id', BoardIdValidationPipe) id: string,
+    @Body() UpdateDto: UpdateDto,
+  ): Board {
     return this.boardService.updateOneById(id, UpdateDto);
   }
 
