@@ -138,6 +138,33 @@ nest g service [name] --no-spec
 - https://github.com/typestack/class-validator#validation-decorators
 - yarn add class-validator class-transformer
 
+## DB 연동
+- yarn add pg typeorm @nestjs/typeorm
+- 그동안 슬쩍슬쩍 건드려보던 postgresql을 본격적으로 연습해보자.
+- pg nodejs postgresql driver 역할인듯?
+- typeorm 말그대로 orm. PHP에서 PDO 역할인 듯?
+- @nestjs/typeorm typeorm 과 nestjs를 연결해 주는 역할인 듯?
+- 비교
+  - typeorm : jpa : PDO
+  - @nestjs/typeorm : hibernate : eloquent
+  - 정도 되는 것 같다... 언어도 다르고 꼭 들어 맞다고는 할 수 없지만 일단은 이렇게 이해하고 넘어가자.
+
+### 설정방법
+- gitignore를 통해 db접속정보를 조금 더 유연하게 관리하기 위해 .env @type/dotenv를 사용하기로 한다.
+- 후에 @nest/config 를 사용해보기로 하고, 지금은 익숙한 방법으로 해보자.
+- entities: [__dirname + 폴더/*.entity.ts] : springboot 등에서도 이러한 기능은 있던거 같던데, 
+  - 미리 테이블을 만드는 모듈을 설정해 놓으면, 해당폴더에서 읽어 서비스가 올라올때 자동으로 table들을 생성해준다.
+  - 라라벨은 자동으로 올라오는 기능은 사용해 보지 않았지만, 통상 php artisan migrate 명령어 한방이면 같은 역할을 해준다. 
+- synchronize: true : 이기능은 이름만 보아서는 데이터를 기억해 두었다가 서비스의 동작에 따라 자동으로 기억된 데이터로 항상 싱크를 맞춰주는 모양인데, 
+  - test 코드를 실행하면 자꾸 데이터가 변하므로 테스팅하기 좋게 기존으로 돌려주는 기능으로 이용하고
+  - 실서버에는 잘못하면 데이터 다 날아가니 꼭 꺼두도록 한다.
+
+- PS: dotenv 적용시 주의할 점은, 통상 main.ts, app.module 등에 dotenv.config 적용을 할텐데, main.ts가 entrypoint 같지만, 실상은 내부적으로 di를 위해 필요한 모듈들을 먼저 생성하게 된다. 이때문에 막상 config/config.ts를 만들고 process.env.*을 사용하여도, 모두 undefined 되고, 이후 main.ts, app.module을 타게된다. 
+  - 서비스 단에서는 이를 위해 nestjs/config를 주입시켜 사용하는 듯 하지만, 이처럼 단순 config object에서는 결국 new를 하는 수 밖에 없게 된다.
+  - best practice는 아닐거 같은데, 일단은 utils를 만들고 함수를 만들어 필요한 경우 일단 쉽게 적용할 수 있도록 만들어 두었다.
+
+  
+
 
 
 https://youtu.be/3JminDpCJNE?t=7487
