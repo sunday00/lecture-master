@@ -25,16 +25,8 @@ export class BoardsService {
     return this.boardRepository.createOne(dto);
   }
 
-  async updateOneById(id: number, dto: UpdateDto): Promise<Board> {
-    const board = await this.getOneById(id);
-
-    for (const k in dto) {
-      board[k] = dto[k] ?? board[k];
-    }
-
-    await this.boardRepository.update(dto, board);
-
-    return board;
+  updateOneById(id: number, dto: UpdateDto): Promise<Board> {
+    return this.boardRepository.updateOneById(id, dto);
   }
 
   deleteOneById(id: number): Promise<Result> {

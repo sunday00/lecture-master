@@ -1,9 +1,10 @@
 import { NotFoundException } from '@nestjs/common';
 import { Result } from 'src/results/Result';
-import { EntityRepository, MustBeEntityError, Repository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 import { Board } from './boards.entity';
 import { BoardsStatus } from './boards.model';
 import { CreateDto } from './dto/create.dto';
+import { UpdateDto } from './dto/update.dto';
 
 @EntityRepository(Board)
 export class BoardRepository extends Repository<Board> {
@@ -26,14 +27,22 @@ export class BoardRepository extends Repository<Board> {
     return board;
   }
 
-  async deleteOneById(id: number): Promise<Result> {
-    const board = await this.findOne(id);
-    try {
-      await this.remove(board);
-    } catch (e) {
-      if (e instanceof MustBeEntityError)
-        return Result.FAIL("Can't Delete this one");
+  async updateOneById(id: number, dto: UpdateDto): Promise<Board> {
+    const board = await this.getOneById(id);
+
+    for (const k in dto) {
+      board[k] = dto[k] ?? board[k];
     }
+
+    return await this.save(board);
+  }
+
+  async deleteOneById(id: number): Promise<Result> {
+    const result = await this.delete(id);
+
+    if (result.affected === 0)
+      throw new NotFoundException("Can't Delete this one");
+
     return Result.SUCCESS;
   }
 }
