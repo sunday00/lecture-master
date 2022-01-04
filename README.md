@@ -163,7 +163,10 @@ nest g service [name] --no-spec
   - 서비스 단에서는 이를 위해 nestjs/config를 주입시켜 사용하는 듯 하지만, 이처럼 단순 config object에서는 결국 new를 하는 수 밖에 없게 된다.
   - best practice는 아닐거 같은데, 일단은 utils를 만들고 함수를 만들어 필요한 경우 일단 쉽게 적용할 수 있도록 만들어 두었다.
 
-  
+## DB 연동
+- Repository 파일 생성 후 DI를 통해 연결한다.
+- 특별할건 없고 typeorm api로 연동하면 된다.
+-   
 
 
 

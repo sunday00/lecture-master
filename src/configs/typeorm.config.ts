@@ -10,6 +10,7 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_BASE,
+  schema: process.env.DB_SCHM,
   entities: [__dirname + process.env.DB_ENTT],
   synchronize: process.env.DB_SYNC === 'true' ? true : false,
 };

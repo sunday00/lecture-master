@@ -28,27 +28,27 @@ export class BoardsController {
   }
 
   @Get('/:id')
-  getOneById(@Param('id') id: string): Board {
+  getOneById(@Param('id') id: number): Promise<Board> {
     return this.boardService.getOneById(id);
   }
 
   @Post()
   @UsePipes(ValidationPipe)
-  create(@Body() CreateDto: CreateDto): Board {
+  create(@Body() CreateDto: CreateDto): Promise<Board> {
     return this.boardService.create(CreateDto);
   }
 
   @Patch('/:id')
   @UsePipes(ValidationPipe)
   updateOneById(
-    @Param('id', BoardIdValidationPipe) id: string,
+    @Param('id', BoardIdValidationPipe) id: number,
     @Body() UpdateDto: UpdateDto,
-  ): Board {
+  ): Promise<Board> {
     return this.boardService.updateOneById(id, UpdateDto);
   }
 
   @Delete('/:id')
-  deleteOneById(@Param('id') id: string): Result {
+  deleteOneById(@Param('id') id: number): Promise<Result> {
     return this.boardService.deleteOneById(id);
   }
 }
