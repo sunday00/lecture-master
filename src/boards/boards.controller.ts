@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UsePipes,
@@ -23,12 +24,12 @@ export class BoardsController {
   constructor(private boardService: BoardsService) {}
 
   @Get()
-  getAll(): Board[] {
+  getAll(): Promise<Board[]> {
     return this.boardService.getAll();
   }
 
   @Get('/:id')
-  getOneById(@Param('id') id: number): Promise<Board> {
+  getOneById(@Param('id', ParseIntPipe) id: number): Promise<Board> {
     return this.boardService.getOneById(id);
   }
 
@@ -48,7 +49,7 @@ export class BoardsController {
   }
 
   @Delete('/:id')
-  deleteOneById(@Param('id') id: number): Promise<Result> {
+  deleteOneById(@Param('id', ParseIntPipe) id: number): Promise<Result> {
     return this.boardService.deleteOneById(id);
   }
 }

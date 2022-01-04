@@ -166,7 +166,20 @@ nest g service [name] --no-spec
 ## DB 연동
 - Repository 파일 생성 후 DI를 통해 연결한다.
 - 특별할건 없고 typeorm api로 연동하면 된다.
--   
+- 왠지 uuid로 계속 하고 싶은데, 한편으로는 generated auto increment id 를 이용해보고 싶어서 일단 number로 바꾸어보자.
+- postgresql에서는 default로 public 스키마가 잡히는데, 보안상 좋지 않다고 한다. typeorm 공식문서에 의하면 scheme도 바꿀 수 있으므로, 설정파일을 통해 바꿔주도록 하자.
+- stackoverflow 등에서는 이 scheme를 런타임에서 다이나믹하게 연동하는 방법에 대해 꽤 뜨거운 모양이다. 
+
+## 삭제로직
+- remove : delete or error
+- delete : delete or ignore
+- 강사는 remove는 무조건 select로 한번 검색해보고 지워야 되서 비효율적이라고 하는데,
+  - 이건 case에 따라 다를 것이다.
+  - 서비스를 유연하게 삭제를 무시하는 로직을 사용할 경우에는 delete를 사용하고, 
+  - 없는 데이터를 삭제하려는 경우 강력한 에러를 표시하여 불필요한 리퀘스트를 방지하려면, 경우에따라 remove도 좋은 로직이 될 수 있다고 생각한다.
+- 이 실습은 강좌를 따르지 않고 error를 일부러 일으키고, 기존의 실패응답을 하기로 한다.
+
+
 
 
 
