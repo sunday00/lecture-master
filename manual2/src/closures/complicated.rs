@@ -109,3 +109,36 @@ pub fn andthen(_: String) {
   println!("{:?}", Some(1).and::<u8>(Some(2)).and::<u8>(None));
 }
 
+pub fn chr_find(_: String) {
+  fn char_exists ( char_vec: &Vec<char>, c: char ) {
+    println!("Char_vec has {} : {}", c, char_vec.iter().any(|&char| char == c));
+  }
+
+  let char_vec = ('a'..'働').collect::<Vec<char>>();
+
+  char_exists(&char_vec, 'i');
+  char_exists(&char_vec, '방');
+  char_exists(&char_vec, '恳');
+
+  let smaller_v = ('A'..'z').collect::<Vec<char>>();
+  println!("all alphabetic? {}", smaller_v.iter().all(|&x| x.is_alphabetic()));
+  println!("all lett then the character 햏 : {}", smaller_v.iter().all(|&x| x < '햏'));
+  
+  let mut big_vec = vec![6; 1000];
+  big_vec.push(5);
+
+  let mut iterator = big_vec.iter().rev();
+  println!("{:?}", iterator.next());
+
+  big_vec.push(5);
+  println!("{:?}", big_vec.iter().rev().any(|&n| n == 5 ))
+}
+
+pub fn calc_find(_:String) {  
+  let nums: Vec<u8> = (10..101).step_by(10).collect();
+  println!("{:?}", nums.iter().find(|&n| n % 3 == 0));
+  println!("{:?}", nums.iter().find(|&n| n * 2 == 30));
+  println!("{:?}", nums.iter().position(|&n| n % 3 == 0));
+  println!("{:?}", nums.iter().position(|&n| n * 2 == 0));
+
+} 
