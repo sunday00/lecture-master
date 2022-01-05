@@ -183,6 +183,31 @@ nest g service [name] --no-spec
 <!-- - 이 실습은 강좌를 따르지 않고 error를 일부러 일으키고, 기존의 실패응답을 하기로 한다. -->
   - delete는 아무 return 값이 없는줄 알고 remove로 처리하려고 했는데, delete 에도 affected row가 뜬다. 이걸 쓰자. 
 
+## user resources
+- 같은 방식으로 user 컨트롤러, 서비스, 리파지토리, dto 를 만든다.
+- uuid를 꼭 쓰고 싶으므로 한번 해보도록 한다.
+  - SELECT * FROM pg_available_extensions;
+    - 사용가능한 모듈이 있는지 확인한다.
+  - CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    - uuid 모듈을 설치한다.
+  - SELECT * FROM pg_extension;
+    - 설치확인
+- dto에서 
+  ```
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
+  ```
+
+## bcrypt
+- 잘알려진 내용은 좀 생략하고,
+- genSalt() 를 이용해 랜덤한 솔트 값을 매번 생성해 해싱하여 저장해 준다.
+  - 이렇게 하면, 한명의 비번이 털려서 비번을 알게 되더라도, 같은 해시값이 없으므로 조금 더 안전해진다.
+- 근데 어떻게 이게 되는거지?? 
+  - 원래 솔트값은 일정한 난수로 저장되고, 해쉬값은 복호화가 되지 않는 대신 같은 값을 넣으면 같은 값이 출력된다는 것만 보장한채,
+  - 같은 솔트에 같은 비번을 비교하면 인정되는 것으로 알고 있었는데,
+  - 매번 다른 솔트가 나오면 어떻게 compare가 되는거지???
+  - 정답은 salt를 비번에 합쳐서 저장하기 때문이다.
+  - bcrypt는 자신의 버젼, round수, 솔트와 해쉬된 값을 concat해서 함께 저장하고, 이후 이를 다시 분리시켜 compare한다.
 
 
 
