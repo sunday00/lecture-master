@@ -2,6 +2,8 @@ pub mod basic;
 pub mod complicated;
 pub mod cycle;
 pub mod pick;
+pub mod relref;
+pub mod func_type;
 
 pub fn run(module: String, arg: String) {
   let module: &str = &module.to_string();
@@ -24,6 +26,8 @@ pub fn run(module: String, arg: String) {
     "divide-vector" => cycle::div_vec(arg),
     "peekable" => pick::peekable(arg),
     "loc" => pick::loc(arg),
+    "borrow" => relref::borrow(arg),
+    "func-type" => func_type::app(arg),
     _ => basic::lambda(arg),
   }
 }
