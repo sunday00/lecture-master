@@ -16,6 +16,10 @@ fn main() {
     let main:&str = &env(1).to_string();
     match main {
     "looping" => closures::run(env(2), env(3)),
+    "dbg" => dbg::run(env(2), env(3)),
+    "life" => life::run(env(2), env(3)),
+    "generics" => generics::run(env(2), env(3)),
+    "cell" => cell::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }
