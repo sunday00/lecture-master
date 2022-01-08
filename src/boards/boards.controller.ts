@@ -12,6 +12,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { Auth } from 'src/auth/decorators/Auth.decorator';
+import { User } from 'src/auth/user.entity';
 import { Result } from 'src/results/Result';
 import { Board } from './boards.model';
 import { BoardsService } from './boards.service';
@@ -30,6 +32,12 @@ export class BoardsController {
     return this.boardService.getAll();
   }
 
+  @Get('/my')
+  @UseGuards(AuthGuard())
+  getAllByAuth(@Auth() user: User): Promise<Board[]> {
+    return this.boardService.getAllByAuth(user);
+  }
+
   @Get('/:id')
   getOneById(@Param('id', ParseIntPipe) id: number): Promise<Board> {
     return this.boardService.getOneById(id);
@@ -38,8 +46,8 @@ export class BoardsController {
   @Post()
   @UseGuards(AuthGuard())
   @UsePipes(ValidationPipe)
-  create(@Body() CreateDto: CreateDto): Promise<Board> {
-    return this.boardService.create(CreateDto);
+  create(@Body() CreateDto: CreateDto, @Auth() user: User): Promise<Board> {
+    return this.boardService.create(CreateDto, user);
   }
 
   @Patch('/:id')

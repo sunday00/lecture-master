@@ -6,6 +6,8 @@ import { Result } from 'src/results/Result';
 import { UpdateDto } from './dto/update.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardRepository } from './board.repository';
+import { User } from 'src/auth/user.entity';
+import { query } from 'express';
 
 @Injectable()
 export class BoardsService {
@@ -17,12 +19,17 @@ export class BoardsService {
     return this.boardRepository.find();
   }
 
+  getAllByAuth(user: User): Promise<Board[]> {
+    // return this.boardRepository.find({ user: user });
+    return this.boardRepository.getAllByAuth(user);
+  }
+
   getOneById(id: number): Promise<Board> {
     return this.boardRepository.getOneById(id);
   }
 
-  create(dto: CreateDto): Promise<Board> {
-    return this.boardRepository.createOne(dto);
+  create(dto: CreateDto, user: User): Promise<Board> {
+    return this.boardRepository.createOne(dto, user);
   }
 
   updateOneById(id: number, dto: UpdateDto): Promise<Board> {

@@ -1,4 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
+import { User } from 'src/auth/user.entity';
 import { Result } from 'src/results/Result';
 import { EntityRepository, Repository } from 'typeorm';
 import { Board } from './boards.entity';
@@ -16,11 +17,21 @@ export class BoardRepository extends Repository<Board> {
     return board;
   }
 
-  async createOne({ title, description }: CreateDto): Promise<Board> {
+  async getAllByAuth(user: User): Promise<Board[]> {
+    const q = this.createQueryBuilder('board');
+    q.where('board.userId = :userId', { userId: user.id });
+    return await q.getMany();
+  }
+
+  async createOne(
+    { title, description }: CreateDto,
+    user: User,
+  ): Promise<Board> {
     const board: Board = this.create({
       title,
       description,
       status: BoardsStatus.PUBLIC,
+      user: user,
     });
 
     await this.save(board);
