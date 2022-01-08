@@ -33,8 +33,12 @@ export class BoardsService {
   }
 
   create(dto: CreateDto, user: User): Promise<Board> {
-    this.logger.verbose(`User ${user.username} created an article`);
-    return this.boardRepository.createOne(dto, user);
+    return this.boardRepository.createOne(dto, user).then((board) => {
+      this.logger.verbose(
+        `User ${user.username} created an article ${board.id}`,
+      );
+      return board;
+    });
   }
 
   updateOneById(id: number, dto: UpdateDto): Promise<Board> {
