@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, MaxLength } from 'class-validator';
-import { BoardsStatus } from '../boards.model';
+import { BoardsStatus } from 'src/boards/boards.model';
 
 export class UpdateDto {
   @IsOptional()

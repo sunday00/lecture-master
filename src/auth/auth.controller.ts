@@ -2,11 +2,12 @@ import {
   Body,
   Controller,
   Post,
-  Req,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Board } from 'src/boards/boards.entity';
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/Auth.decorator';
 import { AuthCredentialDto } from './dto/auth-credential.dto';
@@ -34,6 +35,7 @@ export class AuthController {
   @UseGuards(AuthGuard())
   jwtTest(@Auth() user: User): string {
     console.log(user);
+    console.log(getRepositoryToken(Board));
     return 'It works!';
   }
 }

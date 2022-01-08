@@ -31,7 +31,8 @@ export class AuthService {
           return await { accessToken: this.jwtService.sign(payload) };
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         throw new UnauthorizedException('login failed');
       });
   }

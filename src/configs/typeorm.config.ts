@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import * as DotEnv from '../utils/DotEnv.functions';
+import * as DotEnv from 'src/utils/DotEnv.functions';
 
 DotEnv.apply();
 

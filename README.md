@@ -229,6 +229,13 @@ nest g service [name] --no-spec
 - 사실 이곳에선 크게 필요하진 않으나 연습용으로 사용
 - boards/my
 
+# testing
+- e2e (end-to-end, request 부터 시작해서 response까지 가장 큰 테스트) 는 test 폴더에 만드는 듯?
+- unit 테스트는 domain 단위로 구분된 각 폴더에 생성한다.
+- 하나의 객체가 여러 객체에 의존하고 있을때 mock하기가 어려웠는데, 
+  - 여러 블로그에서는 getRepositoryToken을 이용해 mockRepository를 만드는 것 같은데, 
+  - 이상하게 이렇게 하면 service에서 Logger와 동시에 주입되어 올라오지 않더라...
+  - 대신 타입명은 provide에서 찐으로 넣고 useClass에서 mockClass를 넣으면 작동한다.
 
 
 
