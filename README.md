@@ -22,10 +22,12 @@
 - app.service
   - 서비스 실행 후 리턴
 
+
 ## 모듈의 생성
 ``` 
 nest g module [name]
 ```
+<!-- cSpell:disable-next-line -->
 - using `nest`-cli `g`enerate `module` named `[name]`
 
 ## controller
@@ -222,6 +224,10 @@ nest g service [name] --no-spec
 - 인자로 넣는 함수는 다시 특정 데이터와 컨텍스트를 넣을 수 있는데,
   - ExecutionContext 에는 http request pipeline 을 받아 올 수 있다.
 
+# query builder
+- 복잡한 쿼리 처리를 위해 사용
+- 사실 이곳에선 크게 필요하진 않으나 연습용으로 사용
+- boards/my
 
 
 

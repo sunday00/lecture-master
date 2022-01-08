@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { User } from 'src/auth/user.entity';
 import { Result } from 'src/results/Result';
 import { EntityRepository, Repository } from 'typeorm';
@@ -48,11 +48,18 @@ export class BoardRepository extends Repository<Board> {
     return await this.save(board);
   }
 
-  async deleteOneById(id: number): Promise<Result> {
-    const result = await this.delete(id);
+  async deleteOneById(id: number, user: User): Promise<Result> {
+    const board = await this.findOne(id, { relations: ['user'] });
 
-    if (result.affected === 0)
-      throw new NotFoundException("Can't Delete this one");
+    if (board.user.id === user.id) {
+      const result = await this.delete(id);
+      if (result.affected === 0)
+        throw new NotFoundException(
+          "Can't Delete this one. Something is wrong",
+        );
+    } else {
+      throw new UnauthorizedException('You are not owner of this article.');
+    }
 
     return Result.SUCCESS;
   }

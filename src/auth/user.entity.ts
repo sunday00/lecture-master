@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import * as bcrypt from 'bcryptjs';
+// import * as bcrypt from 'bcryptjs';
 
 @Entity()
 @Unique(['username'])

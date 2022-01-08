@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Board } from './boards.model';
 // import { v1 as uuid } from 'uuid';
 import { CreateDto } from './dto/create.dto';
@@ -7,11 +7,13 @@ import { UpdateDto } from './dto/update.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BoardRepository } from './board.repository';
 import { User } from 'src/auth/user.entity';
-import { query } from 'express';
 
 @Injectable()
 export class BoardsService {
+  // private logger = new Logger('BoardService');
+
   constructor(
+    private logger: Logger,
     @InjectRepository(BoardRepository) private boardRepository: BoardRepository,
   ) {}
 
@@ -21,6 +23,8 @@ export class BoardsService {
 
   getAllByAuth(user: User): Promise<Board[]> {
     // return this.boardRepository.find({ user: user });
+
+    this.logger.verbose(`User ${user.username} trying to get all articles`);
     return this.boardRepository.getAllByAuth(user);
   }
 
@@ -29,6 +33,7 @@ export class BoardsService {
   }
 
   create(dto: CreateDto, user: User): Promise<Board> {
+    this.logger.verbose(`User ${user.username} created an article`);
     return this.boardRepository.createOne(dto, user);
   }
 
@@ -36,7 +41,7 @@ export class BoardsService {
     return this.boardRepository.updateOneById(id, dto);
   }
 
-  deleteOneById(id: number): Promise<Result> {
-    return this.boardRepository.deleteOneById(id);
+  deleteOneById(id: number, user: User): Promise<Result> {
+    return this.boardRepository.deleteOneById(id, user);
   }
 }
