@@ -209,6 +209,19 @@ nest g service [name] --no-spec
   - 정답은 salt를 비번에 합쳐서 저장하기 때문이다.
   - bcrypt는 자신의 버젼, round수, 솔트와 해쉬된 값을 concat해서 함께 저장하고, 이후 이를 다시 분리시켜 compare한다.
 
+# passport 와 validate
+- 커스텀 strategy validate메서드가 작동하지 않아 엄청 애를 먹었는데,
+- validate메서드는 constructor에 설정해둔 jwt 자체가 유효하지 않으면 바로 unauthorize exception 던진다.
+- 이번 경우에는 expire 설정이 문제였는데, ignoreExpire에서 true로 설정하고, 통과되어 validate 단계까지 온다면 이걸 의심해보자.
+- 막연히 강의를 따라 3600으로 설정해뒀는데, 강의랑 다르게 이게 기본값이 초s가 아니라 ms 값이었던 듯. 
+- * 10000 으로 한 뒤 다시 ignore expire를 false로 지정한뒤 작동을 확인하였다.
+
+# custom decorator
+- nestjs 는 createParameterDecorator 팩토리핼퍼를 제공한다.
+- 이 헬퍼는 함수를 인자로 받아 해당 함수를 실행하여 리턴값을 그대로 인자로 넣어주는 데코레이션을 생성해준다.
+- 인자로 넣는 함수는 다시 특정 데이터와 컨텍스트를 넣을 수 있는데,
+  - ExecutionContext 에는 http request pipeline 을 받아 올 수 있다.
+
 
 
 

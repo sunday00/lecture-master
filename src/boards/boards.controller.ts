@@ -7,9 +7,11 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { Result } from 'src/results/Result';
 import { Board } from './boards.model';
 import { BoardsService } from './boards.service';
@@ -34,12 +36,14 @@ export class BoardsController {
   }
 
   @Post()
+  @UseGuards(AuthGuard())
   @UsePipes(ValidationPipe)
   create(@Body() CreateDto: CreateDto): Promise<Board> {
     return this.boardService.create(CreateDto);
   }
 
   @Patch('/:id')
+  @UseGuards(AuthGuard())
   @UsePipes(ValidationPipe)
   updateOneById(
     @Param('id', BoardIdValidationPipe) id: number,
@@ -49,6 +53,7 @@ export class BoardsController {
   }
 
   @Delete('/:id')
+  @UseGuards(AuthGuard())
   deleteOneById(@Param('id', ParseIntPipe) id: number): Promise<Result> {
     return this.boardService.deleteOneById(id);
   }

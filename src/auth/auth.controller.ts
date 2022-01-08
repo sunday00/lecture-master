@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
+import { Auth } from './decorators/Auth.decorator';
 import { AuthCredentialDto } from './dto/auth-credential.dto';
 import { User } from './user.entity';
 
@@ -31,8 +32,8 @@ export class AuthController {
 
   @Post('/jwt-test')
   @UseGuards(AuthGuard())
-  jwtTest(@Req() req): string {
-    console.log(req.user);
+  jwtTest(@Auth() user: User): string {
+    console.log(user);
     return 'It works!';
   }
 }
