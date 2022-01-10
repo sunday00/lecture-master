@@ -20,6 +20,9 @@ fn main() {
     "life" => life::run(env(2), env(3)),
     "generics" => generics::run(env(2), env(3)),
     "cell" => cell::run(env(2), env(3)),
+    "cow" => cow::run(env(2), env(3)),
+    "types" => types::run(env(2), env(3)),
+    "macro" => macros::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }
