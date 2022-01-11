@@ -16,6 +16,7 @@ fn main() {
     let main:&str = &env(1).to_string();
     match main {
     "looping" => closures::run(env(2), env(3)),
+    "test" => test::run(env(2), env(3)),
     "dbg" => dbg::run(env(2), env(3)),
     "life" => life::run(env(2), env(3)),
     "generics" => generics::run(env(2), env(3)),
@@ -23,6 +24,9 @@ fn main() {
     "cow" => cow::run(env(2), env(3)),
     "types" => types::run(env(2), env(3)),
     "macro" => macros::run(env(2), env(3)),
+    "rc" => rc::run(env(2), env(3)),
+    "threads" => threads::run(env(2), env(3)),
+    "closures2" => closures2::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }

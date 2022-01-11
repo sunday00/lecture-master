@@ -1,4 +1,6 @@
+pub mod test;
 pub mod closures;
+pub mod closures2;
 pub mod dbg;
 pub mod life;
 pub mod generics;
@@ -6,3 +8,5 @@ pub mod cell;
 pub mod cow;
 pub mod types;
 pub mod macros;
+pub mod rc;
+pub mod threads;

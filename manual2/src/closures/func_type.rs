@@ -34,3 +34,29 @@ pub fn app(_: String) {
 
   println!("3 doubled: {}", apply_3(double));
 }
+
+pub fn take_what(_: String) {
+  let mut s = String::from("HI");
+  let c = || println!("{}", s);
+
+  c();
+  c();
+  c();
+  c(); // not problem. closure Fn take ref.
+
+  let mut fnmut_c = || {
+    s.push_str(" added");
+    println!("{}", s);
+  };
+
+  fnmut_c();
+  fnmut_c();
+  fnmut_c();
+  fnmut_c(); // fnmut update original
+
+  let m = vec![8,9,10].into_iter()
+    .map(|x| x as u8).map(|x| x+2).collect::<Vec<u8>>();
+
+  println!("{:?}", m);
+  
+}
