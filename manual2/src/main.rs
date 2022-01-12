@@ -25,6 +25,7 @@ fn main() {
     "types" => types::run(env(2), env(3)),
     "macro" => macros::run(env(2), env(3)),
     "rc" => rc::run(env(2), env(3)),
+    "arc" => arc::run(env(2), env(3)),
     "threads" => threads::run(env(2), env(3)),
     "closures2" => closures2::run(env(2), env(3)),
     "traits" => traits::run(env(2), env(3)),
