@@ -27,6 +27,7 @@ fn main() {
     "rc" => rc::run(env(2), env(3)),
     "threads" => threads::run(env(2), env(3)),
     "closures2" => closures2::run(env(2), env(3)),
+    "traits" => traits::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }

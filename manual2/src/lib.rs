@@ -10,3 +10,4 @@ pub mod types;
 pub mod macros;
 pub mod rc;
 pub mod threads;
+pub mod traits;
