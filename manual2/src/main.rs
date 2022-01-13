@@ -17,6 +17,7 @@ fn main() {
     match main {
     "looping" => closures::run(env(2), env(3)),
     "test" => test::run(env(2), env(3)),
+    "box" => boxy::run(env(2), env(3)),
     "dbg" => dbg::run(env(2), env(3)),
     "life" => life::run(env(2), env(3)),
     "generics" => generics::run(env(2), env(3)),
@@ -29,6 +30,7 @@ fn main() {
     "threads" => threads::run(env(2), env(3)),
     "closures2" => closures2::run(env(2), env(3)),
     "traits" => traits::run(env(2), env(3)),
+    "channels" => channels::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }

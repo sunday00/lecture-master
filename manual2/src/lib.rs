@@ -1,4 +1,5 @@
 pub mod test;
+pub mod boxy;
 pub mod closures;
 pub mod closures2;
 pub mod dbg;
@@ -12,3 +13,4 @@ pub mod rc;
 pub mod arc;
 pub mod threads;
 pub mod traits;
+pub mod channels;
