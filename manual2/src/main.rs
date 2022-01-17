@@ -31,6 +31,7 @@ fn main() {
     "closures2" => closures2::run(env(2), env(3)),
     "traits" => traits::run(env(2), env(3)),
     "channels" => channels::run(env(2), env(3)),
+    "pat" => pat::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }
