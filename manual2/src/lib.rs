@@ -15,3 +15,4 @@ pub mod threads;
 pub mod traits;
 pub mod channels;
 pub mod pat;
+pub mod deco;

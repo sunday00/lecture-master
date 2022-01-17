@@ -32,6 +32,7 @@ fn main() {
     "traits" => traits::run(env(2), env(3)),
     "channels" => channels::run(env(2), env(3)),
     "pat" => pat::run(env(2), env(3)),
+    "deco" => deco::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }
