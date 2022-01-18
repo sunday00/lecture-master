@@ -17,6 +17,7 @@ fn main() {
     match main {
     "looping" => closures::run(env(2), env(3)),
     "test" => test::run(env(2), env(3)),
+    "testing" => testing::run(),
     "box" => boxy::run(env(2), env(3)),
     "dbg" => dbg::run(env(2), env(3)),
     "life" => life::run(env(2), env(3)),
@@ -33,6 +34,7 @@ fn main() {
     "channels" => channels::run(env(2), env(3)),
     "pat" => pat::run(env(2), env(3)),
     "deco" => deco::run(env(2), env(3)),
+    "modules" => modules::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }

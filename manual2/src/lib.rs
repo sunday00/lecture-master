@@ -1,4 +1,5 @@
 pub mod test;
+pub mod testing;
 pub mod boxy;
 pub mod closures;
 pub mod closures2;
@@ -16,3 +17,4 @@ pub mod traits;
 pub mod channels;
 pub mod pat;
 pub mod deco;
+pub mod modules;
