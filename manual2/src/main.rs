@@ -35,6 +35,7 @@ fn main() {
     "pat" => pat::run(env(2), env(3)),
     "deco" => deco::run(env(2), env(3)),
     "modules" => modules::run(env(2), env(3)),
+    "std" => standard::run(env(2), env(3)),
     _ => closures::run(env(2), env(3)),
   }
 }

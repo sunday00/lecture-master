@@ -18,3 +18,4 @@ pub mod channels;
 pub mod pat;
 pub mod deco;
 pub mod modules;
+pub mod standard;
