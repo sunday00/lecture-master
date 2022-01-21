@@ -148,10 +148,29 @@
                         "description": "api_token",
                         "required": false,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string"
                         }
                     }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
+        "/sample/namespace": {
+            "get": {
+                "tags": [
+                    "sample"
                 ],
                 "responses": {
                     "200": {

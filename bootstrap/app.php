@@ -97,6 +97,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
 
+$app->register(\Thedevsaddam\LumenRouteList\LumenRouteListServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

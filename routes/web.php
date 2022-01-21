@@ -6,23 +6,30 @@
 
 $router->group([
     'prefix'        => '/sample',
-    'name'          => 'sample',
 ], function () use ($router) {
+    $name_prefix = "sample.";
+
     $router->get('/', [
-        'as' => 'index', 'uses' => 'ExampleController@index'
+        'as' => $name_prefix.'index', 'uses' => 'ExampleController@index'
     ]);
     
     $router->get('/{id:[0-9]+}', [
-        'as' => 'params', 'uses' => 'ExampleController@show'
+        'as' => $name_prefix.'params', 'uses' => 'ExampleController@show'
     ]);
     
     $router->get('/optional[/{id}]', [
-        'as' => 'optional_params', 'uses' => 'ExampleController@showOp'
+        'as' => $name_prefix.'optional_params', 'uses' => 'ExampleController@showOp'
     ]);
 
     $router->get('/auth', [
         'middleware' => 'auth',
-        'as' => 'auth_middleware',
+        'as' => $name_prefix.'auth_middleware',
         'uses' => 'ExampleController@auth'
+    ]);
+});
+
+$router->group(['namespace' => 'SampleNestedLongNamespace'], function() use ($router){
+    $router->get('/sample/namespace', [
+        'uses' => 'ShortController@test'
     ]);
 });
