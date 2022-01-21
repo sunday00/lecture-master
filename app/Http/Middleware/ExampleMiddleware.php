@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Log;
 
 class ExampleMiddleware
 {
@@ -15,6 +16,7 @@ class ExampleMiddleware
      */
     public function handle($request, Closure $next)
     {
+        Log::info("Now You are passing through example middleware...");
         return $next($request);
     }
 }
