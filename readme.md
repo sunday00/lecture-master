@@ -25,3 +25,8 @@ php -S localhost:8000 public/index.php
   - null 상태에서는 {id} 파라미터가 인코딩된 일반 스트링 상태로 요청되는 것을 볼 수 있다.
   - 가장 정확한 방법은 걍 required=true 하나와 param없는 요청 하나 두개를 만들고 description에 잘 적어두자.
 
+### header
+- header도 커스텀 헤더는 @header를 넣어봐야 내가 입력할 수 있는게 없다.
+- 쉬운 테스트를 위해서는 걍 @param, in=header 를 하면 간단하게 테스트 할 수 있다.
+- 아마도 @header는 로그인 이후 강제 유저 토큰을 부여해서 이용가능하도록 하는 모양인데... 현재까지는 param에 넣는게 익숙하긴 함
+

@@ -86,11 +86,12 @@
                 "tags": [
                     "sample"
                 ],
+                "description": "show coming id is null",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "show coming id is null",
+                        "description": "id is optional",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -117,6 +118,40 @@
             "get": {
                 "tags": [
                     "sample"
+                ],
+                "description": "show coming id is null",
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
+        "/sample/auth": {
+            "get": {
+                "tags": [
+                    "sample"
+                ],
+                "description": "check auth",
+                "parameters": [
+                    {
+                        "name": "api_token",
+                        "in": "header",
+                        "description": "api_token",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {

@@ -28,4 +28,9 @@ class ExampleController extends Controller
     {
         return ['yourId' => $id ? 'not null' : 'empty'];
     }
+
+    public function auth()
+    {
+        return "HI";
+    }
 }
