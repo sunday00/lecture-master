@@ -22,7 +22,7 @@ $router->group([
     ]);
 
     $router->get('/auth', [
-        'middleware' => 'auth',
+        'middleware' => ['auth', 'fLogger:apple,banana'],
         'as' => $name_prefix.'auth_middleware',
         'uses' => 'ExampleController@auth'
     ]);
@@ -31,5 +31,21 @@ $router->group([
 $router->group(['namespace' => 'SampleNestedLongNamespace'], function() use ($router){
     $router->get('/sample/namespace', [
         'uses' => 'ShortController@test'
+    ]);
+});
+
+$router->group([
+    'prefix'        => '/test',
+], function () use ($router) {
+    $name_prefix = "test.";
+
+    $router->get('/', [
+        'as' => $name_prefix.'index',
+        'uses' => 'TestController@index'
+    ]);
+    
+    $router->get('/{id}', [
+        'as' => $name_prefix.'show',
+        'uses' => 'TestController@show'
     ]);
 });

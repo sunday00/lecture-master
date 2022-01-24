@@ -30,3 +30,35 @@ php -S localhost:8000 public/index.php
 - 쉬운 테스트를 위해서는 걍 @param, in=header 를 하면 간단하게 테스트 할 수 있다.
 - 아마도 @header는 로그인 이후 강제 유저 토큰을 부여해서 이용가능하도록 하는 모양인데... 현재까지는 param에 넣는게 익숙하긴 함
 
+# middleware
+```
+public function handle($request, Closure $next)
+{
+    do_something_middleware_action();
+
+    return $next($request);
+}
+```
+- req -> mid -> cont -> svc -> res
+
+```
+public function handle($request, Closure $next)
+{
+    $res = $next($request);
+    
+    do_something_middleware_action();
+
+    return $res;
+}
+```
+- req -> cont -> svc -> mid -> res
+```
+public function terminate($req, $res)
+{
+    do_something_middleware_action();
+}
+```
+- req -> cont -> svc -> res -> mid
+- response까지 보내고 커넥션을 끊으면서 동작
+- res까지 나간 상태기 떄문에 당연히 next 동작이 없다. 모든 동작이 끝나면서 최후의 로직을 실행한다는 의미이기 때문이다.
+

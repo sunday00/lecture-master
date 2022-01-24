@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Log;
 
-class ExampleMiddleware
+class TerminatedLogger
 {
     /**
      * Handle an incoming request.
@@ -14,9 +14,13 @@ class ExampleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $fruit1, $fruit2)
+    public function handle($request, Closure $next)
     {
-        Log::info("Now You are passing through example middleware...{$fruit1}, {$fruit2}");
         return $next($request);
+    }
+
+    public function terminate($req, $res)
+    {
+        Log::info("now terminated");
     }
 }
