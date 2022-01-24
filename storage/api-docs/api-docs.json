@@ -207,31 +207,53 @@
                 }
             }
         },
-        "/test/{id}": {
+        "/test/dd": {
             "get": {
                 "tags": [
                     "test"
                 ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "show coming id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Returns some sample category things",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
+                        "links": {
+                            "/test/dd": {
+                                "operationId": "seeInHtml",
+                                "parameters": ""
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                }
+            }
+        },
+        "/test/file": {
+            "post": {
+                "tags": [
+                    "test"
+                ],
+                "operationId": "uploadFile",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "item_image": {
+                                        "description": "Item image",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things"
                     },
                     "400": {
                         "description": "Error: Bad request. When required parameters were not supplied."

@@ -48,4 +48,9 @@ $router->group([
         'as' => $name_prefix.'show',
         'uses' => 'TestController@show'
     ]);
+
+    $router->post('/file', [
+        'as' => $name_prefix.'store',
+        'uses' => 'TestController@store'
+    ]);
 });
