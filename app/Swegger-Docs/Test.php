@@ -34,6 +34,36 @@
  * )
  */
 /**
+ * @OA\Get(
+ *     path="/test/res",
+ *     tags={"test"},
+ *     @OA\Response(
+ *         response="200",
+ *         description="Returns some sample category things",
+ *     ),
+ *     @OA\Response(
+ *         response="400",
+ *         description="Error: Bad request. When required parameters were not supplied.",
+ *     ),
+ * )
+ */
+
+ /**
+ * @OA\Get(
+ *     path="/test/down",
+ *     tags={"test"},
+ *     @OA\Response(
+ *         response="200",
+ *         description="Returns some sample category things",
+ *     ),
+ *     @OA\Response(
+ *         response="400",
+ *         description="Error: Bad request. When required parameters were not supplied.",
+ *     ),
+ * )
+ */
+
+/**
  * @OA\Post(
  *     path="/test/file",
  *     tags={"test"},

@@ -25,4 +25,14 @@ class TestController extends Controller
     {
         return request()->file('item_image')->getClientOriginalName();
     }
+
+    public function res()
+    {
+        return response("<html><h1>Hello</h1></html>", 201, ["Content-Type" => "text/html"]);
+    }
+
+    public function down()
+    {
+        return response()->download(storage_path('app/test.jpg'));
+    }
 }

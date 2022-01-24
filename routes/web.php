@@ -44,13 +44,23 @@ $router->group([
         'uses' => 'TestController@index'
     ]);
     
-    $router->get('/{id}', [
-        'as' => $name_prefix.'show',
-        'uses' => 'TestController@show'
-    ]);
-
     $router->post('/file', [
         'as' => $name_prefix.'store',
         'uses' => 'TestController@store'
+    ]);
+    
+    $router->get('/res', [
+        'as' => $name_prefix.'res',
+        'uses' => 'TestController@res'
+    ]);
+
+    $router->get('/down', [
+        'as' => $name_prefix.'down',
+        'uses' => 'TestController@down'
+    ]);
+
+    $router->get('/{id}', [
+        'as' => $name_prefix.'show',
+        'uses' => 'TestController@show'
     ]);
 });
