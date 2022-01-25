@@ -9,6 +9,149 @@
         "version": "1.0"
     },
     "paths": {
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "create new user",
+                "requestBody": {
+                    "description": "create new user data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "username": {
+                                                "description": "이름",
+                                                "type": "string",
+                                                "example": "kim"
+                                            },
+                                            "password": {
+                                                "description": "password",
+                                                "type": "string",
+                                                "example": "1111"
+                                            },
+                                            "password_confirmation": {
+                                                "description": "password",
+                                                "type": "string",
+                                                "example": "1111"
+                                            },
+                                            "email": {
+                                                "description": "email",
+                                                "type": "string",
+                                                "example": "aaa@aaa.com"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "login user",
+                "requestBody": {
+                    "description": "user data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "username": {
+                                                "description": "이름",
+                                                "type": "string",
+                                                "example": "kim"
+                                            },
+                                            "password": {
+                                                "description": "password",
+                                                "type": "string",
+                                                "example": "1111"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "check auth",
+                "requestBody": {
+                    "description": "user data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "username": {
+                                                "description": "이름",
+                                                "type": "string",
+                                                "example": "kim"
+                                            },
+                                            "password": {
+                                                "description": "password",
+                                                "type": "string",
+                                                "example": "1111"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns some sample category things",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error: Bad request. When required parameters were not supplied."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/sample": {
             "get": {
                 "tags": [
@@ -120,38 +263,6 @@
                     "sample"
                 ],
                 "description": "show coming id is null",
-                "responses": {
-                    "200": {
-                        "description": "Returns some sample category things",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Error: Bad request. When required parameters were not supplied."
-                    }
-                }
-            }
-        },
-        "/sample/auth": {
-            "get": {
-                "tags": [
-                    "sample"
-                ],
-                "description": "check auth",
-                "parameters": [
-                    {
-                        "name": "api_token",
-                        "in": "header",
-                        "description": "api_token",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Returns some sample category things",
@@ -289,6 +400,17 @@
                         "description": "Error: Bad request. When required parameters were not supplied."
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

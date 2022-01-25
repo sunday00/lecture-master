@@ -108,31 +108,6 @@
  */
 /**
  * @OA\Get(
- *     path="/sample/auth",
- *     tags={"sample"},
- *     description="check auth",
- *     @OA\Parameter(
- *         description="api_token",
- *         in="header",
- *         name="api_token",
- *         required=false,
- *         @OA\Schema(
- *            type="string",
-  *         )
- *     ),
- *     @OA\Response(
- *         response="200",
- *         description="Returns some sample category things",
- *         @OA\JsonContent()
- *     ),
- *     @OA\Response(
- *         response="400",
- *         description="Error: Bad request. When required parameters were not supplied.",
- *     ),
- * )
- */
-/**
- * @OA\Get(
  *     path="/sample/namespace",
  *     tags={"sample"},
  *     @OA\Response(

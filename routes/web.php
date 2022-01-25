@@ -64,3 +64,35 @@ $router->group([
         'uses' => 'TestController@show'
     ]);
 });
+
+$router->group([
+    'prefix' => 'auth'
+], function ($router) {
+
+    $router->post('/register', [
+        'as'=>'register',
+        'uses' => 'AuthController@register',
+    ]);
+
+    $router->post('/login', [
+        'as'=>'login',
+        'uses' => 'AuthController@login',
+    ]);
+
+    $router->post('/logout', [
+        'as' => 'logout',
+        'uses' => 'AuthController@logout'
+    ]);
+
+    $router->post('/refresh', [
+        'as' => 'refresh',
+        'uses' => 'AuthController@refresh'
+    ]);
+
+    $router->post('/me', [
+        'as' => 'me',
+        'uses' => 'AuthController@me'
+    ]);
+
+
+});
