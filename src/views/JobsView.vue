@@ -1,6 +1,10 @@
 <template>
   <ul>
-    <li v-for="item in jobs" :key="item.id">{{ item }}</li>
+     <li v-for="item in jobs" :key="item.id">
+      <router-link :to="`/jobs/${ item.id }`">
+        {{ item.title }}
+      </router-link>
+    </li>
   </ul>
 </template>
 

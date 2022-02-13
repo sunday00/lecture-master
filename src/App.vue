@@ -21,14 +21,24 @@ export default {
     margin: 0;
   }
 
-  a{
+  nav a{
     text-decoration: none;
     color: $color-white;
     font-size: $size-lg;
   }
 
-  a:hover{
+  nav a:hover{
     color: $color-lighter;
+  }
+
+  a{
+    text-decoration: none;
+    color: $color-dark;
+    font-size: $size-lg;
+  }
+
+  a:hover{
+    color: $color-darker;
   }
 
   .router-link-exact-active {

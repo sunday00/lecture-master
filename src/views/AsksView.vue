@@ -1,6 +1,10 @@
 <template>
   <ul>
-    <li v-for="item in asks" :key="item.id">{{ item }}</li>
+     <li v-for="item in asks" :key="item.id">
+      <router-link :to="`/ask/${ item.id }`">
+        {{ item.title }}
+      </router-link>
+    </li>
   </ul>
 </template>
 
