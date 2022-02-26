@@ -9,9 +9,11 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
+      asks: [],
     };
   },
   created() {

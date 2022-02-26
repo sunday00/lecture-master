@@ -1,6 +1,6 @@
 <template>
   <ul>
-     <li v-for="item in jobs" :key="item.id">
+    <li v-for="item in this.$store.state.jobs" :key="item.id">
       <router-link :to="`/jobs/${ item.id }`">
         {{ item.title }}
       </router-link>
@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { fetchJobs } from '@a/index';
 
 export default {
   data() {
@@ -18,12 +17,7 @@ export default {
     };
   },
   created() {
-    fetchJobs().then((res) => {
-      this.jobs = res.data;
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    });
+    this.$store.dispatch('FETCH_JOBS');
   },
 };
 </script>

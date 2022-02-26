@@ -1,6 +1,6 @@
 <template>
   <ul>
-     <li v-for="item in asks" :key="item.id">
+    <li v-for="item in asks" :key="item.id">
       <router-link :to="`/ask/${ item.id }`">
         {{ item.title }}
       </router-link>
@@ -9,21 +9,24 @@
 </template>
 
 <script>
-import { fetchAsks } from '@a/index';
+import { /* mapState, */ mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      asks: [],
+
     };
   },
   created() {
-    fetchAsks().then((res) => {
-      this.asks = res.data;
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    });
+    this.$store.dispatch('FETCH_ASKS');
+  },
+  computed: {
+    // ...mapState({
+    //   asks: (state) => state.asks,
+    // }),
+    ...mapGetters({
+      asks: 'asks',
+    }),
   },
 };
 </script>

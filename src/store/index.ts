@@ -1,4 +1,5 @@
-import { fetchNews } from '@a/index';
+import { fetchJobs, fetchNews, fetchAsks } from '@a/index';
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -14,6 +15,12 @@ export default new Vuex.Store({
     SET_NEWS(state, data) {
       state.news = data;
     },
+    SET_JOBS(state, data) {
+      state.jobs = data;
+    },
+    SET_ASKS(state, data) {
+      state.asks = data;
+    },
   },
   actions: {
     FETCH_NEWS(ctx) {
@@ -24,8 +31,27 @@ export default new Vuex.Store({
         console.log(err);
       });
     },
+    FETCH_JOBS(ctx) {
+      fetchJobs(1).then((res) => {
+        ctx.commit('SET_JOBS', res.data);
+      }).catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
+    },
+    FETCH_ASKS(ctx) {
+      fetchAsks(1).then((res) => {
+        ctx.commit('SET_ASKS', res.data);
+      }).catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
+    },
   },
   getters: {
+    asks(state) {
+      return state.asks;
+    },
   },
   modules: {
   },
