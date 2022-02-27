@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="item in this.$store.state.news" :key="item.id">
+    <li v-for="item in news" :key="item.id">
       <router-link :to="`/news/${ item.id }`">
         {{ item.title }}
       </router-link>
@@ -9,15 +9,21 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      asks: [],
+
     };
   },
   created() {
     this.$store.dispatch('FETCH_NEWS');
+  },
+  computed: {
+    ...mapGetters({
+      news: 'news',
+    }),
   },
 };
 </script>
