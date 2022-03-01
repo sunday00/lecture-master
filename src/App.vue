@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container">
     <ToolBar />
-    <router-view/>
+    <router-view class="contents" />
   </div>
 </template>
 
@@ -25,23 +25,35 @@ export default {
     text-decoration: none;
     color: $color-white;
     font-size: $size-lg;
+
+    &:hover {
+      color: $color-lighter;
+    }
+
+    &.router-link-exact-active {
+      border-bottom: 2px solid ;
+    }
   }
 
-  nav a:hover{
-    color: $color-lighter;
-  }
-
-  a{
+  .contents li > a{
     text-decoration: none;
     color: $color-dark;
     font-size: $size-lg;
+    margin-right: $size-sm;
+    display: inline-block;
+    width: 65%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+
+    &:hover{
+      color: $color-darker;
+    }
   }
 
-  a:hover{
-    color: $color-darker;
+  small{
+    margin-right: $size-sm;
   }
 
-  .router-link-exact-active {
-    border-bottom: 2px solid ;
-  }
 </style>

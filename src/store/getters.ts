@@ -10,4 +10,10 @@ export default {
   jobs(state: State) {
     return state.jobs;
   },
+  user(state: State) {
+    return state.user;
+  },
+  item(state: State) {
+    return state.item;
+  },
 };

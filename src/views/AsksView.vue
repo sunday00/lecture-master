@@ -1,15 +1,18 @@
 <template>
   <ul>
     <li v-for="item in asks" :key="item.id">
-      <router-link :to="`/ask/${ item.id }`">
-        {{ item.title }}
-      </router-link>
+        <!-- <a :href="'https://news.ycombinator.com/'+item.url" target="_blank">{{ item.title }}</a> -->
+        <router-link :to="`/item/${item.id}`">
+          {{ item.title }}
+        </router-link>
+        <small>{{ item.user }}</small>
+        <small>{{ item.time_ago }}</small>
     </li>
   </ul>
 </template>
 
 <script>
-import { /* mapState, */ mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -21,9 +24,6 @@ export default {
     this.$store.dispatch('FETCH_ASKS');
   },
   computed: {
-    // ...mapState({
-    //   asks: (state) => state.asks,
-    // }),
     ...mapGetters({
       asks: 'asks',
     }),
