@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="container">
     <ToolBar />
-    <router-view class="contents" />
+    <transition name="fade">
+      <router-view class="contents" />
+    </transition>
   </div>
 </template>
 
@@ -35,13 +37,19 @@ export default {
     }
   }
 
-  .contents li > a{
+  .contents {
+    margin-block-start: 0;
+  }
+
+  .contents li > a,
+  .fade-enter-active li > a,
+  .fade-leave-active li > a {
     text-decoration: none;
     color: $color-dark;
     font-size: $size-lg;
     margin-right: $size-sm;
     display: inline-block;
-    width: 65%;
+    width: 62%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -54,6 +62,20 @@ export default {
 
   small{
     margin-right: $size-sm;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+    position: absolute;
+    width: calc(80% - 40px);
+    max-width: 960px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .fade-enter, .fade-leave-to  {
+    /* .fade-leave-active below version 2.1.8 */
+    opacity: 0;
   }
 
 </style>
