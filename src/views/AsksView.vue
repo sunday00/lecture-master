@@ -1,36 +1,17 @@
 <template>
-  <ul>
-    <li v-for="item in asks" :key="item.id">
-        <!-- <a :href="'https://news.ycombinator.com/'+item.url" target="_blank">{{ item.title }}</a> -->
-        <router-link :to="`/item/${item.id}`">
-          {{ item.title }}
-        </router-link>
-        <small>{{ item.user }}</small>
-        <small>{{ item.time_ago }}</small>
-    </li>
-  </ul>
+  <list-item name="asks" />
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import ListItem from '@/components/ListItem.vue';
 
 export default {
-  data() {
-    return {
-
-    };
-  },
-  created() {
-    this.$store.dispatch('FETCH_ASKS');
-  },
-  computed: {
-    ...mapGetters({
-      asks: 'asks',
-    }),
+  components: {
+    ListItem,
   },
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 
 </style>

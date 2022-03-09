@@ -39,6 +39,25 @@ export default {
 
   .contents {
     margin-block-start: 0;
+    padding-inline-start: 0;
+  }
+
+  .contents li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: $size-sm;
+    margin-bottom: $size-sm;
+
+    .points {
+      padding: 4px;
+      background-color: $color-gray-700;
+      min-width: 25px;
+      min-height: 25px;
+      text-align: center;
+      align-items: center;
+      color: $color-lighter;
+    }
   }
 
   .contents li > a,
@@ -67,7 +86,7 @@ export default {
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
     position: absolute;
-    width: calc(80% - 40px);
+    width: calc(80%);
     max-width: 960px;
     display: block;
     margin: 0 auto;

@@ -1,37 +1,17 @@
 <template>
-  <ul>
-    <li v-for="item in news" :key="item.id">
-        <a :href="item.url" target="_blank">{{ item.title }}</a>
-        <small>
-          <router-link :to="`/user/${item.user}`">
-            {{ item.user }}
-          </router-link>
-        </small>
-        <small>{{ item.time_ago }}</small>
-    </li>
-  </ul>
+  <list-item name="news" />
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import ListItem from '@/components/ListItem.vue';
 
 export default {
-  data() {
-    return {
-
-    };
-  },
-  created() {
-    this.$store.dispatch('FETCH_NEWS');
-  },
-  computed: {
-    ...mapGetters({
-      news: 'news',
-    }),
+  components: {
+    ListItem,
   },
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 
 </style>
