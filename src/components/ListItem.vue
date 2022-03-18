@@ -4,9 +4,17 @@
       <div class="points">
         {{ item.points }}
       </div>
-      <a :href="item.url" target="_blank">{{ item.title }}</a>
+      <template v-if="name === 'asks'">
+        <router-link :to="`item/${item.id}`">{{ item.title }}</router-link>
+      </template>
+      <template v-else>
+        <a :href="item.url" target="_blank">{{ item.title }}</a>
+      </template>
       <small>
-        <router-link :to="`/user/${item.user}`">
+        <a v-if="name === 'jobs'" :href="item.url" target="_blank">
+          {{ item.domain }}
+        </a>
+        <router-link v-else :to="`/user/${item.user}`">
           {{ item.user }}
         </router-link>
       </small>
