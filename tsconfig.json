@@ -19,6 +19,7 @@
       "@a/*": ["src/api/*"],
       "@c/*": ["src/components/*"],
       "@v/*": ["src/views/*"],
+      "@u/*": ["src/utils/*"],
       "@s/*": ["src/store/*"],
     },
     "lib": [

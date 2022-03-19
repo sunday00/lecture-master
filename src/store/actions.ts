@@ -8,6 +8,7 @@ export default {
   FETCH_NEWS(ctx: ActionContext<State, State>) {
     fetchNews(1).then((res) => {
       ctx.commit('SET_NEWS', res.data);
+      return res;
     }).catch((err) => {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -16,6 +17,7 @@ export default {
   FETCH_JOBS(ctx: ActionContext<State, State>) {
     fetchJobs(1).then((res) => {
       ctx.commit('SET_JOBS', res.data);
+      return res;
     }).catch((err) => {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -24,6 +26,7 @@ export default {
   FETCH_ASKS(ctx: ActionContext<State, State>) {
     fetchAsks(1).then((res) => {
       ctx.commit('SET_ASKS', res.data);
+      return res;
     }).catch((err) => {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -32,6 +35,7 @@ export default {
   FETCH_USER(ctx: ActionContext<State, State>, name: string) {
     fetchUser(name).then((res) => {
       ctx.commit('SET_USER', res.data);
+      return res;
     }).catch((err) => {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -39,7 +43,9 @@ export default {
   },
   FETCH_ITEM(ctx: ActionContext<State, State>, id: number) {
     fetchItem(id).then((res) => {
+      ctx.dispatch('FETCH_USER', res.data.user);
       ctx.commit('SET_ITEM', res.data);
+      return res;
     }).catch((err) => {
       // eslint-disable-next-line no-console
       console.log(err);

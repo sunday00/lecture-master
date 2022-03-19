@@ -4,15 +4,40 @@
     <transition name="fade">
       <router-view class="contents" />
     </transition>
+    <Spinner :loading="loading" />
   </div>
 </template>
 
 <script>
 import ToolBar from '@c/Toolbar.vue';
+import Spinner from '@c/Spinner.vue';
+import bus from '@u/bus.ts';
 
 export default {
   components: {
     ToolBar,
+    Spinner,
+  },
+  data() {
+    return {
+      loading: false,
+    };
+  },
+  methods: {
+    startSpinner() {
+      this.loading = true;
+    },
+    endSpinner() {
+      this.loading = false;
+    },
+  },
+  created() {
+    bus.$on('start:spinner', this.startSpinner);
+    bus.$on('end:spinner', this.endSpinner);
+  },
+  beforeDestroy() {
+    bus.$off('start:spinner', this.startSpinner);
+    bus.$off('end:spinner', this.endSpinner);
   },
 };
 </script>

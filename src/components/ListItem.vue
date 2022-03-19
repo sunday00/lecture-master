@@ -34,7 +34,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch(`FETCH_${this.name.toUpperCase()}`);
+    // this.$store.dispatch(`FETCH_${this.name.toUpperCase()}`);
   },
   computed: {
     list() {

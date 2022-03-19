@@ -6,13 +6,18 @@
 
 <script>
 import UserProfile from '@/components/UserProfile.vue';
+import bus from '@u/bus.ts';
 
 export default {
   components: {
     UserProfile,
   },
   created() {
-    this.$store.dispatch('FETCH_USER', this.$route.params.id);
+    bus.$emit('start:spinner');
+    this.$store.dispatch('FETCH_USER', this.$route.params.id)
+      .then(() => {
+        bus.$emit('end:spinner');
+      });
   },
   computed: {
   },
