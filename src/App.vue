@@ -79,6 +79,12 @@ export default {
     }
   }
 
+  .user-div {
+    section p {
+      margin-block-start: 0;
+    }
+  }
+
   small{
     margin-right: $size-sm;
   }

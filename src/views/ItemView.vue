@@ -1,12 +1,7 @@
 <template>
-  <div>
+  <div class="user-div">
+    <UserProfile />
     <section>
-      <p class="user-container">
-        <router-link :to="`/user/${item.user}`">
-          <i class="fa-solid fa-user"></i>
-          {{ item.user }}
-        </router-link>
-      </p>
       <p>{{ item.id }}</p>
       <h2>{{ item.title }}</h2>
       <p>{{ item.time_ago }}</p>
@@ -20,8 +15,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import UserProfile from '@/components/UserProfile.vue';
 
 export default {
+  components: {
+    UserProfile,
+  },
   computed: {
     ...mapGetters({
       item: 'item',
@@ -29,6 +28,7 @@ export default {
   },
   created() {
     this.$store.dispatch('FETCH_ITEM', this.$route.params.id);
+    this.$store.dispatch('FETCH_USER', this.item.user);
   },
 };
 </script>
