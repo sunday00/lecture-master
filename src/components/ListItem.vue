@@ -5,7 +5,7 @@
         {{ item.points }}
       </div>
       <template v-if="name === 'asks'">
-        <router-link :to="`item/${item.id}`">{{ item.title }}</router-link>
+        <router-link :to="`/ask/item/${item.id}`">{{ item.title }}</router-link>
       </template>
       <template v-else>
         <a :href="item.url" target="_blank">{{ item.title }}</a>

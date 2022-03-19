@@ -24,6 +24,11 @@ const routes: Array<RouteConfig> = [
     component: Asks,
   },
   {
+    path: '/ask/item/:id',
+    name: 'item',
+    component: Item,
+  },
+  {
     path: '/jobs',
     name: 'jobs',
     component: Jobs,
@@ -32,11 +37,6 @@ const routes: Array<RouteConfig> = [
     path: '/user/:id',
     name: 'user',
     component: User,
-  },
-  {
-    path: '/item/:id',
-    name: 'item',
-    component: Item,
   },
 ];
 
