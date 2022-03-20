@@ -4,19 +4,15 @@
 
 <script>
 import ListItem from '@c/ListItem.vue';
-import bus from '@u/bus.ts';
+import ListMixinVue from '@/components/mixins/ListMixin.vue';
 
 export default {
   components: {
     ListItem,
   },
-  created() {
-    bus.$emit('start:spinner');
-    this.$store.dispatch('FETCH_NEWS')
-      .then(() => {
-        bus.$emit('end:spinner');
-      });
-  },
+  mixins: [
+    ListMixinVue,
+  ],
 };
 </script>
 
