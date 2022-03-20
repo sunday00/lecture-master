@@ -12,6 +12,7 @@ export default new Vuex.Store({
     news: [],
     asks: [],
     jobs: [],
+    list: [],
     user: {},
     item: {},
   },

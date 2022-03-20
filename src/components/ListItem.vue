@@ -4,7 +4,7 @@
       <div class="points">
         {{ item.points }}
       </div>
-      <template v-if="name === 'asks'">
+      <template v-if="name === 'ask'">
         <router-link :to="`/ask/item/${item.id}`">{{ item.title }}</router-link>
       </template>
       <template v-else>
@@ -38,7 +38,8 @@ export default {
   },
   computed: {
     list() {
-      return this.$store.getters[this.name];
+      // return this.$store.getters[this.name];
+      return this.$store.getters.list;
     },
   },
 };

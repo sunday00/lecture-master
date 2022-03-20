@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import News from '@/views/NewsView.vue';
-import Asks from '@/views/AsksView.vue';
-import Jobs from '@/views/JobsView.vue';
-import User from '@/views/UserView.vue';
-import Item from '@/views/ItemView.vue';
+import News from '@v/NewsView.vue';
+import Asks from '@v/AsksView.vue';
+import Jobs from '@v/JobsView.vue';
+import User from '@v/UserView.vue';
+import Item from '@v/ItemView.vue';
+import createListView from '@v/CreateListView';
 
 Vue.use(VueRouter);
 
@@ -16,12 +17,14 @@ const routes: Array<RouteConfig> = [
   {
     path: '/news',
     name: 'news',
-    component: News,
+    // component: News,
+    component: createListView('news'),
   },
   {
     path: '/asks',
-    name: 'asks',
-    component: Asks,
+    name: 'ask',
+    // component: Asks,
+    component: createListView('asks'),
   },
   {
     path: '/ask/item/:id',
@@ -31,7 +34,8 @@ const routes: Array<RouteConfig> = [
   {
     path: '/jobs',
     name: 'jobs',
-    component: Jobs,
+    // component: Jobs,
+    component: createListView('jobs'),
   },
   {
     path: '/user/:id',

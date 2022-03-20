@@ -12,6 +12,9 @@ export default {
   SET_ASKS(state: State, data: []) {
     state.asks = data;
   },
+  SET_LIST(state: State, data: []) {
+    state.list = data;
+  },
   SET_USER(state: State, data: User) {
     state.user = data;
   },

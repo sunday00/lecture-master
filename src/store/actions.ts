@@ -1,5 +1,5 @@
 import {
-  fetchJobs, fetchNews, fetchAsks, fetchUser, fetchItem,
+  fetchJobs, fetchNews, fetchAsks, fetchList, fetchUser, fetchItem,
 } from '@a/index';
 import { ActionContext } from 'vuex';
 import { State } from '@/types/state.d';
@@ -32,6 +32,17 @@ export default {
       console.log(err);
     });
   },
+
+  FETCH_LIST(ctx: ActionContext<State, State>, viewName: string) {
+    fetchList(viewName, 1).then((res) => {
+      ctx.commit('SET_LIST', res.data);
+      return res;
+    }).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
+  },
+
   FETCH_USER(ctx: ActionContext<State, State>, name: string) {
     fetchUser(name).then((res) => {
       ctx.commit('SET_USER', res.data);

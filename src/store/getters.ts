@@ -10,6 +10,9 @@ export default {
   jobs(state: State) {
     return state.jobs;
   },
+  list(state: State) {
+    return state.list;
+  },
   user(state: State) {
     return state.user;
   },

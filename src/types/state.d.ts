@@ -5,6 +5,7 @@ export type State = {
   news: [],
   jobs: [],
   asks: [],
+  list: [],
   user: User,
   item: Item
 };
