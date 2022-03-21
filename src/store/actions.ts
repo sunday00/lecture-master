@@ -1,38 +1,10 @@
 import {
-  fetchJobs, fetchNews, fetchAsks, fetchList, fetchUser, fetchItem,
+  fetchList, fetchUser, fetchItem,
 } from '@a/index';
 import { ActionContext } from 'vuex';
 import { State } from '@/types/state.d';
 
 export default {
-  FETCH_NEWS(ctx: ActionContext<State, State>) {
-    fetchNews(1).then((res) => {
-      ctx.commit('SET_NEWS', res.data);
-      return res;
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    });
-  },
-  FETCH_JOBS(ctx: ActionContext<State, State>) {
-    fetchJobs(1).then((res) => {
-      ctx.commit('SET_JOBS', res.data);
-      return res;
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    });
-  },
-  FETCH_ASKS(ctx: ActionContext<State, State>) {
-    fetchAsks(1).then((res) => {
-      ctx.commit('SET_ASKS', res.data);
-      return res;
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    });
-  },
-
   FETCH_LIST(ctx: ActionContext<State, State>, viewName: string) {
     fetchList(viewName, 1).then((res) => {
       ctx.commit('SET_LIST', res.data);

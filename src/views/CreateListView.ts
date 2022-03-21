@@ -1,10 +1,10 @@
 import ListView from '@v/ListView.vue';
-import { VNode, VueConstructor } from 'vue';
+import { Component, VNode } from 'vue';
 
 export default function createListView(viewName: string) {
   return {
     name: viewName,
-    render(createElement: (a: VueConstructor<Vue>) => VNode) {
+    render(createElement: (a: Component) => VNode) {
       return createElement(ListView);
     },
   };
