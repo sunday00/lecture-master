@@ -15,15 +15,17 @@ export default {
     });
   },
 
-  FETCH_USER(ctx: ActionContext<State, State>, name: string) {
-    return fetchUser(name).then((res) => {
+  async FETCH_USER(ctx: ActionContext<State, State>, name: string) {
+    try{
+      let res = await fetchUser(name);
       ctx.commit('SET_USER', res.data);
       return res;
-    }).catch((err) => {
+    } catch(err) {
       // eslint-disable-next-line no-console
       console.log(err);
-    });
+    }
   },
+
   FETCH_ITEM(ctx: ActionContext<State, State>, id: number) {
     return fetchItem(id).then((res) => {
       ctx.dispatch('FETCH_USER', res.data.user);
