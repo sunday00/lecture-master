@@ -1041,6 +1041,9 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .block {
   display: block;
 }
@@ -1484,6 +1487,9 @@ select {
 .pb-1 {
   padding-bottom: 0.25rem;
 }
+.pl-12 {
+  padding-left: 3rem;
+}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1531,6 +1537,9 @@ select {
 }
 .font-semibold {
   font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
 }
 .uppercase {
   text-transform: uppercase;
