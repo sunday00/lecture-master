@@ -18,7 +18,9 @@
 <div class="bg-gray-200 bg-opacity-25">
     @foreach($threads as $thread)
         <article class="p-6">
-            <h4 class="text-2xl">{{ $thread->title }}</h4>
+            <h4 class="text-2xl">
+                <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
+            </h4>
             <div class="body mt-1">
                 {!! $thread->body !!}
             </div>
