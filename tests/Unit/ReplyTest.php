@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Reply;
+use App\Models\Thread;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 //use PHPUnit\Framework\TestCase;
@@ -11,6 +12,13 @@ use Tests\TestCase;
 class ReplyTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->thread = Thread::factory()->create();
+    }
+
     /**
      * A basic unit test example.
      *
@@ -21,4 +29,6 @@ class ReplyTest extends TestCase
         $reply = Reply::factory()->create();
         $this->assertInstanceOf(User::class, $reply->owner);
     }
+
+
 }

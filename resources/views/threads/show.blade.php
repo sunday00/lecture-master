@@ -18,22 +18,14 @@
                     </div>
                 </div>
                 <div class="p-6 bg-gray-200 bg-opacity-25 mb-2">
-                    <h4 class="header font-bold">
-                        <a href="#">{{ $thread->user->name }}</a> created {{ $thread->created_at->diffForHumans() }}
-                    </h4>
-                    <hr />
-                    <div class="">{!! $thread->body !!}</div>
+                    <x-threads.article :thread="$thread"/>
                 </div>
 
                 @foreach($thread->replies as $reply)
                 <hr />
 
                 <div class="p-6 pl-12 bg-gray-200 bg-opacity-25 mb-2">
-                    <h4 class="header font-bold">
-                        <a href="#">{{ $reply->user->name }}</a> created {{ $reply->created_at->diffForHumans() }}
-                    </h4>
-                    <hr />
-                    <div class="">{!! $reply->body !!}</div>
+                    <x-threads.article :thread="$reply"/>
                 </div>
                 @endforeach
             </div>

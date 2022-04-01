@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Reply;
 use App\Models\Thread;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -40,5 +41,11 @@ class ReadThreadTest extends TestCase
         $reply = Reply::factory()->create(['thread_id' => $this->thread->id]);
         $this->get($this->thread->path())
             ->assertSee($reply->body);
+    }
+
+    /** @test */
+    public function a_thread_has_a_creator()
+    {
+        $this->assertInstanceOf(User::class, $this->thread->user);
     }
 }

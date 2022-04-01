@@ -20,6 +20,8 @@ Route::get('/', function () {
 Route::get('/threads', 'App\\Http\\Controllers\\ThreadController@index' )->name('threads.index');
 Route::get('/threads/{thread}', 'App\\Http\\Controllers\\ThreadController@show' )->name('threads.show');
 
+Route::post('/threads/{thread}/replies', 'App\\Http\\Controllers\\ReplyController@store')->name('reply.store');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
