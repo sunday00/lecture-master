@@ -4,6 +4,12 @@
     <app-content :items="items" @renew="renewItem"></app-content>
     <using-slot></using-slot>
     <check-box v-model="checked"></check-box>
+    <fetch-data url="https://jsonplaceholder.typicode.com/users/1">
+      <div slot-scope="{ res, loading }">
+        <p v-show="!loading">{{ res }}</p>
+        <p v-show="loading">loading...</p>
+      </div>
+    </fetch-data>
   </div>
 </template>
 
@@ -12,6 +18,7 @@ import AppHeader from './components/AppHeader.vue';
 import AppContent from './components/AppContent.vue';
 import UsingSlot from './components/UsingSlot.vue';
 import CheckBox from './components/CheckBox.vue';
+import FetchData from './components/FetchData.vue';
 
 export default {
   name: 'App',
@@ -20,6 +27,7 @@ export default {
     AppContent,
     UsingSlot,
     CheckBox,
+    FetchData,
   },
   data() {
     return {
