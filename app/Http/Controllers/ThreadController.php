@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Channel;
 use App\Models\Thread;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class ThreadController extends Controller
     {
         return view('threads.form', [
             'method' => 'POST',
+            'channels' => Channel::all()->sortBy('slug'),
         ]);
     }
 
@@ -41,6 +43,7 @@ class ThreadController extends Controller
     {
         $thread = Thread::create([
             'user_id' => auth()->id(),
+            'channel_id' => request('channel_id'),
             'title' => request('title'),
             'body' => request('body'),
         ]);
@@ -54,7 +57,7 @@ class ThreadController extends Controller
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\View\View
      */
-    public function show(Thread $thread): \Illuminate\View\View
+    public function show(string $channel_slug, Thread $thread): \Illuminate\View\View
     {
         return view('threads.show', compact('thread'));
     }

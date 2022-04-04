@@ -6,7 +6,7 @@
     @apply py-2 px-4;
 }
 
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group select {
     @apply w-full rounded-md border border-gray-400 shadow-inner p-2;
 }
 

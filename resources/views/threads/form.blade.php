@@ -12,7 +12,14 @@
                     @csrf
                     @method($method)
 
-                    <div class="form-group mt-4">
+                    <div class="form-group mt-4 w-1/4">
+                        <select name="channel_id" id="channel_id">
+                            @foreach($channels as $ch)
+                                <option value="{{ $ch->id }}">{{ $ch->slug }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input name="title" id="title" class="form-control w-full" placeholder="title" value="{{ $method === 'PATCH' ? $thread->title : old('title') }}" />
                     </div>
                     <div class="form-group">

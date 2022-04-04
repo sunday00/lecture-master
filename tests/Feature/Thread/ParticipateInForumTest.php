@@ -21,7 +21,7 @@ class ParticipateInForumTest extends TestCase
         $this->withoutExceptionHandling();
 
         $reply = make(Reply::class);
-        $this->sign()->post($this->thread->path() . '/replies', $reply->toArray());
+        $this->sign()->post($this->thread->path('replies'), $reply->toArray());
 
         $this->get($this->thread->path())
             ->assertSee($reply->body);

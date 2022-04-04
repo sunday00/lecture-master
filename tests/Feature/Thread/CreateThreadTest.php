@@ -18,7 +18,7 @@ class CreateThreadTest extends TestCase
         $this->withoutExceptionHandling();
 
         $thread = make(Thread::class);
-        $location = $this->sign()->post('/threads', $thread->toArray())
+        $location = $this->sign()->post(route('threads.store'), $thread->toArray())
             ->assertStatus(302)
             ->headers->get('location');
 

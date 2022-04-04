@@ -17,9 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('threads', 'App\\Http\\Controllers\\ThreadController');
+Route::resource('threads', 'App\\Http\\Controllers\\ThreadController')->except(['show']);
+Route::get('threads/{channel:slug}/{thread}', 'App\\Http\\Controllers\\ThreadController@show')->name('threads.show');
 
-Route::post('/threads/{thread}/replies', 'App\\Http\\Controllers\\ReplyController@store')->name('reply.store');
+Route::post('/threads/{channel:slug}/{thread}/replies', 'App\\Http\\Controllers\\ReplyController@store')->name('reply.store');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
