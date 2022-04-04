@@ -33,14 +33,14 @@
                 <div>
                     <form action="{{ $thread->path('replies') }}" method="POST">
                         @csrf
-                        <div class="form-group px-10 pt-8">
-                            <textarea class="form-control w-full rounded-md border-gray-400 shadow-inner" rows="4"
+                        <div class="form-group mt-4">
+                            <textarea class="form-control" rows="4"
                                 name="body" id="body" placeholder="Join this Thread"></textarea>
                         </div>
 
-                        <div class="form-group px-10 py-4 flex justify-end">
+                        <div class="form-group flex justify-end mb-4">
                             <button class="btn-outline-primary">
-                                Button
+                                Leave Reply
                             </button>
                         </div>
                     </form>

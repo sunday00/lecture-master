@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class ThreadController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware(['auth:sanctum'])->except(['index', 'show']);
+    }
+
     public function index(): View
     {
         $threads = Thread::latest()->get();
@@ -18,31 +22,39 @@ class ThreadController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('threads.form', [
+            'method' => 'POST',
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $thread = Thread::create([
+            'user_id' => auth()->id(),
+            'title' => request('title'),
+            'body' => request('body'),
+        ]);
+
+        return redirect($thread->path());
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Thread  $thread
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function show(Thread $thread)
+    public function show(Thread $thread): \Illuminate\View\View
     {
         return view('threads.show', compact('thread'));
     }

@@ -9,6 +9,8 @@ class Thread extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function path($flag = null)
     {
         return route($flag === 'replies' ? 'reply.store' : 'threads.show', $this->id);

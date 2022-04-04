@@ -1,23 +1,20 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Thread;
 
 use App\Models\Reply;
 use App\Models\Thread;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ReadThreadTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->thread = Thread::factory()->create();
+        $this->thread = create(Thread::class);
     }
 
     /** @test */
@@ -38,7 +35,7 @@ class ReadThreadTest extends TestCase
     /** @test */
     public function user_can_read_replies_that_are_associated_with_a_thread()
     {
-        $reply = Reply::factory()->create(['thread_id' => $this->thread->id]);
+        $reply = create(Reply::class, ['thread_id' => $this->thread->id]);
         $this->get($this->thread->path())
             ->assertSee($reply->body);
     }

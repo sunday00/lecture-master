@@ -1,27 +1,18 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Thread;
 
 use App\Models\Reply;
 use App\Models\Thread;
-use App\Models\User;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ParticipateInForumTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function setUp(): void
     {
         parent::setUp();
 
-        /** @var Authenticatable $user */
-        $user = User::factory()->create();
-        $this->signable = $user;
-        $this->thread = Thread::factory()->create();
+        $this->thread = create(Thread::class);
     }
 
     /** @test */
@@ -29,10 +20,8 @@ class ParticipateInForumTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->actingAs($this->signable);
-
-        $reply = Reply::factory()->make();
-        $this->post($this->thread->path() . '/replies', $reply->toArray());
+        $reply = make(Reply::class);
+        $this->sign()->post($this->thread->path() . '/replies', $reply->toArray());
 
         $this->get($this->thread->path())
             ->assertSee($reply->body);
@@ -44,7 +33,7 @@ class ParticipateInForumTest extends TestCase
         $this->withoutExceptionHandling();
         $this->expectException('Illuminate\\Auth\\AuthenticationException');
 
-        $reply = Reply::factory()->make();
+        $reply = make(Reply::class);
         $this->post($this->thread->path() . '/replies', $reply->toArray());
     }
 }

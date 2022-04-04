@@ -17,8 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/threads', 'App\\Http\\Controllers\\ThreadController@index' )->name('threads.index');
-Route::get('/threads/{thread}', 'App\\Http\\Controllers\\ThreadController@show' )->name('threads.show');
+Route::resource('threads', 'App\\Http\\Controllers\\ThreadController');
 
 Route::post('/threads/{thread}/replies', 'App\\Http\\Controllers\\ReplyController@store')->name('reply.store');
 
