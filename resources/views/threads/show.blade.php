@@ -18,16 +18,38 @@
                     </div>
                 </div>
                 <div class="p-6 bg-gray-200 bg-opacity-25 mb-2">
-                    <x-threads.article :thread="$thread"/>
+                    <x-threads.article :thread="$thread"></x-threads.article>
                 </div>
 
                 @foreach($thread->replies as $reply)
                 <hr />
 
-                <div class="p-6 pl-12 bg-gray-200 bg-opacity-25 mb-2">
-                    <x-threads.article :thread="$reply"/>
+                <div class="p-6 pl-12 bg-gray-200 bg-opacity-25 mb-2" id="{{ $reply->id }}">
+                    <x-threads.article :thread="$reply"></x-threads.article>
                 </div>
                 @endforeach
+
+                @if( auth()->check() )
+                <div>
+                    <form action="{{ $thread->path('replies') }}" method="POST">
+                        @csrf
+                        <div class="form-group px-10 pt-8">
+                            <textarea class="form-control w-full rounded-md border-gray-400 shadow-inner" rows="4"
+                                name="body" id="body" placeholder="Join this Thread"></textarea>
+                        </div>
+
+                        <div class="form-group px-10 py-4 flex justify-end">
+                            <button class="btn-outline-primary">
+                                Button
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                @else
+                <div class="px-10 py-8">
+                    <p>Please <a href="{{ route('login') }}" class="text-blue-500">sign in</a> now to join this thread.</p>
+                </div>
+                @endif
             </div>
         </div>
     </div>

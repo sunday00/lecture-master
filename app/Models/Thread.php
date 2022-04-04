@@ -9,9 +9,9 @@ class Thread extends Model
 {
     use HasFactory;
 
-    public function path()
+    public function path($flag = null)
     {
-        return route('threads.show', $this->id);
+        return route($flag === 'replies' ? 'reply.store' : 'threads.show', $this->id);
     }
 
     public function user()

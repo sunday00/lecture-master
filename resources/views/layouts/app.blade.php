@@ -37,6 +37,10 @@
             <main>
                 {{ $slot }}
             </main>
+
+            <footer class="block min-h-lg">
+
+            </footer>
         </div>
 
         @stack('modals')

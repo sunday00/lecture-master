@@ -13,11 +13,11 @@ class ReplyController extends Controller
 
     public function store(Thread $thread)
     {
-        $thread->addReply([
+        $reply = $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id(),
         ]);
 
-        return redirect($thread->path())->with('message', 'replied');
+        return redirect($thread->path() . '#' . $reply->id)->with('message', 'replied');
     }
 }
