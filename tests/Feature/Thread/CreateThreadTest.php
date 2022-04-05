@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Thread;
 
+use App\Models\Channel;
 use App\Models\Thread;
 use Tests\TestCase;
 
@@ -10,6 +11,11 @@ class CreateThreadTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+    }
+
+    private function publish_thread($params = [])
+    {
+        return $this->sign()->post('/threads', make(Thread::class, $params)->toArray());
     }
 
     /** @test */
@@ -41,5 +47,21 @@ class CreateThreadTest extends TestCase
     {
         $this->get(route('threads.create'))
             ->assertRedirect(route('login'));
+    }
+
+    /** @test */
+    public function a_thread_requires_a_title()
+    {
+        $this->publish_thread(['title' => null])
+            ->assertSessionHasErrors('title');
+    }
+
+    /** @test */
+    public function a_thread_channel_id_should_in_channels_table()
+    {
+        Channel::factory(5)->create();
+
+        $this->publish_thread(['channel_id' => 6])
+            ->assertSessionHasErrors('channel_id');
     }
 }

@@ -36,4 +36,13 @@ class ParticipateInForumTest extends TestCase
         $reply = make(Reply::class);
         $this->post($this->thread->path() . '/replies', $reply->toArray());
     }
+
+//    /** @test */
+//    public function a_reply_requires_a_body()
+//    {
+//        $this->sign()->post($this->thread->path().'/replies', make(Reply::class, ['body' => null])->toArray())
+//            ->assertSessionHasErrors('body');
+//    }
+
+
 }
