@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::resource('threads', 'App\\Http\\Controllers\\ThreadController')->except(['show']);
 Route::get('threads/{channel:slug}/{thread}', 'App\\Http\\Controllers\\ThreadController@show')->name('threads.show');
+Route::get('threads/{channel:slug}', 'App\\Http\\Controllers\\ThreadController@index')->name('threads.list');
 
 Route::post('/threads/{channel:slug}/{thread}/replies', 'App\\Http\\Controllers\\ReplyController@store')->name('reply.store');
 
