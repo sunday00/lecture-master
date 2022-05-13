@@ -31,7 +31,6 @@ class ThreadController extends Controller
     {
         return view('threads.form', [
             'method' => 'POST',
-            'channels' => Channel::all()->sortBy('slug'),
         ]);
     }
 

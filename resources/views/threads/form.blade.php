@@ -14,8 +14,9 @@
 
                     <div class="form-group mt-4 w-1/4">
                         <select name="channel_id" id="channel_id" class="@error('channel_id') error @enderror">
+                            <option>--channel--</option>
                             @foreach($channels as $ch)
-                                <option value="{{ $ch->id }}">{{ $ch->slug }}</option>
+                                <option value="{{ $ch->id }}">{{ $ch->name }}</option>
                             @endforeach
                         </select>
                         @error('channel_id')

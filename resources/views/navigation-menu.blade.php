@@ -37,7 +37,7 @@
                                     list of channel to filter list
                                 </div>
 
-                                @foreach(App\Models\Channel::all() as $channel)
+                                @foreach($channels as $channel)
                                 <x-jet-dropdown-link href="{{ route('threads.list', $channel->slug) }}">
                                     {{ $channel->name }}
                                 </x-jet-dropdown-link>
