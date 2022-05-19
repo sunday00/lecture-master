@@ -26,3 +26,5 @@ Route::post('/threads/{channel:slug}/{thread}/replies', 'App\\Http\\Controllers\
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/test/ver', fn () => phpversion());

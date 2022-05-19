@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\ThreadFilter;
 use App\Models\Channel;
 use App\Models\Thread;
 use App\Models\User;
@@ -15,17 +16,9 @@ class ThreadController extends Controller
         $this->middleware(['auth:sanctum'])->except(['index', 'show']);
     }
 
-    public function index(Channel $channel): View
+    public function index(Channel $channel, ThreadFilter $filter): View
     {
-        if($channel->exists) $threads = $channel->threads()->latest();
-        else $threads = Thread::latest();
-
-        if($username = request('by')) {
-            $user = User::where('name', $username)->firstOrFail();
-            $threads = $threads->where('user_id', $user->id);
-        }
-
-        $threads = $threads->get();
+        $threads = $this->getThreads($filter, $channel);
 
         return view('threads.index', compact('threads'));
     }
@@ -109,5 +102,20 @@ class ThreadController extends Controller
     public function destroy(Thread $thread)
     {
         //
+    }
+
+    /**
+     * @param ThreadFilter $filter
+     * @param Channel $channel
+     * @return mixed
+     */
+    public function getThreads(ThreadFilter $filter, Channel $channel)
+    {
+        $threads = Thread::latest()->filter($filter);
+
+        if ($channel->exists) $threads->where('channel_id', $channel->id);
+
+        $threads = $threads->get();
+        return $threads;
     }
 }

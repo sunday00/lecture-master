@@ -68,8 +68,9 @@ class ReadThreadTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->sign(create(User::class, ['name' => 'JD']));
+        $other_user = create(User::class, ['name' => 'XX']);
         $threadByJD = create(Thread::class, ['user_id' => auth()->id()]);
-        $threadNotByJD = create(Thread::class);
+        $threadNotByJD = create(Thread::class, ['title' => \Str::random(10).rand(1000,9999), 'user_id' => $other_user->id]);
 
         $this->get('/threads?by=JD')
             ->assertSee($threadByJD->title)
