@@ -20,4 +20,14 @@ class Reply extends Model
     {
         return $this->user();
     }
+
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favorite');
+    }
+
+    public function favorite()
+    {
+        return $this->favorites()->create(['user_id' => auth()->id()]);
+    }
 }
