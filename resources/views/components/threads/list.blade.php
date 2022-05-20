@@ -21,6 +21,9 @@
             <h4 class="text-2xl">
                 <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
             </h4>
+
+            <strong>{{ $thread->replies_count }} {{ \Illuminate\Support\Str::plural('reply', $thread->replies_count) }}</strong>
+
             <div class="body mt-1">
                 {!! $thread->body !!}
             </div>

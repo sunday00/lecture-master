@@ -7,6 +7,7 @@ use App\Models\Channel;
 use App\Models\Thread;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -16,9 +17,11 @@ class ThreadController extends Controller
         $this->middleware(['auth:sanctum'])->except(['index', 'show']);
     }
 
-    public function index(Channel $channel, ThreadFilter $filter): View
+    public function index(Channel $channel, ThreadFilter $filter): View|Collection
     {
         $threads = $this->getThreads($filter, $channel);
+
+        if(request()->wantsJson()) return $threads;
 
         return view('threads.index', compact('threads'));
     }
@@ -66,8 +69,14 @@ class ThreadController extends Controller
      * @return \Illuminate\View\View
      */
     public function show(string $channel_slug, Thread $thread): \Illuminate\View\View
+//    public function show(string $channel_slug, Thread $thread)
     {
-        return view('threads.show', compact('thread'));
+//        return $thread;
+
+        return view('threads.show', [
+            'thread' => $thread,
+            'replies' => $thread->replies()->paginate(25),
+        ]);
     }
 
     /**
