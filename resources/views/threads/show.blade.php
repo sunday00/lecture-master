@@ -21,7 +21,15 @@
                 <hr />
 
                 <div class="p-6 pl-12 bg-gray-200 bg-opacity-25 mb-2" id="{{ $reply->id }}">
-                    <x-threads.article :thread="$reply"></x-threads.article>
+                    <x-threads.article :thread="$reply">
+                        <x-slot name="favorite">
+                            <form action="{{ route('reply.favorite', [$reply]) }}" method="POST">
+                                @csrf
+                                <span class="text-red-500 mr-4">{{$reply->favorites->count()}}</span>
+                                <button type="submit" class="text-red-400 border border-red-400 rounded rounded-full w-8 h-8">{{ $reply->isFavorited() ? '♥' : '♡'}}</button>
+                            </form>
+                        </x-slot>
+                    </x-threads.article>
                 </div>
                 @endforeach
 

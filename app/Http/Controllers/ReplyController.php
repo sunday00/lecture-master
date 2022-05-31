@@ -39,7 +39,8 @@ class ReplyController extends Controller
         $fv = $reply->favorites()->where('user_id', auth()->id())->first();
 
         if( $fv ) {
-            return $fv->delete();
+            $fv->delete();
+            return back()->with('status', 'cancel favorite');
         }
 
         return $reply->favorite();

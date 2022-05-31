@@ -28,6 +28,13 @@ class Reply extends Model
 
     public function favorite()
     {
-        return $this->favorites()->create(['user_id' => auth()->id()]);
+        $this->favorites()->create(['user_id' => auth()->id()]);
+
+        return back()->with('status', 'success favorite reply');
+    }
+
+    public function isFavorited()
+    {
+        return $this->favorites()->where('user_id', auth()->id())->exists();
     }
 }

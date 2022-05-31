@@ -68,7 +68,7 @@ class ThreadController extends Controller
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\View\View
      */
-    public function show(string $channel_slug, Thread $thread): \Illuminate\View\View
+    public function show(string $channel_slug, Thread $thread): \Illuminate\View\View | Collection
 //    public function show(string $channel_slug, Thread $thread)
     {
 //        return $thread;

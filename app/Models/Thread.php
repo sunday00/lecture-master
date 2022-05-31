@@ -40,7 +40,7 @@ class Thread extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->with(['favorites', 'owner']);
     }
 
 //    public function getReplyCountAttribute()
