@@ -26,7 +26,7 @@
                             <form action="{{ route('reply.favorite', [$reply]) }}" method="POST">
                                 @csrf
                                 <span class="text-red-500 mr-4">{{$reply->favorites->count()}}</span>
-                                <button type="submit" class="text-red-400 border border-red-400 rounded rounded-full w-8 h-8">{{ $reply->isFavorited() ? '♥' : '♡'}}</button>
+                                <button type="submit" class="text-red-400 border border-red-400 rounded rounded-full w-8 h-8">{{ $reply->isFavorited ? '♥' : '♡'}}</button>
                             </form>
                         </x-slot>
                     </x-threads.article>

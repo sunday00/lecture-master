@@ -71,7 +71,7 @@ class ThreadController extends Controller
     public function show(string $channel_slug, Thread $thread): \Illuminate\View\View | Collection
 //    public function show(string $channel_slug, Thread $thread)
     {
-//        return $thread;
+        $thread = $thread->with('replies')->where('id' , $thread->id)->first();
 
         return view('threads.show', [
             'thread' => $thread,
@@ -120,7 +120,7 @@ class ThreadController extends Controller
      */
     public function getThreads(ThreadFilter $filter, Channel $channel)
     {
-        $threads = Thread::latest()->filter($filter);
+        $threads = Thread::with('channel')->latest()->filter($filter);
 
         if ($channel->exists) $threads->where('channel_id', $channel->id);
 

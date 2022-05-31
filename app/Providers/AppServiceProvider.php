@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \View::composer('*', fn ($v) => $v->with('channels', Channel::all()));
+        \View::composer('navigation-menu', fn ($v) => $v->with('channels', Channel::all()));
 //        \View::share('channels', Channel::all());
     }
 }

@@ -11,6 +11,10 @@ class Reply extends Model
 
     protected $guarded = [];
 
+    protected $appends = [
+        'isFavorited'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -33,8 +37,8 @@ class Reply extends Model
         return back()->with('status', 'success favorite reply');
     }
 
-    public function isFavorited()
+    public function getisFavoritedAttribute()
     {
-        return $this->favorites()->where('user_id', auth()->id())->exists();
+        return $this->favorites->where('user_id', auth()->id())->first();
     }
 }
