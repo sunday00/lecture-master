@@ -12,6 +12,10 @@ const Average = () => {
   const [number, setNumber] = useState('');
 
   const onChange = (e) => {
+    if (e.code === 'Enter') {
+      onInsert(e);
+      e.target.value = '';
+    }
     setNumber(e.target.value);
   };
 
@@ -23,7 +27,7 @@ const Average = () => {
 
   return (
     <div>
-      <input value={number} onChange={onChange} />
+      <input value={number} onChange={onChange} onKeyUp={onChange} />
       <button onClick={onInsert}>Insert</button>
       <ul>
         {list.map((value, index) => (
