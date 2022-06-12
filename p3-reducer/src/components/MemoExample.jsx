@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 const getAverage = (numbers) => {
   console.log('calculating...');
@@ -15,6 +15,7 @@ const Average = () => {
     if (e.code === 'Enter') {
       onInsert(e);
       e.target.value = '';
+      setNumber('');
     }
     setNumber(e.target.value);
   };
@@ -24,6 +25,8 @@ const Average = () => {
     setList(nextList);
     setNumber('');
   };
+
+  const memorizedAvg = useMemo(() => getAverage(list), [list]);
 
   return (
     <div>
@@ -35,7 +38,7 @@ const Average = () => {
         ))}
       </ul>
       <div>
-        <strong>Avg: </strong> {getAverage(list)}
+        <strong>Avg: </strong> {memorizedAvg}
       </div>
     </div>
   );
