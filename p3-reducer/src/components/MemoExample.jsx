@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 
 const getAverage = (numbers) => {
   console.log('calculating...');
@@ -10,6 +10,15 @@ const getAverage = (numbers) => {
 const Average = () => {
   const [list, setList] = useState([]);
   const [number, setNumber] = useState('');
+  const inputEl = useRef(null);
+
+  const localV = useRef(33);
+  const setV = (n) => {
+    localV.current = n;
+  };
+  const getV = () => {
+    return localV.current;
+  };
 
   const onChange = useCallback(
     (e) => {
@@ -28,6 +37,7 @@ const Average = () => {
       const nextList = list.concat(parseInt(number));
       setList(nextList);
       setNumber('');
+      inputEl.current.focus();
     },
     [number, list]
   );
@@ -36,7 +46,12 @@ const Average = () => {
 
   return (
     <div>
-      <input value={number} onChange={onChange} onKeyUp={onChange} />
+      <input
+        value={number}
+        onChange={onChange}
+        onKeyUp={onChange}
+        ref={inputEl}
+      />
       <button onClick={onInsert}>Insert</button>
       <ul>
         {list.map((value, index) => (
@@ -45,6 +60,23 @@ const Average = () => {
       </ul>
       <div>
         <strong>Avg: </strong> {memorizedAvg}
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            setV(getV() + 1);
+          }}
+        >
+          +
+        </button>
+        <p>{getV()}</p>
+        <button
+          onClick={() => {
+            console.log(getV());
+          }}
+        >
+          update
+        </button>
       </div>
     </div>
   );
