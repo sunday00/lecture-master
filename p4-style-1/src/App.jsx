@@ -1,4 +1,5 @@
 import ScssExample from './components/ScssExample';
+import StyledComponent from './components/StyledComponent';
 import UsingModule from './components/UsingModule';
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
       </section>
       <section>
         <UsingModule></UsingModule>
+      </section>
+      <section>
+        <StyledComponent></StyledComponent>
       </section>
     </div>
   );
