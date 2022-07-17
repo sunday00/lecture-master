@@ -1,5 +1,4 @@
-.TodoListItem {
-  padding: 1rem;
+.TodoListItem-virtualized {
   display: flex;
   align-items: center;
   &:nth-child(even) {
