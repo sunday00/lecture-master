@@ -1,19 +1,54 @@
+import { useCallback, useRef, useState } from 'react';
+
 const Home = () => {
+  const nextId = useRef(1);
+  const [form, setForm] = useState({ name: '', username: '' });
+  const [data, setData] = useState({
+    array: [],
+    uselessValue: null,
+  });
+
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setForm({
+        ...form,
+        [name]: [value],
+      });
+    },
+    [form]
+  );
+
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+    const info = {
+      id: nextId.current,
+      name: form.name,
+      username: form.username,
+    };
+
+    setData({
+      ...data,
+      array: data.array.concat(info),
+    });
+
+    setForm({ name: '', username: '' });
+
+    nextId.current++;
+  });
+
+  const onRemove = useCallback((id) => {
+    setData({
+      ...data,
+      array: data.array.filter((info) => info.id !== id),
+    });
+  });
+
   return (
     <div className="home-wrap">
-      <section className="hero min-h-screen">
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-            <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-              exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-            <button className="btn btn-primary">Get Started</button>
-          </div>
-        </div>
-      </section>
+      <section className="hero min-h-screen"></section>
     </div>
   );
-}
+};
 
 export default Home;
