@@ -7,6 +7,12 @@ const UsingCustomHook = () => {
     age: 0,
   });
 
+  const v3 = 33;
+
+  const f = () => {
+    v3;
+  };
+
   const { name, age } = state;
 
   return (
