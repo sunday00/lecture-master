@@ -1,25 +1,15 @@
-import {useEffect, useState} from "react";
-// import {useNavigate, usePrompt} from "react-router-dom";
+import {useBlocker} from "@/hooks/useBlocker.jsx";
 
 export default () => {
-  // const navigate = useNavigate()
-  const [isBlocking, setIsBlocking] = useState(true)
+  const leaveWithPrompt = useBlocker()
 
   const handleGoBack = () => {
-    // navigate.goBack()
+    leaveWithPrompt(-1)
   }
 
   const handleGoHome = () => {
-    // navigate.push('/')
+    leaveWithPrompt('/')
   }
-
-  // const unblock = usePrompt('sure?', isBlocking)
-
-  useEffect(() => {
-    return () => {
-      // if(unblock) unblock()
-    }
-  }, [])
 
   return (
     <div className="flex justify-center items-center h-[100vh]">
