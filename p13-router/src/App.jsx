@@ -1,21 +1,23 @@
 import {useState} from 'react';
-import {Link, Route, Routes} from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import Home from '@v/Home.jsx';
 import About from "@v/About.jsx";
 import Profiles from "@v/Profiles.jsx";
 import HistorySample from "@v/HistorySample";
+import WithSample from "@v/WithSample";
 
 function App() {
 
 
   return (
-    <div className="App" data-theme="dracula">
+    <div className="App" data-theme="city">
       <section className="fixed w-full">
         <nav className="flex mb-4 p-4 gap-2 justify-center">
-          <Link className="btn btn-info" to={'/'}>home</Link>
-          <Link className="btn btn-info" to={'/about'}>소개 보기</Link>
-          <Link className="btn btn-info" to={'/profiles'}>과일 보기</Link>
-          <Link className="btn btn-info" to={'/history-sample'}>history 사용</Link>
+          <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/'}>home</NavLink>
+          <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/about'}>소개 보기</NavLink>
+          <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/profiles'}>과일 보기</NavLink>
+          <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/history-sample'}>history 사용</NavLink>
+          <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/with-sample'}>with 사용</NavLink>
         </nav>
       </section>
       <Routes>
@@ -27,6 +29,8 @@ function App() {
         {/*<Route path={"/profile/:username"} element={<Profile />}></Route>*/}
         <Route path={"/profiles/*"} element={<Profiles />}></Route>
         <Route path={"/history-sample"} element={<HistorySample />}></Route>
+        <Route path={"/with-sample"} exact element={<WithSample />}></Route>
+        <Route path={"/with-sample/:id"} element={<WithSample />}></Route>
       </Routes>
     </div>
   )
