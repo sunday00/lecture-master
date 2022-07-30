@@ -1,3 +1,5 @@
+import {NavLink} from "react-router-dom";
+
 const categories = [
   {
     name: 'all',
@@ -29,7 +31,7 @@ const categories = [
   }
 ];
 
-export default ({onSelect, category}) => {
+export default ({category}) => {
   return (<div className="navbar bg-base-100">
     <div className="flex-1">
       <a className="btn btn-ghost normal-case text-xl">Korean News</a>
@@ -39,9 +41,9 @@ export default ({onSelect, category}) => {
         {
           categories.map(c => (
             <li key={c.name}>
-              <a href="#"
+              <NavLink to={c.name === 'all' ? '/' : `/${c.name}`}
                  className={c.name === category ? 'bg-accent' : ''}
-                 onClick={() => onSelect(c.name)}>{c.text}</a>
+                 >{c.text}</NavLink>
             </li>
           ))
         }
