@@ -2,23 +2,24 @@ import NewsItems from "@c/NewsItems";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-export default () => {
+export default ({category}) => {
   const [articles, setArticles] = useState(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchData = () => {
       setLoading(true)
-      axios.get('https://newsapi.org/v2/top-headlines?country=kr&apiKey=1f106a76326a43f8ac22286e3a2e5c8f')
+      const categoryQuery = category === 'all' ? '' : `&category=${category}`
+      axios.get(`https://newsapi.org/v2/top-headlines?country=kr${categoryQuery}&apiKey=${import.meta.env.VITE_NEWS_KEY}`)
         .then(res => {
           setArticles(res.data.articles)
           setLoading(false)
         }).catch(e => {
           console.log(e)
-      })
+        })
     }
     fetchData()
-  }, [])
+  }, [category])
 
   if(loading) return (<div role="status" className="w-full flex justify-center items-center h-[100vh]">
     <svg aria-hidden="true" className="w-20 h-20 text-white animate-spin dark:text-white fill-blue-400"
