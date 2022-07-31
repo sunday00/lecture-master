@@ -1,15 +1,19 @@
 import ColorBox from "@c/ColorBox.jsx";
-import color from "@/contexts/color.jsx";
+import {ColorProvider} from "@/contexts/color.jsx";
+import SelectColor from "@c/SelectColor.jsx";
 
 const Home = () => {
   return (
-    <color.Provider value={{ color: 'emerald' }}>
+    <ColorProvider>
       <div className="home-wrap">
-        <section className="hero min-h-screen">
-          <ColorBox></ColorBox>
+        <section className="hero h-screen">
+          <div className="flex-col">
+            <SelectColor></SelectColor>
+            <ColorBox></ColorBox>
+          </div>
         </section>
       </div>
-    </color.Provider>
+    </ColorProvider>
   );
 }
 
