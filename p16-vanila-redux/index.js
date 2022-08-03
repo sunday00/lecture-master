@@ -1,4 +1,6 @@
-const divToggle = document.querySelector('.toggle' )
+import { configureStore } from '@reduxjs/toolkit'
+
+const checkToggle = document.querySelector('.toggle' )
 const counter = document.querySelector('h2' )
 const btnIncrease = document.querySelector('#increase' )
 const btnDecrease = document.querySelector( '#decrease' )
@@ -37,3 +39,33 @@ function reducer (state = initialState, action) {
       return state;
   }
 }
+
+const store = configureStore({ reducer })
+
+const render = () => {
+  const state = store.getState()
+
+  if(state.toggle) {
+    checkToggle.classList.add('active')
+  } else {
+    checkToggle.classList.remove('active')
+  }
+
+  counter.innerText = state.counter
+}
+
+render()
+
+store.subscribe(render)
+
+checkToggle.addEventListener('change', (e) => {
+  store.dispatch(toggle_switch())
+})
+
+btnIncrease.addEventListener('click', (e) => {
+  store.dispatch(increase(1))
+})
+
+btnDecrease.addEventListener('click', (e) => {
+  store.dispatch(decrease())
+})
