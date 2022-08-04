@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "types": ["module"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@s/*": ["./src/stores/*"],
+      "@v/*": ["./src/views/*"],
+      "@c/*": ["./src/components/*"]
+    }
+  },
+  "include": ["src"],
+  "references": []
+}
