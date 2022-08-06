@@ -1,12 +1,21 @@
-import { useState } from 'react';
-import CounterContainer from '@v/CounterContainer.jsx';
+import { useState } from 'react'
+import { Routes, Route, NavLink } from 'react-router-dom';
+import CounterContainer from '@v/CounterContainer.jsx'
+import Todos from '@c/Todos.jsx';
 
 function App() {
 
 
   return (
     <div className="App" data-theme="dracula">
-      <CounterContainer />
+      <nav className="flex gap-4 p-4">
+        <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/'}>Count</NavLink>
+        <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/todos'}>Todos</NavLink>
+      </nav>
+      <Routes>
+        <Route path="/" element={<CounterContainer />} />
+        <Route path="/todos" element={<Todos />} />
+      </Routes>
     </div>
   )
 }

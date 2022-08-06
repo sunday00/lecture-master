@@ -1,0 +1,1 @@
+const CHANGE_INPUT = 'todos/CHANGE_INPUT'

@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a.btn.active-true {
+  @apply bg-accent;
+}
