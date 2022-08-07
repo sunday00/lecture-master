@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route, NavLink } from 'react-router-dom';
 import CounterContainer from '@v/CounterContainer.jsx'
-import Todos from '@c/Todos.jsx';
+import TodosContainer from '@v/TodosContainer';
 
 function App() {
 
@@ -14,7 +14,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<CounterContainer />} />
-        <Route path="/todos" element={<Todos />} />
+        <Route path="/todos" element={<TodosContainer />} />
       </Routes>
     </div>
   )

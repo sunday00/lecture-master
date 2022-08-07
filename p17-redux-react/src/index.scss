@@ -5,3 +5,7 @@
 a.btn.active-true {
   @apply bg-accent;
 }
+
+.todo-done {
+  text-decoration: line-through;
+}
