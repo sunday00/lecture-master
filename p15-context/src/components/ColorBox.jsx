@@ -1,6 +1,9 @@
-import {ColorConsumer} from "@/contexts/color.jsx";
+import {useContext} from "react";
+import ColorContext from "@/contexts/color.jsx";
 
 export default () => {
+  const {state} = useContext(ColorContext)
+
   return (
     <div className="">
       <input type="hidden" className="bg-red-400"/>
@@ -16,14 +19,10 @@ export default () => {
       <input type="hidden" className="bg-violet-400"/>
       <input type="hidden" className="bg-fuchsia-400"/>
       <input type="hidden" className="bg-rose-400"/>
-      <ColorConsumer>
-        {value => (
-          <div className="flex gap-2">
-            <div className={`w-20 h-20 bg-${value.state.color}-400 border `}></div>
-            <div className={`w-20 h-20 bg-${value.state.subcolor}-400 border `}></div>
-          </div>
-        )}
-      </ColorConsumer>
+      <div className="flex gap-2">
+        <div className={`w-20 h-20 bg-${state.color}-400 border `}></div>
+        <div className={`w-20 h-20 bg-${state.subcolor}-400 border `}></div>
+      </div>
     </div>
   )
 }

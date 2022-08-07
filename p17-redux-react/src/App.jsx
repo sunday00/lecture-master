@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App" data-theme="dracula">
-      <nav className="flex gap-4 p-4">
+      <nav className="flex gap-4 p-4 text-center justify-center">
         <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/'}>Count</NavLink>
         <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/todos'}>Todos</NavLink>
       </nav>

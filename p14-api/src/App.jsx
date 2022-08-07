@@ -4,7 +4,7 @@ import NewsPage from "@v/NewsPage.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <div className="App container mx-auto bg-neutral" data-theme="pastel">
+      <div className="App container mx-auto bg-neutral" data-theme="city">
         <Routes>
           <Route path="/" exact element={<NewsPage />} />
           <Route path="/:category" element={<NewsPage />} />
