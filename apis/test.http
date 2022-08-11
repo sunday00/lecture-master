@@ -1,0 +1,12 @@
+### all boards
+GET {{HOST}}/board
+
+
+### create boards
+POST {{HOST}}/board
+Content-Type: application/json
+
+{
+  "title": "test1",
+  "description": "hello nest"
+}
