@@ -1,0 +1,17 @@
+### all boards
+GET {{HOST}}/board
+
+
+### create boards
+POST {{HOST}}/board
+Content-Type: application/json
+
+{
+  "title": "test Hawk",
+  "description": "Take Off Hawk!"
+}
+
+> {% client.global.set('LAST_BOARD_ID', response.body.id); %}
+
+### get one by id
+GET {{HOST}}/board/{{LAST_BOARD_ID}}
