@@ -27,4 +27,20 @@ export class BoardService {
   getBoardById(id: string): Board {
     return this.boards.find((board) => board.id === id);
   }
+
+  updateBoardStatusById(id: string, status: BoardStatus): Board {
+    const board = this.getBoardById(id);
+    board.status = status;
+
+    return board;
+  }
+
+  deleteById(id: string): SimpleSuccessResponse {
+    this.boards = this.boards.filter((board) => board.id !== id);
+
+    return {
+      success: true,
+      message: 'successfully deleted',
+    };
+  }
 }

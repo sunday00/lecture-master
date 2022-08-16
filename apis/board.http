@@ -1,7 +1,6 @@
 ### all boards
 GET {{HOST}}/board
 
-
 ### create boards
 POST {{HOST}}/board
 Content-Type: application/json
@@ -13,5 +12,25 @@ Content-Type: application/json
 
 > {% client.global.set('LAST_BOARD_ID', response.body.id); %}
 
+### create null boards
+POST {{HOST}}/board
+Content-Type: application/json
+
+{
+  "title": "",
+  "description": ""
+}
+
 ### get one by id
 GET {{HOST}}/board/{{LAST_BOARD_ID}}
+
+### update status one by id
+PATCH  {{HOST}}/board/{{LAST_BOARD_ID}}/status
+Content-Type: application/json
+
+{
+  "status": "PRIVATE"
+}
+
+### delete one by id
+DELETE {{HOST}}/board/{{LAST_BOARD_ID}}
