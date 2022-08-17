@@ -24,6 +24,9 @@ Content-Type: application/json
 ### get one by id
 GET {{HOST}}/board/{{LAST_BOARD_ID}}
 
+### get one 404
+GET {{HOST}}/board/abcd
+
 ### update status one by id
 PATCH  {{HOST}}/board/{{LAST_BOARD_ID}}/status
 Content-Type: application/json
