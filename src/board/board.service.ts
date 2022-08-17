@@ -40,6 +40,8 @@ export class BoardService {
   }
 
   deleteById(id: string): SimpleSuccessResponse {
+    this.getBoardById(id);
+
     this.boards = this.boards.filter((board) => board.id !== id);
 
     return {

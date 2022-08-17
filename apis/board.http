@@ -21,6 +21,16 @@ Content-Type: application/json
   "description": ""
 }
 
+### create other type body
+POST {{HOST}}/board
+Content-Type: application/json
+
+{
+  "title": 123,
+  "description": false
+}
+
+
 ### get one by id
 GET {{HOST}}/board/{{LAST_BOARD_ID}}
 
@@ -35,5 +45,16 @@ Content-Type: application/json
   "status": "PRIVATE"
 }
 
+### update status one not correct type
+PATCH  {{HOST}}/board/{{LAST_BOARD_ID}}/status
+Content-Type: application/json
+
+{
+  "status": false
+}
+
 ### delete one by id
 DELETE {{HOST}}/board/{{LAST_BOARD_ID}}
+
+### delete 404
+DELETE {{HOST}}/board/abcde
