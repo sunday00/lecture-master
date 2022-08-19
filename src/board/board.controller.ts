@@ -24,6 +24,11 @@ export class BoardController {
     return this.service.getAllBoards();
   }
 
+  @Get('/test')
+  sayHello(): string {
+    return this.service.sayHello();
+  }
+
   @Post()
   @UsePipes(ValidationPipe)
   @UsePipes(BoardBodyTypeValidationPipe)
