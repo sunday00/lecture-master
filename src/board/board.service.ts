@@ -8,7 +8,7 @@ export class BoardService {
   constructor(private readonly repository: BoardRepository) {}
 
   getAllBoards(): Promise<Board[]> {
-    return this.repository.orm.find();
+    return this.repository.find();
   }
 
   createBoard({ title, description }: CreateBoardDto): Promise<Board> {
@@ -17,11 +17,11 @@ export class BoardService {
     board.description = description;
     board.status = BoardStatus.PUBLIC;
 
-    return this.repository.orm.save(board);
+    return this.repository.save(board);
   }
 
   getBoardById(id: number): Promise<Board> {
-    return this.repository.orm.findOneBy({ id }).then((board) => {
+    return this.repository.findOneBy({ id }).then((board) => {
       if (!board) throw new NotFoundException();
 
       return board;
@@ -31,12 +31,12 @@ export class BoardService {
   async updateBoardStatusById(id: number, status: BoardStatus): Promise<Board> {
     const board = await this.getBoardById(id);
     board.status = status;
-    return await this.repository.orm.save(board);
+    return await this.repository.save(board);
   }
 
   async deleteById(id: number): Promise<SimpleSuccessResponse> {
     await this.getBoardById(id).then(() => {
-      return this.repository.orm.delete(id);
+      return this.repository.delete(id);
     });
 
     return {

@@ -1,14 +1,13 @@
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Board } from './board.entity';
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class BoardRepository {
-  constructor(
-    @InjectRepository(Board)
-    public orm: Repository<Board>,
-  ) {}
+export class BoardRepository extends Repository<Board> {
+  constructor(private dataSource: DataSource) {
+    super(Board, dataSource.createEntityManager());
+  }
+
   public sayHello() {
     return 'hello';
   }

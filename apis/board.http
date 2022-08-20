@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ### delete one by id
-DELETE {{HOST}}/board/1
+DELETE {{HOST}}/board/2
 
 ### delete 404
 DELETE {{HOST}}/board/abcde
