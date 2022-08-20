@@ -35,9 +35,9 @@ export class BoardService {
   }
 
   async deleteById(id: number): Promise<SimpleSuccessResponse> {
-    await this.getBoardById(id).then(() => {
-      return this.repository.delete(id);
-    });
+    const result = await this.repository.delete(id);
+
+    if (result) throw new NotFoundException();
 
     return {
       success: true,
