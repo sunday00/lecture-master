@@ -16,7 +16,7 @@ import { CreateBoardDto } from './dtos/create-board.dto';
 import { BoardBodyTypeValidationPipe } from '../pipes/board-body-type-validation.pipe';
 import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe';
 
-@Controller('board')
+@Controller({ version: '1', path: 'board' })
 export class BoardController {
   constructor(private service: BoardService) {}
 

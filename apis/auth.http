@@ -1,0 +1,8 @@
+### create user register
+POST {{HOST}}/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "sunday00",
+  "password": "1111"
+}
