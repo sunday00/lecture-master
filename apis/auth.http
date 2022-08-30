@@ -3,6 +3,6 @@ POST {{HOST}}/v1/auth/register
 Content-Type: application/json
 
 {
-  "username": "sunday00",
+  "username": "sunday00sadf",
   "password": "1111"
 }
