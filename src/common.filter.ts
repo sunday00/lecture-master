@@ -1,4 +1,10 @@
-import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { QueryFailedError } from 'typeorm';
 import { HttpAdapterHost } from '@nestjs/core';
 
@@ -13,6 +19,28 @@ export class CommonFilter<T> implements ExceptionFilter {
         {
           statusCode: 400,
           message: exception.driverError.message,
+        },
+        400,
+      );
+    }
+
+    if (exception instanceof UnauthorizedException) {
+      this.httpAdapterHost.httpAdapter.reply(
+        host.switchToHttp().getResponse(),
+        {
+          statusCode: 401,
+          message: exception.message,
+        },
+        401,
+      );
+    }
+
+    if (exception instanceof HttpException) {
+      this.httpAdapterHost.httpAdapter.reply(
+        host.switchToHttp().getResponse(),
+        {
+          statusCode: 400,
+          message: exception.message,
         },
         400,
       );

@@ -18,4 +18,9 @@ export class AuthController {
   register(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.service.createUser(createUserDto);
   }
+
+  @Post('/signin')
+  signIn(@Body(ValidationPipe) signUserDto: CreateUserDto): Promise<User> {
+    return this.service.signIn(signUserDto);
+  }
 }

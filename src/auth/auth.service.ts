@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dtos/create-user.dto';
@@ -17,5 +17,17 @@ export class AuthService {
     );
 
     return await this.repository.save(user);
+  }
+
+  async signIn(signUserDto: CreateUserDto): Promise<User> {
+    const user = await this.repository.findOneBy({
+      username: signUserDto.username,
+    });
+
+    if (user && (await bcrypt.compare(signUserDto.password, user.password))) {
+      return user;
+    } else {
+      throw new UnauthorizedException('Not valid Login');
+    }
   }
 }
