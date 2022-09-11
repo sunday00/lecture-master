@@ -22,6 +22,8 @@ export class CommonFilter<T> implements ExceptionFilter {
         },
         400,
       );
+
+      return;
     }
 
     if (exception instanceof UnauthorizedException) {
@@ -33,6 +35,8 @@ export class CommonFilter<T> implements ExceptionFilter {
         },
         401,
       );
+
+      return;
     }
 
     if (exception instanceof HttpException) {
@@ -44,6 +48,8 @@ export class CommonFilter<T> implements ExceptionFilter {
         },
         400,
       );
+
+      return;
     }
   }
 }

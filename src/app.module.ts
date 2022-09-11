@@ -4,11 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { databases } from './config/databases';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import authConfig from './config/authConfig';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, load: [authConfig] }),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(databases.sqlite),
     AuthModule,
     BoardModule,
