@@ -13,5 +13,11 @@ Content-Type: application/json
 
 {
   "username": "sunday00ko",
-  "password": "11111"
+  "password": "1111"
 }
+
+> {% client.global.set('ACCESS_TOKEN', response.body.access_token); %}
+
+### user profile
+GET {{HOST}}/v1/auth/me
+Authorization: Bearer {{ACCESS_TOKEN}}

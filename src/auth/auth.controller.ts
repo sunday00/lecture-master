@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller,
+  Controller, Get,
   Post,
   Request,
   UseGuards,
@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { LocalAuthGuard } from './local-auth.guard';
+import {JwtAuthGuard} from "./jwt-auth.guard";
 
 @Controller({ version: '1', path: 'auth' })
 export class AuthController {
@@ -26,5 +27,11 @@ export class AuthController {
   @Post('/signin')
   async signIn(@Request() req): Promise<{ access_token: string }> {
     return this.service.login(req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/me')
+  async me(@Request() req) {
+    return req.user;
   }
 }
