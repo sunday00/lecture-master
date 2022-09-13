@@ -1,6 +1,7 @@
 import {
   Body,
-  Controller, Get,
+  Controller,
+  Get,
   Post,
   Request,
   UseGuards,
@@ -8,10 +9,11 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { User } from './user.entity';
+import { User as UserEntity } from './user.entity';
+import { User } from './user.decorator';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { LocalAuthGuard } from './local-auth.guard';
-import {JwtAuthGuard} from "./jwt-auth.guard";
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller({ version: '1', path: 'auth' })
 export class AuthController {
@@ -19,19 +21,19 @@ export class AuthController {
 
   @Post('/register')
   @UsePipes(ValidationPipe)
-  register(@Body() createUserDto: CreateUserDto): Promise<User> {
+  register(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
     return this.service.createUser(createUserDto);
   }
 
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
-  async signIn(@Request() req): Promise<{ access_token: string }> {
-    return this.service.login(req.user);
+  async signIn(@User() user): Promise<{ access_token: string }> {
+    return this.service.login(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('/me')
-  async me(@Request() req) {
-    return req.user;
+  async me(@User() user): Promise<UserEntity> {
+    return user;
   }
 }
