@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   Post,
-  Request,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -27,13 +26,13 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
-  async signIn(@User() user): Promise<{ access_token: string }> {
+  async signIn(@User() user: UserEntity): Promise<{ access_token: string }> {
     return this.service.login(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('/me')
-  async me(@User() user): Promise<UserEntity> {
+  async me(@User() user: UserEntity): Promise<UserEntity> {
     return user;
   }
 }

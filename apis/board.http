@@ -1,5 +1,17 @@
+### sign user
+POST {{HOST}}/v1/auth/signin
+Content-Type: application/json
+
+{
+  "username": "sunday00ko",
+  "password": "1111"
+}
+
+> {% client.global.set('ACCESS_TOKEN', response.body.access_token); %}
+
 ### all boards
-GET {{HOST}}/board
+GET {{HOST}}/v1/board
+Authorization: Bearer {{ACCESS_TOKEN}}
 
 ### create boards
 POST {{HOST}}/board

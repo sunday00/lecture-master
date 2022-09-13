@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -15,8 +16,10 @@ import { Board, BoardStatus } from './board.entity';
 import { CreateBoardDto } from './dtos/create-board.dto';
 import { BoardBodyTypeValidationPipe } from '../pipes/board-body-type-validation.pipe';
 import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller({ version: '1', path: 'board' })
+@UseGuards(JwtAuthGuard)
 export class BoardController {
   constructor(private service: BoardService) {}
 
