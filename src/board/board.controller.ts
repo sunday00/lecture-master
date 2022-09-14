@@ -17,6 +17,8 @@ import { CreateBoardDto } from './dtos/create-board.dto';
 import { BoardBodyTypeValidationPipe } from '../pipes/board-body-type-validation.pipe';
 import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { User } from '../auth/user.decorator';
+import { User as UserEntity } from '../auth/user.entity';
 
 @Controller({ version: '1', path: 'board' })
 @UseGuards(JwtAuthGuard)
@@ -34,10 +36,13 @@ export class BoardController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
+  // @UsePipes(ValidationPipe)
   @UsePipes(BoardBodyTypeValidationPipe)
-  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
-    return this.service.createBoard(createBoardDto);
+  async createBoard(
+    @Body() createBoardDto: CreateBoardDto,
+    @User() user: UserEntity,
+  ): Promise<Board> {
+    return await this.service.createBoard(createBoardDto, user);
   }
 
   @Get('/:id')
@@ -54,7 +59,9 @@ export class BoardController {
   }
 
   @Delete('/:id')
-  deleteBoardById(@Param('id', ParseIntPipe) id: number): Promise<SimpleSuccessResponse> {
+  deleteBoardById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<SimpleSuccessResponse> {
     return this.service.deleteById(id);
   }
 }

@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from '../auth/user.entity';
 
 export enum BoardStatus {
   PUBLIC = 'PUBLIC',
@@ -18,4 +25,7 @@ export class Board extends BaseEntity {
 
   @Column()
   status: BoardStatus;
+
+  @ManyToOne(() => User, (user) => user.boards, { eager: true })
+  user: User;
 }

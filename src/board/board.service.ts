@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Board, BoardStatus } from './board.entity';
 import { CreateBoardDto } from './dtos/create-board.dto';
 import { BoardRepository } from './board.repository';
+import { User } from '../auth/user.entity';
 
 @Injectable()
 export class BoardService {
@@ -11,11 +12,15 @@ export class BoardService {
     return this.repository.find();
   }
 
-  createBoard({ title, description }: CreateBoardDto): Promise<Board> {
+  createBoard(
+    { title, description }: CreateBoardDto,
+    user: User,
+  ): Promise<Board> {
     const board: Board = new Board();
     board.title = title;
     board.description = description;
     board.status = BoardStatus.PUBLIC;
+    board.user = user;
 
     return this.repository.save(board);
   }

@@ -14,7 +14,8 @@ GET {{HOST}}/v1/board
 Authorization: Bearer {{ACCESS_TOKEN}}
 
 ### create boards
-POST {{HOST}}/board
+POST {{HOST}}/v1/board
+Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
