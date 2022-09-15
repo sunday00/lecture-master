@@ -12,8 +12,8 @@ POST {{HOST}}/v1/auth/signin
 Content-Type: application/json
 
 {
-  "username": "sunday00ko",
-  "password": "1111"
+  "username": "sunday00",
+  "password": "1112"
 }
 
 > {% client.global.set('ACCESS_TOKEN', response.body.access_token); %}
@@ -21,3 +21,13 @@ Content-Type: application/json
 ### user profile
 GET {{HOST}}/v1/auth/me
 Authorization: Bearer {{ACCESS_TOKEN}}
+
+### update password
+PATCH {{HOST}}/v1/auth/1
+Authorization: Bearer {{ACCESS_TOKEN}}
+Content-Type: application/json
+
+{
+  "username": "sunday00",
+  "password": "1111"
+}

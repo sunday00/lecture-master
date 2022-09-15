@@ -3,14 +3,18 @@ POST {{HOST}}/v1/auth/signin
 Content-Type: application/json
 
 {
-  "username": "sunday00ko",
+  "username": "sunday00",
   "password": "1111"
 }
 
 > {% client.global.set('ACCESS_TOKEN', response.body.access_token); %}
 
 ### all boards
-GET {{HOST}}/v1/board
+GET {{HOST}}/v1/board?page=1
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+### my boards
+GET {{HOST}}/v1/board/mine
 Authorization: Bearer {{ACCESS_TOKEN}}
 
 ### create boards
@@ -19,8 +23,8 @@ Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
-  "title": "test Hawk",
-  "description": "Take Off Hawk!"
+  "title": "My Original",
+  "description": "Take Off Hawk22!"
 }
 
 > {% client.global.set('LAST_BOARD_ID', response.body.id); %}
@@ -51,7 +55,8 @@ GET {{HOST}}/board/{{LAST_BOARD_ID}}
 GET {{HOST}}/board/abcd
 
 ### update status one by id
-PATCH  {{HOST}}/board/{{LAST_BOARD_ID}}/status
+PATCH {{HOST}}/v1/board/3/status
+Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {

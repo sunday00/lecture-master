@@ -2,6 +2,9 @@ import {
   Body,
   Controller,
   Get,
+  Param,
+  ParseIntPipe,
+  Patch,
   Post,
   UseGuards,
   UsePipes,
@@ -34,5 +37,14 @@ export class AuthController {
   @Get('/me')
   async me(@User() user: UserEntity): Promise<UserEntity> {
     return user;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('/:id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: CreateUserDto,
+  ): Promise<{ id: number; username: string }> {
+    return this.service.update(id, dto);
   }
 }

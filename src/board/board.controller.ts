@@ -6,7 +6,7 @@ import {
   Param,
   ParseIntPipe,
   Patch,
-  Post,
+  Post, Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -26,8 +26,13 @@ export class BoardController {
   constructor(private service: BoardService) {}
 
   @Get()
-  getAllBoards(): Promise<Board[]> {
-    return this.service.getAllBoards();
+  getAllBoards(@Query('page') page: number): Promise<Board[]> {
+    return this.service.getAllBoards(page);
+  }
+
+  @Get('/mine')
+  getMine(@User() user: UserEntity): Promise<Board[]> {
+    return this.service.getMine(user);
   }
 
   @Get('/test')
@@ -54,8 +59,9 @@ export class BoardController {
   updateBoardStatusById(
     @Param('id', ParseIntPipe) id: number,
     @Body('status', BoardStatusValidationPipe) status: BoardStatus,
+    @User() user: UserEntity,
   ): Promise<Board> {
-    return this.service.updateBoardStatusById(id, status);
+    return this.service.updateBoardStatusById(id, status, user);
   }
 
   @Delete('/:id')

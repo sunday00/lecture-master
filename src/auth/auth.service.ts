@@ -43,4 +43,14 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
     };
   }
+
+  async update(
+    id: number,
+    dto: CreateUserDto,
+  ): Promise<{ id: number; username: string }> {
+    let user = await this.repository.findOneBy({ id });
+    user.password = await bcrypt.hash(dto.password, await bcrypt.genSalt());
+    user = await this.repository.save(user);
+    return { id: user.id, username: user.username };
+  }
 }

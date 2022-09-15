@@ -8,8 +8,26 @@ import { User } from '../auth/user.entity';
 export class BoardService {
   constructor(private readonly repository: BoardRepository) {}
 
-  getAllBoards(): Promise<Board[]> {
-    return this.repository.find();
+  getAllBoards(page = 1): Promise<Board[]> {
+    // return this.repository.find();
+    const per = 5;
+    const skip = (page - 1) * per;
+
+    return this.repository
+      .createQueryBuilder('board')
+      .leftJoinAndSelect('board.user', 'user')
+      .orderBy('board.id', 'DESC')
+      .skip(skip)
+      .take(per)
+      .getMany();
+  }
+
+  async getMine(user: User): Promise<Board[]> {
+    return await this.repository
+      .createQueryBuilder('board')
+      .leftJoinAndSelect('board.user', 'user')
+      .where('board.userId = :userId', { userId: user.id })
+      .getMany();
   }
 
   createBoard(
@@ -33,9 +51,14 @@ export class BoardService {
     });
   }
 
-  async updateBoardStatusById(id: number, status: BoardStatus): Promise<Board> {
+  async updateBoardStatusById(
+    id: number,
+    status: BoardStatus,
+    user: User,
+  ): Promise<Board> {
     const board = await this.getBoardById(id);
     board.status = status;
+    board.user = user;
     return await this.repository.save(board);
   }
 
