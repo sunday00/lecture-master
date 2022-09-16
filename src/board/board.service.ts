@@ -27,6 +27,7 @@ export class BoardService {
       .createQueryBuilder('board')
       .leftJoinAndSelect('board.user', 'user')
       .where('board.userId = :userId', { userId: user.id })
+      .orderBy('board.id', 'DESC')
       .getMany();
   }
 
@@ -62,10 +63,23 @@ export class BoardService {
     return await this.repository.save(board);
   }
 
-  async deleteById(id: number): Promise<SimpleSuccessResponse> {
-    const result = await this.repository.delete(id);
+  async deleteById(id: number, user: User): Promise<SimpleSuccessResponse> {
+    // const result = await this.repository
+    //   .createQueryBuilder()
+    //   .delete()
+    //   .from('board')
+    //   .where('id = :id AND userId = :userId', {
+    //     id,
+    //     userId: user.id,
+    //   })
+    //   .execute();
 
-    if (result) throw new NotFoundException();
+    const result = await this.repository.delete({
+      id,
+      user: { id: user.id },
+    });
+
+    if (!result.affected) throw new NotFoundException();
 
     return {
       success: true,

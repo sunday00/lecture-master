@@ -72,7 +72,8 @@ Content-Type: application/json
 }
 
 ### delete one by id
-DELETE {{HOST}}/board/2
+DELETE {{HOST}}/v1/board/9
+Authorization: Bearer {{ACCESS_TOKEN}}
 
 ### delete 404
 DELETE {{HOST}}/board/abcde

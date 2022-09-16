@@ -67,7 +67,8 @@ export class BoardController {
   @Delete('/:id')
   deleteBoardById(
     @Param('id', ParseIntPipe) id: number,
+    @User() user: UserEntity,
   ): Promise<SimpleSuccessResponse> {
-    return this.service.deleteById(id);
+    return this.service.deleteById(id, user);
   }
 }
