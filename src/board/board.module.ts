@@ -7,11 +7,12 @@ import { BoardRepository } from './board.repository';
 import { AuthModule } from '../auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from '../auth/jwt.strategy';
+import { Logger } from '../utils/Logger';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Board]), PassportModule, AuthModule],
   controllers: [BoardController],
-  providers: [BoardRepository, BoardService, JwtStrategy],
-  exports: [BoardService],
+  providers: [BoardRepository, BoardService, JwtStrategy, Logger],
+  exports: [BoardService, Logger],
 })
 export class BoardModule {}

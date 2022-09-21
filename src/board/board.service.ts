@@ -3,10 +3,14 @@ import { Board, BoardStatus } from './board.entity';
 import { CreateBoardDto } from './dtos/create-board.dto';
 import { BoardRepository } from './board.repository';
 import { User } from '../auth/user.entity';
+import { Logger } from '../utils/Logger';
 
 @Injectable()
 export class BoardService {
-  constructor(private readonly repository: BoardRepository) {}
+  constructor(
+    private readonly repository: BoardRepository,
+    private logger: Logger,
+  ) {}
 
   getAllBoards(page = 1): Promise<Board[]> {
     // return this.repository.find();
@@ -40,6 +44,8 @@ export class BoardService {
     board.description = description;
     board.status = BoardStatus.PUBLIC;
     board.user = user;
+
+    this.logger.verbose(`${user.username} has been write`);
 
     return this.repository.save(board);
   }

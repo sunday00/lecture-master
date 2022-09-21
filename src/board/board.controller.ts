@@ -6,10 +6,10 @@ import {
   Param,
   ParseIntPipe,
   Patch,
-  Post, Query,
+  Post,
+  Query,
   UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { Board, BoardStatus } from './board.entity';
