@@ -5,8 +5,6 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import TextCounter from '@v/TextCounter.jsx';
 
 function App() {
-
-
   return (
     <RecoilRoot>
       <div className="App" data-theme="dracula">
