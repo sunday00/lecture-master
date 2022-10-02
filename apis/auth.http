@@ -1,5 +1,5 @@
 ### create user register
-POST {{HOST}}/v1/auth/register
+POST {{baseUrl}}/v1/auth/register
 Content-Type: application/json
 
 {
@@ -7,24 +7,30 @@ Content-Type: application/json
   "password": "1111"
 }
 
-### sign user
-POST {{HOST}}/v1/auth/signin
+### sign user to get request token
+# @name signUser
+POST {{baseUrl}}/v1/auth/signin
 Content-Type: application/json
 
 {
   "username": "sunday00",
-  "password": "1112"
+  "password": "1111"
 }
 
-> {% client.global.set('ACCESS_TOKEN', response.body.access_token); %}
+
+# > {% client.global.set('ACCESS_TOKEN', response.body.access_token); %}
+
+### token
+
+@accessToken = {{signUser.response.body.$.access_token}}
 
 ### user profile
-GET {{HOST}}/v1/auth/me
-Authorization: Bearer {{ACCESS_TOKEN}}
+GET {{baseUrl}}/v1/auth/me
+Authorization: Bearer {{accessToken}}
 
 ### update password
-PATCH {{HOST}}/v1/auth/1
-Authorization: Bearer {{ACCESS_TOKEN}}
+PATCH {{baseUrl}}/v1/auth/1
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {

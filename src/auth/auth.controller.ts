@@ -6,6 +6,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -35,7 +36,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('/me')
-  async me(@User() user: UserEntity): Promise<UserEntity> {
+  async me(@User() user: UserEntity, @Req() req): Promise<UserEntity> {
     return user;
   }
 
