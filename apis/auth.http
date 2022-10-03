@@ -21,8 +21,7 @@ Content-Type: application/json
 # > {% client.global.set('ACCESS_TOKEN', response.body.access_token); %}
 
 ### token
-
-@accessToken = {{signUser.response.body.$.access_token}}
+@accessToken = {{signUser.response.body.access_token}}
 
 ### user profile
 GET {{baseUrl}}/v1/auth/me
@@ -34,6 +33,6 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-  "username": "sunday00",
+  "username": "sunday000",
   "password": "1111"
 }
