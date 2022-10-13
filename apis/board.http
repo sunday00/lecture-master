@@ -3,7 +3,7 @@ POST {{HOST}}/v1/auth/signin
 Content-Type: application/json
 
 {
-  "username": "sunday00",
+  "username": "sunday000",
   "password": "1111"
 }
 
@@ -23,7 +23,7 @@ Authorization: Bearer {{ACCESS_TOKEN}}
 Content-Type: application/json
 
 {
-  "title": "My Original",
+  "title": "new thing is coming",
   "description": "Take Off Hawk22!"
 }
 
