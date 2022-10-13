@@ -8,7 +8,7 @@ import TodoList from '@v/TodoList.jsx';
 function App() {
   return (
     <RecoilRoot>
-      <div className="App" data-theme="dracula">
+      <div className="App" data-theme="night">
         <section className="fixed w-full">
           <nav className="flex mb-4 p-4 gap-2 justify-center">
             <NavLink className={ a => `btn btn-info active-${a.isActive}` } to={'/'}>home</NavLink>

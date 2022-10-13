@@ -9,7 +9,9 @@ export default () => {
   const [inputValue, setInputValue] = useState('')
   const setTodoList = useSetRecoilState(todoListState)
 
-  const addItem = () => {
+  const addItem = (e) => {
+    if(e.key && e.key !== 'Enter') return
+
     setTodoList((oldTodoList) => [
       ...oldTodoList,
       {
@@ -18,6 +20,8 @@ export default () => {
         isComplete: false,
       }
     ])
+
+    setInputValue('')
   }
 
   const onChange = ({target: {value}}) => {
@@ -26,7 +30,7 @@ export default () => {
 
   return (<div className="form-control">
     <label className="input-group justify-center">
-      <input className='input input-bordered text-neutral-content px-8' type='text' value={inputValue} onChange={onChange} />
+      <input className='input input-bordered text-neutral-content px-8' type='text' value={inputValue} onChange={onChange} onKeyDown={addItem} />
       <button className="bg-neutral px-3" onClick={addItem}>Add</button>
     </label>
   </div>)

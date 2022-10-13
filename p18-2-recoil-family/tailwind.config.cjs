@@ -953,6 +953,10 @@ module.exports = {
     'disabled',
   ],
   plugins: [
-    require('daisyui')
+    require('daisyui'),
+    require('daisyui-tailwind-scrollbar'),
   ],
+  variants: {
+    scrollbar: ['dark']
+  }
 }
