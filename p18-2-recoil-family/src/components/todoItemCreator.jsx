@@ -1,24 +1,24 @@
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { todoListState } from '@/store/todo.store.jsx';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { todoItemState, todoListState } from '@/store/todo.store.jsx';
 
-let id = 0;
-const getId = () => id++
+const getId = (todoList) => todoList.length ? todoList[todoList.length - 1] + 1 : 0
 
 export default () => {
   const [inputValue, setInputValue] = useState('')
-  const setTodoList = useSetRecoilState(todoListState)
+  const [todoList, setTodoList] = useRecoilState(todoListState)
+  const setTodoItem = useSetRecoilState(todoItemState(getId(todoList)))
 
   const addItem = (e) => {
     if(e.key && e.key !== 'Enter') return
 
+    const newId = getId(todoList)
+
+    setTodoItem({newId, text: inputValue, isCompleted:false})
+
     setTodoList((oldTodoList) => [
       ...oldTodoList,
-      {
-        id: getId(),
-        text: inputValue,
-        isComplete: false,
-      }
+      newId,
     ])
 
     setInputValue('')

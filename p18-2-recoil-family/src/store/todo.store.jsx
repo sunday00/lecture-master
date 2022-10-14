@@ -1,4 +1,13 @@
-import { atom, selector, useRecoilValue } from 'recoil';
+import { atom, atomFamily, selector, useRecoilValue } from 'recoil';
+
+export const todoItemState = atomFamily({
+  key: 'todoItemState',
+  default: (id) => ({
+    id,
+    text: '',
+    isCompleted: false,
+  })
+})
 
 export const todoListState = atom({
   key: 'todoListState',
@@ -21,6 +30,8 @@ export const filteredTodoListState = selector({
   }
 })
 
+const getItemStateById = (id, get) => get(todoItemState(id))
+
 export const todoListStatsCounts = selector({
   key: 'TodoListStatsCounts',
   get: ({get}) => {
@@ -28,9 +39,9 @@ export const todoListStatsCounts = selector({
 
     return {
       total: all.length,
-      completed: all.filter((item) => item.isComplete).length,
-      uncompleted: all.filter((item) => !item.isComplete).length,
-      completeCov: all.length === 0 ? 0 : all.filter((item) => item.isComplete).length / all.length * 100
+      completed: all.filter((item) => getItemStateById(item, get).isCompleted).length,
+      uncompleted: all.filter((item) => !getItemStateById(item, get).isCompleted).length,
+      completeCov: all.length === 0 ? 0 : all.filter((item) => getItemStateById(item, get).isCompleted).length / all.length * 100
     }
   }
 })
