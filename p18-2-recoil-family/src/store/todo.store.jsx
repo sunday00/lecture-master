@@ -1,5 +1,10 @@
 import { atom, atomFamily, selector, useRecoilValue } from 'recoil';
 
+export const logMiddleware = (logging, atomOption) => {
+  console.log(logging)
+  return atomOption
+}
+
 export const todoItemState = atomFamily({
   key: 'todoItemState',
   default: (id) => ({
@@ -17,6 +22,18 @@ export const todoListState = atom({
 export const todoListFilterState = atom({
   key: 'TodoListFilter',
   default: 'All',
+})
+
+export const loggedTodoListState = selector({
+  key: 'LoggedTodoList',
+  get: ({get}) => {
+    console.log('get list')
+    return get(todoListState)
+  },
+  set: ({get, set}, newList) => {
+    console.log('set list', get(todoListState), 'to', newList)
+    set(todoListState, newList)
+  }
 })
 
 export const filteredTodoListState = selector({

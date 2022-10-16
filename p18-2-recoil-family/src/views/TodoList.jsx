@@ -1,12 +1,12 @@
 import { useRecoilValue } from 'recoil';
-import { todoListState } from '@/store/todo.store.jsx';
+import { loggedTodoListState, todoListState } from '@/store/todo.store.jsx';
 import TodoItemCreator from '@c/todoItemCreator.jsx';
 import TodoItem from '@c/todoItem.jsx';
 import TodoCounts from '@c/todoCounts.jsx';
 import TodoListFilter from '@c/todoListFilter.jsx';
 
 export default () => {
-  const todoList = useRecoilValue(todoListState)
+  const todoList = useRecoilValue(loggedTodoListState)
   // const todoList = useRecoilValue(filteredTodoListState)
 
   return (<section>
