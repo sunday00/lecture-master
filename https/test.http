@@ -1,0 +1,8 @@
+### test
+POST http://localhost:3001/v1/board
+Content-Type: application/json
+
+{
+  "title": "hello",
+  "body": "success"
+}
