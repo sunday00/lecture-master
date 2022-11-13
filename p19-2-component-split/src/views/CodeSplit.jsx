@@ -5,6 +5,7 @@ export default () => {
 
   const handleCLick = async () => {
     const m = await import('./SplitMe.jsx')
+
     setSplitMe(m.default)
   }
 
