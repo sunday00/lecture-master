@@ -1,15 +1,13 @@
-import { useEffect } from 'react';
-import { getUsers } from '@/apis/index.jsx';
-import { useRecoilState } from 'recoil';
-import { userList } from '@/stores/users.store.jsx';
+import { Link } from 'react-router-dom';
 
-export default () => {
-  const [users, setUsers] = useRecoilState(userList)
+export default ({users}) => {
+  if(!users) return null
 
-  useEffect(() => {
-    getUsers()
-      .then((res) => {
-        console.log(res.data)
-      })
-  },[])
+  return (<div>
+    <ul>
+      {users.map(user => (<li key={user.id}>
+        <Link to={`/users/${user.id}`}>{user.username}</Link>
+      </li>))}
+    </ul>
+  </div>)
 }

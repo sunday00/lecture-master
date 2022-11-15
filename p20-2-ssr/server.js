@@ -33,7 +33,7 @@ async function createServer() {
       const html = template.replace('<!--ssr=outlet-->', appHtml)
 
       // 프론트로 뿌리기
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+      await res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {
       vite.ssrFixStacktrace(e)
 
