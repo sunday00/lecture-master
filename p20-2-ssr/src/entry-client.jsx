@@ -6,7 +6,7 @@ import './index.scss'
 ReactDOM.hydrateRoot(
   document.getElementById('root'),
   <BrowserRouter>
-    <App preloads={{ users: [] }} />
+    <App preloads={ {} } />
   </BrowserRouter>
 )
 
