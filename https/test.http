@@ -1,5 +1,11 @@
 ### test
-POST http://localhost:3001/v1/board
+GET {{HOST}}/v1/board/test
+
+### getAll
+GET {{HOST}}/v1/board
+
+### post
+POST {{HOST}}/v1/board
 Content-Type: application/json
 
 {
