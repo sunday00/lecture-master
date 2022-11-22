@@ -7,17 +7,5 @@ import Users from '@v/Users.jsx';
 export default () => {
   const users = useRecoilValue(userList)
 
-  // useEffect(() => {
-  //   if (users.length) return;
-  //
-  //   setLoading(true)
-  //
-  //   getUsers()
-  //     .then((res) => {
-  //       setUsers(res.data)
-  //       setLoading(false)
-  //     })
-  // },[users.users, getUsers])
-
   return !users ? 'loading' : <Users users={users} />
 }

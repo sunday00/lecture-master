@@ -6,6 +6,7 @@ import BluePage from '@v/BluePage';
 import { RecoilRoot } from 'recoil';
 import UserPage from '@v/UserPage';
 import { initRecoil } from '@/stores/share.jsx';
+import UserOnePage from '@v/UserOnePage';
 
 function App({preloads}) {
   return (
@@ -18,6 +19,7 @@ function App({preloads}) {
               <Route path="/" element={<RedPage />}></Route>
               <Route path="/blue" element={<BluePage />}></Route>
               <Route path="/users" element={<UserPage />}></Route>
+              <Route path="/users/:id" element={<UserOnePage />}></Route>
             </Routes>
           </div>
         </div>

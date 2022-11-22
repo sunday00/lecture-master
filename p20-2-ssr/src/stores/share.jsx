@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { userList } from '@/stores/users.store.jsx';
+import { userList, userOne } from '@/stores/users.store.jsx';
 
 export const initRecoil = (preload) => {
   return ({set}) => {
@@ -13,5 +13,5 @@ export const initRecoil = (preload) => {
 }
 
 export const ssrStates = {
-  userList
+  userList, userOne
 }
