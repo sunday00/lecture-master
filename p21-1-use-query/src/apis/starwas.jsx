@@ -1,0 +1,1 @@
+export const fetchPlanets = fetch('http://swapi.dev/api/plnets/')
