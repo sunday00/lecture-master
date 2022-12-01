@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.radial-progress {
+  --value: 80;
+  --size: 2rem;
+  --thickness: 4px;
+  animation: spin 1000ms infinite linear;
+}
+
+@keyframes spin {
+  100%{ transform: rotate(360deg); }
+}
