@@ -6,6 +6,11 @@ export default () => {
   const {data, status} = useQuery({
     queryKey: ['planets'],
     queryFn: fetchPlanets,
+    staleTime: 2000,
+    // cacheTime: 10,
+    onSuccess: () => {
+      console.log('fine')
+    }
   })
 
   return (<>

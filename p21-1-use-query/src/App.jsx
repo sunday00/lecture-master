@@ -7,6 +7,7 @@ import Users from '@v/Users.jsx';
 import Nav from '@c/Nav.jsx';
 import Planets from '@v/Planets';
 import People from '@v/People';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function App() {
   const queryClient = new QueryClient()
@@ -25,6 +26,7 @@ function App() {
             </Routes>
           </div>
         </div>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </RecoilRoot>
   )

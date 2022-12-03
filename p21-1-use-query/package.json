@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.18.0",
+    "@tanstack/react-query-devtools": "^4.19.0",
     "daisyui": "^2.19.0",
+    "noop": "^1.0.1",
     "path": "^0.12.7",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
