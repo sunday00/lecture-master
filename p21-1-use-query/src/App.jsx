@@ -21,8 +21,14 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/users" element={<Users />}></Route>
-              <Route path="/planets" element={<Planets />}></Route>
-              <Route path="/people" element={<People />}></Route>
+              <Route path="/planets">
+                <Route index element={<Planets />}></Route>
+                <Route path=":page" element={<Planets />}></Route>
+              </Route>
+              <Route path="/people">
+                <Route index element={<People />}></Route>
+                <Route path=":page" element={<People />}></Route>
+              </Route>
             </Routes>
           </div>
         </div>
