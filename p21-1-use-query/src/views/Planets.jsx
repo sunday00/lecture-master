@@ -12,7 +12,8 @@ export default () => {
     // cacheTime: 10,
     onSuccess: () => {
       console.log('fine')
-    }
+    },
+    keepPreviousData: true,
   })
 
   return (<>
@@ -40,6 +41,7 @@ export default () => {
                 <NavLink
                   to={`/planets/${i + 1}`}
                   className={`btn ${i + 1 === parseInt(page) ? 'btn-active' : ''}`}
+                  key={i}
                 >{i + 1}</NavLink>
               ))}
           </div>
