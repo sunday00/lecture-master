@@ -2,7 +2,7 @@ import {createContext, useState} from 'react'
 import {Element, Rectangle} from './components/Rectangle/Rectangle'
 import {PageContainer} from './PageContainer'
 import {Toolbar} from './Toolbar'
-import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
+import {atom, useRecoilValue, useSetRecoilState} from 'recoil'
 
 // type ElementsContextType = {
 //   elements: Element[]
@@ -28,7 +28,7 @@ import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 // export type SetElement = (indexToSet: number, newElement: Element) => void
 
-export const selectedElementState = atom<number|null>({
+export const selectedElementState = atom<number | null>({
   key: 'selectedElement',
   default: null,
 })
@@ -71,19 +71,19 @@ function Canvas() {
   return (
     // <SelectedElementContext.Provider value={{selectedElement, setSelectedElement}}>
     //   <ElementsContext.Provider value={{elements, addElement, setElement}}>
-        <PageContainer
-          onClick={() => {
-            setSelectedElement(null)
-          }}
-        >
-          <Toolbar />
-          {/*{elements.map((element, index) => (*/}
-          {elements.map((id) => (
-            // <Rectangle key={index} element={element} index={index} />
-            <Rectangle key={id} id={id} />
-          ))}
-        </PageContainer>
-      // </ElementsContext.Provider>
+    <PageContainer
+      onClick={() => {
+        setSelectedElement(null)
+      }}
+    >
+      <Toolbar />
+      {/*{elements.map((element, index) => (*/}
+      {elements.map((id) => (
+        // <Rectangle key={index} element={element} index={index} />
+        <Rectangle key={id} id={id} />
+      ))}
+    </PageContainer>
+    // </ElementsContext.Provider>
     // </SelectedElementContext.Provider>
   )
 }
