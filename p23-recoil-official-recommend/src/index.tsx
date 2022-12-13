@@ -14,10 +14,10 @@ ReactDOM.render(
       <ChakraProvider>
         <Router>
           <Switch>
-            <Route path="/examples/atoms1">
+            <Route path="/examples/atoms">
               <Atoms />
             </Route>
-            <Route path="/examples/selectors1">
+            <Route path="/examples/selectors">
               <Selectors />
             </Route>
             <Route>
