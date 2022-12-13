@@ -1,8 +1,7 @@
-import { createContext, useState } from 'react';
-import { Element, Rectangle } from './components/Rectangle/Rectangle';
+import { Rectangle } from './components/Rectangle/Rectangle';
 import { PageContainer } from './PageContainer';
 import { Toolbar } from './Toolbar';
-import { atom, useSetRecoilState } from 'recoil';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 
 export const selectedElementState = atom<number | null>({
@@ -10,8 +9,14 @@ export const selectedElementState = atom<number | null>({
   default: null
 });
 
+export const elementsState = atom<number[]>({
+  key: 'elements',
+  default: [],
+})
+
 function Canvas() {
   const setSelectedElement = useSetRecoilState(selectedElementState);
+  const elements = useRecoilValue(elementsState)
 
   return (
     <PageContainer
@@ -20,8 +25,8 @@ function Canvas() {
       }}
     >
       <Toolbar />
-      {elements.map((element, index) => (
-        <Rectangle key={index} element={element} index={index} />
+      {elements.map((id) => (
+        <Rectangle key={id} id={id} />
       ))}
     </PageContainer>
 
