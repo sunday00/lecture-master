@@ -38,7 +38,7 @@ export const Rectangle = ({ id }: { id: number }) => {
         });
       }}
     >
-      <div>
+      <div style={{ position: 'absolute', top: (id + 1) * 10, left: (id + 1) * 10 }}>
         <RectangleContainer
           position={element.style.position}
           size={element.style.size}
