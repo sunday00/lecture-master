@@ -2,6 +2,7 @@ import {createContext, useState} from 'react'
 import {Element, Rectangle} from './components/Rectangle/Rectangle'
 import {PageContainer} from './PageContainer'
 import {Toolbar} from './Toolbar'
+import { atom, useSetRecoilState } from 'recoil';
 
 type ElementsContextType = {
   elements: Element[]
@@ -9,27 +10,21 @@ type ElementsContextType = {
   setElement: SetElement
 }
 
+export const selectedElementState = atom<number|null>({
+  key: 'selectElement',
+  default: null,
+})
+
 export const ElementsContext = createContext<ElementsContextType>({
   elements: [],
   addElement: () => {},
   setElement: () => {},
 })
 
-type SelectedElementContextType = {
-  selectedElement: number | null
-  setSelectedElement: (index: number) => void
-}
-
-export const SelectedElementContext = createContext<SelectedElementContextType>({
-  selectedElement: null,
-  setSelectedElement: () => {},
-})
-
 export type SetElement = (indexToSet: number, newElement: Element) => void
 
 function Canvas() {
   const [elements, setElements] = useState<Element[]>([])
-  const [selectedElement, setSelectedElement] = useState<number | null>(null)
 
   const setElement: SetElement = (indexToSet, newElement) => {
     setElements(
@@ -54,8 +49,9 @@ function Canvas() {
     })
   }
 
+  const setSelectedElement = useSetRecoilState(selectedElementState)
+
   return (
-    <SelectedElementContext.Provider value={{selectedElement, setSelectedElement}}>
       <ElementsContext.Provider value={{elements, addElement, setElement}}>
         <PageContainer
           onClick={() => {
@@ -68,7 +64,6 @@ function Canvas() {
           ))}
         </PageContainer>
       </ElementsContext.Provider>
-    </SelectedElementContext.Provider>
   )
 }
 
