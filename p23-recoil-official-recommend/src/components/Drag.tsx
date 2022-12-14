@@ -1,15 +1,14 @@
 import { DraggableCore } from 'react-draggable';
 import { ElementStyle } from './Rectangle/Rectangle';
-import React from 'react';
+import React, { ReactNode, useRef } from 'react';
 
 type DragProps = {
   position: ElementStyle['position']
-  onDrag: (position: ElementStyle['position']) => void
+  onDrag: (position: ElementStyle['position']) => void,
+  // nodeRef: React.MutableRefObject<null>
 }
 
-export const Drag: React.FC<DragProps> = ({ position, onDrag, children }) => {
-  const nodeRef = React.useRef(null);
-
+export const Drag: React.FC<DragProps> = React.forwardRef(({ position, onDrag, children }, ref) => {
   return (
     <DraggableCore
       onDrag={(e: any) => {
@@ -18,11 +17,11 @@ export const Drag: React.FC<DragProps> = ({ position, onDrag, children }) => {
           top: e.movementY + position.top
         });
       }}
-      nodeRef={nodeRef}
+      nodeRef={ref as React.MutableRefObject<null>}
     >
-      <div ref={nodeRef}>
+      <div ref={ref as React.MutableRefObject<null>}>
         {children}
       </div>
     </DraggableCore>
   );
-};
+});

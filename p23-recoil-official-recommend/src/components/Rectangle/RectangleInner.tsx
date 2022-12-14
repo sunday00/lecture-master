@@ -1,8 +1,10 @@
 import {Box} from '@chakra-ui/react'
 import {getBorderColor} from '../../util'
+import React from 'react';
 
-export const RectangleInner = ({selected}: {selected: boolean}) => {
+export const RectangleInner = React.forwardRef(({selected}: {selected: boolean}, ref) => {
     return (
+      <div ref={ref as React.MutableRefObject<null>}>
         <Box
             position="absolute"
             border={`1px solid ${getBorderColor(selected)}`}
@@ -19,5 +21,6 @@ export const RectangleInner = ({selected}: {selected: boolean}) => {
                 backgroundColor="white"
             />
         </Box>
+      </div>
     )
-}
+})
