@@ -22,26 +22,20 @@ import produce from 'immer';
 //   }
 // })
 
-const editPropertyState = selectorFamily<number|null, string>({
+const editPropertyState = selectorFamily<number, { path: string, id: number }>({
   key: 'editProperty',
-  get: (path) => ({get}) => {
-    const selectedElement = get(selectedElementState)
-    if(typeof selectedElement !== 'number') return null
-
-    const element = get(elementState(selectedElement))
+  get: ({ path, id }) => ({get}) => {
+    const element = get(elementState(id))
 
     return _.get(element, path)
   },
-  set: (path) => ({get, set}, newValue) => {
-    const selectedElement = get(selectedElementState)
-    if(typeof selectedElement !== 'number') return null
-
-    const element = get(elementState(selectedElement))
+  set: ({ path, id }) => ({get, set}, newValue) => {
+    const element = get(elementState(id))
     const newElement = produce(element, (draft) => {
       _.set(draft, path, newValue)
     })
 
-    set(elementState(selectedElement), newElement)
+    set(elementState(id), newElement)
   }
 })
 
@@ -85,16 +79,17 @@ export const EditProperties = () => {
           // value={element.style.position.top}
           // value={top}
           path={'style.position.top'}
+          id={selectedElement}
           // onChange={(top) => { updatePosition('top', top) }}
         />
         {/*<Property label="Left" value={element.style.position.left} onChange={(left) => { updatePosition('left', left) }} />*/}
-        <Property label="Left" path={'style.position.left'} />
+        <Property label="Left" path={'style.position.left'} id={selectedElement}/>
       </Section>
       <Section heading="Size">
       {/*  <Property label="Width" value={element.style.size.width} onChange={(width) => { updateSize('width', width) }} />*/}
       {/*  <Property label="Height" value={element.style.size.height} onChange={(height) => { updateSize('height', height) }} />*/}
-        <Property label="Width" path={'style.size.width'} />
-        <Property label="Height" path={'style.size.height'} />
+        <Property label="Width" path={'style.size.width'} id={selectedElement}/>
+        <Property label="Height" path={'style.size.height'} id={selectedElement}/>
       </Section>
     </Card>
   )
@@ -109,9 +104,8 @@ const Section: React.FC<{heading: string}> = ({heading, children}) => {
   )
 }
 
-const Property = ({label, path}: {label: string; path: string}) => {
-  const [value, setValue] = useRecoilState(editPropertyState(path))
-  if(typeof value !== 'number') return null
+const Property = ({label, path, id}: {label: string; path: string, id: number}) => {
+  const [value, setValue] = useRecoilState(editPropertyState({ path, id }))
 
   return (
     <div>
