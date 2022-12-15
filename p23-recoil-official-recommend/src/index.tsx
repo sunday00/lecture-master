@@ -9,7 +9,7 @@ import Atoms from './examples/Atoms'
 import {Selectors} from './examples/Selectors'
 
 ReactDOM.render(
-  <React.StrictMode>
+
     <RecoilRoot>
       <ChakraProvider>
         <Router>
@@ -27,6 +27,6 @@ ReactDOM.render(
         </Router>
       </ChakraProvider>
     </RecoilRoot>
-  </React.StrictMode>,
+  ,
   document.getElementById('root'),
 )

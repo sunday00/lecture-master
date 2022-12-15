@@ -4,7 +4,7 @@ import { RectangleContainer } from './RectangleContainer';
 import { RectangleInner } from './RectangleInner';
 import { useRecoilState, atomFamily } from 'recoil';
 import { Resize } from '../Resize';
-import React, { useRef } from 'react';
+import React from 'react';
 
 export type ElementStyle = {
   position: { top: number; left: number }

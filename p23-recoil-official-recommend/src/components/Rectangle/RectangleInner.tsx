@@ -1,26 +1,24 @@
-import {Box} from '@chakra-ui/react'
-import {getBorderColor} from '../../util'
+import { Box } from '@chakra-ui/react';
+import { getBorderColor } from '../../util';
 import React from 'react';
 
-export const RectangleInner = React.forwardRef(({selected}: {selected: boolean}, ref) => {
-    return (
-      <div ref={ref as React.MutableRefObject<null>}>
-        <Box
-            position="absolute"
-            border={`1px solid ${getBorderColor(selected)}`}
-            transition="0.1s border-color ease-in-out"
-            width="100%"
-            height="100%"
-            display="flex"
-            padding="2px"
-        >
-            <Box
-                flex="1"
-                border="3px dashed #101010"
-                borderRadius="255px 15px 225px 15px/15px 225px 15px 255px"
-                backgroundColor="white"
-            />
-        </Box>
-      </div>
-    )
-})
+export const RectangleInner = React.forwardRef(({ selected }: { selected: boolean }, ref) => {
+  return (
+    <Box
+      position='absolute'
+      border={`1px solid ${getBorderColor(selected)}`}
+      transition='0.1s border-color ease-in-out'
+      width='100%'
+      height='100%'
+      display='flex'
+      padding='2px'
+    >
+      <Box
+        flex='1'
+        border='3px dashed #101010'
+        borderRadius='255px 15px 225px 15px/15px 225px 15px 255px'
+        backgroundColor='white'
+      />
+    </Box>
+  );
+});
