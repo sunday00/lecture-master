@@ -4,63 +4,68 @@ import { selectedElementState } from './Canvas';
 import { elementState, Element } from './components/Rectangle/Rectangle';
 import React from 'react';
 
-export const selectedElementProperties = selector<Element|undefined>({
-  key: 'selectedElementProperties',
-  get: ({get}) => {
-    const selectedElementId = get(selectedElementState)
-    if (typeof selectedElementId !== 'number') return
-
-    return get(elementState(selectedElementId))
-  },
-  set: ({get, set}, newElement) => {
-    const selectedElementId = get(selectedElementState)
-    if (typeof selectedElementId !== 'number' || !newElement) return
-
-    set(elementState(selectedElementId), newElement)
-  }
-})
+// export const selectedElementProperties = selector<Element|undefined>({
+//   key: 'selectedElementProperties',
+//   get: ({get}) => {
+//     const selectedElementId = get(selectedElementState)
+//     if (typeof selectedElementId !== 'number') return
+//
+//     return get(elementState(selectedElementId))
+//   },
+//   set: ({get, set}, newElement) => {
+//     const selectedElementId = get(selectedElementState)
+//     if (typeof selectedElementId !== 'number' || !newElement) return
+//
+//     set(elementState(selectedElementId), newElement)
+//   }
+// })
 
 export const EditProperties = () => {
-  const [element, setElement] = useRecoilState(selectedElementProperties)
+  // const [element, setElement] = useRecoilState(selectedElementProperties)
+  //
+  // if (!element) return null
 
-  if (!element) return null
-
-  const updatePosition = (prop: 'top' | 'left', amount: number) => {
-    setElement({
-      ...element,
-      style: {
-        ...element.style,
-        position: {
-          ...element.style.position,
-          [prop]: amount,
-        }
-      }
-    })
-  }
-
-  const updateSize = (prop: 'width' | 'height', amount: number) => {
-    setElement({
-      ...element,
-      style: {
-        ...element.style,
-        size: {
-          ...element.style.size,
-          [prop]: amount,
-        }
-      }
-    })
-  }
+  // const updatePosition = (prop: 'top' | 'left', amount: number) => {
+  //   setElement({
+  //     ...element,
+  //     style: {
+  //       ...element.style,
+  //       position: {
+  //         ...element.style.position,
+  //         [prop]: amount,
+  //       }
+  //     }
+  //   })
+  // }
+  //
+  // const updateSize = (prop: 'width' | 'height', amount: number) => {
+  //   setElement({
+  //     ...element,
+  //     style: {
+  //       ...element.style,
+  //       size: {
+  //         ...element.style.size,
+  //         [prop]: amount,
+  //       }
+  //     }
+  //   })
+  // }
 
   return (
     <Card>
       <Section heading="Position">
-        <Property label="Top" value={element.style.position.top} onChange={(top) => { updatePosition('top', top) }} />
-        <Property label="Left" value={element.style.position.left} onChange={(left) => { updatePosition('left', left) }} />
+        <Property label="Top"
+          // value={element.style.position.top}
+          value={1}
+          // onChange={(top) => { updatePosition('top', top) }}
+          onChange={(top) => {  }}
+        />
+        {/*<Property label="Left" value={element.style.position.left} onChange={(left) => { updatePosition('left', left) }} />*/}
       </Section>
-      <Section heading="Size">
-        <Property label="Width" value={element.style.size.width} onChange={(width) => { updateSize('width', width) }} />
-        <Property label="Height" value={element.style.size.height} onChange={(height) => { updateSize('height', height) }} />
-      </Section>
+      {/*<Section heading="Size">*/}
+      {/*  <Property label="Width" value={element.style.size.width} onChange={(width) => { updateSize('width', width) }} />*/}
+      {/*  <Property label="Height" value={element.style.size.height} onChange={(height) => { updateSize('height', height) }} />*/}
+      {/*</Section>*/}
     </Card>
   )
 }
