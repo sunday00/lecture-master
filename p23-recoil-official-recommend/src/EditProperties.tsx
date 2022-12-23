@@ -1,7 +1,7 @@
 import {InputGroup, InputRightElement, NumberInput, NumberInputField, Text, VStack} from '@chakra-ui/react'
-import { selector, selectorFamily, useRecoilState, useRecoilValue } from 'recoil';
+import { selectorFamily, useRecoilState, useRecoilValue } from 'recoil';
 import { selectedElementState } from './Canvas';
-import { elementState, Element } from './components/Rectangle/Rectangle';
+import { elementState } from './components/Rectangle/Rectangle';
 import React from 'react';
 import _ from 'lodash'
 import produce from 'immer';

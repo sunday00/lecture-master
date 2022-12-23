@@ -1,7 +1,8 @@
 import { Container, Heading, Text } from '@chakra-ui/layout';
 import { Select } from '@chakra-ui/select';
-import { selectorFamily, useRecoilValue } from 'recoil';
+import { atomFamily, selectorFamily, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Suspense, useState } from 'react';
+import { getWeather } from './FakeApi';
 
 // const userIdState = atom<number | undefined>({
 //   key: 'userId',
@@ -17,8 +18,50 @@ const userState = selectorFamily({
   }
 });
 
+const weatherRequestIdState = atomFamily({
+  key: 'weatherRequestId',
+  default: 0,
+})
+
+const useRefetchWeather = (userId: number) => {
+  const setRequestId = useSetRecoilState(weatherRequestIdState(userId))
+  return () => setRequestId((id) => id + 1)
+}
+
+
+const weatherState = selectorFamily({
+  key: 'weather',
+  get: (userId: number) => async ({get}) => {
+    if(userId === 0) return null
+
+    get(weatherRequestIdState(userId))
+
+    const user = get(userState(userId))
+    const weather = await getWeather(user.address.city)
+    return weather
+  }
+})
+
+const UserWeather = ({userId}: {userId: number}) => {
+  const user = useRecoilValue(userState(userId as number));
+
+  const weather = useRecoilValue(weatherState(userId))
+
+  const refetch = useRefetchWeather(userId)
+
+  return <div>
+    <Text>
+      <b>Weather for {user.address.city}:</b> {weather} °C
+    </Text>
+    <Text onClick={refetch}>
+      (refresh weather)
+    </Text>
+  </div>
+}
+
 const UserData = ({userId} : {userId: number}) => {
   const user = useRecoilValue(userState(userId as number));
+
   if(!user) return null
 
   return (
@@ -32,6 +75,9 @@ const UserData = ({userId} : {userId: number}) => {
       <Text>
         <b>Phone:</b> {user.phone}
       </Text>
+      <Suspense fallback={<div>Weather loading...</div>}>
+        <UserWeather userId={userId} />
+      </Suspense>
     </div>
   );
 };
