@@ -4,7 +4,8 @@ import { RectangleContainer } from './RectangleContainer';
 import { RectangleInner } from './RectangleInner';
 import { useRecoilState, atomFamily } from 'recoil';
 import { Resize } from '../Resize';
-import React from 'react';
+import React, { Suspense } from 'react';
+import { RectangleLoading } from './RectangleLoading';
 
 export type ElementStyle = {
   position: { top: number; left: number }
@@ -57,6 +58,7 @@ export const Rectangle = ({ id }: { id: number }) => {
           position={element.style.position}
           onDrag={(position) => {
             setElement({
+              ...element,
               style: {
                 ...element.style,
                 position
@@ -64,7 +66,9 @@ export const Rectangle = ({ id }: { id: number }) => {
             });
           }}
         >
-          <RectangleInner selected={isSelected} />
+          <Suspense fallback={<RectangleLoading selected={isSelected} />}>
+            <RectangleInner selected={isSelected} id={id}/>
+          </Suspense>
         </Drag>
       </Resize>
     </RectangleContainer>

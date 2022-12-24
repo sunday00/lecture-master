@@ -22,7 +22,7 @@ import produce from 'immer';
 //   }
 // })
 
-const editPropertyState = selectorFamily<number, { path: string, id: number }>({
+export const editPropertyState = selectorFamily<any, { path: string, id: number }>({
   key: 'editProperty',
   get: ({ path, id }) => ({get}) => {
     const element = get(elementState(id))
