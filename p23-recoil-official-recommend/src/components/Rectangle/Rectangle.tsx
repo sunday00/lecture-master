@@ -11,16 +11,21 @@ export type ElementStyle = {
   size: { width: number; height: number }
 }
 
-export type Element = { style: ElementStyle }
+export type Element = {
+  style: ElementStyle
+  image?: {id: number, src: string}
+}
+
+export const defaultElement = {
+  style: {
+    position: { top: 50, left: 50 },
+    size: { width: 50, height: 50 }
+  }
+}
 
 export const elementState = atomFamily<Element, number>({
   key: 'element',
-  default: {
-    style: {
-      position: { top: 50, left: 50 },
-      size: { width: 50, height: 50 }
-    }
-  }
+  default: defaultElement
 });
 
 export const Rectangle = ({ id }: { id: number }) => {
