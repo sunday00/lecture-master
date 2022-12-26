@@ -3,6 +3,8 @@ import { Select } from '@chakra-ui/select';
 import { atomFamily, selectorFamily, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Suspense, useState } from 'react';
 import { getWeather } from './FakeApi';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { Button } from '@chakra-ui/react';
 
 // const userIdState = atom<number | undefined>({
 //   key: 'userId',
@@ -14,7 +16,10 @@ const userState = selectorFamily({
   get: (userId: number) => async () => {
     if(userId === 0) return null
     return await fetch('https://jsonplaceholder.typicode.com/users/' + userId)
-      .then(res => res.json());
+      .then(res => {
+        if(res.status === 404) throw Error('user not found')
+        return res.json()
+      })
   }
 });
 
@@ -82,6 +87,21 @@ const UserData = ({userId} : {userId: number}) => {
   );
 };
 
+export const ErrorFallback = ({error, resetErrorBoundary}: FallbackProps) => {
+  return (
+    <div>
+      <Heading as='h2' size='md' mb={1}>
+        404
+      </Heading>
+      <Text>
+        {error.message}
+      </Text>
+
+      <Button onClick={resetErrorBoundary}>Ok</Button>
+    </div>
+  );
+}
+
 export const Async = () => {
   // const [userId, setUserId] = useRecoilState(userIdState);
   const [userId, setUserId] = useState<number>(0);
@@ -106,10 +126,13 @@ export const Async = () => {
         <option value='1'>User 1</option>
         <option value='2'>User 2</option>
         <option value='3'>User 3</option>
+        <option value='999'>User 999</option>
       </Select>
-      <Suspense fallback={<div>Loading...</div>}>
-        <UserData userId={userId}></UserData>
-      </Suspense>
+      <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {setUserId(0)}} resetKeys={[userId]}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <UserData userId={userId}></UserData>
+        </Suspense>
+      </ErrorBoundary>
     </Container>
   );
 };
