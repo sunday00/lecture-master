@@ -1,10 +1,11 @@
 import {InputGroup, InputRightElement, NumberInput, NumberInputField, Text, VStack} from '@chakra-ui/react'
-import { selectorFamily, useRecoilState, useRecoilValue } from 'recoil';
+import { selector, selectorFamily, useRecoilState, useRecoilValue } from 'recoil';
 import { selectedElementState } from './Canvas';
 import { elementState } from './components/Rectangle/Rectangle';
-import React from 'react';
+import React, { Suspense } from 'react';
 import _ from 'lodash'
 import produce from 'immer';
+import { ImageInfo, ImageInfoFallback } from './components/ImageInfo';
 
 // export const selectedElementProperties = selector<Element|undefined>({
 //   key: 'selectedElementProperties',
@@ -39,37 +40,20 @@ export const editPropertyState = selectorFamily<any, { path: string, id: number 
   }
 })
 
-export const EditProperties = () => {
-  // const [element, setElement] = useRecoilState(selectedElementProperties)
-  //
-  // if (!element) return null
+const hasImageState = selector({
+  key: 'hasImage',
+  get: ({get}) => {
+    const id = get(selectedElementState)
+    if(id === null) return
 
-  // const updatePosition = (prop: 'top' | 'left', amount: number) => {
-  //   setElement({
-  //     ...element,
-  //     style: {
-  //       ...element.style,
-  //       position: {
-  //         ...element.style.position,
-  //         [prop]: amount,
-  //       }
-  //     }
-  //   })
-  // }
-  //
-  // const updateSize = (prop: 'width' | 'height', amount: number) => {
-  //   setElement({
-  //     ...element,
-  //     style: {
-  //       ...element.style,
-  //       size: {
-  //         ...element.style.size,
-  //         [prop]: amount,
-  //       }
-  //     }
-  //   })
-  // }
+    const element = get(elementState(id))
+    return element.image !== undefined
+  }
+})
+
+export const EditProperties = () => {
   const selectedElement = useRecoilValue(selectedElementState)
+  const hasImage = useRecoilValue(hasImageState)
   if(typeof selectedElement !== 'number') return null
 
   return (
@@ -91,6 +75,11 @@ export const EditProperties = () => {
         <Property label="Width" path={'style.size.width'} id={selectedElement}/>
         <Property label="Height" path={'style.size.height'} id={selectedElement}/>
       </Section>
+      {hasImage ? <Section heading="Image">
+        <Suspense fallback={<ImageInfoFallback />}>
+          <ImageInfo />
+        </Suspense>
+      </Section> : null}
     </Card>
   )
 }
