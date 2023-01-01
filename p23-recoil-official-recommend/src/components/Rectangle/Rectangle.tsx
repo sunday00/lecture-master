@@ -14,7 +14,7 @@ export type ElementStyle = {
 
 export type Element = {
   style: ElementStyle
-  image?: {id: number, src: string}
+  image?: { id: number, src: string }
 }
 
 export const defaultElement = {
@@ -22,7 +22,7 @@ export const defaultElement = {
     position: { top: 50, left: 50 },
     size: { width: 50, height: 50 }
   }
-}
+};
 
 export const elementState = atomFamily<Element, number>({
   key: 'element',
@@ -51,9 +51,14 @@ export const Rectangle = ({ id }: { id: number }) => {
         setSelectedElement(id);
       }}
     >
-      <Resize onResize={(style) => {
-        handleResize(style);
-      }} selected={isSelected} position={element.style.position} size={element.style.size}>
+      <Resize
+        onResize={(style) => {
+          handleResize(style);
+        }}
+        selected={isSelected}
+        position={element.style.position}
+        size={element.style.size}
+        keepAspectRatio={element.image !== undefined}>
         <Drag
           position={element.style.position}
           onDrag={(position) => {
@@ -67,7 +72,7 @@ export const Rectangle = ({ id }: { id: number }) => {
           }}
         >
           <Suspense fallback={<RectangleLoading selected={isSelected} />}>
-            <RectangleInner selected={isSelected} id={id}/>
+            <RectangleInner selected={isSelected} id={id} />
           </Suspense>
         </Drag>
       </Resize>
