@@ -1,61 +1,67 @@
 import {Button} from '@chakra-ui/button'
 import {Input} from '@chakra-ui/input'
 import {Box, Divider, Heading, VStack} from '@chakra-ui/layout'
-import produce from 'immer'
 import React, {useState} from 'react'
-import { atom, useRecoilState, useResetRecoilState } from 'recoil';
+import {
+  atom, AtomEffect,
+  atomFamily,
+  useRecoilCallback,
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState
+} from 'recoil';
+import { isArray } from 'lodash';
 
 type ItemType = {
   label: string
-  checked: boolean,
+  checked: boolean
 }
 
-const shoppingListState = atom<ItemType[]>({
-  key: 'shoppingList',
+const persistLocalStorage: AtomEffect<number[]|ItemType|any> = ({onSet, setSelf, node}) => {
+  const storedData = localStorage.getItem(node.key)
+  if(storedData !== null) {
+    setSelf(JSON.parse(storedData))
+  }
+
+  onSet((newIds) => {
+    if(isArray(newIds) && newIds.length === 0) {
+      localStorage.clear()
+    } else {
+      localStorage.setItem(node.key, JSON.stringify(newIds))
+    }
+  })
+}
+
+const idsState = atom<number[]>({
+  key: 'ids',
   default: [],
   effects: [
-    ({ onSet, setSelf }) => {
-      const storedData = localStorage.getItem('shoppingList')
-      if(storedData !== null) setSelf(JSON.parse(storedData))
+    persistLocalStorage
+  ],
+})
 
-      onSet((newShoppingList) => {
-        if(newShoppingList.length === 0) {
-          localStorage.removeItem('shoppingList')
-        } else {
-          localStorage.setItem('shoppingList', JSON.stringify(newShoppingList))
-        }
-      })
-    }
-  ]
+const itemState = atomFamily<ItemType, number>({
+  key: 'item',
+  default: {label: '', checked: false},
+  effects: [
+    persistLocalStorage
+  ],
 })
 
 export const AtomEffects = () => {
-  const [items, setItems] = useRecoilState(shoppingListState)
-  const resetList = useResetRecoilState(shoppingListState)
+  const ids = useRecoilValue(idsState)
+  const resetList = useResetRecoilState(idsState)
+  const nextId = ids.length
 
-  const toggleItem = (index: number) => {
-    setItems(
-      produce(items, (draftItems) => {
-        draftItems[index].checked = !draftItems[index].checked
-      }),
-    )
-  }
-
-  const insertItem = (label: string) => {
-    setItems([...items, {label, checked: false}])
-  }
+  const insertItem = useRecoilCallback(({set}) => (label: string) => {
+    set(idsState, [...ids, nextId])
+    set(itemState(nextId), {label, checked: false})
+  })
 
   return (
     <Container onClear={() => resetList()}>
-      {items.map((item, index) => (
-        <Item
-          key={item.label}
-          label={item.label}
-          checked={item.checked}
-          onClick={() => {
-            toggleItem(index)
-          }}
-        />
+      {ids.map((id) => (
+        <Item key={id} id={id} />
       ))}
       <NewItemInput
         onInsert={(label) => {
@@ -85,23 +91,23 @@ const Container: React.FC<{onClear: () => void}> = ({children, onClear}) => {
 }
 
 type ItemProps = {
-  label: string
-  checked: boolean
-  onClick: () => void
+  id: number
 }
 
-const Item = ({label, checked, onClick}: ItemProps) => {
+const Item = ({id}: ItemProps) => {
+  const [item, setItem] = useRecoilState(itemState(id))
+
   return (
     <Box
       rounded="md"
-      textDecoration={checked ? 'line-through' : ''}
-      opacity={checked ? 0.5 : 1}
+      textDecoration={item.checked ? 'line-through' : ''}
+      opacity={item.checked ? 0.5 : 1}
       _hover={{textDecoration: 'line-through'}}
       cursor="pointer"
       width="100%"
-      onClick={onClick}
+      onClick={() => setItem({...item, checked: !item.checked})}
     >
-      {label}
+      {item.label}
     </Box>
   )
 }
