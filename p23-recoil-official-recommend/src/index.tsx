@@ -23,7 +23,9 @@ ReactDOM.render(
               <Selectors />
             </Route>
             <Route path="/examples/atom-effect">
-              <AtomEffects />
+              <Suspense fallback={<div>Loading...</div>}>
+                <AtomEffects />
+              </Suspense>
             </Route>
             <Route path="/examples/async">
               <Suspense fallback={<div>Loading...</div>}>

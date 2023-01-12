@@ -3,48 +3,68 @@ import {Input} from '@chakra-ui/input'
 import {Box, Divider, Heading, VStack} from '@chakra-ui/layout'
 import React, {useState} from 'react'
 import {
-  atom, AtomEffect,
+  atom,
   atomFamily,
+  DefaultValue,
   useRecoilCallback,
   useRecoilState,
   useRecoilValue,
-  useResetRecoilState
-} from 'recoil';
-import { isArray } from 'lodash';
+  useResetRecoilState,
+} from 'recoil'
+import {shoppingListAPI} from './FakeApi'
 
 type ItemType = {
   label: string
   checked: boolean
 }
 
-const persistLocalStorage: AtomEffect<number[]|ItemType|any> = ({onSet, setSelf, node}) => {
-  const storedData = localStorage.getItem(node.key)
-  if(storedData !== null) {
-    setSelf(JSON.parse(storedData))
+class CachedApi {
+  cachedItems: Record<string, ItemType> | undefined
+
+  private async getItems() {
+    if(!this.cachedItems) this.cachedItems = await shoppingListAPI.getItems()
+
+    return this.cachedItems
   }
 
-  onSet((newIds) => {
-    if(isArray(newIds) && newIds.length === 0) {
-      localStorage.clear()
-    } else {
-      localStorage.setItem(node.key, JSON.stringify(newIds))
-    }
-  })
+  async getIds() {
+    return Object.keys(await this.getItems()).map((id) => parseInt(id))
+  }
+
+  async getItem(id: number) {
+    const items = await this.getItems()
+    if(items[id] === undefined) return new DefaultValue()
+    return items[id]
+  }
 }
+
+const cachedApi = new CachedApi()
 
 const idsState = atom<number[]>({
   key: 'ids',
   default: [],
   effects: [
-    persistLocalStorage
+    ({setSelf}) => {
+      setSelf(cachedApi.getIds())
+    },
   ],
 })
 
 const itemState = atomFamily<ItemType, number>({
   key: 'item',
   default: {label: '', checked: false},
-  effects: [
-    persistLocalStorage
+  effects: (id) => [
+    ({onSet, setSelf}) => {
+      setSelf(cachedApi.getItem(id))
+
+      onSet((item: DefaultValue|{label: string, checked: boolean}) => {
+        if(item instanceof DefaultValue) {
+          shoppingListAPI.deleteItem(id).then(() => console.log('done'))
+        } else {
+          shoppingListAPI.createOrUpdateItem(id, item).then(() => console.log('done'))
+        }
+      })
+    },
   ],
 })
 
