@@ -5,12 +5,12 @@ import React, {useState} from 'react'
 import {
   atom,
   atomFamily,
-  DefaultValue,
+  DefaultValue, selector,
   useRecoilCallback,
   useRecoilState,
   useRecoilValue,
-  useResetRecoilState,
-} from 'recoil'
+  useResetRecoilState
+} from 'recoil';
 import {shoppingListAPI} from './FakeApi'
 
 type ItemType = {
@@ -39,6 +39,14 @@ class CachedApi {
 }
 
 const cachedApi = new CachedApi()
+
+// const userState = selector({
+//   key: 'user',
+//   get: async ({get}) => {
+//     const userId = get(currentUserId)
+//     return getUserFromApi(userId)
+//   }
+// })
 
 const idsState = atom<number[]>({
   key: 'ids',
