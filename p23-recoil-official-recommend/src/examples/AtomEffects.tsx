@@ -50,14 +50,21 @@ const idsState = atom<number[]>({
   ],
 })
 
+type DefaultItemState = {
+  label: string;
+  checked: boolean;
+}
+
 const itemState = atomFamily<ItemType, number>({
   key: 'item',
   default: {label: '', checked: false},
   effects: (id) => [
-    ({onSet, setSelf}) => {
+    ({onSet, setSelf, trigger}) => {
       setSelf(cachedApi.getItem(id))
 
-      onSet((item: DefaultValue|{label: string, checked: boolean}) => {
+      onSet((item: DefaultValue|DefaultItemState, oldItem: DefaultValue|DefaultItemState) => {
+        if(oldItem instanceof DefaultValue && trigger === 'get') return
+
         if(item instanceof DefaultValue) {
           shoppingListAPI.deleteItem(id).then(() => console.log('done'))
         } else {
