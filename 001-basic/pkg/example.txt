@@ -1,0 +1,10 @@
+foo
+bar
+baz
+qux
+qoo
+ti
+fox
+quex
+tax
+cho
