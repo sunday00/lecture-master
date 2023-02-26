@@ -54,19 +54,27 @@ func (p Pkg) Start() {
 }
 
 func setUserNumber(config *Config) bool {
-	_, err := fmt.Scanln(&config.User)
+	var input string
+	cnt, _ := fmt.Scanln(&input)
 
+	if cnt == 0 {
+		console.PrintColoredLn("Empty. please input 1~1000", console.Danger)
+		return false
+	}
+
+	userNumber, err := strconv.Atoi(input)
 	if err != nil {
 		console.PrintColoredLn("Not a number. please input 1~1000", console.Danger)
-		_, _ = scanner.ReadString('\n')
+		//_, _ = scanner.ReadString('\n')
 		return false
 	}
 
-	if config.User < 0 || config.User > 1000 {
+	if userNumber < 0 || userNumber > 1000 {
 		console.PrintColoredLn("wrong number. please input 1~1000", console.Danger)
-		_, _ = scanner.ReadString('\n')
 		return false
 	}
+
+	config.User = userNumber
 
 	return true
 }

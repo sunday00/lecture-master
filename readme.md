@@ -18,4 +18,3 @@ package {pkg-name}
 $ GOOS=windows go build
 ```
 
-https://www.youtube.com/watch?v=EkQqlk4anX0&list=PLy-g2fnSzUTBHwuXkWQ834QHDZwLx6v6j&index=24
