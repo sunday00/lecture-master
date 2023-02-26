@@ -1,21 +1,23 @@
 package pkg
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/sunday00/go-console"
 	random "math/rand"
+	"os"
 	"strconv"
 	"time"
 )
 
 var target int
 
+var scanner = bufio.NewReader(os.Stdin)
+
 func init() {
 	random.Seed(time.Now().UnixNano())
 
 	target = random.Intn(999) + 1
-
-	console.PrintColored("please input 1~1000 : ", console.Info)
 }
 
 type Config struct {
@@ -27,11 +29,14 @@ type Config struct {
 }
 
 func (p Pkg) Start() {
+	console.PrintColored("please input 1~1000 : ", console.Info)
+
 	var config = Config{0, 0, 0, 1000, ""}
 
 	for {
 		isSetUserNumber := setUserNumber(&config)
 		if !isSetUserNumber {
+			//_, _ = scanner.ReadString('\n')
 			continue
 		}
 
@@ -49,10 +54,17 @@ func (p Pkg) Start() {
 }
 
 func setUserNumber(config *Config) bool {
-	_, _ = fmt.Scanln(&config.User)
+	_, err := fmt.Scanln(&config.User)
+
+	if err != nil {
+		console.PrintColoredLn("Not a number. please input 1~1000", console.Danger)
+		_, _ = scanner.ReadString('\n')
+		return false
+	}
 
 	if config.User < 0 || config.User > 1000 {
 		console.PrintColoredLn("wrong number. please input 1~1000", console.Danger)
+		_, _ = scanner.ReadString('\n')
 		return false
 	}
 
@@ -94,8 +106,4 @@ func setHint(config *Config) {
 
 func getHint(config *Config) string {
 	return fmt.Sprintf("hint: %d < target < %d", config.Min, config.Max)
-}
-
-func (p Pkg) template() {
-
 }
