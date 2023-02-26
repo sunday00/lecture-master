@@ -58,7 +58,7 @@ func setUserNumber(config *Config) bool {
 	cnt, _ := fmt.Scanln(&input)
 
 	if cnt == 0 {
-		console.PrintColoredLn("EEmpty. please input 1~1000", console.Danger)
+		console.PrintColoredLn("Empty. please input 1~1000", console.Danger)
 		return false
 	}
 
