@@ -8,6 +8,9 @@ func (p Pkg) Basic() {
 	for i := 0; i < len(a); i++ {
 		println(a[i])
 	}
+
+	var b = [...]int{1, 3, 5, 7, 9}
+	fmt.Printf("%v \n", b)
 }
 
 func (p Pkg) ValueByIndex() {
