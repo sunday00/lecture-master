@@ -121,7 +121,3 @@ func (j *SquareJob) Do() {
 	time.Sleep(1 * time.Second)
 	console.PrintColoredF("%d job complete. result : %d \n", console.Success, j.index, j.index*j.index)
 }
-
-func (p Pkg) sample() {
-
-}
