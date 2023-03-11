@@ -17,3 +17,12 @@ package {pkg-name}
 ```
 $ GOOS=windows go build
 ```
+
+# simple test
+```
+$ go test ./pkg
+$ go test ./...
+$ go test -bench=. ./...
+```
+- ... means not implement something else, like files, directory....
+- It literally dot dot dot. means recursive sub files.
