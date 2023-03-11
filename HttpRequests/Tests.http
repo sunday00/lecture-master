@@ -3,3 +3,12 @@ GET localhost:3000/v23031113
 
 ### all quiz
 GET localhost:3000/v23031113/quiz
+
+### create Quiz
+POST localhost:3000/v23031113/quiz
+Content-Type: application/json
+
+{
+  "title": "hello quiz",
+  "description": "who is invent Han-gule"
+}
