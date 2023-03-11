@@ -15,8 +15,8 @@ export class QuizService {
     return [1, 2, 3];
   }
 
-  store(quiz: QuizCreateDto) {
-    return this.repository.save(quiz);
+  async store(quiz: QuizCreateDto): Promise<Quiz> {
+    return await this.repository.save(quiz);
     // const quizEntity = this.repository.create(quiz);
     // return this.repository.insert(quizEntity);
   }

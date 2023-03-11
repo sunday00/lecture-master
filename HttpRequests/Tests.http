@@ -1,14 +1,22 @@
 ### start
-GET localhost:3000/v23031113
+GET {{HOST}}/{{defaultVersion}}
 
 ### all quiz
-GET localhost:3000/v23031113/quiz
+GET {{HOST}}/{{defaultVersion}}/quiz
 
 ### create Quiz
-POST localhost:3000/v23031113/quiz
+POST {{HOST}}/{{defaultVersion}}/quiz
 Content-Type: application/json
 
 {
   "title": "hello quiz",
   "description": "who is invent Han-gule"
+}
+
+### create Question
+POST {{HOST}}/{{defaultVersion}}/question
+Content-Type: application/json
+
+{
+  "question": "Who invented Turtle-Ship"
 }

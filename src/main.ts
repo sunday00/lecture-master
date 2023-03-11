@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { VersioningType } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 
 const HARDCODE_CONFIG = {
   port: 3000,
@@ -12,6 +12,7 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: '23031113',
   });
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(HARDCODE_CONFIG.port);
 }
 bootstrap()

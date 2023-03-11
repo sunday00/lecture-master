@@ -3,11 +3,10 @@ import {
   Controller,
   Get,
   Post,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { QuizService } from './quiz.service';
 import { QuizCreateDto } from './models/quiz.create.dto';
+import { Quiz } from './models/quiz.entity';
 
 @Controller('quiz')
 export class QuizController {
@@ -19,8 +18,7 @@ export class QuizController {
   }
 
   @Post('/')
-  @UsePipes(ValidationPipe)
-  store(@Body() quiz: QuizCreateDto) {
-    return this.service.store(quiz);
+  async store(@Body() quiz: QuizCreateDto): Promise<Quiz> {
+    return await this.service.store(quiz);
   }
 }
