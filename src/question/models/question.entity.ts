@@ -1,7 +1,7 @@
 import {
   BaseEntity,
   Column,
-  Entity,
+  Entity, JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -16,5 +16,6 @@ export class Question extends BaseEntity {
   question: string;
 
   @ManyToOne(() => Quiz, (quiz) => quiz.questions)
+  @JoinColumn({ name: 'quiz_id' })
   quiz: Quiz;
 }
