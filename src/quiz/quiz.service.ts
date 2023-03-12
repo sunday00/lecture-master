@@ -12,7 +12,9 @@ export class QuizService {
   ) {}
 
   list() {
-    return [1, 2, 3];
+    return this.repository.find({
+      relations: { questions: true },
+    });
   }
 
   async store(quiz: QuizCreateDto): Promise<Quiz> {
