@@ -4,4 +4,7 @@ export class QuestionCreateDto {
   @IsNotEmpty()
   @Length(3)
   question: string;
+
+  @IsNotEmpty()
+  quizId: number;
 }
