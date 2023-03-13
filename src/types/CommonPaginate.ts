@@ -1,14 +1,34 @@
+import {
+  FindManyOptions,
+  QueryRunner,
+  Repository,
+  SelectQueryBuilder,
+} from 'typeorm';
+
 export type PaginateReq = {
   per?: number;
   page?: number;
   search?: string;
 };
 
+export function applyPaginate(req: PaginateReq): {
+  take: number;
+  page: number;
+  skip: number;
+} {
+  const take = req.per || 10;
+  const page = req.page || 1;
+
+  return {
+    take,
+    page,
+    skip: take * (page - 1),
+  };
+}
+
 export type Paginate<Entity> = {
-  results: Entity[];
-  total: number;
-  current: number;
-  last: number;
+  results: [Entity[], number];
+  req: PaginateReq;
 };
 
 export class PaginateRes<Entity> {
@@ -18,9 +38,48 @@ export class PaginateRes<Entity> {
   public last: number;
 
   constructor(raw: Paginate<Entity>) {
-    this.results = raw.results;
-    this.total = raw.total;
-    this.current = raw.current;
-    this.last = raw.last;
+    const { page, take } = applyPaginate(raw.req);
+
+    this.results = raw.results[0];
+    this.total = raw.results[1];
+    this.current = page;
+    this.last = Math.floor(raw.results[1] / take) + 1;
+  }
+}
+
+export class PaginateRepository<Entity> extends Repository<Entity> {
+  public page: number;
+  public take: number;
+
+  whereLike(where: string, search?: string): [string, { search: string }] {
+    return [
+      `${where} ${search ? 'LIKE :search' : 'IS NOT NULL'}`,
+      { search: `%${search}%` },
+    ];
+  }
+
+  paginateFindAndCount(options: FindManyOptions<Entity>, req?: PaginateReq) {
+    const { page, take, skip } = applyPaginate(req);
+
+    options.skip = skip;
+    options.take = take;
+
+    this.page = page;
+    this.take = take;
+
+    return this.findAndCount(options);
+  }
+
+  createPaginateQueryBuilder(
+    alias?: string,
+    req?: PaginateReq,
+    queryRunner?: QueryRunner,
+  ): SelectQueryBuilder<Entity> {
+    const { page, take, skip } = applyPaginate(req);
+
+    this.page = page;
+    this.take = take;
+
+    return this.createQueryBuilder(alias, queryRunner).skip(skip).take(take);
   }
 }

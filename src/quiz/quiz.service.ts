@@ -1,38 +1,43 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { QuizCreateDto } from './models/quiz.create.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { QuizRepository } from './quiz.repository';
 import { Quiz } from './models/quiz.entity';
 import { FindOptionsWhere } from 'typeorm';
-import { Paginate, PaginateReq, PaginateRes } from '../types/CommonPaginate';
+import { PaginateReq, PaginateRes } from '../types/CommonPaginate';
 
 @Injectable()
 export class QuizService {
-  constructor(
-    @InjectRepository(Quiz)
-    private readonly repository: QuizRepository,
-  ) {}
+  constructor(private readonly repository: QuizRepository) {}
 
-  async list(commonPaginate: PaginateReq): Promise<PaginateRes<Quiz>> {
-    // return this.repository.find({
-    //   relations: { questions: true },
-    // });
-
-    const per = commonPaginate.per || 10;
-    const page = commonPaginate.page || 1;
-
-    const [results, total] = await this.repository.findAndCount({
-      take: per,
-      skip: per * (page - 1),
-      order: { id: 'DESC' },
-      relations: { questions: true },
-    });
+  async list(req: PaginateReq): Promise<PaginateRes<Quiz>> {
+    const results = await this.repository.paginateFindAndCount(
+      {
+        order: { id: 'DESC' },
+        relations: { questions: true },
+      },
+      req,
+    );
 
     return new PaginateRes<Quiz>({
       results,
-      total,
-      current: page,
-      last: Math.floor(total / per) + 1,
+      req,
+    });
+  }
+
+  async withOption(req: PaginateReq): Promise<PaginateRes<Quiz>> {
+    const results = await this.repository
+      // .createQueryBuilder('qz')
+      .createPaginateQueryBuilder('qz', req)
+      // .leftJoinAndSelect(Question, 'qt', 'qz.id=qt.quiz_id')
+      .leftJoinAndSelect('qz.questions', 'qt')
+      .leftJoinAndSelect('qt.options', 'ot')
+      .where(...this.repository.whereLike('qz.title', req.search))
+      .orderBy('qz.id', 'DESC')
+      .getManyAndCount();
+
+    return new PaginateRes<Quiz>({
+      results,
+      req,
     });
   }
 

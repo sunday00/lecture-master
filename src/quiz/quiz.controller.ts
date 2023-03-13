@@ -17,6 +17,15 @@ export class QuizController {
     return await this.service.list({ per, page, search });
   }
 
+  @Get('/with-option')
+  async withOption(
+    @Query('per') per: number,
+    @Query('page') page: number,
+    @Query('search') search: string,
+  ): Promise<PaginateRes<Quiz>> {
+    return await this.service.withOption({ per, page, search });
+  }
+
   @Get('/:id')
   show(@Param('id') id: number) {
     return this.service.getQuizById(id);

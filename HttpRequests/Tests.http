@@ -4,6 +4,9 @@ GET {{HOST}}/{{defaultVersion}}
 ### all quiz
 GET {{HOST}}/{{defaultVersion}}/quiz
 
+### all quiz with optionns
+GET {{HOST}}/{{defaultVersion}}/quiz/with-option?search=2
+
 ### one quiz
 GET {{HOST}}/{{defaultVersion}}/quiz/1
 
