@@ -20,9 +20,7 @@ export class QuizService {
 
   async getQuizById(id: number): Promise<Quiz> {
     const quiz = await this.repository.findOne({
-      where: ((q) => q.where('quizes.id := id', { id })) as
-        | FindOptionsWhere<Quiz>
-        | FindOptionsWhere<Quiz>[],
+      where: { id } as FindOptionsWhere<Quiz> | FindOptionsWhere<Quiz>[],
       relations: { questions: true },
     });
 

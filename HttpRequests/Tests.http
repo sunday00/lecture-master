@@ -12,8 +12,8 @@ POST {{HOST}}/{{defaultVersion}}/quiz
 Content-Type: application/json
 
 {
-  "title": "hello quiz",
-  "description": "who is invent Han-gule"
+  "title": "hello2 quiz",
+  "description": "who2 is invent Han-gule"
 
 }
 
@@ -22,6 +22,6 @@ POST {{HOST}}/{{defaultVersion}}/question
 Content-Type: application/json
 
 {
-  "question": "Who invented Turtle-Ship",
-  "quizId": 1
+  "question": "22 here is question for quiz2",
+  "quizId": 2
 }

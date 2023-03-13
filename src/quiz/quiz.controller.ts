@@ -1,7 +1,8 @@
 import {
   Body,
   Controller,
-  Get, Param,
+  Get,
+  Param,
   Post,
 } from '@nestjs/common';
 import { QuizService } from './quiz.service';
@@ -18,7 +19,7 @@ export class QuizController {
   }
 
   @Get('/:id')
-  show(@Param() id: number) {
+  show(@Param('id') id: number) {
     return this.service.getQuizById(id);
   }
 
