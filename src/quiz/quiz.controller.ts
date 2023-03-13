@@ -1,21 +1,20 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { QuizService } from './quiz.service';
 import { QuizCreateDto } from './models/quiz.create.dto';
 import { Quiz } from './models/quiz.entity';
+import { PaginateRes } from '../types/CommonPaginate';
 
 @Controller('quiz')
 export class QuizController {
   constructor(private readonly service: QuizService) {}
 
   @Get('/')
-  index() {
-    return this.service.list();
+  async index(
+    @Query('per') per: number,
+    @Query('page') page: number,
+    @Query('search') search: string,
+  ): Promise<PaginateRes<Quiz>> {
+    return await this.service.list({ per, page, search });
   }
 
   @Get('/:id')

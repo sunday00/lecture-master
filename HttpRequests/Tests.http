@@ -25,3 +25,13 @@ Content-Type: application/json
   "question": "22 here is question for quiz2",
   "quizId": 2
 }
+
+### create Optopn
+POST {{HOST}}/{{defaultVersion}}/option
+Content-Type: application/json
+
+{
+  "text": "option for question1",
+  "isCorrect": true,
+  "questionId": 1
+}

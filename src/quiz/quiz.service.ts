@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { QuizRepository } from './quiz.repository';
 import { Quiz } from './models/quiz.entity';
 import { FindOptionsWhere } from 'typeorm';
+import { Paginate, PaginateReq, PaginateRes } from '../types/CommonPaginate';
 
 @Injectable()
 export class QuizService {
@@ -12,9 +13,26 @@ export class QuizService {
     private readonly repository: QuizRepository,
   ) {}
 
-  list() {
-    return this.repository.find({
+  async list(commonPaginate: PaginateReq): Promise<PaginateRes<Quiz>> {
+    // return this.repository.find({
+    //   relations: { questions: true },
+    // });
+
+    const per = commonPaginate.per || 10;
+    const page = commonPaginate.page || 1;
+
+    const [results, total] = await this.repository.findAndCount({
+      take: per,
+      skip: per * (page - 1),
+      order: { id: 'DESC' },
       relations: { questions: true },
+    });
+
+    return new PaginateRes<Quiz>({
+      results,
+      total,
+      current: page,
+      last: Math.floor(total / per) + 1,
     });
   }
 

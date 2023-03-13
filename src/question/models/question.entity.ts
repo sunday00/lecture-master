@@ -2,10 +2,11 @@ import {
   BaseEntity,
   Column,
   Entity, JoinColumn,
-  ManyToOne,
+  ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Quiz } from '../../quiz/models/quiz.entity';
+import { Option } from '../../option/models/option.entity';
 
 @Entity('questions')
 export class Question extends BaseEntity {
@@ -18,4 +19,7 @@ export class Question extends BaseEntity {
   @ManyToOne(() => Quiz, (quiz) => quiz.questions)
   @JoinColumn({ name: 'quiz_id' })
   quiz: Quiz;
+
+  @OneToMany(() => Option, (option) => option.question)
+  options: Option[];
 }
