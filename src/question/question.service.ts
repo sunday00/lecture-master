@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { QuestionRepository } from './question.repository';
 import { QuizRepository } from '../quiz/quiz.repository';
 import { Quiz } from '../quiz/models/quiz.entity';
+import { FindRelationsNotFoundError } from 'typeorm';
 
 @Injectable()
 export class QuestionService {
@@ -17,6 +18,12 @@ export class QuestionService {
 
   async store(question: QuestionCreateDto): Promise<Question> {
     const quiz = await this.quizRepository.findOneBy({ id: question.quizId });
+
+    if (!quiz)
+      throw new FindRelationsNotFoundError([
+        `cant find Quiz id ${question.quizId}`,
+      ]);
+
     let newQuestion = await this.repository.create(question);
 
     newQuestion.quiz = quiz;

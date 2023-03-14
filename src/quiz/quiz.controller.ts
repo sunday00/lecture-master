@@ -27,8 +27,13 @@ export class QuizController {
   }
 
   @Get('/:id')
-  show(@Param('id') id: number) {
-    return this.service.getQuizById(id);
+  async show(@Param('id') id: number): Promise<Quiz> {
+    return await this.service.getQuizById(id);
+  }
+
+  @Get('/with-option/:id')
+  async showWithOption(@Param('id') id: number): Promise<Quiz> {
+    return await this.service.getQuizByIdWithOption(id);
   }
 
   @Post('/')

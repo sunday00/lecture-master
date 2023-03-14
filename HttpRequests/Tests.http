@@ -10,13 +10,16 @@ GET {{HOST}}/{{defaultVersion}}/quiz/with-option?search=2
 ### one quiz
 GET {{HOST}}/{{defaultVersion}}/quiz/1
 
+### one quiz with options
+GET {{HOST}}/{{defaultVersion}}/quiz/with-option/2
+
 ### create Quiz
 POST {{HOST}}/{{defaultVersion}}/quiz
 Content-Type: application/json
 
 {
-  "title": "hello2 quiz",
-  "description": "who2 is invent Han-gule"
+  "title": "Sql",
+  "description": "Very easy sql basic"
 
 }
 
@@ -25,7 +28,7 @@ POST {{HOST}}/{{defaultVersion}}/question
 Content-Type: application/json
 
 {
-  "question": "22 here is question for quiz2",
+  "question": "CREATE for what?",
   "quizId": 2
 }
 
@@ -34,7 +37,7 @@ POST {{HOST}}/{{defaultVersion}}/option
 Content-Type: application/json
 
 {
-  "text": "option for question1",
+  "text": "make one row data",
   "isCorrect": true,
-  "questionId": 1
+  "questionId": 7
 }

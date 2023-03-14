@@ -54,6 +54,15 @@ export class QuizService {
     return quiz;
   }
 
+  async getQuizByIdWithOption(id: number): Promise<Quiz> {
+    return await this.repository
+      .createQueryBuilder('qz')
+      .leftJoinAndSelect('qz.questions', 'qt')
+      .leftJoinAndSelect('qt.options', 'ot')
+      .where('qz.id=:id', { id })
+      .getOne();
+  }
+
   async store(quiz: QuizCreateDto): Promise<Quiz> {
     return await this.repository.save(quiz);
     // const quizEntity = this.repository.create(quiz);
