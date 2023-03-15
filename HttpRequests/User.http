@@ -1,0 +1,10 @@
+### register
+POST {{HOST}}/{{defaultVersion}}/user/register
+Content-Type: application/json
+
+{
+  "name": "TwoFace",
+  "email": "flip@villain.com",
+  "password": "2111",
+  "confirm": "1211"
+}
