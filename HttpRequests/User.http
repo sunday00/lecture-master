@@ -14,6 +14,23 @@ POST {{HOST}}/{{defaultVersion}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "flip@villain.com1",
+  "email": "flip@villain.com",
   "password": "2111"
 }
+
+### login-local-jwt
+POST {{HOST}}/{{defaultVersion}}/auth/login-local-jwt
+Content-Type: application/json
+
+{
+  "email": "flip@villain.com",
+  "password": "2111"
+}
+
+> {%
+  client.global.set('access_token', response.body.access_token)
+%}
+
+### use-local-jwt-token
+GET {{HOST}}/{{defaultVersion}}/auth/me
+Authorization: bearer {{access_token}}
