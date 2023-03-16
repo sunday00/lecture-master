@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { QuestionModule } from './question/question.module';
 import { OptionModule } from './option/option.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 import typeormConfig from './configs/typeorm.config';
 
 @Module({
@@ -20,6 +21,7 @@ import typeormConfig from './configs/typeorm.config';
     QuestionModule,
     OptionModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

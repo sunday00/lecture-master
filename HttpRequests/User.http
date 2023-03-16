@@ -8,3 +8,12 @@ Content-Type: application/json
   "password": "2111",
   "confirm": "1211"
 }
+
+### login
+POST {{HOST}}/{{defaultVersion}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "flip@villain.com1",
+  "password": "2111"
+}
