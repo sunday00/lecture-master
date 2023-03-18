@@ -10,7 +10,7 @@ import {
 import * as bcrypt from 'bcrypt';
 // import { Matches } from 'class-validator';
 
-@Entity()
+@Entity('users')
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

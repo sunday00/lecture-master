@@ -74,3 +74,6 @@ Nest is [MIT licensed](LICENSE).
 
 ## ref
 - https://www.youtube.com/watch?v=uXVTWbmPN2Q&list=PLkZU2rKh1mT-3VvYvGCdRVCCJ5lCtOKED&index=9
+- https://www.npmjs.com/package/@ngneat/falso
+- https://dev.to/nestjs/introducing-nest-commander-5a3o
+- 
