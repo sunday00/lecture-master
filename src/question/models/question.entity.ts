@@ -1,8 +1,10 @@
 import {
   BaseEntity,
   Column,
-  Entity, JoinColumn,
-  ManyToOne, OneToMany,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Quiz } from '../../quiz/models/quiz.entity';
