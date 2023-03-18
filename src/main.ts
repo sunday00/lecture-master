@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { swaggerConfig } from './configs/swagger.config';
 
 const HARDCODE_CONFIG = {
   port: 3000,
@@ -15,14 +15,7 @@ async function bootstrap() {
     defaultVersion: HARDCODE_CONFIG.version,
   });
 
-  const swagger = new DocumentBuilder()
-    .setTitle('Quiz Manager')
-    .setDescription('Quiz api')
-    .setVersion(HARDCODE_CONFIG.version)
-    // .addTag('cats')
-    .build();
-  const swaggerDocument = SwaggerModule.createDocument(app, swagger);
-  SwaggerModule.setup('swagger', app, swaggerDocument);
+  swaggerConfig('swagger', HARDCODE_CONFIG.version, app);
 
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(HARDCODE_CONFIG.port);

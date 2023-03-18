@@ -5,8 +5,10 @@ import { JwtAuthResponse } from './models/jwt-auth.response';
 import { User } from '../user/models/user.entity';
 import { JwtAuthGuard } from './utils/jwt-auth.guard';
 import { AuthLoginDto } from './models/auth-login.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
+@ApiTags('auth')
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 

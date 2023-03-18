@@ -40,10 +40,13 @@ export class PaginateRes<Entity> {
   constructor(raw: Paginate<Entity>) {
     const { page, take } = applyPaginate(raw.req);
 
+    const hasRemain = raw.results[1] % take;
+    const filledPages = raw.results[1] / take;
+
     this.results = raw.results[0];
     this.total = raw.results[1];
-    this.current = page;
-    this.last = Math.floor(raw.results[1] / take) + 1;
+    this.current = page ? parseInt(String(page)) : 1;
+    this.last = hasRemain ? Math.floor(filledPages) + 1 : filledPages;
   }
 }
 

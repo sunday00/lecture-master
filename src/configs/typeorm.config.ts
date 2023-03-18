@@ -9,5 +9,5 @@ export default (): TypeOrmModuleOptions => ({
   database: process.env.DB_SCHM || 'main',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: process.env.APP_ENV !== 'production',
-  logging: true,
+  logging: false,
 });

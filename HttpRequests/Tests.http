@@ -18,8 +18,8 @@ POST {{HOST}}/{{defaultVersion}}/quiz
 Content-Type: application/json
 
 {
-  "title": "Sql",
-  "description": "Very easy sql basic"
+  "title": "Programming Common Sense",
+  "description": "Very Easy Common sense for beginners"
 
 }
 
