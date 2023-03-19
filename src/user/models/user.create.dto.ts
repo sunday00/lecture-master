@@ -2,6 +2,7 @@ import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 import { User } from './user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { faker } from '@faker-js/faker';
+import { UserRoleEnum } from '../../types/UserRole.enum';
 
 const apiExamples = {
   uuid: {
@@ -11,6 +12,7 @@ const apiExamples = {
   name: { example: faker.internet.userName, description: 'user name' },
   email: { example: faker.internet.email, description: 'user email' },
   password: { example: () => '1111', description: 'user password' },
+  role: { example: () => UserRoleEnum.MEMBER, description: '' },
   get: (key) => {
     faker.seed(Date.now());
     return {
@@ -31,6 +33,10 @@ export class UserCreateDto {
   email: string;
 
   @IsNotEmpty()
+  @ApiProperty(apiExamples.get('role'))
+  role: UserRoleEnum;
+
+  @IsNotEmpty()
   @Length(4)
   @ApiProperty(apiExamples.get('password'))
   password: string;
@@ -39,12 +45,19 @@ export class UserCreateDto {
 export class UserResponse {
   @ApiProperty(apiExamples.get('uuid'))
   id: string;
+
   @ApiProperty(apiExamples.get('name'))
   name: string;
+
   @ApiProperty(apiExamples.get('email'))
   email: string;
+
+  @ApiProperty(apiExamples.get('role'))
+  role: UserRoleEnum;
+
   @ApiProperty()
   created_at: Date;
+
   @ApiProperty()
   updated_at: Date;
 
@@ -52,6 +65,7 @@ export class UserResponse {
     this.id = user.id;
     this.name = user.name;
     this.email = user.email;
+    this.role = user.role;
     this.created_at = user.created_at;
     this.updated_at = user.updated_at;
   }

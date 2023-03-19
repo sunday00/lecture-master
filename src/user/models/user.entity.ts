@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { UserRoleEnum } from '../../types/UserRole.enum';
 // import { Matches } from 'class-validator';
 
 @Entity('users')
@@ -26,6 +27,9 @@ export class User extends BaseEntity {
   @Column()
   // @Matches(/^(?=.*?[A-Z])/)
   password: string;
+
+  @Column({ default: UserRoleEnum.MEMBER })
+  role: UserRoleEnum;
 
   @CreateDateColumn()
   created_at: Date;
