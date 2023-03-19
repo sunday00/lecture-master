@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { QuizModule } from './quiz/quiz.module';
@@ -9,6 +9,7 @@ import { OptionModule } from './option/option.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import typeormConfig from './configs/typeorm.config';
+import { ApiTokenCheckMiddleware } from './middlewares/api-token-check.middleware';
 
 @Module({
   imports: [
@@ -26,4 +27,10 @@ import typeormConfig from './configs/typeorm.config';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): any {
+    consumer
+      .apply(ApiTokenCheckMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

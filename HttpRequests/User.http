@@ -6,6 +6,7 @@ Content-Type: application/json
   "name": "TwoFace",
   "email": "flip@villain.com",
   "password": "2111",
+  "role": "member",
   "confirm": "1211"
 }
 
