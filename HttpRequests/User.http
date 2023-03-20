@@ -35,3 +35,4 @@ Content-Type: application/json
 ### use-local-jwt-token
 GET {{HOST}}/{{defaultVersion}}/auth/me
 Authorization: bearer {{access_token}}
+Api-Key: 9XqF7CsiOa8nWJb60sHUuA2Mcguts2OOSJ+WSlOvHpg=
