@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { QuizService } from './quiz.service';
 import { QuizCreateDto } from './models/quiz.create.dto';
 import { Quiz } from './models/quiz.entity';
 import { PaginateRes } from '../types/CommonPaginate';
 import { ApiTags } from '@nestjs/swagger';
 import { QuizListDto } from './models/quiz.list.dto';
+import { RoleGuard } from '../middlewares/role.guard';
+import { JwtAuthGuard } from '../auth/utils/jwt-auth.guard';
 
 @Controller('quiz')
 @ApiTags('quiz')
@@ -38,6 +48,7 @@ export class QuizController {
   }
 
   @Post('/')
+  @UseGuards(JwtAuthGuard, RoleGuard)
   async store(@Body() quiz: QuizCreateDto): Promise<Quiz> {
     return await this.service.store(quiz);
   }

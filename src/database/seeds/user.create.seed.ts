@@ -1,6 +1,7 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'mariadb';
 import { User } from '../../user/models/user.entity';
+import { UserRoleEnum } from '../../types/UserRole.enum';
 
 export default class UserCreateSeed implements Seeder {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -13,6 +14,7 @@ export default class UserCreateSeed implements Seeder {
       name: 'admin',
       email: 'root@system.com',
       password: '@dmin$ecret!',
+      role: UserRoleEnum.ADMIN,
     });
 
     await factory(User)().createMany(10);
