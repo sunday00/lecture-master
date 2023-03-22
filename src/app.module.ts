@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import typeormConfig from './configs/typeorm.config';
 import { ApiTokenCheckMiddleware } from './middlewares/api-token-check.middleware';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     }),
     TypeOrmModule.forRoot(typeormConfig()),
     EventEmitterModule.forRoot(),
+    MulterModule.register({ dest: './uploaded' }),
     QuizModule,
     QuestionModule,
     OptionModule,
