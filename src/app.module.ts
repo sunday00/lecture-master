@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import typeormConfig from './configs/typeorm.config';
 import { ApiTokenCheckMiddleware } from './middlewares/api-token-check.middleware';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -17,8 +18,9 @@ import { ApiTokenCheckMiddleware } from './middlewares/api-token-check.middlewar
       isGlobal: true,
       load: [typeormConfig],
     }),
-    QuizModule,
     TypeOrmModule.forRoot(typeormConfig()),
+    EventEmitterModule.forRoot(),
+    QuizModule,
     QuestionModule,
     OptionModule,
     UserModule,
