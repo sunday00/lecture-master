@@ -4,7 +4,7 @@ import { UserEntity } from './model/user.entity'
 
 @Injectable()
 export class UserService {
-  users: UserEntity[]
+  users: UserEntity[] = []
 
   list() {
     return [{ name: 'hello' }, { name: 'bye' }]
@@ -19,5 +19,10 @@ export class UserService {
     this.users.push(userEntity)
 
     return userEntity
+  }
+
+  show(id: number): UserEntity {
+    console.log('do business logic')
+    return this.users.filter((u) => u.id === id.toString())[0]
   }
 }
