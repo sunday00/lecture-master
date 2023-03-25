@@ -6,14 +6,15 @@ import {
   HttpStatus,
   Param,
   Post,
-  UseFilters,
-  UsePipes,
+  UseFilters, UseGuards,
+  UsePipes
 } from '@nestjs/common'
 import { UserService } from './user.service'
 import { UserCreateDto } from './model/user.create.dto'
 import { UserEntity } from './model/user.entity'
 import { UserExceptionFilter } from './middleware/user.exception.filter'
 import { GlobalValidationPipe } from '../../global/middleware/validation.pipe'
+import { UserGuard } from './user.guard'
 
 @Controller({ version: '1', path: 'user' })
 export class UserController {
@@ -30,6 +31,7 @@ export class UserController {
   }
 
   @Get('/a/b/c')
+  @UseGuards(UserGuard)
   test() {
     console.log('logic')
   }
