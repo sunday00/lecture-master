@@ -8,6 +8,7 @@ import {
   Post,
   UseFilters,
   UseGuards,
+  UseInterceptors,
   UsePipes,
 } from '@nestjs/common'
 import { UserService } from './user.service'
@@ -16,8 +17,10 @@ import { UserEntity } from './model/user.entity'
 import { UserExceptionFilter } from './middleware/user.exception.filter'
 import { GlobalValidationPipe } from '../../global/middleware/validation.pipe'
 import { UserGuard } from './user.guard'
+import { UserInterceptor } from './middleware/user.interceptor'
 
 @Controller({ version: '1', path: 'user' })
+@UseInterceptors(UserInterceptor)
 export class UserController {
   constructor(private readonly service: UserService) {}
 

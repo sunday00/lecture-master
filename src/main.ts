@@ -18,7 +18,13 @@ async function bootstrap() {
 
   swaggerConfig('swagger', HARDCODE_CONFIGS.version, app)
 
-  app.useGlobalPipes(new ValidationPipe({ transform: true }))
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      skipMissingProperties: true,
+    }),
+  )
 
   await app.listen(HARDCODE_CONFIGS.port)
 }
