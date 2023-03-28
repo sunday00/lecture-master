@@ -1,6 +1,12 @@
+# config
+.env
+
 # compiled output
 /dist
 /node_modules
+
+#docker
+mongodb/data
 
 # Logs
 logs
