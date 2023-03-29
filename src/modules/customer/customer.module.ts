@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
-import { CustomerSchema } from './model/customer.schema'
+import { CustomerSchema } from './model/customer.entity'
 import { CustomerService } from './customer.service'
 import { CustomerController } from './customer.controller'
 
