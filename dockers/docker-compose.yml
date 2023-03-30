@@ -1,0 +1,30 @@
+services:
+  api:
+    build:
+      dockerfile: dockers/nest.Dockerfile
+      context: ../
+      target: development
+    volumes:
+      - ../:/usr/src/app
+    env_file:
+      - ../.env
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    depends_on:
+      - maria
+  maria:
+    image: yobasystems/alpine-mariadb:10.6.12
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_BASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_PASSWORD: ${DB_PASS}
+    ports:
+      - '3316:3306'
+    volumes:
+      - ./db:/var/lib/mysql
+
+#volumes:
+#  db:
