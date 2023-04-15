@@ -1,0 +1,26 @@
+### create poll
+POST http://localhost:3000/polls
+Content-Type: application/json
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+### join poll
+POST http://localhost:3000/polls/join
+Content-Type: application/json
+
+{
+  "name": "player2",
+  "pollID": "7WX00L"
+}
+
+### rejoin poll
+POST http://localhost:3000/polls/rejoin
+Content-Type: application/json
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwb2xsSUQiOiI3V1gwMEwiLCJuYW1lIjoicGxheWVyMiIsImlhdCI6MTY4MTUyODA1NCwiZXhwIjoxNjgxNTM1MjU0LCJzdWIiOiJwUno5NEJ6dDY4Y21LSXZ5WnN3MkQifQ.jughcsucgRs-ZS8qyFBatGteW3O9nMd8bp8t8EOQOjQ"
+}

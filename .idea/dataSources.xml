@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="@localhost" uuid="64235eb6-2d93-4d09-86f6-dc248d61e879">
+      <driver-ref>redis</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>jdbc.RedisDriver</jdbc-driver>
+      <jdbc-url>jdbc:redis://127.0.0.1:6389?statusColor=6D0000&amp;env=local&amp;name=localhost%40docker-nest-socket&amp;tLSMode=0&amp;usePrivateKey=false&amp;safeModeLevel=0&amp;advancedSafeModeLevel=0&amp;driverVersion=0</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="database.redis.default.key.filter" value="*:*" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>

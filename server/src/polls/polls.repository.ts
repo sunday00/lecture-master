@@ -42,17 +42,26 @@ export class PollsRepository {
     const key = `polls:${pollID}`;
 
     try {
-      await this.redisClient
-        .multi([
-          ['send_command', 'JSON.SET', key, '.', JSON.stringify(initialPoll)],
-          ['expire', key, this.ttl],
-        ])
-        .exec();
+      // await this.redisClient
+      //   .multi([
+      //     ['send_command', 'JSON.SET', key, '.', JSON.stringify(initialPoll)],
+      //     ['expire', key, this.ttl],
+      //   ])
+      //   .exec();
+
+      await this.redisClient.send_command(
+        'JSON.SET',
+        key,
+        '$',
+        JSON.stringify(initialPoll),
+      );
+
       return initialPoll;
     } catch (e) {
       this.logger.error(
         `Failed to add poll ${JSON.stringify(initialPoll)}\n${e}`,
       );
+
       throw new InternalServerErrorException();
     }
   }

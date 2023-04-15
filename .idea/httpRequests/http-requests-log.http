@@ -1,0 +1,522 @@
+POST http://localhost:3000/polls/rejoin
+Content-Type: application/json
+Content-Length: 238
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwb2xsSUQiOiI3V1gwMEwiLCJuYW1lIjoicGxheWVyMiIsImlhdCI6MTY4MTUyODA1NCwiZXhwIjoxNjgxNTM1MjU0LCJzdWIiOiJwUno5NEJ6dDY4Y21LSXZ5WnN3MkQifQ.jughcsucgRs-ZS8qyFBatGteW3O9nMd8bp8t8EOQOjQ"
+}
+
+<> 2023-04-15T120916.201.json
+
+###
+
+POST http://localhost:3000/polls/join
+Content-Type: application/json
+Content-Length: 45
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "player2",
+  "pollID": "7WX00L"
+}
+
+<> 2023-04-15T120734.201.json
+
+###
+
+POST http://localhost:3000/polls/join
+Content-Type: application/json
+Content-Length: 45
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "player2",
+  "pollId": "7WX00L"
+}
+
+<> 2023-04-15T120709.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-15T120638.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-13T011014.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T232135.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T151619.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T151600.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T151459.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T151404.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T151306.201.json
+
+###
+
+POST http://localhost:3000/polls/join
+Content-Type: application/json
+Content-Length: 45
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "player2",
+  "pollId": "DV14VL"
+}
+
+<> 2023-04-09T150938.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T150720.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T143253.201.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T142508.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T142501.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T140411.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T140054.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T140007.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T135956.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T135852.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T135641.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T135613.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T135336.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T135249.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T134832.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T134412.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T134351.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T132921.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T132913.500.json
+
+###
+
+POST http://localhost:3000/polls
+Content-Type: application/json
+Content-Length: 71
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "topic": "what i want",
+  "votesPerVoter": 3,
+  "name": "player1"
+}
+
+<> 2023-04-09T132621.500.json
+
+###
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="WS-231.8109.174">
+    <data-source name="@localhost" uuid="64235eb6-2d93-4d09-86f6-dc248d61e879">
+      <database-info product="Redis" version="6.2.4" jdbc-version="4.2" driver-name="Redis JDBC Driver" driver-version="1.3" dbms="REDIS" exact-version="6.2.4" exact-driver-version="1.3" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" negative="1" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+  </component>
+</project>
