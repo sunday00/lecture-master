@@ -1,0 +1,22 @@
+WEBSOCKET ws://127.0.0.1:3000/polls
+#Content-Type: application/json // used only for IDE highlighting.
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: ytguHlvRvgesHk4hmbTS5w==
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Host: localhost:3000
+#// Highlighting is applied for each message independently.
+Version: v4
+
+
+=== wait-for-server
+{
+    "message": "Wait for the server message and send the current message as response"
+}
+===
+{
+    "message": "Send after previous message without waiting for the server message"
+}
+
+####

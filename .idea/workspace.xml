@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa7328e6-3784-4f63-a114-653c3ff9dd7b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/http-client/shocket.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +15,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HttpClientSelectedEnvironments">
+    <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/ws-requests.http" environment="test" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -59,10 +61,7 @@
       <recent name="$PROJECT_DIR$/server/src/global/decorator" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.http-client | rejoin poll">
-    <configuration name="http-client | create poll" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" requestIdentifier="create poll" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="HTTP Request.http-client | join poll">
     <configuration name="http-client | create poll#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" requestIdentifier="create poll#1" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -75,13 +74,16 @@
     <configuration name="http-client | rejoin poll" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" index="3" requestIdentifier="rejoin poll" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="shocket | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/shocket.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.http-client | rejoin poll" />
         <item itemvalue="HTTP Request.http-client | join poll" />
+        <item itemvalue="HTTP Request.shocket | #1" />
+        <item itemvalue="HTTP Request.http-client | rejoin poll" />
         <item itemvalue="HTTP Request.http-client | create poll#1" />
         <item itemvalue="HTTP Request.http-client | create poll#2" />
-        <item itemvalue="HTTP Request.http-client | create poll" />
       </list>
     </recent_temporary>
   </component>
@@ -102,7 +104,7 @@
       <workItem from="1680533415722" duration="9925000" />
       <workItem from="1680971215333" duration="13787000" />
       <workItem from="1681049572813" duration="59000" />
-      <workItem from="1681049641179" duration="4533000" />
+      <workItem from="1681049641179" duration="14564000" />
     </task>
     <servers />
   </component>

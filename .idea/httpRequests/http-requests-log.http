@@ -1,3 +1,19 @@
+POST http://localhost:3000/polls/join
+Content-Type: application/json
+Content-Length: 45
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "player2",
+  "pollID": "7WX00L"
+}
+
+<> 2023-04-21T001031.201.json
+
+###
+
 POST http://localhost:3000/polls/rejoin
 Content-Type: application/json
 Content-Length: 238

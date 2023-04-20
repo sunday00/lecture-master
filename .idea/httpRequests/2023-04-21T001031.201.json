@@ -1,0 +1,12 @@
+{
+  "poll": {
+    "id": "7WX00L",
+    "topic": "what i want",
+    "votesPerVoter": 3,
+    "participants": {
+      "pRz94Bzt68cmKIvyZsw2D": "player2"
+    },
+    "adminID": "rfCBStUu1YdR1Ww-I_ind"
+  },
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwb2xsSUQiOiI3V1gwMEwiLCJuYW1lIjoicGxheWVyMiIsImlhdCI6MTY4MjAwMzQzMSwiZXhwIjoxNjgyMDEwNjMxLCJzdWIiOiJaZ2xKMjBlRjFONmMyODJpY0pqVEgifQ.ou76ZYhbiFCEOHkMwng4xrZPFAs8916Y3A5o30XOtUo"
+}
