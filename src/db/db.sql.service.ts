@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { DbService } from './db.service';
+import { IDbService } from './db.service';
 
 @Injectable()
-export class DbSqlService extends DbService {
+export class DbSqlService implements IDbService {
   getListByRequest() {
     console.log('hello sqlDB');
   }

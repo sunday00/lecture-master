@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DbService } from '../db/db.service';
+import { IDbService } from '../db/db.service';
 
 @Injectable()
 export class BaseService {
   constructor(
-    @Inject(DbService)
-    private readonly db: DbService,
+    @Inject('DbService')
+    private readonly db: IDbService,
   ) {}
 
   list() {
