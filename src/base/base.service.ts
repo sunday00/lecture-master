@@ -4,7 +4,7 @@ import { DbService } from '../db/db.service';
 @Injectable()
 export class BaseService {
   constructor(
-    // @Inject(DbService)
+    @Inject(DbService)
     private readonly db: DbService,
   ) {}
 
