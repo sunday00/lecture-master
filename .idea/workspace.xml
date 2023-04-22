@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa7328e6-3784-4f63-a114-653c3ff9dd7b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/http-client/shocket.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/http-client/http-client.http" beforeDir="false" afterPath="$PROJECT_DIR$/http-client/http-client.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,11 +62,11 @@
       <recent name="$PROJECT_DIR$/server/src/global/decorator" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.http-client | join poll">
-    <configuration name="http-client | create poll#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" requestIdentifier="create poll#1" runType="Run single request">
+  <component name="RunManager" selected="HTTP Request.http-client | create poll">
+    <configuration name="http-client | create poll" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" requestIdentifier="create poll" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="http-client | create poll#2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" index="2" requestIdentifier="create poll#2" runType="Run single request">
+    <configuration name="http-client | create poll#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" requestIdentifier="create poll#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="http-client | join poll" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http-client/http-client.http" index="2" requestIdentifier="join poll" runType="Run single request">
@@ -79,11 +80,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.http-client | create poll" />
         <item itemvalue="HTTP Request.http-client | join poll" />
         <item itemvalue="HTTP Request.shocket | #1" />
         <item itemvalue="HTTP Request.http-client | rejoin poll" />
         <item itemvalue="HTTP Request.http-client | create poll#1" />
-        <item itemvalue="HTTP Request.http-client | create poll#2" />
       </list>
     </recent_temporary>
   </component>
@@ -104,7 +105,8 @@
       <workItem from="1680533415722" duration="9925000" />
       <workItem from="1680971215333" duration="13787000" />
       <workItem from="1681049572813" duration="59000" />
-      <workItem from="1681049641179" duration="14564000" />
+      <workItem from="1681049641179" duration="15613000" />
+      <workItem from="1682098472869" duration="4019000" />
     </task>
     <servers />
   </component>

@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "topic": "what i want",
-  "votesPerVoter": 3,
+  "votesPerVoter": 5,
   "name": "player1"
 }
 

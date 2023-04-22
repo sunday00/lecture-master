@@ -1,0 +1,10 @@
+{
+  "poll": {
+    "id": "FLCE2Z",
+    "topic": "what i want",
+    "votesPerVoter": 5,
+    "participants": {},
+    "adminID": "O4YqQ8Be-JlAHIR8MyaiT"
+  },
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwb2xsSUQiOiJGTENFMloiLCJuYW1lIjoicGxheWVyMSIsImlhdCI6MTY4MjE1NDYzNCwiZXhwIjoxNjgyMTYxODM0LCJzdWIiOiJPNFlxUThCZS1KbEFISVI4TXlhaVQifQ.bmm7JIZFgm_ywDUx54aZi_1WUm054PQ4Uc6T1WglKUY"
+}

@@ -2,15 +2,20 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
+  SubscribeMessage,
   // SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
+  WsException,
 } from '@nestjs/websockets';
-import { Logger } from '@nestjs/common';
+import { Logger, UseFilters, UsePipes, ValidationPipe } from "@nestjs/common";
 import { PollsService } from './polls.service';
 import { Namespace } from 'socket.io';
 import { SocketWithAuth } from './types';
+import { WsCatchFilter } from '../ws-catch.filter';
 
+@UsePipes(new ValidationPipe())
+@UseFilters(new WsCatchFilter())
 @WebSocketGateway({ namespace: 'polls' })
 export class PollsGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
@@ -51,5 +56,10 @@ export class PollsGateway
 
     this.logger.log(`WSClient with id: ${client.id} disconnected.`);
     this.logger.debug(`Number of connected sockets: ${socket.size}`);
+  }
+
+  @SubscribeMessage('test')
+  async test() {
+    throw new WsException({ field: 'field', message: 'sucked...' });
   }
 }

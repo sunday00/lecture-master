@@ -1,0 +1,7 @@
+{
+  "statusCode": 400,
+  "message": [
+    "votesPerVoter must not be greater than 5"
+  ],
+  "error": "Bad Request"
+}
