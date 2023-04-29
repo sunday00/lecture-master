@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa7328e6-3784-4f63-a114-653c3ff9dd7b" name="Changes" comment="" />
+    <list default="true" id="fa7328e6-3784-4f63-a114-653c3ff9dd7b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/poll-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/poll-types.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +105,7 @@
       <workItem from="1680971215333" duration="13787000" />
       <workItem from="1681049572813" duration="59000" />
       <workItem from="1681049641179" duration="15613000" />
-      <workItem from="1682098472869" duration="11799000" />
+      <workItem from="1682098472869" duration="16246000" />
     </task>
     <servers />
   </component>
