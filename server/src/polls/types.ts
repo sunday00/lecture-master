@@ -1,5 +1,5 @@
 import { Request } from '@nestjs/common';
-import { Socket } from "socket.io";
+import { Socket } from 'socket.io';
 
 // service types
 export type CreatePollFields = {
@@ -18,6 +18,17 @@ export type RejoinPollFields = {
   userID: string;
   name: string;
 };
+
+export interface AddParticipantFields {
+  pollID: string;
+  userID: string;
+  name: string;
+}
+
+export interface RemoveParticipantData {
+  pollID: string;
+  userID: string;
+}
 
 // repository types
 export type CreatePollData = {
