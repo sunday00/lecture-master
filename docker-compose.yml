@@ -4,7 +4,7 @@ services:
   redis:
     image: 'redislabs/rejson:2.0.0'
     ports:
-      - '6389:6379'
+      - '6379:6379'
     volumes:
       - 'redisdata:/data'
 volumes:

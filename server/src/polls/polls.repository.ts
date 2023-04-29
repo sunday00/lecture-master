@@ -43,26 +43,17 @@ export class PollsRepository {
     const key = `polls:${pollID}`;
 
     try {
-      // await this.redisClient
-      //   .multi([
-      //     ['send_command', 'JSON.SET', key, '.', JSON.stringify(initialPoll)],
-      //     ['expire', key, this.ttl],
-      //   ])
-      //   .exec();
-
-      await this.redisClient.send_command(
-        'JSON.SET',
-        key,
-        '$',
-        JSON.stringify(initialPoll),
-      );
-
+      await this.redisClient
+        .multi([
+          ['send_command', 'JSON.SET', key, '.', JSON.stringify(initialPoll)],
+          ['expire', key, this.ttl],
+        ])
+        .exec();
       return initialPoll;
     } catch (e) {
       this.logger.error(
         `Failed to add poll ${JSON.stringify(initialPoll)}\n${e}`,
       );
-
       throw new InternalServerErrorException();
     }
   }
@@ -112,20 +103,7 @@ export class PollsRepository {
         JSON.stringify(name),
       );
 
-      const pollJSON = await this.redisClient.send_command(
-        'JSON.GET',
-        key,
-        '.',
-      );
-
-      const poll = JSON.parse(pollJSON) as Poll;
-
-      this.logger.debug(
-        `Current Participants for pollID: ${pollID}:`,
-        poll.participants,
-      );
-
-      return poll;
+      return this.getPoll(pollID);
     } catch (e) {
       this.logger.error(
         `Failed to add a participant with userID/name: ${userID}/${name} to pollID: ${pollID}`,
@@ -134,22 +112,22 @@ export class PollsRepository {
     }
   }
 
-  async removeParticipant(pollID: string, id: string) {
-    this.logger.log(`remove userId: ${id}, from poll: ${pollID}`);
+  async removeParticipant(pollID: string, userID: string): Promise<Poll> {
+    this.logger.log(`removing userID: ${userID} from poll: ${pollID}`);
 
     const key = `polls:${pollID}`;
-    const participantPath = `.participants.${id}`;
+    const participantPath = `.participants.${userID}`;
 
     try {
-      await this.redisClient.send_command(`JSON.DEL`, key, participantPath);
+      await this.redisClient.send_command('JSON.DEL', key, participantPath);
 
       return this.getPoll(pollID);
     } catch (e) {
       this.logger.error(
-        `Failed to remove userId: ${id} from poll: ${pollID}`,
+        `Failed to remove userID: ${userID} from poll: ${pollID}`,
         e,
       );
-      throw new InternalServerErrorException('failed to remove participant');
+      throw new InternalServerErrorException('Failed to remove participant');
     }
   }
 }

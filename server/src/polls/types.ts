@@ -1,4 +1,4 @@
-import { Request } from '@nestjs/common';
+import { Request } from 'express';
 import { Socket } from 'socket.io';
 
 // service types
@@ -44,13 +44,12 @@ export type AddParticipantData = {
   name: string;
 };
 
+// guard types
 export type AuthPayload = {
   userID: string;
   pollID: string;
   name: string;
 };
 
-type AccessTokenIncludeRequest = { body: { accessToken: string } };
-
-export type RequestWithAuth = Request & AuthPayload & AccessTokenIncludeRequest;
-export type SocketWithAuth = Socket & AuthPayload & AccessTokenIncludeRequest;
+export type RequestWithAuth = Request & AuthPayload;
+export type SocketWithAuth = Socket & AuthPayload;

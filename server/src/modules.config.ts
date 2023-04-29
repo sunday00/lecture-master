@@ -34,9 +34,9 @@ export const redisModule = RedisModule.registerAsync({
 export const jwtModule = JwtModule.registerAsync({
   imports: [ConfigModule],
   useFactory: async (configService: ConfigService) => ({
-    secret: configService.get('JWT_SECRET'),
+    secret: configService.get<string>('JWT_SECRET'),
     signOptions: {
-      expiresIn: parseInt(configService.get('POLL_DURATION')),
+      expiresIn: parseInt(configService.get<string>('POLL_DURATION')),
     },
   }),
   inject: [ConfigService],

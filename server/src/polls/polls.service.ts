@@ -1,9 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { Poll } from 'shared/poll-types';
 import { createPollID, createUserID } from 'src/ids';
 import { PollsRepository } from './polls.repository';
-import { AddParticipantFields, CreatePollFields, JoinPollFields, RejoinPollFields } from './types';
-import { JwtService } from '@nestjs/jwt';
-import { Poll } from 'shared';
+import {
+  AddParticipantFields,
+  CreatePollFields,
+  JoinPollFields,
+  RejoinPollFields,
+} from './types';
 
 @Injectable()
 export class PollsService {
@@ -23,7 +28,7 @@ export class PollsService {
     });
 
     this.logger.debug(
-      `Create token for pollId: ${createdPoll.id} and userId: ${userID}`,
+      `Creating token string for pollID: ${createdPoll.id} and userID: ${userID}`,
     );
 
     const signedString = this.jwtService.sign(
@@ -76,22 +81,31 @@ export class PollsService {
       `Rejoining poll with ID: ${fields.pollID} for user with ID: ${fields.userID} with name: ${fields.name}`,
     );
 
-    return await this.pollsRepository.addParticipant(fields);
+    const joinedPoll = await this.pollsRepository.addParticipant(fields);
+
+    return joinedPoll;
   }
 
   async addParticipant(addParticipant: AddParticipantFields): Promise<Poll> {
     return this.pollsRepository.addParticipant(addParticipant);
   }
 
-  async getPoll(pollID: string): Promise<Poll> {
-    return this.pollsRepository.getPoll(pollID);
-  }
-
-  async removeParticipant(pollID: string, id: string) {
+  async removeParticipant(
+    pollID: string,
+    userID: string,
+  ): Promise<Poll | void> {
     const poll = await this.pollsRepository.getPoll(pollID);
 
     if (!poll.hasStarted) {
-      return await this.pollsRepository.removeParticipant(pollID, id);
+      const updatedPoll = await this.pollsRepository.removeParticipant(
+        pollID,
+        userID,
+      );
+      return updatedPoll;
     }
+  }
+
+  async getPoll(pollID: string): Promise<Poll> {
+    return this.pollsRepository.getPoll(pollID);
   }
 }

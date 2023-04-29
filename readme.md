@@ -68,6 +68,3 @@ Or, heck, skip the videos all together. It's not like I'm in this for the money 
 * [Redis-JSON](https://oss.redis.com/redisjson/)
 * [Redis-JSON Docker Image](https://hub.docker.com/r/redislabs/rejson/)
 * [JSON Web Token](https://jwt.io/)
-
-### redis gui
-- https://github.com/qishibo/AnotherRedisDesktopManager/releases
