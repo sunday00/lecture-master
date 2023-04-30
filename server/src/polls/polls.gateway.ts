@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Logger,
   UseFilters,
   UseGuards,
@@ -90,7 +89,7 @@ export class PollsGateway
       `Total clients connected to room '${roomName}': ${clientCount}`,
     );
 
-    // updatedPoll could be undefined if the the poll already started
+    // updatedPoll could be undefined if the poll already started
     // in this case, the socket is disconnect, but no the poll state
     if (updatedPoll) {
       this.io.to(pollID).emit('poll_updated', updatedPoll);
@@ -151,5 +150,53 @@ export class PollsGateway
     );
 
     this.io.to(client.pollID).emit('poll_updated', updatedPoll);
+  }
+
+  @UseGuards(GatewayAdminGuard)
+  @SubscribeMessage('start_vote')
+  async startVote(@ConnectedSocket() client: SocketWithAuth): Promise<void> {
+    this.logger.debug(`Attempting to start vote ${client.pollID}`);
+
+    const updatedPoll = await this.pollsService.startPoll(client.pollID);
+
+    this.io.to(client.pollID).emit('poll_updated', updatedPoll);
+  }
+
+  @SubscribeMessage('submit_rankings')
+  async submitRankings(
+    @ConnectedSocket() client: SocketWithAuth,
+    @MessageBody('rankings') rankings: string[],
+  ): Promise<void> {
+    this.logger.debug(
+      `submitting votes for users: ${client.userID} belonging to poll: ${client.pollID}`,
+    );
+
+    const updatedPoll = await this.pollsService.submitRankings({
+      pollID: client.pollID,
+      userID: client.userID,
+      rankings,
+    });
+
+    this.io.to(client.pollID).emit('poll_updated', updatedPoll);
+  }
+
+  @UseGuards(GatewayAdminGuard)
+  @SubscribeMessage('close_poll')
+  async closePoll(@ConnectedSocket() client: SocketWithAuth): Promise<void> {
+    this.logger.debug(`Closing poll: ${client.pollID} and computing results`);
+
+    const updatedPoll = await this.pollsService.computeResults(client.pollID);
+
+    this.io.to(client.pollID).emit('poll_updated', updatedPoll);
+  }
+
+  @UseGuards(GatewayAdminGuard)
+  @SubscribeMessage('cancel_poll')
+  async cancelPoll(@ConnectedSocket() client: SocketWithAuth): Promise<void> {
+    this.logger.debug(`Cancelling poll with id: "${client.pollID}"`);
+
+    await this.pollsService.cancelPoll(client.pollID);
+
+    this.io.to(client.pollID).emit('poll_cancelled');
   }
 }
