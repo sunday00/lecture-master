@@ -17,10 +17,10 @@ import {
 } from '@nestjs/websockets';
 import { Namespace } from 'socket.io';
 import { WsCatchAllFilter } from 'src/exceptions/ws-catch-all-filter';
+import { NominationDto } from './dtos';
 import { GatewayAdminGuard } from './gateway-admin.guard';
 import { PollsService } from './polls.service';
 import { SocketWithAuth } from './types';
-import { NominationDto } from './dtos';
 
 @UsePipes(new ValidationPipe())
 @UseFilters(new WsCatchAllFilter())
@@ -89,7 +89,7 @@ export class PollsGateway
       `Total clients connected to room '${roomName}': ${clientCount}`,
     );
 
-    // updatedPoll could be undefined if the poll already started
+    // updatedPoll could be undefined if the the poll already started
     // in this case, the socket is disconnect, but no the poll state
     if (updatedPoll) {
       this.io.to(pollID).emit('poll_updated', updatedPoll);
@@ -155,7 +155,7 @@ export class PollsGateway
   @UseGuards(GatewayAdminGuard)
   @SubscribeMessage('start_vote')
   async startVote(@ConnectedSocket() client: SocketWithAuth): Promise<void> {
-    this.logger.debug(`Attempting to start vote ${client.pollID}`);
+    this.logger.debug(`Attempting to start voting for poll: ${client.pollID}`);
 
     const updatedPoll = await this.pollsService.startPoll(client.pollID);
 
@@ -168,7 +168,7 @@ export class PollsGateway
     @MessageBody('rankings') rankings: string[],
   ): Promise<void> {
     this.logger.debug(
-      `submitting votes for users: ${client.userID} belonging to poll: ${client.pollID}`,
+      `Submitting votes for user: ${client.userID} belonging to pollID: "${client.pollID}"`,
     );
 
     const updatedPoll = await this.pollsService.submitRankings({
@@ -177,6 +177,10 @@ export class PollsGateway
       rankings,
     });
 
+    // an enhancement might be to not send ranking data to clients,
+    // but merely a list of the participants who have voted since another
+    // participant getting this data could lead to cheating
+    // we may add this while working on the client
     this.io.to(client.pollID).emit('poll_updated', updatedPoll);
   }
 

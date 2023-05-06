@@ -9,7 +9,7 @@ import {
   AddParticipantRankingsData,
   CreatePollData,
 } from './types';
-import { Poll, Results } from "shared";
+import { Poll, Results } from 'shared';
 
 @Injectable()
 export class PollsRepository {
@@ -30,7 +30,17 @@ export class PollsRepository {
     pollID,
     userID,
   }: CreatePollData): Promise<Poll> {
-    const initialPoll = new Poll(pollID, topic, votesPerVoter, userID);
+    const initialPoll = {
+      id: pollID,
+      topic,
+      votesPerVoter,
+      participants: {},
+      nominations: {},
+      rankings: {},
+      results: [],
+      adminID: userID,
+      hasStarted: false,
+    };
 
     this.logger.log(
       `Creating new poll: ${JSON.stringify(initialPoll, null, 2)} with TTL ${
@@ -41,6 +51,7 @@ export class PollsRepository {
     const key = `polls:${pollID}`;
 
     try {
+      console.log(JSON.stringify(initialPoll))
       await this.redisClient
         .multi([
           ['send_command', 'JSON.SET', key, '.', JSON.stringify(initialPoll)],
@@ -52,6 +63,7 @@ export class PollsRepository {
       this.logger.error(
         `Failed to add poll ${JSON.stringify(initialPoll)}\n${e}`,
       );
+      console.dir(e)
       throw new InternalServerErrorException();
     }
   }
@@ -155,6 +167,7 @@ export class PollsRepository {
     } catch (e) {
       this.logger.error(
         `Failed to add a nomination with nominationID/text: ${nominationID}/${nomination.text} to pollID: ${pollID}`,
+        e,
       );
       throw new InternalServerErrorException(
         `Failed to add a nomination with nominationID/text: ${nominationID}/${nomination.text} to pollID: ${pollID}`,
@@ -187,9 +200,9 @@ export class PollsRepository {
   }
 
   async startPoll(pollID: string): Promise<Poll> {
-    this.logger.log(`setting has Started for poll: ${pollID}`);
+    this.logger.log(`setting hasStarted for poll: ${pollID}`);
 
-    const key = `poll:${pollID}`;
+    const key = `polls:${pollID}`;
 
     try {
       await this.redisClient.send_command(
@@ -198,12 +211,12 @@ export class PollsRepository {
         '.hasStarted',
         JSON.stringify(true),
       );
+
       return this.getPoll(pollID);
     } catch (e) {
-      this.logger.error(`Failed to set has started to poll: ${pollID}`, e);
-
+      this.logger.error(`Failed set hasStarted for poll: ${pollID}`, e);
       throw new InternalServerErrorException(
-        `Failed to set has started to poll: ${pollID}`,
+        'The was an error starting the poll',
       );
     }
   }

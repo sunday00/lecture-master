@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { Poll } from 'shared/poll-types';
+import { makeRequest } from '../api';
 import CountSelector from '../components/ui/CountSelector';
 import { actions, AppPage } from '../state';
-import { makeRequest } from '../api';
-import { Poll } from 'shared';
 
 const Create: React.FC = () => {
   const [pollTopic, setPollTopic] = useState('');
@@ -10,7 +10,7 @@ const Create: React.FC = () => {
   const [name, setName] = useState('');
   const [apiError, setApiError] = useState('');
 
-  function areFieldsValid() {
+  const areFieldsValid = (): boolean => {
     if (pollTopic.length < 1 || pollTopic.length > 100) {
       return false;
     }
@@ -24,7 +24,7 @@ const Create: React.FC = () => {
     }
 
     return true;
-  }
+  };
 
   const handleCreatePoll = async () => {
     actions.startLoading();
@@ -110,6 +110,6 @@ const Create: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Create;
