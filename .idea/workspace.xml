@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa7328e6-3784-4f63-a114-653c3ff9dd7b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/Pages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Pages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Join.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Join.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/WaitingRoom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/WaitingRoom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/socket-io.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/socket-io.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/util.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/util.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/poll-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/poll-types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,39 +27,40 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2NpKoizrh9r7k99JvkcgO3QDVbE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;nest-ytb-socket-vote&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.16.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.18.23&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/sunday00/workspace/nestjs/ytb-socket-vote/node_modules/jest&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/sunday00/workspace/nestjs/ytb-socket-vote/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.TypeScript&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/sunday00/workspace/nestjs/ytb-socket-vote/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "nest-ytb-socket-vote",
+    "javascript.nodejs.core.library.configured.version": "16.16.0",
+    "javascript.nodejs.core.library.typings.version": "16.18.23",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/Users/sunday00/workspace/nestjs/ytb-socket-vote/node_modules/jest",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/sunday00/workspace/nestjs/ytb-socket-vote/node_modules/prettier",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "/Users/sunday00/workspace/nestjs/ytb-socket-vote/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;redis&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "redis"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/http-client" />
@@ -126,11 +123,17 @@
       <workItem from="1681049641179" duration="15613000" />
       <workItem from="1682098472869" duration="20388000" />
       <workItem from="1682831228774" duration="10908000" />
-      <workItem from="1682956296279" duration="6806000" />
+      <workItem from="1682956296279" duration="10831000" />
+      <workItem from="1683466420840" duration="94000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/server" />
+    </ignored-roots>
   </component>
 </project>
