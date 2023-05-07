@@ -51,7 +51,6 @@ export class PollsRepository {
     const key = `polls:${pollID}`;
 
     try {
-      console.log(JSON.stringify(initialPoll))
       await this.redisClient
         .multi([
           ['send_command', 'JSON.SET', key, '.', JSON.stringify(initialPoll)],
@@ -63,7 +62,6 @@ export class PollsRepository {
       this.logger.error(
         `Failed to add poll ${JSON.stringify(initialPoll)}\n${e}`,
       );
-      console.dir(e)
       throw new InternalServerErrorException();
     }
   }
