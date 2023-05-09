@@ -1,12 +1,12 @@
 import { Nav } from '../components/layout.Nav.tsx'
 import { Route } from 'wouter'
-import { Create } from '../pages/Create.tsx'
+import { HandleMessage } from '../pages/HandleMessage.tsx'
 
 function App() {
   return (<>
     <Nav></Nav>
 
-    <Route path="/create">{Create}</Route>
+    <Route path="/handleMessage">{HandleMessage}</Route>
   </>)
 }
 
