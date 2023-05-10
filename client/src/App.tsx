@@ -1,12 +1,14 @@
 import { Nav } from '../components/layout.Nav.tsx'
 import { Route } from 'wouter'
 import { HandleMessage } from '../pages/HandleMessage.tsx'
+import { Chat } from '../pages/Chat.tsx'
 
-function App() {
+const App = () => {
   return (<>
     <Nav></Nav>
 
-    <Route path="/handleMessage">{HandleMessage}</Route>
+    <Route path="/handleMessage" component={HandleMessage} />
+    <Route path="/chat" component={Chat} />
   </>)
 }
 

@@ -3,7 +3,10 @@ import { Link } from 'wouter'
 export const Nav = () => {
   return (<>
     <nav>
-      <Link href="/handleMessage"><a className="handleMessage">handleMessage</a></Link>
+      <ul>
+        <li><Link href="/handleMessage"><a className="handleMessage">handleMessage</a></Link></li>
+        <li><Link href="/chat"><a className="chat">chat</a></Link></li>
+      </ul>
     </nav>
   </>)
 }

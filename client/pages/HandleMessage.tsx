@@ -40,8 +40,10 @@ export const HandleMessage = () => {
 
     <p>{reply}</p>
 
-    <button onClick={connect} disabled={connection}>connect</button>
-    <button onClick={emitMessage} disabled={!connection}>emitMessage</button>
-    <button onClick={disconnect} disabled={!connection}>disconnect</button>
+    <section className="flex">
+      <button onClick={connect} disabled={connection} role="button">connect</button>
+      <button onClick={emitMessage} disabled={!connection} role="button">emitMessage</button>
+      <button onClick={disconnect} disabled={!connection} role="button">disconnect</button>
+    </section>
   </>)
 }
