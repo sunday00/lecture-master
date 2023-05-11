@@ -1,3 +1,33 @@
+.chat-content {
+    height: calc( 100vh - 550px);
+    overflow-y: scroll;
+    margin-bottom: 2em;
+    padding: 1em;
+}
+
+.message-group .message{
+    padding: 0.5em;
+    border: 1px solid;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+}
+
+.message-group.by-me {
+    text-align: right;
+}
+
+.message-group.other {
+    text-align: left;
+}
+
+.message-group.by-me .message {
+    border-color: yellow;
+}
+
+.message-group.other .message {
+    border-color: cyan;
+}
+
 .w-100 { width: 100%; }
 
 .flex { display: flex; gap: 1em; }
@@ -12,5 +42,17 @@
 .l-0 { left: 0; }
 
 .p-4 { padding: 4em; }
+.pb-0 {padding-bottom: 0; }
+
+.mb-0 {margin-bottom: 0; }
+.mr-1 {margin-right: 0.5em; }
 
 .b-0 { bottom: 0; }
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.align-center { align-self: center; }
+
+.logout { --primary: #d81b60; }
+.logout:hover, .logout:focus { --primary-hover: #e1286a; }

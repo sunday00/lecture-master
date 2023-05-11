@@ -21,5 +21,4 @@ export class HelloGateway {
     console.log('disconnect from client')
     clearInterval(this.itv)
   }
-
 }
