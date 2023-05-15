@@ -140,48 +140,48 @@ export const Chat = () => {
 
   return (<>
     <h1>Chat</h1>
-      <div className="form-group">
-        <form className='w-100' onSubmit={handleLogin}>
-          <div className='input-group flex'>
-            {isLogon ?
-              <p className='w-5/6 text-right align-center'>{name}</p>
-              : <input type='text' className='w-5/6' onChange={handleName} />}
-            {isLogon ?
-              <button type='submit' className='w-1/6 logout'>logout</button>
-              : <button type='submit' className='w-1/6'>login</button>}
-          </div>
-        </form>
-      </div>
+    <div className="form-group">
+      <form className='w-100' onSubmit={handleLogin}>
+        <div className='input-group flex'>
+          {isLogon ?
+            <p className='w-5/6 text-right align-center'>{name}</p>
+            : <input type='text' className='w-5/6' onChange={handleName} />}
+          {isLogon ?
+            <button type='submit' className='w-1/6 logout'>logout</button>
+            : <button type='submit' className='w-1/6'>login</button>}
+        </div>
+      </form>
+    </div>
 
-      <div className="chat-content" ref={wrap}>{
-        content.map((p) =>
-          <p key={p.key} className={
-            `message-group ${p.isJoin ? 'text-center' : (p.name === '$me' ? 'by-me' : 'other')}`
-          }>
-            {p.isJoin ? <>
-                <span className='mr-1'>{p.message} [{p.time}]</span>
-              </>
-              :
-              <>
-                {p.name === '$me'? <span>{p.time}</span> : '' }
-                {p.name !== '$me' ? <span className='name'>{p.name} : </span> : ''}
-                <span className='message'>{p.message}</span>
-                {p.name !== '$me' ? <span>{p.time}</span> : ''}
-              </>
-            }
-          </p>
-      )}</div>
+    <div className="chat-content" ref={wrap}>{
+      content.map((p) =>
+        <p key={p.key} className={
+          `message-group ${p.isJoin ? 'text-center' : (p.name === '$me' ? 'by-me' : 'other')}`
+        }>
+          {p.isJoin ? <>
+              <span className='mr-1'>{p.message} [{p.time}]</span>
+            </>
+            :
+            <>
+              {p.name === '$me'? <span>{p.time}</span> : '' }
+              {p.name !== '$me' ? <span className='name'>{p.name} : </span> : ''}
+              <span className='message'>{p.message}</span>
+              {p.name !== '$me' ? <span>{p.time}</span> : ''}
+            </>
+          }
+        </p>
+    )}</div>
 
-      <div className="form-group">
-        <form className='w-100 l-0 b-0 pb-0 mb-0' onSubmit={handleSend}>
-          <div className='input-group flex'>
-            <input type='text' className="w-5/6"
-              onChange={handleChangeInputMessage}
-              value={message}
-            />
-            <button type="submit" className="w-1/6">send</button>
-          </div>
-        </form>
-      </div>
+    <div className="form-group">
+      <form className='w-100 l-0 b-0 pb-0 mb-0' onSubmit={handleSend}>
+        <div className='input-group flex'>
+          <input type='text' className="w-5/6"
+            onChange={handleChangeInputMessage}
+            value={message}
+          />
+          <button type="submit" className="w-1/6">send</button>
+        </div>
+      </form>
+    </div>
   </>)
 }
