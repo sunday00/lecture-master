@@ -28,6 +28,17 @@
     border-color: cyan;
 }
 
+.room-list.grid { grid-template-columns: repeat(3, 1fr) }
+@media (min-width: 992px) {
+    .room-list.grid { grid-template-columns: repeat(2, 1fr) }
+}
+
+.room-list .room-chat-content {
+    min-height: 10em;
+    border: 1px solid #888;
+    overflow-y: scroll;
+}
+
 .w-100 { width: 100%; }
 
 .flex { display: flex; gap: 1em; }

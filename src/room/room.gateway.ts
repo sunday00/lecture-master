@@ -3,7 +3,7 @@ import {
   SubscribeMessage,
   WebSocketGateway,
 } from '@nestjs/websockets'
-
+import { v4 } from 'uuid'
 import { Socket } from 'socket.io'
 import { room } from '../../types/room'
 
@@ -17,17 +17,18 @@ export class RoomGateway implements OnGatewayConnection {
   }
 
   @SubscribeMessage('createRoom')
-  handleCreateRoom(client: Socket, payload: room): boolean {
-    client.join(client.id)
+  handleCreateRoom(client: Socket, payload: room): string {
+    const id = v4()
+    client.join(id)
     this.rooms.push({
       name: payload.name,
-      id: client.id,
+      id,
       users: [payload.users[0]],
     })
-    return true
+    return id
   }
 
-  handleConnection(_client: any, ..._args: any[]): void {
-    //
+  handleConnection(client: Socket): void {
+    client.emit('roomsList', this.rooms)
   }
 }

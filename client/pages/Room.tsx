@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useLayoutEffect, useRef, useState } from 'react'
 import { room } from '../../types/room'
 import { socket } from '../types/RoomSocket.ts'
-import { useLocation } from 'wouter'
 
 export const Room = () => {
   const rendered = useRef(false)
@@ -9,17 +8,9 @@ export const Room = () => {
   const [name, setName] = useState('')
   const [isLogon, setIsLogon] = useState(false)
 
+  const [rooms, setRooms] = useState<room[]|[]>([])
+
   const [roomName, setRoomName] = useState('')
-
-  const [rooms, setRooms]
-    = useState<room[]|[]>([])
-
-  const [, setLocation] = useLocation()
-
-  socket?.on('roomsList', (res) => {
-    console.log(res)
-    setRooms(res)
-  })
 
   useLayoutEffect(() => {
     if (rendered.current) return
@@ -31,6 +22,11 @@ export const Room = () => {
     setName(name)
     setIsLogon(true)
     if (!socket?.connected) socket?.connect()
+
+    socket?.on('roomsList', (res: room[]) => {
+      setRooms(res)
+    })
+
   }, [])
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,9 +64,13 @@ export const Room = () => {
 
   const handleCreate = (e: FormEvent) => {
     e.preventDefault()
-    socket?.emit('createRoom', { name: roomName, users: [name] }, (r: boolean) => {
+    socket?.emit('createRoom', { name: roomName, users: [name] }, (r: string) => {
       if(r) {
-        setLocation(`/room-in?room=${roomName}`)
+        setRooms([...rooms, {
+          id: r,
+          name: roomName,
+          users: [name]
+        }])
       }
     })
   }
@@ -90,11 +90,26 @@ export const Room = () => {
       </form>
     </div>
 
-    <div className="chat-content" ref={wrap}>{
+    <div className="room-list grid" ref={wrap}>{
       rooms.map((r) =>
-        <p key={r.id} className={`room-group`}>
+        <section key={r.id} className={`room-group room-${r.id}`}>
+          <h6>{r.id}</h6>
+          <h5>[ {r.name} ]</h5>
 
-        </p>
+          <div className='room-chat-content'>
+            {r.contents?.map(c => (
+              <p>
+                <span>{c.user}</span>
+              </p>
+            ))}
+          </div>
+
+          <div className='room-form-group'>
+            <form>
+
+            </form>
+          </div>
+        </section>
       )}</div>
 
     <div className="form-group">
