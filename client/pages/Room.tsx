@@ -1,6 +1,7 @@
-import { ChangeEvent, FormEvent, useLayoutEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useLayoutEffect, useRef, useState } from 'react'
 import { room } from '../../types/room'
 import { socket } from '../types/RoomSocket.ts'
+import { RoomMessage } from '../types/RoomMessage.ts'
 
 export const Room = () => {
   const rendered = useRef(false)
@@ -11,6 +12,8 @@ export const Room = () => {
   const [rooms, setRooms] = useState<room[]|[]>([])
 
   const [roomName, setRoomName] = useState('')
+
+  const [messages, setMessages] = useState<RoomMessage[]|[]>([])
 
   useLayoutEffect(() => {
     if (rendered.current) return
@@ -25,6 +28,10 @@ export const Room = () => {
 
     socket?.on('roomsList', (res: room[]) => {
       setRooms(res)
+    })
+
+    socket?.on('roomMessage', (res) => {
+      console.log(socket?.id, res)
     })
 
   }, [])
@@ -75,6 +82,33 @@ export const Room = () => {
     })
   }
 
+  function handleMessageChange(e: React.ChangeEvent<HTMLInputElement>, r: room) {
+    const currentMessage: RoomMessage = {
+      id: r.id,
+      message: e.target.value
+    }
+
+    const prevCopy = Array.from(messages)
+
+    const prevIndex = messages.findIndex((m) => m.id === r.id)
+    if(prevIndex > -1) {
+      prevCopy[prevIndex] = currentMessage
+    } else {
+      prevCopy.push(currentMessage)
+    }
+
+    setMessages(prevCopy)
+  }
+
+  function handleMessageSubmit(e: React.FormEvent<HTMLFormElement>, r: room) {
+    e.preventDefault()
+    socket?.emit('send', {
+      room: r,
+      user: name,
+      message: messages.filter(m => m.id === r.id)?.[0]?.message
+    })
+  }
+
   return (<>
     <h1>Room - list</h1>
     <div className="form-group">
@@ -105,8 +139,9 @@ export const Room = () => {
           </div>
 
           <div className='room-form-group'>
-            <form>
-
+            <form onSubmit={(e) => handleMessageSubmit(e, r)}>
+              <input type='text' onChange={(e) => handleMessageChange(e, r)}/>
+              <input type='submit' value='send'/>
             </form>
           </div>
         </section>
@@ -119,7 +154,7 @@ export const Room = () => {
             onChange={handleChangeInputRoomName}
             value={roomName}
           />
-          <button type="submit" className="w-1/6">send</button>
+          <button type="submit" className="w-1/6">make room</button>
         </div>
       </form>
     </div>

@@ -6,7 +6,7 @@ export type roomContent = {
 }
 
 export type room = {
-  id?: string
+  id: string
   name: string
   users?: string[]
   contents?: roomContent[]
