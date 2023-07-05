@@ -12,20 +12,20 @@ class Player extends SpriteComponent with HasGameRef<SpaceEscapeGame> {
     Vector2? size,
   }) : super(sprite: sprite, position: position, size: size);
 
+  updatePosition(double dt) {
+    position += _moveDirection.normalized() * _speed * dt;
+
+    position.clamp(
+      Vector2.zero() + (size / 2),
+      gameRef.canvasSize - (size / 2),
+    );
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
 
-    position += _moveDirection.normalized() * _speed * dt;
-
-    if (position.x < (size.x / 2)) position.x = size.x / 2;
-    if (position.y < (size.y / 2)) position.y = size.y / 2;
-    if (position.x > (gameRef.canvasSize.x - (size.x / 2))) {
-      position.x = gameRef.canvasSize.x - (size.x / 2);
-    }
-    if (position.y > (gameRef.canvasSize.y - (size.y / 2))) {
-      position.y = gameRef.canvasSize.y - (size.y / 2);
-    }
+    updatePosition(dt);
   }
 
   void setMoveDirection(Vector2 newMoveDirection, double speed) {

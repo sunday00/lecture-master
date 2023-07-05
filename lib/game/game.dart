@@ -33,7 +33,7 @@ class SpaceEscapeGame extends FlameGame with PanDetector {
     player = Player(
       sprite: spriteSheet.getSpriteById(5),
       size: Vector2(64, 64),
-      position: canvasSize / 2,
+      position: Vector2(canvasSize.x / 2, canvasSize.y * 0.75),
     );
 
     player.anchor = Anchor.center;
