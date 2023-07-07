@@ -1,8 +1,11 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/particles.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/game.dart';
 import 'package:flutter_space_escape/helper/hitbox_helper.dart';
+import 'package:flutter_space_escape/helper/random_vector.dart';
 
 class Player extends SpriteComponent
     with HasGameRef<SpaceEscapeGame>, CollisionCallbacks, HitboxHelper {
@@ -32,7 +35,7 @@ class Player extends SpriteComponent
     if (other is Enemy) {
       //Todo
       print('enemy hits player');
-      removeFromParent();
+      // removeFromParent();
     }
   }
 
@@ -43,6 +46,34 @@ class Player extends SpriteComponent
       Vector2.zero() + (size / 2),
       gameRef.canvasSize - (size / 2),
     );
+
+    final particleComponent = ParticleSystemComponent(
+      // particle: MovingParticle(
+      //   from: size / 2,
+      //   to: Vector2(size.x / 2, size.y + 20),
+      //   child: CircleParticle(
+      //     radius: 2,
+      //     lifespan: 1,
+      //     paint: Paint()..color = Colors.white,
+      //   ),
+      // ),
+      particle: Particle.generate(
+        count: 10,
+        lifespan: 0.1,
+        generator: (i) => AcceleratedParticle(
+          acceleration: Vector2(0, 0),
+          speed: getBoostParticles(),
+          position: size / 2,
+          child: CircleParticle(
+            radius: 2,
+            // lifespan: 1,
+            paint: Paint()..color = Colors.orange,
+          ),
+        ),
+      ),
+    );
+
+    add(particleComponent);
   }
 
   @override

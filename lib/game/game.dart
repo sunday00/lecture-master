@@ -89,11 +89,18 @@ class SpaceEscapeGame extends FlameGame
     }
   }
 
+  loadJoystick() {
+    // final joystick = JoystickComponent();
+    //
+    // add(joystick);
+  }
+
   @override
   FutureOr<void> onLoad() async {
     await loadCameraAndWorld();
     loadPlayer();
     loadEnemy();
+    loadJoystick();
   }
 
   @override

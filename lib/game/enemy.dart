@@ -2,9 +2,13 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/particles.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_space_escape/game/bullet.dart';
 import 'package:flutter_space_escape/game/game.dart';
 import 'package:flutter_space_escape/game/player.dart';
+
+import '../helper/random_vector.dart';
 
 class Enemy extends SpriteComponent
     with HasGameRef<SpaceEscapeGame>, CollisionCallbacks {
@@ -32,7 +36,26 @@ class Enemy extends SpriteComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
 
+    final particleComponent = ParticleSystemComponent(
+      particle: Particle.generate(
+        count: 30,
+        lifespan: 5,
+        generator: (i) => AcceleratedParticle(
+          // acceleration: getBoostParticles(),
+          speed: getBoostParticles(yDirection: 1),
+          position: position.clone(),
+          child: CircleParticle(
+            radius: 2,
+            paint: Paint()..color = Colors.blue,
+          ),
+        ),
+      ),
+    );
+
+    gameRef.add(particleComponent);
+
     if (other is Bullet) removeFromParent();
+
     if (other is Player) removeFromParent();
   }
 
