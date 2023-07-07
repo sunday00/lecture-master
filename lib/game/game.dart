@@ -1,26 +1,34 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame/input.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_space_escape/game/bullet.dart';
 import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/enemy_manager.dart';
 import 'package:flutter_space_escape/game/player.dart';
 
-class SpaceEscapeGame extends FlameGame with PanDetector {
+class SpaceEscapeGame extends FlameGame
+    with PanDetector, TapDetector, HasCollisionDetection {
   // final World _world = World();
 
   late final spriteSheet;
 
   Offset? _pointerStartPosition;
   Offset? _pointerCurrentPosition;
-  late Player player;
-  late Enemy enemy;
   final double _joystickRad = 60;
   final int _deadZoneRad = 10;
+
+  late Player player;
   final int _speedRate = 3;
+
+  late Enemy enemy;
+  late EnemyManager _enemyManager;
+
+  late int _shootStart = DateTime.now().microsecondsSinceEpoch;
+  int _shootSpeed = 300000;
 
   loadCameraAndWorld() async {
     await images.load('ships.png');
@@ -59,8 +67,26 @@ class SpaceEscapeGame extends FlameGame with PanDetector {
     //
     //   add(enemy);
 
-    EnemyManager enemyManager = EnemyManager(spriteSheet: spriteSheet);
-    add(enemyManager);
+    _enemyManager = EnemyManager(spriteSheet: spriteSheet);
+    add(_enemyManager);
+  }
+
+  loadBullet(DateTime now) {
+    int newShootTime = now.microsecondsSinceEpoch;
+
+    if (_shootStart + _shootSpeed < newShootTime) {
+      Bullet bullet = Bullet(
+        sprite: spriteSheet.getSpriteById(29),
+        size: Vector2(30, 30),
+        position: player.position,
+      );
+
+      bullet.anchor = Anchor.center;
+
+      add(bullet);
+
+      _shootStart = newShootTime;
+    }
   }
 
   @override
@@ -105,6 +131,9 @@ class SpaceEscapeGame extends FlameGame with PanDetector {
   void onPanStart(DragStartInfo info) {
     _pointerStartPosition = info.eventPosition.global.toOffset();
     _pointerCurrentPosition = info.eventPosition.global.toOffset();
+
+    _shootStart = DateTime.now().microsecondsSinceEpoch;
+    loadBullet(DateTime.now());
   }
 
   @override
@@ -120,6 +149,8 @@ class SpaceEscapeGame extends FlameGame with PanDetector {
         delta.distance * _speedRate,
       );
     }
+
+    loadBullet(DateTime.now());
   }
 
   @override
@@ -134,5 +165,11 @@ class SpaceEscapeGame extends FlameGame with PanDetector {
     _pointerStartPosition = null;
     _pointerCurrentPosition = null;
     player.setMoveDirection(Vector2.zero(), 0);
+  }
+
+  @override
+  void onTapDown(TapDownInfo info) {
+    super.onTapDown(info);
+    loadBullet(DateTime.now());
   }
 }

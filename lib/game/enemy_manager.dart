@@ -34,7 +34,8 @@ class EnemyManager extends Component with HasGameRef<SpaceEscapeGame> {
 
     enemy.anchor = Anchor.center;
 
-    add(enemy);
+    // add(enemy);
+    gameRef.add(enemy);
   }
 
   @override
