@@ -10,11 +10,14 @@ import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/enemy_manager.dart';
 import 'package:flutter_space_escape/game/player.dart';
 
+import 'command.dart';
+
 class SpaceEscapeGame extends FlameGame
     with PanDetector, TapDetector, HasCollisionDetection {
   // final World _world = World();
 
   late final spriteSheet;
+  // CameraComponent cameraComponent = CameraComponent(world: World());
 
   Offset? _pointerStartPosition;
   Offset? _pointerCurrentPosition;
@@ -29,6 +32,12 @@ class SpaceEscapeGame extends FlameGame
 
   late int _shootStart = DateTime.now().microsecondsSinceEpoch;
   int _shootSpeed = 300000;
+
+  late TextComponent _playerScoreText;
+  late TextComponent _playerHealthText;
+
+  final _commandList = List<Command>.empty(growable: true);
+  final _addLaterCommandList = List<Command>.empty(growable: true);
 
   loadCameraAndWorld() async {
     await images.load('ships.png');
@@ -95,12 +104,43 @@ class SpaceEscapeGame extends FlameGame
     // add(joystick);
   }
 
+  loadText() {
+    _playerScoreText = TextComponent(
+      text: 'Score: 100',
+      position: Vector2(20, 20),
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
+      ),
+    );
+
+    add(_playerScoreText);
+
+    _playerHealthText = TextComponent(
+      text: 'Health: 0',
+      position: Vector2(canvasSize.x - 20, 20),
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
+      ),
+    );
+
+    _playerHealthText.anchor = Anchor.topRight;
+
+    add(_playerHealthText);
+  }
+
   @override
   FutureOr<void> onLoad() async {
     await loadCameraAndWorld();
     loadPlayer();
     loadEnemy();
     loadJoystick();
+    loadText();
   }
 
   @override
@@ -132,6 +172,11 @@ class SpaceEscapeGame extends FlameGame
         Paint()..color = Colors.grey.withAlpha(100),
       );
     }
+
+    canvas.drawRect(
+      Rect.fromLTWH(canvasSize.x - 120, 40, player.health.toDouble(), 20),
+      Paint()..color = Colors.blue[500]!,
+    );
   }
 
   @override
@@ -178,5 +223,39 @@ class SpaceEscapeGame extends FlameGame
   void onTapDown(TapDownInfo info) {
     super.onTapDown(info);
     loadBullet(DateTime.now());
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    for (var command in _commandList) {
+      for (var component in children) {
+        command.run(component);
+      }
+    }
+    _commandList.clear();
+    _commandList.addAll(_addLaterCommandList);
+    _addLaterCommandList.clear();
+
+    _playerScoreText.text = 'Score: ${player.score}';
+    _playerHealthText.text = 'Health: ${player.health}';
+  }
+
+  void addCommand(Command command) {
+    _addLaterCommandList.add(command);
+  }
+
+  void reset() {
+    player.reset();
+    _enemyManager.reset();
+
+    children.whereType<Enemy>().forEach((element) {
+      element.removeFromParent();
+    });
+
+    children.whereType<Bullet>().forEach((element) {
+      element.removeFromParent();
+    });
   }
 }

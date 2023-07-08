@@ -13,6 +13,9 @@ class Player extends SpriteComponent
 
   double _speed = 300;
 
+  int health = 100;
+  int score = 0;
+
   Player({
     Sprite? sprite,
     Vector2? position,
@@ -32,10 +35,9 @@ class Player extends SpriteComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
 
-    if (other is Enemy) {
-      //Todo
-      print('enemy hits player');
-      // removeFromParent();
+    if (other is Enemy && health > 0) {
+      health -= 10;
+      gameRef.camera.shake(intensity: 5);
     }
   }
 
@@ -86,5 +88,15 @@ class Player extends SpriteComponent
   void setMoveDirection(Vector2 newMoveDirection, double speed) {
     _moveDirection = newMoveDirection;
     _speed = speed;
+  }
+
+  void reset() {
+    health = 100;
+    score = 0;
+    _moveDirection = Vector2.zero();
+    position = Vector2(
+      gameRef.canvasSize.x / 2,
+      gameRef.canvasSize.y * 0.75,
+    );
   }
 }
