@@ -9,6 +9,9 @@ import 'package:flutter_space_escape/game/bullet.dart';
 import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/enemy_manager.dart';
 import 'package:flutter_space_escape/game/player.dart';
+import 'package:flutter_space_escape/models/player_data.dart';
+import 'package:flutter_space_escape/models/spaceship_detail.dart';
+import 'package:provider/provider.dart';
 
 import 'command.dart';
 
@@ -52,8 +55,12 @@ class SpaceEscapeGame extends FlameGame
   }
 
   loadPlayer() {
+    final spaceshipType = SpaceshipType.Albatross;
+    final spaceship = Spaceship.getSpaceshipByType(spaceshipType);
+
     player = Player(
-      sprite: spriteSheet.getSpriteById(5),
+      spaceshipType: spaceshipType,
+      sprite: spriteSheet.getSpriteById(spaceship.spriteId),
       size: Vector2(64, 64),
       position: Vector2(canvasSize.x / 2, canvasSize.y * 0.75),
     );
@@ -132,6 +139,15 @@ class SpaceEscapeGame extends FlameGame
     _playerHealthText.anchor = Anchor.topRight;
 
     add(_playerHealthText);
+  }
+
+  @override
+  void onAttach() {
+    if (buildContext != null) {
+      final playerData = Provider.of<PlayerData>(buildContext!, listen: false);
+      player.setSpaceshipType(playerData.spaceshipType);
+    }
+    super.onAttach();
   }
 
   @override

@@ -6,21 +6,26 @@ import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/game.dart';
 import 'package:flutter_space_escape/helper/hitbox_helper.dart';
 import 'package:flutter_space_escape/helper/random_vector.dart';
+import 'package:flutter_space_escape/models/spaceship_detail.dart';
 
 class Player extends SpriteComponent
     with HasGameRef<SpaceEscapeGame>, CollisionCallbacks, HitboxHelper {
   Vector2 _moveDirection = Vector2.zero();
+  double _speedRate = 0;
 
-  double _speed = 300;
+  SpaceshipType spaceshipType;
+  Spaceship _spaceship;
 
   int health = 100;
   int score = 0;
 
   Player({
+    required this.spaceshipType,
     Sprite? sprite,
     Vector2? position,
     Vector2? size,
-  }) : super(sprite: sprite, position: position, size: size);
+  })  : _spaceship = Spaceship.getSpaceshipByType(spaceshipType),
+        super(sprite: sprite, position: position, size: size);
 
   @override
   onMount() {
@@ -42,7 +47,8 @@ class Player extends SpriteComponent
   }
 
   updatePosition(double dt) {
-    position += _moveDirection.normalized() * _speed * dt;
+    position +=
+        _moveDirection.normalized() * _spaceship.speed * _speedRate * dt;
 
     position.clamp(
       Vector2.zero() + (size / 2),
@@ -85,9 +91,9 @@ class Player extends SpriteComponent
     updatePosition(dt);
   }
 
-  void setMoveDirection(Vector2 newMoveDirection, double speed) {
+  void setMoveDirection(Vector2 newMoveDirection, double speedRate) {
     _moveDirection = newMoveDirection;
-    _speed = speed;
+    _speedRate = speedRate / 600;
   }
 
   void reset() {
@@ -98,5 +104,11 @@ class Player extends SpriteComponent
       gameRef.canvasSize.x / 2,
       gameRef.canvasSize.y * 0.75,
     );
+  }
+
+  void setSpaceshipType(SpaceshipType spaceshipType) {
+    spaceshipType = spaceshipType;
+    _spaceship = Spaceship.getSpaceshipByType(spaceshipType);
+    sprite = gameRef.spriteSheet.getSpriteById(_spaceship.spriteId);
   }
 }
