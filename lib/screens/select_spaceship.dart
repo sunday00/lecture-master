@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:flutter_space_escape/models/player_data.dart';
 import 'package:flutter_space_escape/models/spaceship_detail.dart';
 import 'package:flutter_space_escape/screens/main_menu.dart';
+import 'package:provider/provider.dart';
 
 import 'game_play.dart';
 
@@ -59,6 +61,17 @@ class _SelectSpaceshipState extends State<SelectSpaceship> {
                 ),
               ),
             ),
+            Consumer<PlayerData>(builder: (context, playData, child) {
+              final spaceship =
+                  Spaceship.getSpaceshipByType(playData.spaceshipType);
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('Current: ${spaceship.name}'),
+                  Text('Money: ${playData.money}'),
+                ],
+              );
+            }),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.5,
               child: CarouselSlider.builder(
@@ -69,11 +82,10 @@ class _SelectSpaceshipState extends State<SelectSpaceship> {
                   var imageXy = _convertIndex(spaceship.spriteId);
 
                   return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.height * 0.35,
-                        height: MediaQuery.of(context).size.height * 0.35,
+                        width: MediaQuery.of(context).size.height * 0.3,
+                        height: MediaQuery.of(context).size.height * 0.3,
                         child: FittedBox(
                           fit: BoxFit.fitWidth,
                           child: ClipRect(
@@ -85,7 +97,59 @@ class _SelectSpaceshipState extends State<SelectSpaceship> {
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      Text(spaceship.name),
+                      Text('bullet speed: ${spaceship.shootSpeed / 100}'),
+                      Text('move speed: ${spaceship.speed / 5}'),
+                      Text('health: ${spaceship.health}'),
+                      Text('cost: ${spaceship.cost}'),
+                      Consumer<PlayerData>(builder: (context, playData, child) {
+                        final type =
+                            Spaceship.spaceships.entries.elementAt(idx).key;
+                        final isEquipped = playData.isEquipped(type);
+                        final isOwned = playData.isOwned(type);
+                        final canBuy = playData.canBuy(type);
+
+                        return ElevatedButton(
+                          onPressed: isEquipped
+                              // || (!isOwned && !canBuy)
+                              ? null
+                              : () {
+                                  if (isOwned) {
+                                    playData.equip(type);
+                                  } else {
+                                    if (canBuy) {
+                                      playData.buy(type);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              backgroundColor: Colors.redAccent,
+                                              title: const Text(
+                                                'Not Enough Money',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              content: Text(
+                                                'Should more ${spaceship.cost - playData.money} needed',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            );
+                                          });
+                                    }
+                                  }
+                                },
+                          child: Text(
+                            isEquipped
+                                ? 'equipped'
+                                : isOwned
+                                    ? 'select'
+                                    : canBuy
+                                        ? 'buy'
+                                        : 'LowMoney',
+                          ),
+                        );
+                      }),
                     ],
                   );
                 },

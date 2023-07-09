@@ -15,7 +15,13 @@ void main() {
       child: MaterialApp(
         themeMode: ThemeMode.dark,
         darkTheme: ThemeData.dark().copyWith(
-          textTheme: GoogleFonts.bungeeInlineTextTheme(),
+          textTheme: GoogleFonts.bungeeInlineTextTheme(
+            const TextTheme(
+              displayMedium: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
           scaffoldBackgroundColor: Colors.black,
         ),
         home: const MainMenu(),

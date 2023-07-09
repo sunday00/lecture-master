@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_space_escape/models/spaceship_detail.dart';
 
 class PlayerData extends ChangeNotifier {
-  final SpaceshipType spaceshipType;
-  final List<SpaceshipType> ownedSpaceships;
-  final int highScore;
-  final int money;
+  SpaceshipType spaceshipType;
+  List<SpaceshipType> ownedSpaceships;
+  int highScore;
+  int money;
 
   PlayerData({
     required this.spaceshipType,
@@ -24,9 +24,36 @@ class PlayerData extends ChangeNotifier {
         money = map['money'];
 
   static Map<String, dynamic> defaultData = {
-    'currentSpaceshipType': SpaceshipType.Raptor,
-    'ownedSpaceshipTypes': [],
+    'currentSpaceshipType': SpaceshipType.Albatross,
+    'ownedSpaceshipTypes': [
+      SpaceshipType.Albatross,
+    ],
     'highScore': 0,
-    'money': 0,
+    'money': 100,
   };
+
+  bool isOwned(SpaceshipType spaceshipType) {
+    return ownedSpaceships.contains(spaceshipType);
+  }
+
+  bool canBuy(SpaceshipType spaceshipType) {
+    return money >= Spaceship.getSpaceshipByType(spaceshipType).cost;
+  }
+
+  bool isEquipped(SpaceshipType spaceshipType) {
+    return this.spaceshipType == spaceshipType;
+  }
+
+  void buy(SpaceshipType spaceshipType) {
+    if (canBuy(spaceshipType) && !isOwned(spaceshipType)) {
+      money -= Spaceship.getSpaceshipByType(spaceshipType).cost;
+      ownedSpaceships.add(spaceshipType);
+      notifyListeners();
+    }
+  }
+
+  void equip(SpaceshipType spaceshipType) {
+    this.spaceshipType = spaceshipType;
+    notifyListeners();
+  }
 }

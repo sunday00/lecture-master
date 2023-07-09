@@ -55,7 +55,7 @@ class SpaceEscapeGame extends FlameGame
   }
 
   loadPlayer() {
-    final spaceshipType = SpaceshipType.Raptor;
+    final spaceshipType = SpaceshipType.Albatross;
     final spaceship = Spaceship.getSpaceshipByType(spaceshipType);
 
     player = Player(
