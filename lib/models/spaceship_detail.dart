@@ -28,7 +28,7 @@ class Spaceship {
       shootSpeed: 10000,
       speed: 500,
       health: 100,
-      spriteId: 6,
+      spriteId: 3,
       level: 1,
     ),
     SpaceshipType.Boramae: Spaceship(
@@ -37,7 +37,7 @@ class Spaceship {
       shootSpeed: 10500,
       speed: 700,
       health: 150,
-      spriteId: 7,
+      spriteId: 4,
       level: 2,
     ),
     SpaceshipType.Canary: Spaceship(
@@ -46,7 +46,7 @@ class Spaceship {
       shootSpeed: 11000,
       speed: 900,
       health: 200,
-      spriteId: 8,
+      spriteId: 5,
       level: 3,
     ),
     SpaceshipType.Dusky: Spaceship(
@@ -55,7 +55,7 @@ class Spaceship {
       shootSpeed: 12000,
       speed: 1200,
       health: 300,
-      spriteId: 9,
+      spriteId: 6,
       level: 4,
     ),
     SpaceshipType.Raptor: Spaceship(
@@ -64,7 +64,7 @@ class Spaceship {
       shootSpeed: 13500,
       speed: 1500,
       health: 500,
-      spriteId: 10,
+      spriteId: 7,
       level: 5,
     ),
   };

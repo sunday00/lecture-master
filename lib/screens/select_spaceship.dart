@@ -27,12 +27,12 @@ class _SelectSpaceshipState extends State<SelectSpaceship> {
   }
 
   List<double> _convertIndex(int id) {
-    double IdX = (1 / 7) * 1;
-    double IdY = -(1 / 5) * 5;
+    double idX = (1 / 7);
+    double idY = -(1 / 5) * 5;
 
-    //TODO
+    idX = idX * (id - (7 - id));
 
-    return [IdX, IdY];
+    return [idX, idY];
   }
 
   @override
@@ -69,13 +69,21 @@ class _SelectSpaceshipState extends State<SelectSpaceship> {
                   var imageXy = _convertIndex(spaceship.spriteId);
 
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ClipRect(
-                        child: Align(
-                          alignment: Alignment(imageXy[0], imageXy[1]),
-                          widthFactor: 1 / 8,
-                          heightFactor: 1 / 6,
-                          child: spaceshipImages,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.height * 0.35,
+                        height: MediaQuery.of(context).size.height * 0.35,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: ClipRect(
+                            child: Align(
+                              alignment: Alignment(imageXy[0], imageXy[1]),
+                              widthFactor: 1 / 8,
+                              heightFactor: 1 / 6,
+                              child: spaceshipImages,
+                            ),
+                          ),
                         ),
                       )
                     ],

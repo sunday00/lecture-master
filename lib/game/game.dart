@@ -183,9 +183,10 @@ class SpaceEscapeGame extends FlameGame
     canvas.drawRect(
       Rect.fromLTWH(
           canvasSize.x -
-              (Spaceship.getSpaceshipByType(player.spaceshipType).health + 20),
+              (Spaceship.getSpaceshipByType(player.spaceshipType).health / 2 +
+                  20),
           40,
-          player.health.toDouble(),
+          player.health.toDouble() / 2,
           20),
       Paint()..color = Colors.blue[500]!,
     );
