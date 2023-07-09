@@ -55,7 +55,7 @@ class SpaceEscapeGame extends FlameGame
   }
 
   loadPlayer() {
-    final spaceshipType = SpaceshipType.Boramae;
+    final spaceshipType = SpaceshipType.Raptor;
     final spaceship = Spaceship.getSpaceshipByType(spaceshipType);
 
     player = Player(
@@ -74,17 +74,6 @@ class SpaceEscapeGame extends FlameGame
   }
 
   loadEnemy() {
-    //   enemy = Enemy(
-    //     sprite: spriteSheet.getSpriteById(4),
-    //     size: Vector2(32, 32),
-    //     // position: Vector2(canvasSize.x / 2, canvasSize.y * 0.1),
-    //     position: canvasSize / 2 + Vector2(0, -100),
-    //   );
-    //
-    //   enemy.anchor = Anchor.center;
-    //
-    //   add(enemy);
-
     _enemyManager = EnemyManager(spriteSheet: spriteSheet);
     add(_enemyManager);
   }

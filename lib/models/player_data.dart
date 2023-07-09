@@ -24,7 +24,7 @@ class PlayerData extends ChangeNotifier {
         money = map['money'];
 
   static Map<String, dynamic> defaultData = {
-    'currentSpaceshipType': SpaceshipType.Canary,
+    'currentSpaceshipType': SpaceshipType.Raptor,
     'ownedSpaceshipTypes': [],
     'highScore': 0,
     'money': 0,
