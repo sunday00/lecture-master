@@ -1,14 +1,18 @@
 class Spaceship {
   final String name;
   final int cost;
+  final int shootSpeed;
   final double speed;
+  final int health;
   final int spriteId;
   final int level;
 
   const Spaceship({
     required this.name,
     required this.cost,
+    required this.shootSpeed,
     required this.speed,
+    required this.health,
     required this.spriteId,
     required this.level,
   });
@@ -21,35 +25,45 @@ class Spaceship {
     SpaceshipType.Albatross: Spaceship(
       name: 'Albatross',
       cost: 0,
-      speed: 250,
+      shootSpeed: 10000,
+      speed: 500,
+      health: 100,
       spriteId: 6,
       level: 1,
     ),
     SpaceshipType.Boramae: Spaceship(
       name: 'Boramae',
       cost: 100,
-      speed: 300,
+      shootSpeed: 10500,
+      speed: 700,
+      health: 150,
       spriteId: 7,
       level: 2,
     ),
     SpaceshipType.Canary: Spaceship(
       name: 'Canary',
       cost: 200,
-      speed: 350,
+      shootSpeed: 11000,
+      speed: 900,
+      health: 200,
       spriteId: 8,
       level: 3,
     ),
     SpaceshipType.Dusky: Spaceship(
       name: 'Dusky',
       cost: 300,
-      speed: 400,
+      shootSpeed: 12000,
+      speed: 1200,
+      health: 300,
       spriteId: 9,
       level: 4,
     ),
     SpaceshipType.Raptor: Spaceship(
       name: 'Raptor',
       cost: 500,
-      speed: 450,
+      shootSpeed: 13500,
+      speed: 1500,
+      health: 500,
       spriteId: 10,
       level: 5,
     ),

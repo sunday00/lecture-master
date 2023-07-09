@@ -97,7 +97,7 @@ class Player extends SpriteComponent
   }
 
   void reset() {
-    health = 100;
+    health = _spaceship.health;
     score = 0;
     _moveDirection = Vector2.zero();
     position = Vector2(
@@ -110,5 +110,6 @@ class Player extends SpriteComponent
     spaceshipType = spaceshipType;
     _spaceship = Spaceship.getSpaceshipByType(spaceshipType);
     sprite = gameRef.spriteSheet.getSpriteById(_spaceship.spriteId);
+    health = _spaceship.health;
   }
 }

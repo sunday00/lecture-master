@@ -55,7 +55,7 @@ class SpaceEscapeGame extends FlameGame
   }
 
   loadPlayer() {
-    final spaceshipType = SpaceshipType.Albatross;
+    final spaceshipType = SpaceshipType.Boramae;
     final spaceship = Spaceship.getSpaceshipByType(spaceshipType);
 
     player = Player(
@@ -69,6 +69,8 @@ class SpaceEscapeGame extends FlameGame
 
     // _world.add(player);
     add(player);
+
+    _shootSpeed = 1400000 - spaceship.shootSpeed * 100;
   }
 
   loadEnemy() {
@@ -190,7 +192,12 @@ class SpaceEscapeGame extends FlameGame
     }
 
     canvas.drawRect(
-      Rect.fromLTWH(canvasSize.x - 120, 40, player.health.toDouble(), 20),
+      Rect.fromLTWH(
+          canvasSize.x -
+              (Spaceship.getSpaceshipByType(player.spaceshipType).health + 20),
+          40,
+          player.health.toDouble(),
+          20),
       Paint()..color = Colors.blue[500]!,
     );
   }
