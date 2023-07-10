@@ -17,11 +17,17 @@ class Enemy extends SpriteComponent
 
   double _speed = 250;
 
+  late Timer _freezeTimer;
+
   Enemy({
     Sprite? sprite,
     Vector2? position,
     Vector2? size,
-  }) : super(sprite: sprite, position: position, size: size, angle: pi);
+  }) : super(sprite: sprite, position: position, size: size, angle: pi) {
+    _freezeTimer = Timer(2, onTick: () {
+      _speed = 250;
+    });
+  }
 
   @override
   onMount() {
@@ -32,10 +38,7 @@ class Enemy extends SpriteComponent
     add(shape);
   }
 
-  @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollision(intersectionPoints, other);
-
+  void addSpark() {
     final particleComponent = ParticleSystemComponent(
       particle: Particle.generate(
         count: 30,
@@ -53,15 +56,30 @@ class Enemy extends SpriteComponent
     );
 
     gameRef.add(particleComponent);
+  }
+
+  void addMoneyAndScore() {
+    gameRef.player.score += 10;
+    gameRef.playerData.money += 10;
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
 
     if (other is Bullet) {
+      addSpark();
+
       removeFromParent();
 
-      gameRef.player.score += 10;
-      gameRef.playerData.money += 10;
+      addMoneyAndScore();
     }
 
-    if (other is Player) removeFromParent();
+    if (other is Player) {
+      addSpark();
+
+      removeFromParent();
+    }
   }
 
   updatePosition(double dt) {
@@ -74,6 +92,20 @@ class Enemy extends SpriteComponent
   void update(double dt) {
     super.update(dt);
 
+    _freezeTimer.update(dt);
+
     updatePosition(dt);
+  }
+
+  void destroy() {
+    addSpark();
+    removeFromParent();
+    addMoneyAndScore();
+  }
+
+  void freeze() {
+    _speed = 0;
+    _freezeTimer.stop();
+    _freezeTimer.start();
   }
 }

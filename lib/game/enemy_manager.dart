@@ -1,12 +1,15 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flame/sprite.dart';
 import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/game.dart';
 
 class EnemyManager extends Component with HasGameRef<SpaceEscapeGame> {
-  late final spriteSheet;
+  late final SpriteSheet spriteSheet;
   late Timer _timer;
+
+  late Timer _freezeTimer;
 
   EnemyManager({required this.spriteSheet}) : super() {
     _timer = Timer(
@@ -14,6 +17,10 @@ class EnemyManager extends Component with HasGameRef<SpaceEscapeGame> {
       onTick: _spawnEnemy,
       repeat: true,
     );
+
+    _freezeTimer = Timer(5, onTick: () {
+      _timer.start();
+    });
   }
 
   void _spawnEnemy() {
@@ -54,10 +61,17 @@ class EnemyManager extends Component with HasGameRef<SpaceEscapeGame> {
   void update(double dt) {
     super.update(dt);
     _timer.update(dt);
+    _freezeTimer.update(dt);
   }
 
   void reset() {
     _timer.stop();
     _timer.start();
+  }
+
+  void freeze() {
+    _timer.stop();
+    _freezeTimer.stop();
+    _freezeTimer.start();
   }
 }

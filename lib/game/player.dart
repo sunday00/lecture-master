@@ -18,6 +18,9 @@ class Player extends SpriteComponent
   SpaceshipType spaceshipType;
   Spaceship _spaceship;
 
+  bool multipleBullet = false;
+  late Timer _multiBulletTimer;
+
   int health = 100;
   int score = 0;
   late PlayerData _playerData;
@@ -31,7 +34,11 @@ class Player extends SpriteComponent
     Vector2? position,
     Vector2? size,
   })  : _spaceship = Spaceship.getSpaceshipByType(spaceshipType),
-        super(sprite: sprite, position: position, size: size);
+        super(sprite: sprite, position: position, size: size) {
+    _multiBulletTimer = Timer(5, onTick: () {
+      multipleBullet = false;
+    });
+  }
 
   @override
   onMount() {
@@ -97,6 +104,8 @@ class Player extends SpriteComponent
     super.update(dt);
 
     updatePosition(dt);
+
+    _multiBulletTimer.update(dt);
   }
 
   void setMoveDirection(Vector2 newMoveDirection, double speedRate) {
@@ -119,6 +128,16 @@ class Player extends SpriteComponent
     _spaceship = Spaceship.getSpaceshipByType(spaceshipType);
     sprite = gameRef.spriteSheet.getSpriteById(_spaceship.spriteId);
     health = _spaceship.health;
+  }
+
+  void setHealth(int point) {
+    health = point;
+  }
+
+  void multiShot() {
+    multipleBullet = true;
+    _multiBulletTimer.stop();
+    _multiBulletTimer.start();
   }
 
   @override

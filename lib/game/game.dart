@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_space_escape/game/bullet.dart';
 import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/enemy_manager.dart';
 import 'package:flutter_space_escape/game/player.dart';
+import 'package:flutter_space_escape/game/power_up.dart';
+import 'package:flutter_space_escape/game/power_up_manager.dart';
 import 'package:flutter_space_escape/models/player_data.dart';
 import 'package:flutter_space_escape/models/spaceship_detail.dart';
 import 'package:flutter_space_escape/widgets/overlay/game_over.dart';
@@ -22,7 +25,7 @@ class SpaceEscapeGame extends FlameGame
     with PanDetector, TapDetector, HasCollisionDetection {
   // final World _world = World();
 
-  late final spriteSheet;
+  late final SpriteSheet spriteSheet;
   // CameraComponent cameraComponent = CameraComponent(world: World());
 
   Offset? _pointerStartPosition;
@@ -36,6 +39,8 @@ class SpaceEscapeGame extends FlameGame
 
   late Enemy enemy;
   late EnemyManager _enemyManager;
+
+  late PowerUpManager _powerUpManager;
 
   late int _shootStart = DateTime.now().microsecondsSinceEpoch;
   int _shootSpeed = 300000;
@@ -59,7 +64,7 @@ class SpaceEscapeGame extends FlameGame
   }
 
   loadPlayer() {
-    final spaceshipType = SpaceshipType.Albatross;
+    const spaceshipType = SpaceshipType.Albatross;
     final spaceship = Spaceship.getSpaceshipByType(spaceshipType);
 
     player = Player(
@@ -84,6 +89,21 @@ class SpaceEscapeGame extends FlameGame
 
   loadBullet(DateTime now) {
     int newShootTime = now.microsecondsSinceEpoch;
+
+    if (_shootStart + _shootSpeed < newShootTime && player.multipleBullet) {
+      for (var i = -1; i < 2; i += 2) {
+        Bullet bullet = Bullet(
+          sprite: spriteSheet.getSpriteById(29),
+          size: Vector2(30, 30),
+          position: player.position,
+        );
+
+        bullet.anchor = Anchor.center;
+        bullet.direction.rotate(i * pi / 6);
+
+        add(bullet);
+      }
+    }
 
     if (_shootStart + _shootSpeed < newShootTime) {
       Bullet bullet = Bullet(
@@ -136,6 +156,35 @@ class SpaceEscapeGame extends FlameGame
     add(_playerHealthText);
   }
 
+  loadPowerUp() {
+    // // TODO : change with manager
+    // final nuke = Nuke(
+    //     sprite: spriteSheet.getSpriteById(41),
+    //     size: Vector2(40, 40),
+    //     position: canvasSize / 2);
+    // add(nuke);
+    //
+    // final health = Health(
+    //     sprite: spriteSheet.getSpriteById(45),
+    //     size: Vector2(40, 40),
+    //     position: canvasSize / 2 + Vector2(20, 0));
+    // add(health);
+    //
+    // final freeze = Freeze(
+    //     sprite: spriteSheet.getSpriteById(46),
+    //     size: Vector2(40, 40),
+    //     position: canvasSize / 2 + Vector2(-20, 0));
+    // add(freeze);
+    //
+    // final multiBullet = MultiShot(
+    //     sprite: spriteSheet.getSpriteById(47),
+    //     size: Vector2(40, 40),
+    //     position: canvasSize / 2 + Vector2(0, 20));
+    // add(multiBullet);
+    _powerUpManager = PowerUpManager(spriteSheet: spriteSheet);
+    add(_powerUpManager);
+  }
+
   @override
   void onAttach() {
     if (buildContext != null) {
@@ -153,6 +202,7 @@ class SpaceEscapeGame extends FlameGame
     await loadCameraAndWorld();
     loadPlayer();
     loadEnemy();
+    loadPowerUp();
     loadJoystick();
     loadText();
   }
@@ -302,12 +352,17 @@ class SpaceEscapeGame extends FlameGame
     player.reset();
 
     _enemyManager.reset();
+    _powerUpManager.reset();
 
     children.whereType<Enemy>().forEach((element) {
       element.removeFromParent();
     });
 
     children.whereType<Bullet>().forEach((element) {
+      element.removeFromParent();
+    });
+
+    children.whereType<PowerUp>().forEach((element) {
       element.removeFromParent();
     });
   }
