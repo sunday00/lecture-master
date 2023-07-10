@@ -6,7 +6,9 @@ import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/game.dart';
 import 'package:flutter_space_escape/helper/hitbox_helper.dart';
 import 'package:flutter_space_escape/helper/random_vector.dart';
+import 'package:flutter_space_escape/models/player_data.dart';
 import 'package:flutter_space_escape/models/spaceship_detail.dart';
+import 'package:provider/provider.dart';
 
 class Player extends SpriteComponent
     with HasGameRef<SpaceEscapeGame>, CollisionCallbacks, HitboxHelper {
@@ -18,6 +20,7 @@ class Player extends SpriteComponent
 
   int health = 100;
   int score = 0;
+  late PlayerData _playerData;
 
   late ShapeComponent shape;
   late ParticleSystemComponent particleComponent;
@@ -37,6 +40,8 @@ class Player extends SpriteComponent
     shape = CircleHitbox();
 
     add(shape);
+
+    _playerData = Provider.of<PlayerData>(gameRef.buildContext!, listen: false);
   }
 
   @override

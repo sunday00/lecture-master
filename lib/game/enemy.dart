@@ -58,6 +58,7 @@ class Enemy extends SpriteComponent
       removeFromParent();
 
       gameRef.player.score += 10;
+      gameRef.playerData.money += 10;
     }
 
     if (other is Player) removeFromParent();

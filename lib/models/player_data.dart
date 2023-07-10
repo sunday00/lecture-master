@@ -29,7 +29,7 @@ class PlayerData extends ChangeNotifier {
       SpaceshipType.Albatross,
     ],
     'highScore': 0,
-    'money': 500,
+    'money': 0,
   };
 
   bool isOwned(SpaceshipType spaceshipType) {

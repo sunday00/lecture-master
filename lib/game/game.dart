@@ -31,6 +31,7 @@ class SpaceEscapeGame extends FlameGame
   final int _deadZoneRad = 10;
 
   late Player player;
+  late PlayerData playerData;
   final int _speedRate = 3;
 
   late Enemy enemy;
@@ -138,7 +139,7 @@ class SpaceEscapeGame extends FlameGame
   @override
   void onAttach() {
     if (buildContext != null) {
-      final playerData = Provider.of<PlayerData>(buildContext!, listen: false);
+      playerData = Provider.of<PlayerData>(buildContext!, listen: false);
       player.setSpaceshipType(playerData.spaceshipType);
 
       _shootSpeed = 1400000 -
