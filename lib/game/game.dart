@@ -11,8 +11,11 @@ import 'package:flutter_space_escape/game/enemy_manager.dart';
 import 'package:flutter_space_escape/game/player.dart';
 import 'package:flutter_space_escape/models/player_data.dart';
 import 'package:flutter_space_escape/models/spaceship_detail.dart';
+import 'package:flutter_space_escape/widgets/overlay/game_over.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/overlay/pause_btn.dart';
+import '../widgets/overlay/pause_menu.dart';
 import 'command.dart';
 
 class SpaceEscapeGame extends FlameGame
@@ -137,6 +140,9 @@ class SpaceEscapeGame extends FlameGame
     if (buildContext != null) {
       final playerData = Provider.of<PlayerData>(buildContext!, listen: false);
       player.setSpaceshipType(playerData.spaceshipType);
+
+      _shootSpeed = 1400000 -
+          Spaceship.getSpaceshipByType(player.spaceshipType).shootSpeed * 100;
     }
     super.onAttach();
   }
@@ -253,6 +259,34 @@ class SpaceEscapeGame extends FlameGame
 
     _playerScoreText.text = 'Score: ${player.score}';
     _playerHealthText.text = 'Health: ${player.health}';
+
+    if (player.health <= 0 && !camera.shaking) {
+      player.shape.removeFromParent();
+      player.particleComponent.removeFromParent();
+      player.removeFromParent();
+      // pauseEngine();
+      overlays.remove(PauseBtn.id);
+      overlays.add(GameOver.id);
+    }
+  }
+
+  @override
+  void lifecycleStateChange(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        if (player.health > 0) {
+          pauseEngine();
+          overlays.remove(PauseBtn.id);
+          overlays.add(PauseMenu.id);
+        }
+        break;
+    }
+
+    super.lifecycleStateChange(state);
   }
 
   void addCommand(Command command) {
@@ -260,7 +294,12 @@ class SpaceEscapeGame extends FlameGame
   }
 
   void reset() {
+    if (player.isRemoved) {
+      add(player);
+    }
+
     player.reset();
+
     _enemyManager.reset();
 
     children.whereType<Enemy>().forEach((element) {

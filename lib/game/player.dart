@@ -19,6 +19,9 @@ class Player extends SpriteComponent
   int health = 100;
   int score = 0;
 
+  late ShapeComponent shape;
+  late ParticleSystemComponent particleComponent;
+
   Player({
     required this.spaceshipType,
     Sprite? sprite,
@@ -31,7 +34,7 @@ class Player extends SpriteComponent
   onMount() {
     super.onMount();
 
-    final shape = CircleHitbox();
+    shape = CircleHitbox();
 
     add(shape);
   }
@@ -55,7 +58,7 @@ class Player extends SpriteComponent
       gameRef.canvasSize - (size / 2),
     );
 
-    final particleComponent = ParticleSystemComponent(
+    particleComponent = ParticleSystemComponent(
       // particle: MovingParticle(
       //   from: size / 2,
       //   to: Vector2(size.x / 2, size.y + 20),
@@ -107,9 +110,16 @@ class Player extends SpriteComponent
   }
 
   void setSpaceshipType(SpaceshipType spaceshipType) {
-    spaceshipType = spaceshipType;
+    this.spaceshipType = spaceshipType;
     _spaceship = Spaceship.getSpaceshipByType(spaceshipType);
     sprite = gameRef.spriteSheet.getSpriteById(_spaceship.spriteId);
     health = _spaceship.health;
+  }
+
+  @override
+  void onRemove() {
+    // shape.removeFromParent();
+    // particleComponent.removeFromParent();
+    super.onRemove();
   }
 }

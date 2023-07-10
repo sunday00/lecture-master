@@ -22,6 +22,15 @@ class Spaceship {
   }
 
   static const Map<SpaceshipType, Spaceship> spaceships = {
+    SpaceshipType.Test: Spaceship(
+      name: 'Test',
+      cost: 0,
+      shootSpeed: 10000,
+      speed: 500,
+      health: 10,
+      spriteId: 3,
+      level: 1,
+    ),
     SpaceshipType.Albatross: Spaceship(
       name: 'Albatross',
       cost: 0,
@@ -71,6 +80,7 @@ class Spaceship {
 }
 
 enum SpaceshipType {
+  Test,
   Albatross,
   Boramae,
   Canary,
