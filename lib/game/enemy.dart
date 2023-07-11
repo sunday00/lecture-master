@@ -61,6 +61,7 @@ class Enemy extends SpriteComponent
   void addMoneyAndScore() {
     gameRef.player.score += 10;
     gameRef.playerData.money += 10;
+    gameRef.playerData.save();
   }
 
   @override

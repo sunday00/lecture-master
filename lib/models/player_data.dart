@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_space_escape/models/spaceship_detail.dart';
+import 'package:hive/hive.dart';
 
-class PlayerData extends ChangeNotifier {
+part 'player_data.g.dart';
+
+@HiveType(typeId: 0)
+class PlayerData extends ChangeNotifier with HiveObjectMixin {
+  @HiveField(0)
   SpaceshipType spaceshipType;
+
+  @HiveField(1)
   List<SpaceshipType> ownedSpaceships;
+
+  @HiveField(2)
   int highScore;
+
+  @HiveField(3)
   int money;
 
   PlayerData({
@@ -49,11 +60,13 @@ class PlayerData extends ChangeNotifier {
       money -= Spaceship.getSpaceshipByType(spaceshipType).cost;
       ownedSpaceships.add(spaceshipType);
       notifyListeners();
+      save();
     }
   }
 
   void equip(SpaceshipType spaceshipType) {
     this.spaceshipType = spaceshipType;
     notifyListeners();
+    save();
   }
 }
