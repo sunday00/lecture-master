@@ -43,6 +43,7 @@ dependencies:
   hive_generator: ^2.0.0
   path_provider: ^2.0.15
   hive_flutter: ^1.1.0
+  flame_audio: ^0.1.0-rc5
 
 
 dev_dependencies:

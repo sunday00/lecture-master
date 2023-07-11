@@ -4,11 +4,13 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/particles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_space_escape/game/audio_player_component.dart';
 import 'package:flutter_space_escape/game/bullet.dart';
 import 'package:flutter_space_escape/game/game.dart';
 import 'package:flutter_space_escape/game/player.dart';
 
 import '../helper/random_vector.dart';
+import 'command.dart';
 
 class Enemy extends SpriteComponent
     with HasGameRef<SpaceEscapeGame>, CollisionCallbacks {
@@ -70,6 +72,10 @@ class Enemy extends SpriteComponent
 
     if (other is Bullet) {
       addSpark();
+
+      gameRef.addCommand(Command<AudioPlayerComponent>(action: (audio) {
+        audio.play('boom.ogg');
+      }));
 
       removeFromParent();
 

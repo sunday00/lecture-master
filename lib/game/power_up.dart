@@ -7,6 +7,7 @@ import 'package:flutter_space_escape/game/player.dart';
 import 'package:flutter_space_escape/game/power_up_manager.dart';
 import 'package:flutter_space_escape/models/spaceship_detail.dart';
 
+import 'audio_player_component.dart';
 import 'command.dart';
 
 abstract class PowerUp extends SpriteComponent
@@ -45,6 +46,11 @@ abstract class PowerUp extends SpriteComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Player) {
       onActivate();
+
+      gameRef.addCommand(Command<AudioPlayerComponent>(action: (audio) {
+        audio.play('power.ogg');
+      }));
+
       removeFromParent();
     }
 

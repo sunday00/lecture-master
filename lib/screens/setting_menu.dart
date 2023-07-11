@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_space_escape/screens/select_spaceship.dart';
-import 'package:flutter_space_escape/screens/setting_menu.dart';
+import 'package:flutter_space_escape/configs/setting.dart';
+import 'package:flutter_space_escape/screens/main_menu.dart';
+import 'package:provider/provider.dart';
 
-class MainMenu extends StatelessWidget {
-  const MainMenu({super.key});
+class SettingMenu extends StatelessWidget {
+  const SettingMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class MainMenu extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                'SpaceEscape',
+                'Setting',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontSize: 50,
                   // color: Colors.white,
@@ -29,28 +30,27 @@ class MainMenu extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 3,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                        builder: (context) => const SelectSpaceship()),
-                  );
-                },
-                child: const Text('Play'),
-              ),
+            Selector<Setting, bool>(
+              selector: (context, setting) => setting.soundEffects,
+              builder: (context, value, child) {
+                return SwitchListTile(
+                    title: const Text('Sound Effect'),
+                    value: value,
+                    onChanged: (newValue) {
+                      Provider.of<Setting>(context, listen: false)
+                          .soundEffects = newValue;
+                    });
+              },
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width / 3,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                        builder: (context) => const SettingMenu()),
+                    MaterialPageRoute(builder: (context) => const MainMenu()),
                   );
                 },
-                child: const Text('Options'),
+                child: const Icon(Icons.arrow_back_ios_rounded),
               ),
             ),
           ],

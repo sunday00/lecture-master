@@ -6,6 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_space_escape/game/audio_player_component.dart';
 import 'package:flutter_space_escape/game/bullet.dart';
 import 'package:flutter_space_escape/game/enemy.dart';
 import 'package:flutter_space_escape/game/enemy_manager.dart';
@@ -47,6 +48,8 @@ class SpaceEscapeGame extends FlameGame
 
   late TextComponent _playerScoreText;
   late TextComponent _playerHealthText;
+
+  late AudioPlayerComponent _audioPlayerComponent;
 
   final _commandList = List<Command>.empty(growable: true);
   final _addLaterCommandList = List<Command>.empty(growable: true);
@@ -115,6 +118,10 @@ class SpaceEscapeGame extends FlameGame
       bullet.anchor = Anchor.center;
 
       add(bullet);
+      // addCommand(Command<AudioPlayerComponent>(action: (audio) {
+      //   audio.play('shot.ogg');
+      // }));
+      _audioPlayerComponent.play('shot.ogg');
 
       _shootStart = newShootTime;
     }
@@ -157,32 +164,13 @@ class SpaceEscapeGame extends FlameGame
   }
 
   loadPowerUp() {
-    // // TODO : change with manager
-    // final nuke = Nuke(
-    //     sprite: spriteSheet.getSpriteById(41),
-    //     size: Vector2(40, 40),
-    //     position: canvasSize / 2);
-    // add(nuke);
-    //
-    // final health = Health(
-    //     sprite: spriteSheet.getSpriteById(45),
-    //     size: Vector2(40, 40),
-    //     position: canvasSize / 2 + Vector2(20, 0));
-    // add(health);
-    //
-    // final freeze = Freeze(
-    //     sprite: spriteSheet.getSpriteById(46),
-    //     size: Vector2(40, 40),
-    //     position: canvasSize / 2 + Vector2(-20, 0));
-    // add(freeze);
-    //
-    // final multiBullet = MultiShot(
-    //     sprite: spriteSheet.getSpriteById(47),
-    //     size: Vector2(40, 40),
-    //     position: canvasSize / 2 + Vector2(0, 20));
-    // add(multiBullet);
     _powerUpManager = PowerUpManager(spriteSheet: spriteSheet);
     add(_powerUpManager);
+  }
+
+  loadAudio() {
+    _audioPlayerComponent = AudioPlayerComponent();
+    add(_audioPlayerComponent);
   }
 
   @override
@@ -205,6 +193,7 @@ class SpaceEscapeGame extends FlameGame
     loadPowerUp();
     loadJoystick();
     loadText();
+    loadAudio();
   }
 
   @override
