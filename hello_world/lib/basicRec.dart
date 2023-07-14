@@ -9,8 +9,6 @@ import 'package:flame/palette.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'components/LifeBar.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Flame.device.fullScreen();
@@ -27,7 +25,14 @@ class Square extends PositionComponent {
   Paint color = BasicPalette.white.paint()
     ..style = PaintingStyle.stroke
     ..strokeWidth = 0;
-  late LifeBar lifeBar;
+
+  List<RectangleComponent> lifeBarElements = List<RectangleComponent>.filled(
+    3,
+    RectangleComponent(
+      size: Vector2(1, 1),
+    ),
+    growable: true,
+  );
 
   Square({
     required Vector2 position,
@@ -38,9 +43,40 @@ class Square extends PositionComponent {
   }) : super(position: position);
 
   createLifeBar() {
-    lifeBar = LifeBar.initData(size,
-        size: Vector2(size.x - 10, 5), placement: LifeBarPlacement.center);
-    add(lifeBar);
+    var lifeBarSize = Vector2(40, 10);
+    var backgroundFillColor = Paint()
+      ..color = Colors.grey.withOpacity(0.35)
+      ..style = PaintingStyle.fill;
+    var outlineColor = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    var lifeDangerColor = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.fill;
+
+    lifeBarElements = [
+      RectangleComponent(
+        position: Vector2(size.x - lifeBarSize.x, -lifeBarSize.y - 2),
+        size: lifeBarSize,
+        angle: 0,
+        paint: outlineColor,
+      ),
+      RectangleComponent(
+        position: Vector2(size.x - lifeBarSize.x, -lifeBarSize.y - 2),
+        size: lifeBarSize,
+        angle: 0,
+        paint: backgroundFillColor,
+      ),
+      RectangleComponent(
+        position: Vector2(size.x - lifeBarSize.x, -lifeBarSize.y - 2),
+        size: Vector2(10, 10),
+        angle: 0,
+        paint: lifeDangerColor,
+      ),
+    ];
+
+    addAll(lifeBarElements);
   }
 
   @override
@@ -67,10 +103,6 @@ class Square extends PositionComponent {
   void render(Canvas canvas) {
     super.render(canvas);
     canvas.drawRect(size.toRect(), color);
-  }
-
-  processHit() {
-    lifeBar.decrementCurrentLifeBy(10);
   }
 }
 
@@ -135,8 +167,9 @@ class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
 
     final handled = children.any((element) {
       if (element is Square && element.containsPoint(touchPoint)) {
-        element.velocity.negate();
-        element.processHit();
+        // element.velocity.negate();
+        element.rotationSpeed = -element.rotationSpeed;
+        // remove(element);
         return true;
       }
       return false;
@@ -148,6 +181,8 @@ class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
             position: touchPoint,
             squareSize: 45.0,
             velocity: Vector2(0, 1).normalized() * 50,
+            // normalize: 대각선 이동 등을 할때 가로 세로보다 대각선이 길어지는 현상때문에
+            // 대각선 이동시 더 빨라지는 현상을 막기 위해 벡터 값을 표준화 하는 메서드
             rotationSpeed: 0.3,
             color: (BasicPalette.red.paint()
               ..style = PaintingStyle.stroke

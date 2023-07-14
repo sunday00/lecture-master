@@ -8,8 +8,7 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'components/LifeBar.dart';
+import 'package:hello_world/utils/component_utils.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,38 +19,49 @@ void main() {
   ));
 }
 
-class Square extends PositionComponent {
-  Vector2 velocity = Vector2(0, 0).normalized() * 0;
-  double squareSize;
-  double rotationSpeed;
-  Paint color = BasicPalette.white.paint()
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 0;
-  late LifeBar lifeBar;
+class Asteroid extends PositionComponent with HasGameRef<MyApp> {
+  Vector2 velocity = Vector2(0, 25);
+  double polygonSize;
+  double rotationSpeed = 0.3;
+  Paint paint = Paint();
 
-  Square({
-    required Vector2 position,
+  final vertices = ([
+    Vector2(0.2, 0.8), // v1
+    Vector2(-0.6, 0.6), // v2
+    Vector2(-0.8, 0.2), // v3
+    Vector2(-0.6, -0.4), // v4
+    Vector2(-0.4, -0.8), // v5
+    Vector2(0.0, -1.0), // v6
+    Vector2(0.4, -0.6), // v7
+    Vector2(0.8, -0.8), // v8
+    Vector2(1.0, 0.0), // v9
+    Vector2(0.4, 0.2), // v10
+    Vector2(0.7, 0.6), // v1
+  ]);
+
+  late PolygonComponent asteroid;
+
+  Asteroid({
+    required position,
+    required this.polygonSize,
     required this.velocity,
-    required this.squareSize,
-    required this.rotationSpeed,
-    required this.color,
-  }) : super(position: position);
-
-  createLifeBar() {
-    lifeBar = LifeBar.initData(size,
-        size: Vector2(size.x - 10, 5), placement: LifeBarPlacement.center);
-    add(lifeBar);
-  }
+    required this.paint,
+  }) : super(
+          position: position,
+        );
 
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
 
-    size.setValues(squareSize, squareSize);
+    asteroid = PolygonComponent.relative(
+      vertices,
+      parentSize: Vector2.all(polygonSize),
+      position: position,
+      paint: paint,
+    );
 
     anchor = Anchor.center;
-
-    createLifeBar();
   }
 
   @override
@@ -61,16 +71,16 @@ class Square extends PositionComponent {
     position += velocity * dt;
 
     angle = (angle - (dt * rotationSpeed)) % (2 * pi);
+
+    if (Util.isPositionOutOfBounds(gameRef.size, position)) {
+      gameRef.remove(this);
+    }
   }
 
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    canvas.drawRect(size.toRect(), color);
-  }
-
-  processHit() {
-    lifeBar.decrementCurrentLifeBy(10);
+    asteroid.render(canvas);
   }
 }
 
@@ -134,9 +144,8 @@ class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
     final touchPoint = info.eventPosition.game;
 
     final handled = children.any((element) {
-      if (element is Square && element.containsPoint(touchPoint)) {
+      if (element is Asteroid && element.containsPoint(touchPoint)) {
         element.velocity.negate();
-        element.processHit();
         return true;
       }
       return false;
@@ -144,14 +153,13 @@ class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
 
     if (!handled) {
       add(
-        Square(
+        Asteroid(
             position: touchPoint,
-            squareSize: 45.0,
-            velocity: Vector2(0, 1).normalized() * 50,
-            rotationSpeed: 0.3,
-            color: (BasicPalette.red.paint()
+            polygonSize: 100.0,
+            velocity: Vector2(0, 1).normalized() * 25,
+            paint: (BasicPalette.red.paint()
               ..style = PaintingStyle.stroke
-              ..strokeWidth = 2)),
+              ..strokeWidth = 3)),
       );
     }
   }
