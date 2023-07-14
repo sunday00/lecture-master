@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -20,6 +21,7 @@ void main() {
 class Square extends PositionComponent {
   Vector2 velocity = Vector2(0, 0).normalized() * 0;
   double squareSize;
+  double rotationSpeed;
   Paint color = BasicPalette.white.paint()
     ..style = PaintingStyle.stroke
     ..strokeWidth = 0;
@@ -28,6 +30,7 @@ class Square extends PositionComponent {
     required Vector2 position,
     required this.velocity,
     required this.squareSize,
+    required this.rotationSpeed,
     required this.color,
   }) : super(position: position);
 
@@ -45,6 +48,8 @@ class Square extends PositionComponent {
     super.update(dt);
 
     position += velocity * dt;
+
+    angle = (angle - (dt * rotationSpeed)) % (2 * pi);
   }
 
   @override
@@ -56,6 +61,19 @@ class Square extends PositionComponent {
 
 class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
   bool running = true;
+
+  @override
+  bool get debugMode {
+    super.debugMode;
+    return kDebugMode;
+  }
+
+  final TextPaint textPaint = TextPaint(
+    style: const TextStyle(
+      fontSize: 36.0,
+      fontFamily: 'Awesome Font',
+    ),
+  );
 
   loadFps() {
     if (!kDebugMode) return;
@@ -87,6 +105,9 @@ class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
   void render(Canvas canvas) {
     canvas.drawPaint(Paint()..color = Colors.red.shade200);
 
+    textPaint.render(
+        canvas, 'active: ${children.length}', Vector2(canvasSize.x / 2, 0));
+
     super.render(canvas);
   }
 
@@ -97,7 +118,9 @@ class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
 
     final handled = children.any((element) {
       if (element is Square && element.containsPoint(touchPoint)) {
-        element.velocity.negate();
+        // element.velocity.negate();
+        element.rotationSpeed = -element.rotationSpeed;
+        // remove(element);
         return true;
       }
       return false;
@@ -109,6 +132,9 @@ class MyApp extends FlameGame with TapDetector, DoubleTapDetector {
             position: touchPoint,
             squareSize: 45.0,
             velocity: Vector2(0, 1).normalized() * 50,
+            // normalize: 대각선 이동 등을 할때 가로 세로보다 대각선이 길어지는 현상때문에
+            // 대각선 이동시 더 빨라지는 현상을 막기 위해 벡터 값을 표준화 하는 메서드
+            rotationSpeed: 0.3,
             color: (BasicPalette.red.paint()
               ..style = PaintingStyle.stroke
               ..strokeWidth = 2)),
