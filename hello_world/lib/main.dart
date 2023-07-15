@@ -17,14 +17,24 @@ void main() {
   ));
 }
 
-class MyApp extends FlameGame with HasDraggablesBridge {
+class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
   late final JoystickPlayer player;
   late final JoystickComponent joystick;
 
-  @override
-  FutureOr<void> onLoad() {
-    super.onLoad();
+  final TextPaint textPaint = TextPaint(
+    style: const TextStyle(
+      fontSize: 36.0,
+      fontFamily: 'Awesome Font',
+    ),
+  );
 
+  renderHUDChildren(Canvas canvas) {
+    textPaint.render(
+        canvas, 'active: ${children.length}', Vector2(canvasSize.x, 0),
+        anchor: Anchor.topRight);
+  }
+
+  loadJoystick() {
     final knobPaint = BasicPalette.green.withAlpha(200).paint();
     final backgroundPaint = BasicPalette.green.withAlpha(100).paint();
 
@@ -39,5 +49,30 @@ class MyApp extends FlameGame with HasDraggablesBridge {
 
     add(player);
     add(joystick);
+  }
+
+  @override
+  FutureOr<void> onLoad() {
+    super.onLoad();
+
+    loadJoystick();
+  }
+
+  @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+    textPaint.render(
+        canvas, 'active: ${children.length}', Vector2(canvasSize.x, 0),
+        anchor: Anchor.topRight);
+  }
+
+  @override
+  void onTapUp(TapUpInfo info) {
+    var velocity = Vector2(0, -1);
+    velocity.rotate(player.angle);
+
+    add(Bullet(player, velocity));
+
+    super.onTapUp(info);
   }
 }
