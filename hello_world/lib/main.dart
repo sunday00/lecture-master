@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/components/joystick_player.dart';
 
@@ -51,11 +52,24 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
     add(joystick);
   }
 
+  loadBgm() {
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play('race_to_mars.mp3');
+
+    FlameAudio.audioCache.load('laser_004.wav');
+  }
+
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
 
     loadJoystick();
+    loadBgm();
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
   }
 
   @override
@@ -74,5 +88,21 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
     add(Bullet(player, velocity));
 
     super.onTapUp(info);
+  }
+
+  @override
+  void lifecycleStateChange(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        FlameAudio.bgm.resume();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        FlameAudio.bgm.stop();
+        break;
+    }
+
+    super.lifecycleStateChange(state);
   }
 }

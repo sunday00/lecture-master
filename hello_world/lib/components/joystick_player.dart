@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 
 class JoystickPlayer extends SpriteComponent with HasGameRef {
@@ -62,6 +63,7 @@ class Bullet extends PositionComponent with HasGameRef {
     super.onLoad();
 
     _velocity = (_velocity)..scaleTo(speed);
+    FlameAudio.play('laser_004.wav');
   }
 
   @override
