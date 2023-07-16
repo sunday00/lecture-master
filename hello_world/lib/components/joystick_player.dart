@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/main.dart';
-import 'package:hello_world/traits/KnowGameSize.dart';
+import 'package:hello_world/traits/know_game_size.dart';
 
 class JoystickPlayer extends SpriteComponent
     with HasGameRef<MyApp>, KnowGameSize {
@@ -85,7 +85,8 @@ class Bullet extends PositionComponent with HasGameRef<MyApp>, KnowGameSize {
         position.y > gameMaxY ||
         position.x < gameMinX ||
         position.y < gameMinY) {
-      gameRef.camera.shake();
+      gameRef.cameraComponent.shake();
+
       removeFromParent();
     }
   }

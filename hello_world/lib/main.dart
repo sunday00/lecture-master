@@ -1,13 +1,36 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flame_audio/flame_audio.dart';
+import 'package:flame_noise/flame_noise.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/components/joystick_player.dart';
+
+extension CameraHelep on CameraComponent {
+  void shake() {
+    viewport.add(
+      MoveEffect.by(
+        Vector2(20, 20),
+        PerlinNoiseEffectController(
+          duration: 1.0,
+          frequency: 100,
+          taperingCurve: Curves.linear,
+        ),
+      ),
+    );
+  }
+
+  double get minX => -viewport.size.x / 2;
+  double get minY => -viewport.size.y / 2;
+  double get maxX => viewport.size.x / 2;
+  double get maxY => viewport.size.y / 2;
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +64,12 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
         anchor: Anchor.topRight);
   }
 
+  loadWorldAndCamera() {
+    cameraComponent = CameraComponent(world: world);
+
+    addAll([cameraComponent, world]);
+  }
+
   loadJoystick() {
     final knobPaint = BasicPalette.green.withAlpha(200).paint();
     final backgroundPaint = BasicPalette.green.withAlpha(100).paint();
@@ -58,9 +87,12 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
     cameraComponent.viewport.add(joystick);
   }
 
-  loadBgm() {
+  loadBgm() async {
     FlameAudio.bgm.initialize();
-    FlameAudio.bgm.play('race_to_mars.mp3');
+
+    if (!FlameAudio.bgm.isPlaying && !kDebugMode) {
+      FlameAudio.bgm.play('race_to_mars.mp3');
+    }
 
     FlameAudio.audioCache.load('laser_004.wav');
   }
@@ -69,10 +101,7 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
   FutureOr<void> onLoad() {
     super.onLoad();
 
-    cameraComponent = CameraComponent(world: world);
-
-    addAll([cameraComponent, world]);
-
+    loadWorldAndCamera();
     loadJoystick();
     loadBgm();
   }
