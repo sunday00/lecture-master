@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/main.dart';
+import 'package:hello_world/traits/KnowGameSize.dart';
 
-class JoystickPlayer extends SpriteComponent with HasGameRef {
+class JoystickPlayer extends SpriteComponent
+    with HasGameRef<MyApp>, KnowGameSize {
   double maxSpeed = 300.0;
 
   final JoystickComponent joystick;
@@ -18,7 +21,7 @@ class JoystickPlayer extends SpriteComponent with HasGameRef {
     super.onLoad();
 
     sprite = await gameRef.loadSprite('asteroids_ship.png');
-    position = gameRef.size / 2;
+    position = Vector2.zero();
   }
 
   @override
@@ -28,25 +31,25 @@ class JoystickPlayer extends SpriteComponent with HasGameRef {
       angle = joystick.delta.screenAngle();
     }
 
-    if (position.x < 0) {
-      position.x = gameRef.size.x - (size.x / 2);
+    if (position.x < gameMinX) {
+      position.x = gameMaxX - (size.x / 2);
     }
 
-    if (position.y < 0) {
-      position.y = gameRef.size.y - (size.y / 2);
+    if (position.y < gameMinY) {
+      position.y = gameMaxY - (size.y / 2);
     }
 
-    if (position.x > gameRef.size.x) {
-      position.x = 0 + (size.x / 2);
+    if (position.y > gameMaxY) {
+      position.y = gameMinY + (size.y / 2);
     }
 
-    if (position.y > gameRef.size.y) {
-      position.y = 0 + (size.y / 2);
+    if (position.x > gameMaxX) {
+      position.x = gameMinX + (size.x / 2);
     }
   }
 }
 
-class Bullet extends PositionComponent with HasGameRef {
+class Bullet extends PositionComponent with HasGameRef<MyApp>, KnowGameSize {
   static final _paint = Paint()..color = Colors.white;
   final double speed = 450;
   late Vector2 _velocity;
@@ -78,9 +81,12 @@ class Bullet extends PositionComponent with HasGameRef {
   void update(double dt) {
     position.add(_velocity * dt);
 
-    if (position.x > gameRef.size.x ||
-        position.y > gameRef.size.y ||
-        position.x < 0 ||
-        position.y < 0) removeFromParent();
+    if (position.x > gameMaxX ||
+        position.y > gameMaxY ||
+        position.x < gameMinX ||
+        position.y < gameMinY) {
+      gameRef.camera.shake();
+      removeFromParent();
+    }
   }
 }

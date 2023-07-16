@@ -19,6 +19,12 @@ void main() {
 }
 
 class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
+  // @override
+  // bool get debugMode => kDebugMode;
+
+  late final CameraComponent cameraComponent;
+  final World world = World();
+
   late final JoystickPlayer player;
   late final JoystickComponent joystick;
 
@@ -48,8 +54,8 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
 
     player = JoystickPlayer(joystick);
 
-    add(player);
-    add(joystick);
+    cameraComponent.world.add(player);
+    cameraComponent.viewport.add(joystick);
   }
 
   loadBgm() {
@@ -63,6 +69,10 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
   FutureOr<void> onLoad() {
     super.onLoad();
 
+    cameraComponent = CameraComponent(world: world);
+
+    addAll([cameraComponent, world]);
+
     loadJoystick();
     loadBgm();
   }
@@ -75,8 +85,9 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
+
     textPaint.render(
-        canvas, 'active: ${children.length}', Vector2(canvasSize.x, 0),
+        canvas, 'active: ${world.children.length}', Vector2(canvasSize.x, 0),
         anchor: Anchor.topRight);
   }
 
@@ -85,7 +96,7 @@ class MyApp extends FlameGame with HasDraggablesBridge, TapDetector {
     var velocity = Vector2(0, -1);
     velocity.rotate(player.angle);
 
-    add(Bullet(player, velocity));
+    world.add(Bullet(player, velocity));
 
     super.onTapUp(info);
   }
