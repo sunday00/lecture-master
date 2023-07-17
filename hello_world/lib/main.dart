@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -9,6 +10,7 @@ import 'package:flame/input.dart';
 import 'package:flame_noise/flame_noise.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/traits/know_game_size.dart';
 
 extension CameraHelep on CameraComponent {
   void shake() {
@@ -101,14 +103,14 @@ class MyApp extends FlameGame with TapDetector, HasCollisionDetection {
 }
 
 class CircleObj extends PositionComponent
-    with HasGameRef<MyApp>, CollisionCallbacks {
+    with HasGameRef<MyApp>, CollisionCallbacks, KnowGameSize {
   late Vector2 velocity;
   final _collisionColor = Colors.amber;
   final _defaultColor = Colors.cyan;
   Color _currentColor = Colors.cyan;
   bool _isWallHit = false;
   bool _isCollision = false;
-  final double _speed = 50;
+  final double _speed = 150 + Random().nextDouble() * 300;
 
   CircleObj(Vector2 position)
       : super(
@@ -129,7 +131,7 @@ class CircleObj extends PositionComponent
   void update(double dt) {
     super.update(dt);
     if (_isWallHit) {
-      removeFromParent();
+      // removeFromParent();
       return;
     } else {
       _currentColor = _isCollision ? _collisionColor : _defaultColor;
@@ -147,7 +149,18 @@ class CircleObj extends PositionComponent
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is ScreenHitbox) {
-      _isWallHit = true;
+      // _isWallHit = true;
+      // velocity = -velocity;
+      if (intersectionPoints.first.x <= gameMinX ||
+          intersectionPoints.first.x >= gameMaxX) {
+        velocity.x = -velocity.x;
+      }
+
+      if (intersectionPoints.first.y <= gameMinY ||
+          intersectionPoints.first.y >= gameMaxY) {
+        velocity.y = -velocity.y;
+      }
+
       return;
     }
 
