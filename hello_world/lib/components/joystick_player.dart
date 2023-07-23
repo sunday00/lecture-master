@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/main.dart';
-import 'package:hello_world/traits/know_game_size.dart';
+import 'package:hello_world/my_game.dart';
 
 class JoystickPlayer extends SpriteComponent
-    with HasGameRef<MyApp>, KnowGameSize {
+    with HasGameRef<MyGame>, KnowGameSize {
   double maxSpeed = 300.0;
 
   final JoystickComponent joystick;
@@ -49,7 +48,7 @@ class JoystickPlayer extends SpriteComponent
   }
 }
 
-class Bullet extends PositionComponent with HasGameRef<MyApp>, KnowGameSize {
+class Bullet extends PositionComponent with HasGameRef<MyGame>, KnowGameSize {
   static final _paint = Paint()..color = Colors.white;
   final double speed = 450;
   late Vector2 _velocity;

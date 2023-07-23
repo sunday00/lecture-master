@@ -11,11 +11,13 @@ class Util {
       randomGenerator
               .nextInt(screenSize.x.toInt() - 2 * margins.x.toInt())
               .toDouble() +
-          margins.x,
+          margins.x -
+          screenSize.x.toInt() / 2,
       randomGenerator
               .nextInt(screenSize.y.toInt() - 2 * margins.y.toInt())
               .toDouble() +
-          margins.y,
+          margins.y -
+          screenSize.y.toInt() / 2,
     );
 
     return result;
@@ -37,6 +39,24 @@ class Util {
     velocity = (randomGenerator.nextInt(max - min) + min).toDouble();
 
     return result * velocity;
+  }
+
+  static Vector2 generateRandomDirection() {
+    var result = Vector2.zero();
+    var randomGenerator = Random();
+    while (result == Vector2.zero()) {
+      result = Vector2(
+        randomGenerator.nextInt(3) - 1,
+        randomGenerator.nextInt(3) - 1,
+      );
+    }
+    return result;
+  }
+
+  static double generateRandomSpeed(int min, int max) {
+    var randomGenerator = Random();
+
+    return (randomGenerator.nextInt(max - min) + max).toDouble();
   }
 
   static bool isPositionOutOfBounds(Vector2 bounds, Vector2 position) {
