@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flame/timer.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/components/ball.dart';
 import 'package:hello_world/utils/component_utils.dart';
 
+import 'components/sounded_ball.dart';
 import 'my_game.dart';
 
 void main() {
@@ -25,7 +25,8 @@ class MyApp extends MyGame with HasCollisionDetection {
     style: const TextStyle(color: Colors.white, fontSize: 15),
   );
 
-  late Timer interval;
+  // late Timer interval;
+  late TimerComponent interval;
 
   int elapsedTicks = 0;
 
@@ -33,29 +34,55 @@ class MyApp extends MyGame with HasCollisionDetection {
   FutureOr<void> onLoad() {
     super.onLoad();
 
-    interval = Timer(1.00, onTick: () {
-      Vector2 rndPosition = Util.generateRandomPosition(size, Vector2.all(50));
-      Vector2 rndVelocity = Util.generateRandomDirection();
-      double rndSpeed = Util.generateRandomSpeed(10, 50);
+    // interval = Timer(1.00, onTick: () {
+    //   Vector2 rndPosition = Util.generateRandomPosition(size, Vector2.all(50));
+    //   Vector2 rndVelocity = Util.generateRandomDirection();
+    //   double rndSpeed = Util.generateRandomSpeed(10, 50);
+    //
+    //   SoundedBall ball = SoundedBall(rndPosition, rndVelocity, rndSpeed);
+    //
+    //   cameraComponent.world.add(ball);
+    //
+    //   elapsedTicks++;
+    //
+    //   if (elapsedTicks > numSimulationObjects) {
+    //     interval.stop();
+    //   }
+    // }, repeat: true);
 
-      Ball ball = Ball(rndPosition, rndVelocity, rndSpeed);
+    interval = TimerComponent(
+        period: 1,
+        removeOnFinish: true,
+        autoStart: true,
+        onTick: () {
+          Vector2 rndPosition =
+              Util.generateRandomPosition(size, Vector2.all(50));
+          Vector2 rndVelocity = Util.generateRandomDirection();
+          double rndSpeed = Util.generateRandomSpeed(10, 50);
 
-      cameraComponent.world.add(ball);
+          SoundedBall ball =
+              SoundedBall(rndPosition, rndVelocity, rndSpeed, elapsedTicks);
 
-      elapsedTicks++;
+          cameraComponent.world.add(ball);
 
-      if (elapsedTicks > numSimulationObjects) {
-        interval.stop();
-      }
-    }, repeat: true);
+          elapsedTicks++;
+
+          if (elapsedTicks > numSimulationObjects) {
+            interval.timer.stop();
+            remove(interval);
+          }
+        },
+        repeat: true);
+
+    add(interval);
   }
 
-  @override
-  void update(double dt) {
-    super.update(dt);
-
-    interval.update(dt);
-  }
+  // @override
+  // void update(double dt) {
+  //   super.update(dt);
+  //
+  //   interval.update(dt);
+  // }
 
   @override
   void render(Canvas canvas) {
