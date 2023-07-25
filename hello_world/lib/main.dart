@@ -1,13 +1,16 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flame/palette.dart';
+import 'package:flame/parallax.dart';
+import 'package:flame_audio/flame_audio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/utils/component_utils.dart';
-
-import 'components/sounded_ball.dart';
-import 'my_game.dart';
+import 'package:hello_world/components/joystick_player.dart';
+import 'package:hello_world/my_game.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,78 +21,105 @@ void main() {
   ));
 }
 
-class MyApp extends MyGame with HasCollisionDetection {
-  static const int numSimulationObjects = 10;
-
-  final TextPaint textConfig = TextPaint(
-    style: const TextStyle(color: Colors.white, fontSize: 15),
-  );
-
-  // late Timer interval;
-  late TimerComponent interval;
-
-  int elapsedTicks = 0;
-
+class MyApp extends MyGame with HasDraggablesBridge, TapDetector {
   @override
-  FutureOr<void> onLoad() {
-    super.onLoad();
+  bool get debugMode => kDebugMode;
 
-    // interval = Timer(1.00, onTick: () {
-    //   Vector2 rndPosition = Util.generateRandomPosition(size, Vector2.all(50));
-    //   Vector2 rndVelocity = Util.generateRandomDirection();
-    //   double rndSpeed = Util.generateRandomSpeed(10, 50);
-    //
-    //   SoundedBall ball = SoundedBall(rndPosition, rndVelocity, rndSpeed);
-    //
-    //   cameraComponent.world.add(ball);
-    //
-    //   elapsedTicks++;
-    //
-    //   if (elapsedTicks > numSimulationObjects) {
-    //     interval.stop();
-    //   }
-    // }, repeat: true);
+  late final JoystickPlayer player;
+  late final JoystickComponent joystick;
 
-    interval = TimerComponent(
-        period: 1,
-        removeOnFinish: true,
-        autoStart: true,
-        onTick: () {
-          Vector2 rndPosition =
-              Util.generateRandomPosition(size, Vector2.all(50));
-          Vector2 rndVelocity = Util.generateRandomDirection();
-          double rndSpeed = Util.generateRandomSpeed(10, 50);
+  late final ParallaxComponent parallax;
+  final double parallaxSpeed = 25.0;
+  final _backgroundImages = [
+    ParallaxImageData('small_stars.png'),
+    ParallaxImageData('big_stars.png'),
+  ];
 
-          SoundedBall ball =
-              SoundedBall(rndPosition, rndVelocity, rndSpeed, elapsedTicks);
+  loadBackground() async {
+    parallax = await loadParallaxComponent(
+      _backgroundImages,
+      baseVelocity: Vector2(0, -parallaxSpeed),
+      velocityMultiplierDelta: Vector2(1.0, 1.8),
+      repeat: ImageRepeat.repeat,
+    );
 
-          cameraComponent.world.add(ball);
-
-          elapsedTicks++;
-
-          if (elapsedTicks > numSimulationObjects) {
-            interval.timer.stop();
-            remove(interval);
-          }
-        },
-        repeat: true);
-
-    add(interval);
+    add(parallax);
   }
 
-  // @override
-  // void update(double dt) {
-  //   super.update(dt);
-  //
-  //   interval.update(dt);
-  // }
+  loadJoystick() {
+    final knobPaint = BasicPalette.green.withAlpha(200).paint();
+    final backgroundPaint = BasicPalette.green.withAlpha(100).paint();
+
+    joystick = JoystickComponent(
+      knob: CircleComponent(radius: 15, paint: knobPaint),
+      background: CircleComponent(radius: 50, paint: backgroundPaint),
+      // screen position margin
+      margin: const EdgeInsets.only(left: 20, bottom: 20),
+    );
+
+    player = JoystickPlayer(joystick);
+
+    cameraComponent.world.add(player);
+    cameraComponent.viewport.add(joystick);
+  }
+
+  loadBgm() async {
+    FlameAudio.bgm.initialize();
+
+    if (!FlameAudio.bgm.isPlaying && !kDebugMode) {
+      FlameAudio.bgm.play('race_to_mars.mp3');
+    }
+
+    FlameAudio.audioCache.load('laser_004.wav');
+  }
+
+  @override
+  FutureOr<void> onLoad() async {
+    super.onLoad();
+
+    loadBackground();
+    loadJoystick();
+    loadBgm();
+  }
+
+  @override
+  void update(double dt) {
+    parallax.parallax?.baseVelocity = player.currentVelocity == Vector2.zero() ? Vector2(0, -parallaxSpeed) : player.currentVelocity;
+    super.update(dt);
+  }
 
   @override
   void render(Canvas canvas) {
     super.render(canvas);
 
-    textConfig.render(canvas, 'Elapsed: $elapsedTicks', Vector2(30, 30));
-    textConfig.render(canvas, 'Ball: ${cameraComponent.world.children.length}',
-        Vector2(30, 50));
+    textPaint.render(
+        canvas, 'active: ${world.children.length}', Vector2(canvasSize.x, 0),
+        anchor: Anchor.topRight);
+  }
+
+  @override
+  void onTapUp(TapUpInfo info) {
+    var velocity = Vector2(0, -1);
+    velocity.rotate(player.angle);
+
+    world.add(Bullet(player, velocity));
+
+    super.onTapUp(info);
+  }
+
+  @override
+  void lifecycleStateChange(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        FlameAudio.bgm.resume();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        FlameAudio.bgm.stop();
+        break;
+    }
+
+    super.lifecycleStateChange(state);
   }
 }

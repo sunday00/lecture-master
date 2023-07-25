@@ -9,6 +9,8 @@ class JoystickPlayer extends SpriteComponent
     with HasGameRef<MyGame>, KnowGameSize {
   double maxSpeed = 300.0;
 
+  Vector2 currentVelocity = Vector2.all(0.0);
+
   final JoystickComponent joystick;
 
   JoystickPlayer(this.joystick) : super(size: Vector2.all(50.0)) {
@@ -26,7 +28,8 @@ class JoystickPlayer extends SpriteComponent
   @override
   void update(double dt) {
     if (!joystick.delta.isZero()) {
-      position.add(joystick.relativeDelta * maxSpeed * dt);
+      currentVelocity = joystick.relativeDelta * maxSpeed;
+      position.add(currentVelocity * dt);
       angle = joystick.delta.screenAngle();
     }
 
