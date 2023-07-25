@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,8 @@ class JoystickPlayer extends SpriteComponent
 
     sprite = await gameRef.loadSprite('asteroids_ship.png');
     position = Vector2.zero();
+
+    add(RectangleHitbox());
   }
 
   @override
@@ -51,7 +54,8 @@ class JoystickPlayer extends SpriteComponent
   }
 }
 
-class Bullet extends PositionComponent with HasGameRef<MyGame>, KnowGameSize {
+class Bullet extends PositionComponent
+    with HasGameRef<MyGame>, KnowGameSize, CollisionCallbacks {
   static final _paint = Paint()..color = Colors.white;
   final double speed = 450;
   late Vector2 _velocity;
@@ -69,6 +73,8 @@ class Bullet extends PositionComponent with HasGameRef<MyGame>, KnowGameSize {
 
     _velocity = (_velocity)..scaleTo(speed);
     FlameAudio.play('laser_004.wav');
+
+    add(RectangleHitbox());
   }
 
   @override
@@ -87,7 +93,7 @@ class Bullet extends PositionComponent with HasGameRef<MyGame>, KnowGameSize {
         position.y > gameMaxY ||
         position.x < gameMinX ||
         position.y < gameMinY) {
-      gameRef.cameraComponent.shake();
+      // gameRef.cameraComponent.shake();
 
       removeFromParent();
     }

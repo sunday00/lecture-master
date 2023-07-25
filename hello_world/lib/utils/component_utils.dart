@@ -46,8 +46,8 @@ class Util {
     var randomGenerator = Random();
     while (result == Vector2.zero()) {
       result = Vector2(
-        randomGenerator.nextInt(3) - 1,
-        randomGenerator.nextInt(3) - 1,
+        randomGenerator.nextInt(2) - 1,
+        randomGenerator.nextInt(2) - 1,
       );
     }
     return result;

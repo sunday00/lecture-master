@@ -9,8 +9,10 @@ import 'package:flame/parallax.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/components/enemy.dart';
 import 'package:hello_world/components/joystick_player.dart';
 import 'package:hello_world/my_game.dart';
+import 'package:hello_world/utils/component_utils.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +23,12 @@ void main() {
   ));
 }
 
-class MyApp extends MyGame with HasDraggablesBridge, TapDetector {
+class MyApp extends MyGame
+    with HasDraggablesBridge, TapDetector, HasCollisionDetection {
   @override
   bool get debugMode => kDebugMode;
 
-  late final JoystickPlayer player;
+  late JoystickPlayer player;
   late final JoystickComponent joystick;
 
   late final ParallaxComponent parallax;
@@ -34,6 +37,11 @@ class MyApp extends MyGame with HasDraggablesBridge, TapDetector {
     ParallaxImageData('small_stars.png'),
     ParallaxImageData('big_stars.png'),
   ];
+
+  late TimerComponent enemyInterval;
+  int elapsedTicks = 0;
+
+  late TimerComponent playerRespawn;
 
   loadBackground() async {
     parallax = await loadParallaxComponent(
@@ -57,13 +65,25 @@ class MyApp extends MyGame with HasDraggablesBridge, TapDetector {
       margin: const EdgeInsets.only(left: 20, bottom: 20),
     );
 
+    // TODO : game over
     player = JoystickPlayer(joystick);
+    world.add(player);
+    playerRespawn = TimerComponent(
+        period: 4,
+        autoStart: true,
+        onTick: () {
+          if (!world.children.any((element) => element is JoystickPlayer)) {
+            player = JoystickPlayer(joystick);
+            world.add(player);
+          }
+        },
+        repeat: true);
 
-    cameraComponent.world.add(player);
     cameraComponent.viewport.add(joystick);
+    add(playerRespawn);
   }
 
-  loadBgm() async {
+  loadAssets() async {
     FlameAudio.bgm.initialize();
 
     if (!FlameAudio.bgm.isPlaying && !kDebugMode) {
@@ -71,6 +91,41 @@ class MyApp extends MyGame with HasDraggablesBridge, TapDetector {
     }
 
     FlameAudio.audioCache.load('laser_004.wav');
+
+    await images.load('boom.png');
+  }
+
+  loadEnemies() {
+    enemyInterval = TimerComponent(
+      period: 4,
+      onTick: () {
+        world.add(
+          Enemy(
+            Util.generateRandomPosition(size, Vector2.zero()),
+            Util.generateRandomDirection(),
+            Util.generateRandomSpeed(20, 100),
+            elapsedTicks,
+          ),
+        );
+
+        // add some end of game
+        //TODO: maybe
+        // when kill 100 enemy
+        // enemyInterval.timer.stop();
+        // world.remove(enemyInterval);
+
+        elapsedTicks++;
+
+        if (children.length > 200) {
+          enemyInterval.timer.stop();
+          remove(enemyInterval);
+        }
+      },
+      repeat: true,
+      autoStart: true,
+    );
+
+    add(enemyInterval);
   }
 
   @override
@@ -79,12 +134,15 @@ class MyApp extends MyGame with HasDraggablesBridge, TapDetector {
 
     loadBackground();
     loadJoystick();
-    loadBgm();
+    loadAssets();
+    loadEnemies();
   }
 
   @override
   void update(double dt) {
-    parallax.parallax?.baseVelocity = player.currentVelocity == Vector2.zero() ? Vector2(0, -parallaxSpeed) : player.currentVelocity;
+    parallax.parallax?.baseVelocity = player.currentVelocity == Vector2.zero()
+        ? Vector2(0, -parallaxSpeed)
+        : player.currentVelocity;
     super.update(dt);
   }
 
@@ -99,6 +157,10 @@ class MyApp extends MyGame with HasDraggablesBridge, TapDetector {
 
   @override
   void onTapUp(TapUpInfo info) {
+    if (!world.children.any((element) => element is JoystickPlayer)) {
+      return;
+    }
+
     var velocity = Vector2(0, -1);
     velocity.rotate(player.angle);
 
