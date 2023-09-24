@@ -13,6 +13,7 @@ import jwtConfig from './config/jwt.config';
 import { LoggingMiddleware } from './common/middleware/logging.middleware';
 import { swaggerAuth } from './config/swagger.config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { HealthModule } from './health/health.module';
 import sentryConfig from './config/sentry.config';
 
 @Module({
@@ -38,6 +39,7 @@ import sentryConfig from './config/sentry.config';
     AnalyticsModule,
     TempModule,
     CusromModule,
+    HealthModule,
   ],
   providers: [Logger],
 })
