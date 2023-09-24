@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ChatApp</title>
+    <link rel="stylesheet" href="/node_modules/@picocss/pico/css/pico.classless.min.css">
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<main class="container">
+    <header style="background: #1d50cd; padding: 2em; display: flex;">
+        <h1 style="color: white; padding: 0; margin: 0;">Chat</h1>
+    </header>
+
+    <section class="login-container" style="padding: 1em;">
+        <form method="POST" class="user-login" style="display: flex; justify-content: center; flex-direction: column;">
+            <label for="username">username</label>
+            <input type="text" name="username" id="username" required>
+            <button type="submit">SEND</button>
+        </form>
+    </section>
+
+    <section class="chat-body hidden" style="display: flex;  height: 60vh;">
+        <div style="flex: 4; height: 100%;">
+            <div class="sidebar" style="border-right: 1px double lightgray; height: 100%;">
+                <div class="title" style="padding: 1em; background: greenyellow; color: black;">
+                    name: <span id="user-title"></span>
+                </div>
+
+                <div class="user-title" style="padding: 1em; border-bottom: 1px solid lightgray;">
+                    <span id="users-tagline"></span>
+                </div>
+
+                <div class="users"></div>
+            </div>
+        </div>
+
+        <div class="" style="flex: 8;">
+            <div class="chat-container hidden">
+                <div class="title" style="padding: 1em; background: greenyellow; color: black;">
+                    partner: <span id="active-user"></span>
+                </div>
+
+                <div class="messages" style="padding: 1em;"></div>
+
+                <div class="msg-div" style="display: flex; justify-content: center; border-top: 1px solid lightgray">
+                    <form class="msg-form" style="width: 100%;">
+                        <div style="display: flex; flex-direction: row;">
+                            <label style="flex: 0; display: none;" for="message"> message </label>
+                            <input type="text" name="message" id="message" style="flex: 10" placeholder="message"/>
+
+                            <button type="submit" style="flex: 2">send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/app.js"></script>
+
+<script></script>
+
+</body>
+</html>

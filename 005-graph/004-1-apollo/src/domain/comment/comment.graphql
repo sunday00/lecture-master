@@ -1,0 +1,23 @@
+type Query {
+    comments: [Comment]
+    comment: Comment
+    commentsByLikes(
+        minLikes: Int!
+        maxLikes: Int
+    ): [Comment]
+}
+
+type Comment {
+    id: ID!
+    text: String!
+    likes: Int
+}
+
+type Mutation {
+    addNewComment(postId: Int!, text: String!): CommentResult
+}
+
+type CommentResult {
+    comment: Comment
+    q: Query
+}
