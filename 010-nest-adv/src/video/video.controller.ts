@@ -3,20 +3,26 @@ import { ApiBearerAuth, ApiConsumes, ApiExtraModels, ApiTags } from '@nestjs/swa
 import { VideoService } from './video.service';
 import { CreateVideoReqDto, FindVideoReqDto } from './dto/req.dto';
 import { PageReqDto } from 'src/common/dto/req.dto';
-import { CreateVideoResDto, FindVideoResDto } from './dto/res.dto';
+import { CreateVideoResDto, FindVideoResDto, FindVideoUserResDto } from './dto/res.dto';
 import { ApiGetItemsResponse, ApiGetResponse, ApiPostResponse } from 'src/common/decorator/swagger.decorator';
 import { User, UserAfterAuth } from 'src/common/decorator/user.decorator';
 import { SkipThrottle, Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { ThrottlerForProxyGuard } from '../common/guard/throttler-for-proxy.guard';
 import { CreateVideoCommand } from './command/create-video.command';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { FindVideoQuery } from './query/find-video.query';
+import { raw } from 'express';
 
 @ApiTags('Video')
 @ApiExtraModels(FindVideoReqDto, PageReqDto, CreateVideoResDto, FindVideoResDto, FindVideoResDto)
 @Controller('api/videos')
 export class VideoController {
-  constructor(private readonly videoService: VideoService, private commandBus: CommandBus) {}
+  constructor(
+    private readonly videoService: VideoService,
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @ApiBearerAuth()
   // @ApiConsumes('multipart/form-data')
@@ -36,8 +42,20 @@ export class VideoController {
   @ApiBearerAuth()
   @ApiGetItemsResponse(FindVideoResDto)
   @Get()
-  findAll(@Query() { page, size }: PageReqDto) {
-    return this.videoService.findAll();
+  async findAll(@Query() { page, size }: PageReqDto): Promise<FindVideoResDto[]> {
+    // return this.videoService.findAll();
+    const findVideoQuery = new FindVideoQuery(page, size);
+    const videos = await this.queryBus.execute(findVideoQuery);
+    return videos.map((v) => {
+      return {
+        id: v.id,
+        title: v.title,
+        user: {
+          id: v.user.id,
+          email: v.user.email,
+        },
+      };
+    });
   }
 
   @ApiBearerAuth()
