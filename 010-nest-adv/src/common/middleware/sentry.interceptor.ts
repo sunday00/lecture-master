@@ -12,6 +12,8 @@ export class SentryInterceptor implements NestInterceptor {
     const { url } = req;
     return next.handle().pipe(
       catchError((err) => {
+        if (err.status < 500) throw err;
+
         Sentry.captureException(err);
         const webhook = new IncomingWebhook(process.env.SLACK_HOOK);
         webhook
