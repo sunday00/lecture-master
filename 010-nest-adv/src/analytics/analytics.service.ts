@@ -7,7 +7,7 @@ import { EmailService } from '../email/email.service';
 export class AnalyticsService {
   constructor(private readonly videoService: VideoService, private readonly emailService: EmailService) {}
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_6_MONTHS)
   async handleEmailCron() {
     Logger.log('email task called');
     const videos = await this.videoService.findTopDownload(5);
