@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import * as path from 'path';
 
 import * as dotenv from 'dotenv';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 dotenv.config({ path: '.env.local' });
 
@@ -19,10 +20,16 @@ export class TypeOrmModuleOptionsFactory implements TypeOrmOptionsFactory {
       synchronize: false,
       logging: true,
       autoLoadEntities: true,
+      migrations: ['migrations/*.ts'],
+      migrationsTableName: 'migrations',
     };
   }
 }
 
+const config = new TypeOrmModuleOptionsFactory().createTypeOrmOptions();
+
 export default () => ({
-  db: new TypeOrmModuleOptionsFactory().createTypeOrmOptions(),
+  db: config,
 });
+
+export const connectionSource = new DataSource(config as DataSourceOptions);
