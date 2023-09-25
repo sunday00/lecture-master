@@ -29,4 +29,14 @@ export class VideoService {
     const stream = createReadStream(filePath);
     return { stream, mimetype, size };
   }
+
+  async findTopDownload(size: number) {
+    return await this.videoRepository.find({
+      relations: ['user'],
+      order: {
+        downloadCnt: 'DESC',
+      },
+      take: size,
+    });
+  }
 }
