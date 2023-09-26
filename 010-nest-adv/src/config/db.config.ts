@@ -20,7 +20,7 @@ export class TypeOrmModuleOptionsFactory implements TypeOrmOptionsFactory {
       synchronize: false,
       logging: true,
       autoLoadEntities: true,
-      migrations: ['migrations/*.ts'],
+      migrations: ['dist/migrations/*.js'],
       migrationsTableName: 'migrations',
     };
   }

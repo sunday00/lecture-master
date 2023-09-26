@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "migrations"],
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -18,5 +18,5 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
 }
