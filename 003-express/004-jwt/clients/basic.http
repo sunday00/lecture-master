@@ -1,0 +1,26 @@
+### login
+POST localhost:4000/login
+Content-Type: application/json
+
+{ "username":"KIM" }
+
+
+
+### posts
+GET localhost:4000/posts
+
+
+
+### post
+GET localhost:4000/post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS0lNIiwiaWF0IjoxNjkxMzkwNzMzLCJleHAiOjE2OTEzOTA3NjN9.iJvJxrfrUYSsYpBIpLe9hOeLCGs8F2nmR6fAFBPWevg
+
+
+### represh
+POST localhost:4000/login
+Content-Type: application/json
+
+{
+    "username":"KIM",
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS0lNIiwiaWF0IjoxNjkxMzkwNDYyLCJleHAiOjE2OTE0NzY4NjJ9.mF_M8fxVsI__z77iHVJFVk-hlpxtDFsHtPpqMlpytmY"
+}

@@ -1,0 +1,17 @@
+### hello
+POST http://localhost:4000/graphql
+Content-Type: application/json
+
+{
+  "query": "{ posts { id, title } }"
+}
+
+
+
+### hello
+GRAPHQL http://localhost:4000/graphql
+
+query sample {
+  description
+  name
+}

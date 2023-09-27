@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2015", // 빌드된 dist js 의 es 버전.
+    "module": "ESNext", // commonjs require / amd async require / umd developer switch / esm import: tree shaking easy
+    "moduleResolution": "node", // 모듈의 ~/index.ts 생략해 주는 거
+    "esModuleInterop": true, // commonjs <-> esm 호환
+    "isolatedModules": true, // 모든 파일은 모듈이어야 하고, 모든 모듈은 export가 필요하다.
+    "lib": [],
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": false
+  }
+}

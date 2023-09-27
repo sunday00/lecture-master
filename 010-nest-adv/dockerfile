@@ -1,0 +1,24 @@
+FROM node:18.17.1 AS builder
+RUN mkdir -p /app
+WORKDIR /app
+ADD . .
+COPY .env.docker .env.local
+RUN mkdir -p video-storage
+
+RUN npm uninstall bcrypt
+RUN npm install bcrypt
+RUN npm install
+RUN npm run build
+
+ARG STAGE
+ENV STAGE ${STAGE}
+ARG POSTGRES_HOST
+ENV POSTGRES_HOST ${POSTGRES_HOST}
+ARG SENTRY_DSN
+ENV SENTRY_DSN ${SENTRY_DSN}
+ARG SLACK_HOOK
+ENV SLACK_HOOK ${SLACK_HOOK}
+ARG EMAIL_USER
+ENV EMAIL_USER ${EMAIL_USER}
+
+CMD npm run mig:run; npm run start:prod

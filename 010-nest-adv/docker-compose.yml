@@ -1,0 +1,20 @@
+version: '3.1'
+
+volumes:
+  postgres_data:
+
+
+services:
+  postgres:
+    image: postgres:15.3-alpine
+    container_name: facam-psql
+    # 5432로 포워딩 할 경우 host os 에 설치된 postgre와 겹칠 수 있으므로 host에 설치된 postgre를 내려야함
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=sunday00
+      - POSTGRES_PASSWORD=Zktm500CC!
+      - POSTGRES_DB=facam_common
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always

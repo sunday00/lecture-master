@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/@picocss/pico/css/pico.classless.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Simple chat</h1>
+
+        <form action="/chat">
+            <label> username
+                <input type="text" name="username" placeholder="username" />
+            </label>
+
+            <label> room name
+                <input type="text" name="roomname" placeholder="roomname" />
+            </label>
+
+            <input type="submit" value="Enter">
+        </form>
+    </main>
+
+    <script src="/node_modules/dayjs/dayjs.min.js"></script>
+    <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
