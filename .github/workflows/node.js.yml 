@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "nest-facam-prac" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "nest-facam-prac" ]
+    branches: [ "master" ]
 
 jobs:
   build:
