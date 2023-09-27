@@ -22,12 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: cd 012-tdd-nest
-    - name: Use Node.js ${{ matrix.node-version }}
+    - run: npm install
       uses: actions/setup-node@v3
+      working-directory: 012-tdd-nest
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install
-      working-directory: 012-tdd-nest
     - run: npm test
       working-directory: 012-tdd-nest
