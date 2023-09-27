@@ -28,4 +28,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install
+      working-directory: 012-tdd-nest
     - run: npm test
+      working-directory: 012-tdd-nest
