@@ -19,9 +19,11 @@ export class AnalyticsController {
   @EventPattern('video_downloaded')
   async handleVideoDownloaded(
     @Payload() message: any,
-    @Ctx() context: KafkaContext,
+    // @Ctx() context: KafkaContext,
   ) {
-    console.log(message);
-    console.log(`Topic: ${context.getTopic()}`);
+    console.info({ message });
+    // console.log(`Topic: ${context.getTopic()}`);
+
+    await this.analyticsService.updateVideoDownloadCnt(message.id);
   }
 }
