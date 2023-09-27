@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { VideoModule } from './../src/video.module';
+import { VideoModule } from '../src/video/video.module';
 
 describe('VideoController (e2e)', () => {
   let app: INestApplication;
