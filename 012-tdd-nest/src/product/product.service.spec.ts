@@ -5,7 +5,7 @@ import { ProductEntity } from './schema/product.entity';
 import {
   MockRepository,
   MockRepositoryFactory,
-} from '../common/Mock.repository';
+} from '../common/mock.repository';
 import { ProductController } from './product.controller';
 
 describe('ProductService', () => {

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
-import { MockRepositoryFactory } from '../common/Mock.repository';
+import { MockRepositoryFactory } from '../common/mock.repository';
 import { ProductEntity } from './schema/product.entity';
 import { Repository } from 'typeorm';
 
