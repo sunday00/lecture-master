@@ -43,7 +43,6 @@ describe('ProductService', () => {
 
     it('should err property missing', async () => {
       repository.save.mockRejectedValue('missingName');
-      // const returnV = await service.store({ description: 'abc' });
       await expect(service.store({ description: 'abc' })).rejects.toEqual(
         'missingName',
       );
