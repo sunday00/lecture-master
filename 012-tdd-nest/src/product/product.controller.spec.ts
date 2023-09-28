@@ -4,6 +4,7 @@ import { ProductService } from './product.service';
 import { MockRepositoryFactory } from '../common/mock.repository';
 import { ProductEntity } from './schema/product.entity';
 import { Repository } from 'typeorm';
+import { ProductReqStoreDto } from './schema/req.dto';
 
 class MockService extends ProductService {}
 
@@ -61,6 +62,9 @@ describe('ProductController', () => {
     const spy = jest.spyOn(service, 'read');
 
     const id = 1;
+    spy.mockReturnValue(
+      Promise.resolve({ id, name: '', price: 10, description: '' }),
+    );
 
     controller.read(id);
     expect(spy).toBeCalledWith(id);

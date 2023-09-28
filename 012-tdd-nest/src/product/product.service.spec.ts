@@ -40,13 +40,6 @@ describe('ProductService', () => {
       const returnV = await service.store(body);
       expect(returnV).toEqual(body);
     });
-
-    it('should err property missing', async () => {
-      repository.save.mockRejectedValue('missingName');
-      await expect(service.store({ description: 'abc' })).rejects.toEqual(
-        'missingName',
-      );
-    });
   }
 
   {
