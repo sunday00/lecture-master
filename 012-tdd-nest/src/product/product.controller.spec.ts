@@ -40,8 +40,8 @@ describe('ProductController', () => {
     expect(controller).toHaveProperty('index');
     expect(controller).toHaveProperty('read');
     expect(controller).toHaveProperty('store');
-    // expect(controller).toHaveProperty('update');
-    // expect(controller).toHaveProperty('destroy');
+    expect(controller).toHaveProperty('update');
+    expect(controller).toHaveProperty('destroy');
   });
 
   it('should call store service', () => {
@@ -68,5 +68,19 @@ describe('ProductController', () => {
 
     controller.read(id);
     expect(spy).toBeCalledWith(id);
+  });
+
+  it('should call update service', () => {
+    const spy = jest.spyOn(service, 'update');
+
+    controller.update(1, body);
+    expect(spy).toBeCalledWith(1, body);
+  });
+
+  it('should call delete service', () => {
+    const spy = jest.spyOn(service, 'destroy');
+
+    controller.destroy(1);
+    expect(spy).toBeCalledWith(1);
   });
 });

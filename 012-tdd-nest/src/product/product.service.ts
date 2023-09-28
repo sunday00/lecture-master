@@ -24,4 +24,12 @@ export class ProductService {
   async store(body: ProductReqStoreDto) {
     return this.repository.save(this.repository.create({ ...body }));
   }
+
+  async update(id: number, body: ProductReqStoreDto) {
+    return this.repository.update({ id }, body);
+  }
+
+  async destroy(id: number) {
+    return this.repository.delete({ id });
+  }
 }

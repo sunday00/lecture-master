@@ -53,4 +53,21 @@ describe('ProductService', () => {
       expect(await service.read(1)).toEqual(body);
     });
   }
+
+  {
+    it('should update', async () => {
+      const updates = { ...body, price: body.price + 100 };
+
+      repository.update.mockReturnValue({ affected: 1 });
+      const returnV = await service.update(1, updates);
+      expect(returnV).toEqual({ affected: 1 });
+    });
+
+    it('should delete', async () => {
+      const spy = jest.spyOn(repository, 'delete');
+
+      await service.destroy(1);
+      expect(spy).toBeCalledWith({ id: 1 });
+    });
+  }
 });
