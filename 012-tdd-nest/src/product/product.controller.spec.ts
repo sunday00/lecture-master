@@ -36,8 +36,8 @@ describe('ProductController', () => {
   });
 
   it('should be defined crud methods', () => {
-    // expect(controller).toHaveProperty('index');
-    // expect(controller).toHaveProperty('read');
+    expect(controller).toHaveProperty('index');
+    expect(controller).toHaveProperty('read');
     expect(controller).toHaveProperty('store');
     // expect(controller).toHaveProperty('update');
     // expect(controller).toHaveProperty('destroy');
@@ -48,5 +48,21 @@ describe('ProductController', () => {
 
     controller.store(body);
     expect(spy).toBeCalledWith(body);
+  });
+
+  it('should call index', () => {
+    const spy = jest.spyOn(service, 'index');
+
+    controller.index();
+    expect(spy).toBeCalled();
+  });
+
+  it('should call read', () => {
+    const spy = jest.spyOn(service, 'read');
+
+    const id = 1;
+
+    controller.read(id);
+    expect(spy).toBeCalledWith(id);
   });
 });

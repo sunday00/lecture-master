@@ -11,6 +11,14 @@ export class ProductService {
     private readonly repository: Repository<ProductEntity>,
   ) {}
 
+  async index() {
+    return this.repository.find({});
+  }
+
+  async read(id: number) {
+    return this.repository.findOneBy({ id });
+  }
+
   async store(body: ProductReqStoreDto) {
     return this.repository.save(this.repository.create({ ...body }));
   }

@@ -30,21 +30,35 @@ describe('ProductService', () => {
     service = module.get<ProductService>(ProductService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+  {
+    it('should be defined', () => {
+      expect(service).toBeDefined();
+    });
 
-  it('should return body', async () => {
-    repository.save.mockReturnValue(body);
-    const returnV = await service.store(body);
-    expect(returnV).toEqual(body);
-  });
+    it('should return body', async () => {
+      repository.save.mockReturnValue(body);
+      const returnV = await service.store(body);
+      expect(returnV).toEqual(body);
+    });
 
-  it('should err property missing', async () => {
-    repository.save.mockRejectedValue('missingName');
-    // const returnV = await service.store({ description: 'abc' });
-    await expect(service.store({ description: 'abc' })).rejects.toEqual(
-      'missingName',
-    );
-  });
+    it('should err property missing', async () => {
+      repository.save.mockRejectedValue('missingName');
+      // const returnV = await service.store({ description: 'abc' });
+      await expect(service.store({ description: 'abc' })).rejects.toEqual(
+        'missingName',
+      );
+    });
+  }
+
+  {
+    it('should return lists', async () => {
+      repository.find.mockReturnValue([]);
+      expect(await service.index()).toEqual([]);
+    });
+
+    it('should return one', async () => {
+      repository.findOneBy.mockReturnValue(body);
+      expect(await service.read(1)).toEqual(body);
+    });
+  }
 });

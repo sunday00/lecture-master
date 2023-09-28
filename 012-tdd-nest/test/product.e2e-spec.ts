@@ -49,5 +49,7 @@ describe('AppController (e2e)', () => {
 
   afterEach(async () => {
     await repository.delete({ name: body.name });
+
+    await app.close();
   });
 });
