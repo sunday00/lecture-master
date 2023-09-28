@@ -2,6 +2,7 @@ import { Repository } from 'typeorm';
 
 export type MockRepository<T = any> =
   | Partial<Record<keyof T, jest.Mock>>
+  | Partial<Repository<T>>
   | Partial<T>;
 
 export class MockRepositoryFactory {
