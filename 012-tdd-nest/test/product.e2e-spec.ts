@@ -102,6 +102,13 @@ describe('AppController (e2e) read and list', () => {
     expect(res.body.price).toEqual(body.price);
   });
 
+  it('/:id (read) not match return 404', async () => {
+    const p = await repository.findOne({ where: {}, order: { id: 'DESC' } });
+    const res = await request(app.getHttpServer())
+      .get(`/product/${p.id + Math.ceil(Math.random() * 10)}`)
+      .expect(404);
+  });
+
   afterEach(async () => {
     await repository.delete({ name: body.name });
 

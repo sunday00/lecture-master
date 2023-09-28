@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ProductReqStoreDto } from './schema/req.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './schema/product.entity';
@@ -12,11 +12,13 @@ export class ProductService {
   ) {}
 
   async index() {
-    return this.repository.find({});
+    return await this.repository.find({});
   }
 
   async read(id: number) {
-    return this.repository.findOneBy({ id });
+    const one = await this.repository.findOneBy({ id });
+    if (!one) throw new NotFoundException();
+    return one;
   }
 
   async store(body: ProductReqStoreDto) {
