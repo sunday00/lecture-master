@@ -29,6 +29,11 @@ public class Member {
         this.createdAt = createdAt == null ? LocalDateTime.now() : createdAt;
     }
 
+    public void changeNickname(String to) {
+        validateNickname(to);
+        nickname = to;
+    }
+
     private void validateNickname(String nickname) {
         Assert.isTrue(nickname.length() <= NAME_MAX_LENGTH, "exceed max length nickName");
     }
