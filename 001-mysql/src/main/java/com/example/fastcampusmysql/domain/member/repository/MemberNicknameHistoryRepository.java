@@ -1,6 +1,7 @@
 package com.example.fastcampusmysql.domain.member.repository;
 
 import com.example.fastcampusmysql.domain.member.entity.Member;
+import com.example.fastcampusmysql.domain.member.entity.MemberNicknameHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,69 +20,49 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
-public class MemberRepository {
-    static final String TABLE = "Member";
+public class MemberNicknameHistoryRepository {
+    static final String TABLE = "MemberNicknameHistory";
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static final RowMapper<Member> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> Member
+    private static final RowMapper<MemberNicknameHistory> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> MemberNicknameHistory
             .builder()
             .id(resultSet.getLong("id"))
+            .memberId(resultSet.getLong("memberId"))
             .nickname(resultSet.getString("nickName"))
-            .email(resultSet.getString("email"))
-            .birthday(resultSet.getObject("birthday", LocalDate.class))
             .createdAt(resultSet.getObject("createdAt", LocalDateTime.class))
             .build();
 
-    public Optional<Member> findById(Long id) {
-        var sql = String.format("SELECT * FROM %s WHERE id = :id ", TABLE);
+    public List<MemberNicknameHistory> findAllByMemberId(Long id) {
+        var sql = String.format("SELECT * FROM %s WHERE memberId = :memberId ", TABLE);
         var params = new MapSqlParameterSource()
-                .addValue("id", id);
+                .addValue("memberId", id);
 
-        List<Member> members = namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
-
-        Member member = DataAccessUtils.singleResult(members);
-        return Optional.ofNullable(member);
-    }
-
-    public List<Member> findAllByIdIn(List<Long> ids) {
-        if (ids.isEmpty()) {
-            return List.of();
-        }
-
-        String sql = String.format("SELECT * FROM %s WHERE id in (:ids)", TABLE);
-        var params = new MapSqlParameterSource().addValue("ids", ids);
         return namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
     }
 
-    public Member save(Member member) {
-        if (member.getId() == null) return insert(member);
-        return update(member);
+    public MemberNicknameHistory save(MemberNicknameHistory history) {
+        if (history.getId() == null) return insert(history);
+
+        throw new UnsupportedOperationException("Can't be updated history");
     }
 
-    private Member insert(Member member) {
+    private MemberNicknameHistory insert(MemberNicknameHistory history) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(namedParameterJdbcTemplate.getJdbcTemplate())
                 .withTableName(TABLE)
                 .usingGeneratedKeyColumns("id");
         // insert into TABLE (....) values ($1, $2, $3...)
 
-        SqlParameterSource params = new BeanPropertySqlParameterSource(member);
+        SqlParameterSource params = new BeanPropertySqlParameterSource(history);
         // { $1 = ... $2 = .... }
         var id = jdbcInsert.executeAndReturnKey(params).longValue();
         // real execute and return id
 
-        return Member.builder()
+        return MemberNicknameHistory.builder()
                 .id(id)
-                .nickname(member.getNickname())
-                .email(member.getEmail())
-                .birthday(member.getBirthday())
+                .memberId(history.getMemberId())
+                .nickname(history.getNickname())
+                .createdAt(history.getCreatedAt())
                 .build();
-    }
-
-    private Member update(Member member) {
-        var sql = String.format("UPDATE %s set email = :email, nickname = :nickname, birthday = :birthday WHERE id = :id", TABLE);
-        SqlParameterSource params = new BeanPropertySqlParameterSource(member);
-        namedParameterJdbcTemplate.update(sql, params);
-        return member;
     }
 }
