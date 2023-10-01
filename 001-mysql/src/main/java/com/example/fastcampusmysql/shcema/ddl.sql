@@ -45,10 +45,10 @@ create table POST
 );
 
 create index POST__index_member_id
-    on POST (memberId);
+    on Post (memberId);
 
 create index POST__index_created_date
-    on POST (createdDate);
+    on Post (createdDate);
 
 
 
