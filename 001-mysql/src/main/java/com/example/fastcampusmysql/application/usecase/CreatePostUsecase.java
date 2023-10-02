@@ -16,7 +16,7 @@ public class CreatePostUsecase {
     final private FollowReadService followReadService;
     final private TimelineWriteService timelineWriteService;
 
-    @Transactional
+    @Transactional // Warning. follower 가 많으면 transaction pool 을 너무 오래 잡고 있게 됨
     public Long execute(PostCommand command) {
         var postId = postWriteService.create(command);
 

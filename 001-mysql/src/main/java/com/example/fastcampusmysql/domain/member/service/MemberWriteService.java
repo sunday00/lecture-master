@@ -23,9 +23,10 @@ public class MemberWriteService {
                 .birthday(command.birthday())
                 .build();
 
-        return memberRepository.save(member);
+        return memberRepository.save(member) ;
     }
 
+    @Transactional
     public void changeNickname(Long memberId, String nickname) {
         var member = memberRepository.findById(memberId).orElseThrow();
         member.changeNickname(nickname);
