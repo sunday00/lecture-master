@@ -91,49 +91,49 @@ public class PostRepository {
         return new PageImpl<Post>(posts, pageRequest, getCount(memberId));
     }
 //
-//    public List<Post> findAllByLessThanIdAndMemberIdInAndOrderByIdDesc(Long id, List<Long> memberIds, int size) {
-//        if (memberIds.isEmpty()) {
-//            return List.of();
-//        }
-//
-//        var params = new MapSqlParameterSource()
-//                .addValue("id", id)
-//                .addValue("memberIds", memberIds)
-//                .addValue("size", size);
-//
-//        String query = String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE memberId in (:memberIds) and id < :id
-//                ORDER BY id DESC
-//                LIMIT :size
-//                """, TABLE);
-//
-//        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
-//
-//    }
-//
-//    public List<Post> findAllByMemberIdInAndOrderByIdDesc(List<Long> memberIds, int size) {
-//        if (memberIds.isEmpty()) {
-//            return List.of();
-//        }
-//
-//        var params = new MapSqlParameterSource()
-//                .addValue("memberIds", memberIds)
-//                .addValue("size", size);
-//
-//        String query = String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE memberId in (:memberIds)
-//                ORDER BY id DESC
-//                LIMIT :size
-//                """, TABLE);
-//
-//        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
-//
-//    }
-//
+    public List<Post> findAllByLessThanIdAndMemberIdInAndOrderByIdDesc(Long id, List<Long> memberIds, int size) {
+        if (memberIds.isEmpty()) {
+            return List.of();
+        }
+
+        var params = new MapSqlParameterSource()
+                .addValue("id", id)
+                .addValue("memberIds", memberIds)
+                .addValue("size", size);
+
+        String query = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId in (:memberIds) and id < :id
+                ORDER BY id DESC
+                LIMIT :size
+                """, TABLE);
+
+        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
+
+    }
+
+    public List<Post> findAllByMemberIdInAndOrderByIdDesc(List<Long> memberIds, int size) {
+        if (memberIds.isEmpty()) {
+            return List.of();
+        }
+
+        var params = new MapSqlParameterSource()
+                .addValue("memberIds", memberIds)
+                .addValue("size", size);
+
+        String query = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId in (:memberIds)
+                ORDER BY id DESC
+                LIMIT :size
+                """, TABLE);
+
+        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
+
+    }
+
     private Integer getCount(Long memberId) {
         String countQuery = String.format("""
                 SELECT count(id)
@@ -176,25 +176,25 @@ public class PostRepository {
 
         return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
     }
-//
-//    public List<Post> findAllByIdIn(List<Long> postIds) {
-//        if (postIds.isEmpty()) {
-//            return List.of();
-//        }
-//
-//        var params = new MapSqlParameterSource()
-//                .addValue("postIds", postIds);
-//
-//        String query = String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE id in (:postIds)
-//                """, TABLE);
-//
-//        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
-//
-//    }
-//
+
+    public List<Post> findAllByIdIn(List<Long> postIds) {
+        if (postIds.isEmpty()) {
+            return List.of();
+        }
+
+        var params = new MapSqlParameterSource()
+                .addValue("postIds", postIds);
+
+        String query = String.format("""
+                SELECT *
+                FROM %s
+                WHERE id in (:postIds)
+                """, TABLE);
+
+        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
+
+    }
+
 //    public Optional<Post> findById(Long postId, boolean requiredLock) {
 //        String query =String.format("""
 //                SELECT *
@@ -235,25 +235,23 @@ public class PostRepository {
     }
 
     private Post update(Post post) {
-//        var sql = String.format("""
-//        UPDATE %s set
-//            memberId = :memberId,
-//            contents = :contents,
-//            createdDate = :createdDate,
-//            createdAt = :createdAt,
-//            likeCount = :likeCount,
-//            version = :version + 1
-//        WHERE id = :id and version = :version
-//        """, TABLE);
-//
-//        SqlParameterSource params = new BeanPropertySqlParameterSource(post);
-//        var updatedCount = namedParameterJdbcTemplate.update(sql, params);
-//        if (updatedCount == 0) {
-//            throw new RuntimeException("not updated");
-//        }
-//        return post;
+        var sql = String.format("""
+        UPDATE %s set
+            memberId = :memberId,
+            contents = :contents,
+            createdDate = :createdDate,
+            createdAt = :createdAt,
+            likeCount = :likeCount,
+            version = :version + 1
+        WHERE id = :id and version = :version
+        """, TABLE);
 
-        return post; // TODO: remove
+        SqlParameterSource params = new BeanPropertySqlParameterSource(post);
+        var updatedCount = namedParameterJdbcTemplate.update(sql, params);
+        if (updatedCount == 0) {
+            throw new RuntimeException("not updated");
+        }
+        return post;
     }
 
     public void bulkInsert(List<Post> posts) {

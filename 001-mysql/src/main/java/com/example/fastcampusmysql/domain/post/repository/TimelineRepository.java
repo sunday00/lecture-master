@@ -28,63 +28,63 @@ public class TimelineRepository {
             .createdAt(resultSet.getObject("createdAt", LocalDateTime.class))
             .build();
 
-//    public List<Timeline> findAllByMemberIdAndOrderByIdDesc(Long memberId, int size) {
-//        var sql = String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE memberId = :memberId
-//                ORDER BY id desc
-//                LIMIT :size
-//                """, TABLE);
-//
-//        var params = new MapSqlParameterSource()
-//                .addValue("memberId", memberId)
-//                .addValue("size", size)
-//                ;
-//
-//        return namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
-//    }
+    public List<Timeline> findAllByMemberIdAndOrderByIdDesc(Long memberId, int size) {
+        var sql = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId = :memberId
+                ORDER BY id desc
+                LIMIT :size
+                """, TABLE);
 
-//    public List<Timeline> findAllByLessThanIdAndMemberIdAndOrderByIdDesc(Long id, Long memberId, int size) {
-//        var sql = String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE memberId = :memberId and id < :id
-//                ORDER BY id desc
-//                LIMIT :size
-//                """, TABLE);
-//
-//        var params = new MapSqlParameterSource()
-//                .addValue("memberId", memberId)
-//                .addValue("id", id)
-//                .addValue("size", size)
-//                ;
-//        return namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
-//    }
+        var params = new MapSqlParameterSource()
+                .addValue("memberId", memberId)
+                .addValue("size", size)
+                ;
 
-//    public Timeline save(Timeline timeline) {
-//        if (timeline.getId() == null) {
-//            return insert(timeline);
-//        }
+        return namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
+    }
+
+    public List<Timeline> findAllByLessThanIdAndMemberIdAndOrderByIdDesc(Long id, Long memberId, int size) {
+        var sql = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId = :memberId and id < :id
+                ORDER BY id desc
+                LIMIT :size
+                """, TABLE);
+
+        var params = new MapSqlParameterSource()
+                .addValue("memberId", memberId)
+                .addValue("id", id)
+                .addValue("size", size)
+                ;
+        return namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
+    }
+
+    public Timeline save(Timeline timeline) {
+        if (timeline.getId() == null) {
+            return insert(timeline);
+        }
+
+        throw new UnsupportedOperationException("Timeline는 갱신을 지원하지 않습니다");
+    }
 //
-//        throw new UnsupportedOperationException("Timeline는 갱신을 지원하지 않습니다");
-//    }
-//
-//    private Timeline insert(Timeline timeline) {
-//        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(namedParameterJdbcTemplate.getJdbcTemplate())
-//                .withTableName(TABLE)
-//                .usingGeneratedKeyColumns("id");
-//
-//        SqlParameterSource params = new BeanPropertySqlParameterSource(timeline);
-//        var id = jdbcInsert.executeAndReturnKey(params).longValue();
-//
-//        return Timeline.builder()
-//                .id(id)
-//                .memberId(timeline.getMemberId())
-//                .postId(timeline.getPostId())
-//                .createdAt(timeline.getCreatedAt())
-//                .build();
-//    }
+    private Timeline insert(Timeline timeline) {
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(namedParameterJdbcTemplate.getJdbcTemplate())
+                .withTableName(TABLE)
+                .usingGeneratedKeyColumns("id");
+
+        SqlParameterSource params = new BeanPropertySqlParameterSource(timeline);
+        var id = jdbcInsert.executeAndReturnKey(params).longValue();
+
+        return Timeline.builder()
+                .id(id)
+                .memberId(timeline.getMemberId())
+                .postId(timeline.getPostId())
+                .createdAt(timeline.getCreatedAt())
+                .build();
+    }
 
     public void bulkInsert(List<Timeline> timeline) {
         var sql = String.format("""

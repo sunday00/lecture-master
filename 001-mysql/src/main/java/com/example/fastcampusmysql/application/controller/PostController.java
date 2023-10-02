@@ -1,6 +1,7 @@
 package com.example.fastcampusmysql.application.controller;
 
 import com.example.fastcampusmysql.application.usecase.CreatePostUsecase;
+import com.example.fastcampusmysql.application.usecase.GetTimelinePostsUsecase;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCount;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCountRequest;
 import com.example.fastcampusmysql.domain.post.dto.PostCommand;
@@ -24,7 +25,7 @@ public class PostController {
 //    final private PostWriteService postWriteService;
     final private PostReadService postReadService;
 
-//    final private GetTimelinePostsUsecase getTimelinePostsUsecase;
+    final private GetTimelinePostsUsecase getTimelinePostsUsecase;
     final private CreatePostUsecase createPostUsecase;
 //    final private CreatePostLikeUsecase createPostLikeUsecase;
 
@@ -60,14 +61,14 @@ public class PostController {
     }
 
 
-//    @GetMapping("/members/{memberId}/timeline")
-//    public PageCursor<PostDto> getTimeline(
-//            @PathVariable Long memberId,
-//            CursorRequest cursorRequest
-//    ) {
-////        return getTimelinePostsUsecase.execute(memberId, cursorRequest);
-//        return getTimelinePostsUsecase.executeByTimeline(memberId, cursorRequest);
-//    }
+    @GetMapping("/members/{memberId}/timeline")
+    public PageCursor<PostDto> getTimeline(
+            @PathVariable Long memberId,
+            CursorRequest cursorRequest
+    ) {
+//        return getTimelinePostsUsecase.execute(memberId, cursorRequest);
+        return getTimelinePostsUsecase.executeByTimeline(memberId, cursorRequest);
+    }
 
 
 //    @PostMapping("/{postId}/like/v1")
