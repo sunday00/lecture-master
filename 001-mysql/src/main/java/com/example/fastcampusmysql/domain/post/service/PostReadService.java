@@ -1,9 +1,14 @@
 package com.example.fastcampusmysql.domain.post.service;
 
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCount;
+import com.example.fastcampusmysql.domain.post.dto.PostDto;
+import com.example.fastcampusmysql.domain.post.entity.Post;
 import com.example.fastcampusmysql.domain.post.repository.PostRepository;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCountRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,23 +38,27 @@ public class PostReadService {
 //        var postDtos = posts.stream().map(this::toDto).toList();
 //        return new PageCursor<>(cursorRequest.next(nextKey), postDtos);
 //    }
-//    private PostDto toDto(Post post) {
-//        return new PostDto(
-//                post.getId(),
-//                post.getMemberId(),
-//                post.getContents(),
-//                post.getCreatedAt(),
+    private PostDto toDto(Post post) {
+        return new PostDto(
+                post.getId(),
+                post.getMemberId(),
+                post.getContents(),
+                post.getCreatedAt()
 //                postLikeRepository.countByPostId(post.getId())
-//        );
-//    }
+        );
+    }
 
     public List<DailyPostCount> getDailyPostCounts(DailyPostCountRequest request) {
         return postRepository.groupByCreatedDate(request);
     }
 
-//    public Page<PostDto> getPostDtos(Long memberId, PageRequest pageRequest) {
-//        return postRepository.findAllByMemberId(memberId, pageRequest).map(this::toDto);
-//    }
+    public Page<PostDto> getPostDtos(Long memberId, PageRequest pageRequest) {
+        return postRepository.findAllByMemberId(memberId, pageRequest).map(this::toDto);
+    }
+
+    public Page<PostDto> getPostDtos(Long memberId, Pageable pageRequest) {
+        return postRepository.findAllByMemberId(memberId, pageRequest).map(this::toDto);
+    }
 //
 //    public Page<Post> getPost(Long memberId, PageRequest pageRequest) {
 //        return postRepository.findAllByMemberId(memberId, pageRequest);
