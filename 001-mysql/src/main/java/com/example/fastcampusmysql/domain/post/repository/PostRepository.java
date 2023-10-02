@@ -143,39 +143,39 @@ public class PostRepository {
         var countParam = new MapSqlParameterSource().addValue("memberId", memberId);
         return namedParameterJdbcTemplate.queryForObject(countQuery,  countParam, Integer.class);
     }
+
+    public List<Post> findAllByLessThanIdAndMemberIdAndOrderByIdDesc(Long id, Long memberId, int size) {
+        var params = new MapSqlParameterSource()
+                .addValue("id", id)
+                .addValue("memberId", memberId)
+                .addValue("size", size);
+
+        String query = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId = :memberId and id < :id
+                ORDER BY id DESC
+                LIMIT :size
+                """, TABLE);
+
+        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
+    }
 //
-//    public List<Post> findAllByLessThanIdAndMemberIdAndOrderByIdDesc(Long id, Long memberId, int size) {
-//        var params = new MapSqlParameterSource()
-//                .addValue("id", id)
-//                .addValue("memberId", memberId)
-//                .addValue("size", size);
-//
-//        String query = String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE memberId = :memberId and id < :id
-//                ORDER BY id DESC
-//                LIMIT :size
-//                """, TABLE);
-//
-//        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
-//    }
-//
-//    public List<Post> findAllByMemberIdAndOrderByIdDesc(Long memberId, int size) {
-//        var params = new MapSqlParameterSource()
-//                .addValue("memberId", memberId)
-//                .addValue("size", size);
-//
-//        String query = String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE memberId = :memberId
-//                ORDER BY id DESC
-//                LIMIT :size
-//                """, TABLE);
-//
-//        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
-//    }
+    public List<Post> findAllByMemberIdAndOrderByIdDesc(Long memberId, int size) {
+        var params = new MapSqlParameterSource()
+                .addValue("memberId", memberId)
+                .addValue("size", size);
+
+        String query = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId = :memberId
+                ORDER BY id DESC
+                LIMIT :size
+                """, TABLE);
+
+        return namedParameterJdbcTemplate.query(query, params, ROW_MAPPER);
+    }
 //
 //    public List<Post> findAllByIdIn(List<Long> postIds) {
 //        if (postIds.isEmpty()) {
