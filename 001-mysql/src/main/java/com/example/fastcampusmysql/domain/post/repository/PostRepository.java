@@ -33,8 +33,8 @@ public class PostRepository {
             .contents(resultSet.getString("contents"))
             .createdDate(resultSet.getObject("createdDate", LocalDate.class))
             .createdAt(resultSet.getObject("createdAt", LocalDateTime.class))
-//            .likeCount(resultSet.getLong("likeCount"))
-//            .version(resultSet.getLong("version"))
+            .likeCount(resultSet.getLong("likeCount"))
+            .version(resultSet.getLong("version"))
             .build();
 
 //    public List<Post> findByMemberId(Long memberId) {
