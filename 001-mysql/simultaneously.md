@@ -12,7 +12,8 @@
 
 ## 주요 해결책
 - 락을 획득하여 순차 처리 / 비관적 락
-- 락의 범위 최소화, 단시간화 중요
+  - 락의 범위 최소화, 단시간화 중요
+- 별도의 도메인으로 분리
 
 # lock
 ## mysql lock의 기본 동작
@@ -50,7 +51,11 @@ COMMIT;
   - 다른 트랜잭션에서 update 할때 마찬가지로 where 구문에 해당 컬럼 함께 기입
   - 다른 트랜잭션에서는 where 구문에서 실패하므로 다시 처리 하는 로직 구현
 - 예시
-  - 
+
+```
+{tx:A where stock=9, updateCnt=1 --> ... processing ... --> update stock+1, updateCnt+1 where updateCnt=1 commit --> stock:9, updateCnt:2}
+{ ---------- tx:B where stock=9, updateCnt=1 --> ... processing ...... --> update stock+1, updateCnt+1 where updateCnt=1 --> failed. updateCnt 1 not found}
+```
 
 # 추가
 - framework 에서 동시성 이슈 제어
