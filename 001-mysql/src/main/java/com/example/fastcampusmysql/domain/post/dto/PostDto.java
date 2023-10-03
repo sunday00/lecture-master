@@ -6,6 +6,6 @@ public record PostDto(
         Long id,
         Long memberId,
         String contents,
-        LocalDateTime createdAt
-//        Long likeCount
+        LocalDateTime createdAt,
+        Long likeCount
 ) {}

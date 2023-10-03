@@ -195,21 +195,21 @@ public class PostRepository {
 
     }
 
-//    public Optional<Post> findById(Long postId, boolean requiredLock) {
-//        String query =String.format("""
-//                SELECT *
-//                FROM %s
-//                WHERE id = :postId
-//                """, TABLE);
-//        if (requiredLock) {
-//            query += "FOR UPDATE";
-//        }
-//
-//        var params = new MapSqlParameterSource()
-//                .addValue("postId", postId);
-//        var nullablePost = namedParameterJdbcTemplate.queryForObject(query, params, ROW_MAPPER);
-//        return Optional.ofNullable(nullablePost);
-//    }
+    public Optional<Post> findById(Long postId, boolean requiredLock) {
+        String query =String.format("""
+                SELECT *
+                FROM %s
+                WHERE id = :postId
+                """, TABLE);
+        if (requiredLock) {
+            query += "FOR UPDATE";
+        }
+
+        var params = new MapSqlParameterSource()
+                .addValue("postId", postId);
+        var nullablePost = namedParameterJdbcTemplate.queryForObject(query, params, ROW_MAPPER);
+        return Optional.ofNullable(nullablePost);
+    }
 
     public Post save(Post post) {
         if (post.getId() == null)

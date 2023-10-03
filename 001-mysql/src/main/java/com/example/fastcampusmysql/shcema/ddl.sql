@@ -44,15 +44,15 @@ create table POST
         primary key (id)
 );
 
-alter table POST add column likeCount int;
+alter table Post add column likeCount int;
 
-alter table POST add column version int default 0;
+alter table Post add column version int default 0;
 
 create index POST__index_member_id
-    on POST (memberId);
+    on Post (memberId);
 
 create index POST__index_created_date
-    on POST (createdDate);
+    on Post (createdDate);
 
 
 

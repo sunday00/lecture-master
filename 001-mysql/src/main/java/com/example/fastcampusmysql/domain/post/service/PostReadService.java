@@ -46,7 +46,8 @@ public class PostReadService {
                 post.getId(),
                 post.getMemberId(),
                 post.getContents(),
-                post.getCreatedAt()
+                post.getCreatedAt(),
+                post.getLikeCount()
 //                postLikeRepository.countByPostId(post.getId())
         );
     }

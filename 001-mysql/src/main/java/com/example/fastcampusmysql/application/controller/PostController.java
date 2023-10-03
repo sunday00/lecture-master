@@ -8,6 +8,7 @@ import com.example.fastcampusmysql.domain.post.dto.PostCommand;
 import com.example.fastcampusmysql.domain.post.dto.PostDto;
 import com.example.fastcampusmysql.domain.post.entity.Post;
 import com.example.fastcampusmysql.domain.post.service.PostReadService;
+import com.example.fastcampusmysql.domain.post.service.PostWriteService;
 import com.example.fastcampusmysql.util.CursorRequest;
 import com.example.fastcampusmysql.util.PageCursor;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/posts")
 public class PostController {
-//    final private PostWriteService postWriteService;
+    final private PostWriteService postWriteService;
     final private PostReadService postReadService;
 
     final private GetTimelinePostsUsecase getTimelinePostsUsecase;
@@ -70,13 +71,12 @@ public class PostController {
         return getTimelinePostsUsecase.executeByTimeline(memberId, cursorRequest);
     }
 
-
-//    @PostMapping("/{postId}/like/v1")
-//    public void like(@PathVariable Long postId) {
-////        postWriteService.likePost(postId);
+    @PostMapping("/{postId}/like/v1")
+    public void like(@PathVariable Long postId) {
+        postWriteService.likePost(postId);
 //        postWriteService.likePostByOptimisticLock(postId);
-//    }
-//
+    }
+
 //    @PostMapping("/{postId}/like/v2")
 //    public void like(
 //            @PathVariable Long postId,
