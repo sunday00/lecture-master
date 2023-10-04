@@ -1,6 +1,7 @@
 package com.example.helloworld.service;
 
 import com.example.helloworld.dto.CacheDto;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -10,8 +11,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class CacheService {
     private final StringRedisTemplate redisTemplate;
-    public CacheService(StringRedisTemplate redisTemplate) {
+    private final GetAgeApi getAgeApi;
+
+    public CacheService(StringRedisTemplate redisTemplate, GetAgeApi getAgeApi) {
         this.redisTemplate = redisTemplate;
+        this.getAgeApi = getAgeApi;
     }
 
     public CacheDto getUserProfile() {
@@ -19,13 +23,15 @@ public class CacheService {
         String cachedName = ops.get("name");
         if (cachedName == null){
             String name = this.getApi();
+            int age = this.getAgeApi.getApiAge("aaa");
 
             ops.set("name", "Cached Memory name", 5, TimeUnit.SECONDS);
 
-            return new CacheDto(name, 30);
+            return new CacheDto(name, age);
 
         } else {
-            return new CacheDto(cachedName, 30);
+            int age = this.getAgeApi.getApiAge("aaa");
+            return new CacheDto(cachedName, age);
         }
     }
 
