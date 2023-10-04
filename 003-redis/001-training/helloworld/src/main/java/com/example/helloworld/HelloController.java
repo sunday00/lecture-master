@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
+    private StringRedisTemplate redisTemplate;
 
-    @Autowired
-    StringRedisTemplate redisTemplate;
+    public HelloController(StringRedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     // /hello => "hello world!"
 
@@ -25,7 +27,7 @@ public class HelloController {
 
     @GetMapping("/setFruit")
     public String setFruit(@RequestParam String name) {
-        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        ValueOperations<String, String> ops = this.redisTemplate.opsForValue();
         ops.set("fruit", name);
 
         return "saved.";
@@ -33,7 +35,7 @@ public class HelloController {
 
     @GetMapping("/getFruit")
     public String getFruit() {
-        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        ValueOperations<String, String> ops = this.redisTemplate.opsForValue();
         String fruitName = ops.get("fruit");
 
         return fruitName;
