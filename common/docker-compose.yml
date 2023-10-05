@@ -1,7 +1,6 @@
 version: '3.1'
 
 services:
-
   db:
     container_name: facam_mysql
     image: mysql:8.1
@@ -14,15 +13,16 @@ services:
     volumes:
       - ./db:/var/lib/mysql
 
-  redis: # container name
+  redis-main: # container name
     build:
       context: .
       dockerfile: redis/dockerfile
+    hostname: redis-main
     ports: # 바인딩할 포트:내부 포트
       - "6389:6379"
     volumes: # 마운트할 볼륨 설정
       - ./redis/data:/data
-      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/configs/main:/usr/local/etc/redis
     restart: always
 
   redis-replica: # container name
@@ -33,5 +33,56 @@ services:
       - "6399:6379"
     volumes: # 마운트할 볼륨 설정
       - ./redis/data:/data
-      - ./redis/redis.replica.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/configs/replica:/usr/local/etc/redis
     restart: always
+    depends_on:
+      - redis-main
+
+  redis-sentinel-1:
+    build:
+      context: .
+      args:
+        NUM: no1
+      dockerfile: redis/sentinel.dockerfile
+    ports: # 바인딩할 포트:내부 포트
+      - "26379:26379"
+    volumes: # 마운트할 볼륨 설정
+      - ./redis/data:/data
+      - ./redis/configs/sentinel:/usr/local/etc/redis
+    restart: always
+    depends_on:
+      - redis-main
+      - redis-replica
+
+  redis-sentinel-2:
+    build:
+      context: .
+      args:
+        NUM: no2
+      dockerfile: redis/sentinel.dockerfile
+    ports: # 바인딩할 포트:내부 포트
+      - "26380:26379"
+    volumes: # 마운트할 볼륨 설정
+      - ./redis/data:/data
+      - ./redis/configs/sentinel:/usr/local/etc/redis
+    restart: always
+    depends_on:
+      - redis-main
+      - redis-replica
+
+  redis-sentinel-3:
+    build:
+      context: .
+      args:
+        NUM: no3
+      dockerfile: redis/sentinel.dockerfile
+    ports: # 바인딩할 포트:내부 포트
+      - "26381:26379"
+    volumes: # 마운트할 볼륨 설정
+      - ./redis/data:/data
+      - ./redis/configs/sentinel:/usr/local/etc/redis
+    restart: always
+    depends_on:
+      - redis-main
+      - redis-replica
+
