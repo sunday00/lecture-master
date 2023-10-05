@@ -24,3 +24,14 @@ services:
       - ./redis/data:/data
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     restart: always
+
+  redis-replica: # container name
+    build:
+      context: .
+      dockerfile: redis/dockerfile
+    ports: # 바인딩할 포트:내부 포트
+      - "6399:6379"
+    volumes: # 마운트할 볼륨 설정
+      - ./redis/data:/data
+      - ./redis/redis.replica.conf:/usr/local/etc/redis/redis.conf
+    restart: always
