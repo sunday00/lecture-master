@@ -1,0 +1,5 @@
+FROM redis:7.2-alpine
+
+RUN chown redis:redis /run
+
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
