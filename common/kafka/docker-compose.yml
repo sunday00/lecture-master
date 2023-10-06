@@ -25,6 +25,8 @@ services:
       KAFKA_NUM_PARTITIONS: 3
     volumes:
       - ./configs/server.properties:/etc/kafka/server.properties
+      - ./data/log:/var/lib/kafka
+      - ./data/tmp:/tmp
 
   kafka-2:
     image: confluentinc/cp-kafka:7.3.5.arm64
@@ -42,6 +44,8 @@ services:
       KAFKA_NUM_PARTITIONS: 3
     volumes:
       - ./configs/server.properties:/etc/kafka/server.properties
+      - ./data/log:/var/lib/kafka
+      - ./data/tmp:/tmp
 
 
   kafka-3:
@@ -60,6 +64,8 @@ services:
       KAFKA_NUM_PARTITIONS: 3
     volumes:
       - ./configs/server.properties:/etc/kafka/server.properties
+      - ./data/log:/var/lib/kafka
+      - ./data/tmp:/tmp
 
   kafka-ui:
     image: provectuslabs/kafka-ui
