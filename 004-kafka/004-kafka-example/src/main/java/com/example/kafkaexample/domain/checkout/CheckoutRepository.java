@@ -1,4 +1,4 @@
-package com.example.kafkaexample.domain;
+package com.example.kafkaexample.domain.checkout;
 
 import com.example.kafkaexample.entity.CheckoutEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

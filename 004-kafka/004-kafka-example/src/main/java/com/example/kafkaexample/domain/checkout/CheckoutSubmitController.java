@@ -1,4 +1,4 @@
-package com.example.kafkaexample.domain;
+package com.example.kafkaexample.domain.checkout;
 
 import com.example.kafkaexample.dto.CheckoutDto;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class CheckoutSubmitController {
-    private final SaveService saveService;
+    private final SaveCheckoutService saveService;
 
     @PostMapping("/submit-checkout")
     public String submitCheckout(CheckoutDto checkoutDto, Model model) {

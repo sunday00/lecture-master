@@ -1,5 +1,6 @@
-package com.example.kafkaexample.domain;
+package com.example.kafkaexample.domain.checkout;
 
+import com.example.kafkaexample.config.InternalConfig;
 import com.example.kafkaexample.dto.CheckoutDto;
 import com.example.kafkaexample.entity.CheckoutEntity;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -13,10 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class SaveService {
-    private final String CHECKOUT_COMPLETE_TOPIC_NAME = "checkout.complete.v1";
-
-    private final KafkaTemplate<String,  String> kafkaTemplate;
+public class SaveCheckoutService {
+    private final KafkaTemplate<String,  String> kafkaProducerTemplate;
     private final ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     private final ModelMapper modelMapper = new ModelMapper();
@@ -40,7 +39,7 @@ public class SaveService {
     private void sendToKafka(CheckoutDto checkoutDto) {
         try {
             String jsonInString = objectMapper.writeValueAsString(checkoutDto);
-            kafkaTemplate.send(CHECKOUT_COMPLETE_TOPIC_NAME, jsonInString);
+            kafkaProducerTemplate.send(InternalConfig.topicname, jsonInString);
             log.info("success sendToKafka");
         } catch (Exception e) {
             log.error("sendToKafka", e);
