@@ -14,13 +14,11 @@ import java.util.Map;
 
 @Configuration
 public class KafkaProducerConfig {
-    private static final String BOOTSTRAP_SERVER = "localhost:9092";
-
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, InternalConfig.kafkaServer);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
@@ -34,7 +32,7 @@ public class KafkaProducerConfig {
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, InternalConfig.kafkaServer);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 

@@ -10,4 +10,5 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 public class InternalConfig {
     public static final String topicname = "checkout.complete.v1";
     public static final String groupId = "shipment.group.v1";
+    public static final String kafkaServer = "localhost:9092";
 }
