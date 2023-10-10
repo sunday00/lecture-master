@@ -1,0 +1,16 @@
+---
+title: Node
+---
+
+flowchart LR
+    subgraph SUB
+        direction TB
+        id1(hello)--->id2(world)
+    end
+    idMain[user]--->SUB--->db[(psql)]
+
+    subgraph No2
+        direction LR
+        idCircle1((pie))
+    end
+

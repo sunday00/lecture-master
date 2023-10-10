@@ -1,0 +1,12 @@
+---
+title: sequence
+---
+
+sequenceDiagram
+    actor user
+    user ->> button: Hi
+    button ->> react: store
+    react ->> api: controller, service, repository
+    api ->> DB: store
+    DB[(psql)] -) api: response
+    api ->> react: !
