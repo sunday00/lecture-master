@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "typescript": "^5.2.2"
+  },
+  "name": "002-manage-student",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "npx tsc && node ./dist/index.js",
+    "build": "npx tsc --build",
+    "clean": "npx tsc --build --clean"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
