@@ -12,6 +12,18 @@ git push -u origin lecName
 
 -------
 
+git checkout lec-current-focus
+
+git pull origin [lec branch name] --allow-unrelated-histories --ff
+
+git aa
+
+git commit -m 'overwrite before lecture'
+
+git push
+
+-------
+
 ps-db:
 
 winter is java
