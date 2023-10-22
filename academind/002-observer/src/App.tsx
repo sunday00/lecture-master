@@ -1,24 +1,19 @@
-import {useEffect, useRef} from "react";
-import {fromEvent} from "rxjs";
+import {Link, Outlet} from "react-router-dom";
+
 
 function App() {
-  const btnRef = useRef(null)
-
-  useEffect(() => {
-    const src$ = fromEvent(btnRef.current!, 'click')
-    const piped = src$.pipe()
-
-    const subscription = piped.subscribe((coordinate) => {
-      console.log(coordinate)
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
-
   return (
     <>
       <main>
-        <button ref={btnRef}>Click</button>
+        <nav style={{display: 'flex', justifyContent: 'start', gap: '1em'}}>
+          <li>
+            <Link to={'/'}>Home</Link>
+          </li>
+          <li>
+            <Link to={'/01'}>01</Link>
+          </li>
+        </nav>
+        <Outlet />
       </main>
     </>
   )
