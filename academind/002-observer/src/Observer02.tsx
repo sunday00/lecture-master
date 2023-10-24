@@ -20,7 +20,9 @@ const Observer02 = () => {
       obs.next('b value')
       obs.next('c value')
 
-      obs.error('oops')
+      // obs.error('oops')
+
+      obs.complete()
 
       obs.next('d value') // not execute, cause above err
       obs.next('e value') // not execute
