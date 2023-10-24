@@ -3,6 +3,8 @@ import App from "../App.tsx";
 import Home from "../page/Home.tsx";
 import Foo from "../page/Foo.tsx";
 import Interval01 from "../page/Interval01.tsx";
+import Subject01 from "../page/Subject01.tsx";
+import Filter01 from "../page/Filter01.tsx";
 
 /**
  * @CONF: add here to more subjects
@@ -15,6 +17,8 @@ const routes = {
     { index: true, path: "/", element: <Home /> },
     { path: "/foo", element: <Foo /> },
     { path: "/interval01", element: <Interval01 /> },
+    { path: "/subject01", element: <Subject01 /> },
+    { path: "/filter01", element: <Filter01 /> },
   ],
 }
 
