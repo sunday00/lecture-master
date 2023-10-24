@@ -2,6 +2,7 @@ import {createBrowserRouter, Link} from "react-router-dom";
 import App from "../App.tsx";
 import Home from "../page/Home.tsx";
 import Foo from "../page/Foo.tsx";
+import Interval01 from "../page/Interval01.tsx";
 
 /**
  * @CONF: add here to more subjects
@@ -13,6 +14,7 @@ const routes = {
   children: [
     { index: true, path: "/", element: <Home /> },
     { path: "/foo", element: <Foo /> },
+    { path: "/interval01", element: <Interval01 /> },
   ],
 }
 
