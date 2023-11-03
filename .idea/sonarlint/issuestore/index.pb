@@ -168,3 +168,13 @@ U
 %999-daily/202311/0202-star-marking.js,7/b/7b0dd24a3dbb542ab66b598f19c0037707e8a870
 N
 999-daily/202311/0203-array.js,d/c/dc8b008ac5f54763d5eb5daed2c0b98f941a72e7
+F
+real-remember/001-u.js,9/7/973d5c4edf33b827eb79611434a29f90ddc5261b
+I
+real-remember/example.txt,1/8/18b3d88e6ac6c0756809f6f387895e0c4ca48f01
+M
+999-daily/202311/0301-less.js,6/9/69766e209dcf239c33d91ddcded1f39ca223b610
+T
+$999-daily/202311/0302-put-in-ball.js,5/e/5e329c77ce61b29b5806f7db631fdb14ddad08a2
+R
+"999-daily/202311/0303-swap-ball.js,e/e/ee4dc4fe7b719404bd7d2b58b6d322c387f9b37b
