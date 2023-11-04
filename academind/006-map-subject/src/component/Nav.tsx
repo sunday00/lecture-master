@@ -1,8 +1,10 @@
 import {createBrowserRouter, Link} from "react-router-dom";
 import App from "../App.tsx";
 import Home from "../page/Home.tsx";
-import Foo from "../page/Foo.tsx";
 import Merge from "../page/Merge.tsx";
+import SwitchMap from "../page/SwitchMap.tsx";
+import StateSubject from "../page/StateSubject.tsx";
+import BehaviorSubjectComponent from "../page/BehaviorSubject.tsx";
 
 /**
  * @CONF: add here to more subjects
@@ -14,6 +16,9 @@ const routes = {
   children: [
     { index: true, path: "/", element: <Home /> },
     { path: "/merge", element: <Merge /> },
+    { path: "/switch", element: <SwitchMap /> },
+    { path: "/s-subject", element: <StateSubject /> },
+    { path: "/b-subject", element: <BehaviorSubjectComponent /> },
   ],
 }
 
