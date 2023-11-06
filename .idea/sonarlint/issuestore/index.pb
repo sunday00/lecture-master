@@ -178,3 +178,13 @@ T
 $999-daily/202311/0302-put-in-ball.js,5/e/5e329c77ce61b29b5806f7db631fdb14ddad08a2
 R
 "999-daily/202311/0303-swap-ball.js,e/e/ee4dc4fe7b719404bd7d2b58b6d322c387f9b37b
+U
+%999-daily/202311/0401-string-basic.js,9/5/952a047b261ce298f0fc79f03b1629be21dd4d80
+S
+#999-daily/202311/0402-phone-dial.js,5/3/53ca892c442cd1aaab8cafc4e43ca6e96e6faeb6
+N
+999-daily/202311/0403-chess.js,f/9/f945bbd164364cffd2ca20310c821008fcc554a1
+Q
+!999-daily/202311/0404-star-dia.js,5/f/5ff3b8215db88bd73d6d162ffd86a915beec8063
+R
+"999-daily/202311/0405-pellidrom.js,5/4/549164cd066b026db76a714a77487127ae3d8409
