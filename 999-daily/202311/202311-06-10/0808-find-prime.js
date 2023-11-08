@@ -2,19 +2,15 @@ let fs = require('fs')
 let input = fs.readFileSync('/dev/stdin').toString().trim()
 // let input = fs.readFileSync('./example.txt').toString().trim()
 
-let [INFO, DATA] = input.split('\n')
-// let data = input.split('\n').map(Number)
-// let N = (+input)
-// let DATA = input.split('\n').map(Number)
+let [N, M] = input.split('\n').map(Number)
 
 // @info: logic start
 // @@info: prepare for using
-let cnt = 0
-outer: for(let N of DATA.split(' ')) {
-    let n = Number(N)
+let r = []
+outer: for(let n=N;n<=M;n++) {
     if(n === 1) continue
     if(n === 2) {
-        cnt++
+        r.push(n)
         continue
     }
     if(n !== 2 && n % 2 === 0) continue
@@ -23,7 +19,7 @@ outer: for(let N of DATA.split(' ')) {
         if(n % i === 0) continue outer
     }
 
-    cnt++
+    r.push(n)
 }
 
-console.log(cnt)
+console.log(r.length === 0 ? -1 : `${r.reduce((ac,cu)=>ac+cu, 0)}\n${r[0]}`)
