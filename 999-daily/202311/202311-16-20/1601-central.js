@@ -1,15 +1,14 @@
 let fs = require('fs')
+let input
 if(fs.existsSync('./example.txt')) {
     input = fs.readFileSync('./example.txt').toString().trim()
 } else {
     input = fs.readFileSync('/dev/stdin').toString().trim()
 }
 
-let data = input.split(' ').map(Number).sort((a,b) => a-b)
+let data = input.split('\n').map(Number).sort((a,b) => a-b)
 
 // @info: logic start
 // @@info: prepare for using
-
-let two = (data[0] + data[1])
-
-console.log(data[2] >= two ? two * 2 - 1 : two + data[2])
+console.log(data.reduce((acc, cur) => acc + cur, 0) / data.length)
+console.log(data[Math.floor(data.length / 2)])

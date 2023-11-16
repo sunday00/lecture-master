@@ -5,11 +5,12 @@ if(fs.existsSync('./example.txt')) {
     input = fs.readFileSync('/dev/stdin').toString().trim()
 }
 
-let data = input.split(' ').map(Number).sort((a,b) => a-b)
+// let data = input.split(' ').map(Number).sort((a,b) => a-b)
+let [info, data] = input.split('\n')
+let [n, k] =  info.split(' ').map(Number)
+data = data.split(' ').map(Number).sort((a,b) => b-a)
 
 // @info: logic start
 // @@info: prepare for using
 
-let two = (data[0] + data[1])
-
-console.log(data[2] >= two ? two * 2 - 1 : two + data[2])
+console.log(data[k-1])
