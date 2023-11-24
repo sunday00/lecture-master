@@ -5,7 +5,7 @@ if(fs.existsSync('./example.txt')) {
     input = fs.readFileSync('/dev/stdin').toString().trim()
 }
 
-let S = input.split('')
+let S = input
 // @info: logic start
 // @@info: prepare for using
 
@@ -20,10 +20,8 @@ for(let z=0;z<S.length;z++){
     start = z
     for(let y=start+1;y<=S.length;y++){
         end = y
-        let w = ''
-        for(let i = start; i<end; i++) {
-            w += S[i]
-        }
+
+        const w = S.slice(start, end)
 
         if(!t.get(w)) {
             t.set(w, true)
