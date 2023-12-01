@@ -9,13 +9,19 @@ let [n, ...data] = input.split('\n')
 // @info: logic start
 // @@info: prepare for using
 
+let ans = ''
+
 for(const d of data) {
+    if(Number(d) === 1 || Number(d) === 0) {
+        ans += ans === '' ? 2 : '\n'+2
+        continue
+    }
+
     let curr = Number(d)
     let isSosu = false
 
     let divider = 2
-    let sqrt = Math.sqrt(curr)
-    while (divider <= sqrt) {
+    while (divider <= Math.sqrt(curr)) {
         if(curr % divider === 0) {
             if(divider % 2 === 0) curr++
             else curr += 2
@@ -25,5 +31,7 @@ for(const d of data) {
     }
 
     isSosu = true
-    console.log(curr)
+    ans += ans === '' ? curr : '\n'+curr
 }
+
+console.log(ans)
