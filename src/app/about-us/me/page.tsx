@@ -1,11 +1,14 @@
 import styles from "@/app/page.module.css";
 import Navigation from '@/components/layout/navigation'
 
-export default function Home() {
+const Me = () => {
+
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <Navigation />
-      <h1>Hello</h1>
-    </main>
-  );
+      <h1>AboutUs/Me</h1>
+    </div>
+  )
 }
+
+export default Me
