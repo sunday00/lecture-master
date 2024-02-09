@@ -7,10 +7,13 @@ const Navigation = () => {
     <nav>
       <ul>
         <li>
-          <LinkWrap href="/" name={'Home'} />
+          <LinkWrap href="/" name={'Home'}/>
         </li>
         <li>
-          <LinkWrap href="/about-us/me" name={'AboutUs'} />
+          <LinkWrap href="/about-us/me" name={'AboutUs'}/>
+        </li>
+        <li>
+          <LinkWrap href="/about-us/company" name={'Company'}/>
         </li>
       </ul>
     </nav>

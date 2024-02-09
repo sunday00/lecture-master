@@ -1,16 +1,16 @@
 import type {Metadata} from 'next'
 
 export const metadata: Metadata = {
-  title: 'me'
+  title: 'company'
 }
 
-const Me = () => {
+const Company = () => {
 
   return (
     <div>
-      <h1>AboutUs/Me</h1>
+      <h1>AboutUs/Company</h1>
     </div>
   )
 }
 
-export default Me
+export default Company
