@@ -12,3 +12,7 @@ export const getMovieDetail = async (id: string) => {
 export const getMovieVideos = async (id: string) => {
   return await fetch(`${API_URL}/${id}/videos`).then((r) => r.json())
 }
+
+export const wrongApi = async () => {
+  return await fetch('https://something.not/found')
+}
