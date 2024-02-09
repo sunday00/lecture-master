@@ -1,14 +1,9 @@
 import type {Metadata} from 'next'
+import MovieItem from '@/app/movie/MovieItem'
+import {getMovies} from '@/api/movie'
 
 export const metadata: Metadata = {
   title: 'movie'
-}
-
-const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
-
-async function getMovies() {
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-  return await fetch(URL).then((r) => r.json());
 }
 
 const Movie = async () => {
@@ -19,9 +14,11 @@ const Movie = async () => {
       <h1>Movies/List</h1>
 
       <ul>
-        {movies.map((m: {id: number, title:string}) => {
-          return (<li key={m.id}>{m.title}</li>)
-        })}
+        {
+          movies.map((m: {id: number, title:string}) => {
+            return (<MovieItem key={m.id} item={m} />)
+          })
+        }
       </ul>
     </div>
   )

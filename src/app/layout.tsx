@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
 import React from 'react'
 import Navigation from '@/components/layout/navigation'
 import styles from '@/app/page.module.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "study | home",
-  description: "study with nomad code",
-};
+  title: { template: 'study | %s', default: '...' },
+  description: 'study with nomad code',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -26,5 +26,5 @@ export default function RootLayout({
         </main>
       </body>
     </html>
-  );
+  )
 }
