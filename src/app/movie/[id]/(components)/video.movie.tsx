@@ -1,11 +1,26 @@
 import { getMovieVideos } from '@/api/movie'
+import { YTB_URL } from '@/constants/external'
 
 const VideoMovie = async ({ id }: { id: string }) => {
   const videos = await getMovieVideos(id)
 
   return (
     <div>
-      <h6>{JSON.stringify(videos)}</h6>
+      {videos.map((v) => (
+        <iframe
+          src={`${YTB_URL}/${v.key}`}
+          key={v.id}
+          title={v.name}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{
+            border: 0,
+            width: '100%',
+            minHeight: '300px',
+            marginBottom: '1em',
+          }}
+        />
+      ))}
     </div>
   )
 }
