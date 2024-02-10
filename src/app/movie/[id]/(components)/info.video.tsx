@@ -2,7 +2,7 @@ import { getMovieDetail, wrongApi } from '@/api/movie'
 
 const InfoVideo = async ({ id }: { id: string }) => {
   const movie = await getMovieDetail(id)
-  const eee = await wrongApi()
+  // const eee = await wrongApi()
 
   return (
     <div>

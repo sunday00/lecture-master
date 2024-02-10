@@ -20,10 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        <main className={styles.main}>
-          <Navigation />
-          {children}
-        </main>
+        <Navigation />
+        <main className={styles.main}>{children}</main>
       </body>
     </html>
   )
