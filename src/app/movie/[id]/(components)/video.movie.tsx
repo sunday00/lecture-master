@@ -6,7 +6,7 @@ const VideoMovie = async ({ id }: { id: string }) => {
 
   return (
     <div>
-      {videos.map((v) => (
+      {videos.map((v: { key: string; id: string; name: string }) => (
         <iframe
           src={`${YTB_URL}/${v.key}`}
           key={v.id}

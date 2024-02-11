@@ -1,9 +1,9 @@
-import type {Metadata} from 'next'
+import type { Metadata } from 'next'
 import MovieItem from '@/app/movie/MovieItem'
-import {getMovies} from '@/api/movie'
+import { getMovies } from '@/api/movie'
 
 export const metadata: Metadata = {
-  title: 'movie'
+  title: 'movie',
 }
 
 const Movie = async () => {
@@ -14,11 +14,9 @@ const Movie = async () => {
       <h1>Movies/List</h1>
 
       <ul>
-        {
-          movies.map((m: {id: number, title:string}) => {
-            return (<MovieItem key={m.id} item={m} />)
-          })
-        }
+        {movies.map((m: { id: number; title: string; poster_path: string }) => {
+          return <MovieItem key={m.id} item={m} />
+        })}
       </ul>
     </div>
   )
