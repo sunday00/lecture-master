@@ -26,7 +26,9 @@ const MovieItem = ({
         priority={true}
         onClick={handleMoveTo}
       />
-      <Link href={`/movie/${item.id}`}>{item.title}</Link>
+      <Link prefetch href={`/movie/${item.id}`}>
+        {item.title}
+      </Link>
     </li>
   )
 }
